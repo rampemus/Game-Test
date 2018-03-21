@@ -8,9 +8,9 @@ public class Ammo{
 	
 	private String name;
 	private int count;
-	private double damage;
-	private double firingSpeed;
-	private double projectileSpeed;
+	private int damage;
+	private int firingSpeed;
+	private float projectileSpeed;
 	private boolean destroyable;
 	private boolean guided;
 	private boolean arcs;
@@ -18,7 +18,7 @@ public class Ammo{
 	private boolean infinite;
 	private static ArrayList<Ammo> bullets;
 	
-	public Ammo(String name, int count, double damage, double firingSpeed, double projectileSpeed, boolean destroyable, boolean guided,
+	public Ammo(String name, int count, int damage, int firingSpeed, float projectileSpeed, boolean destroyable, boolean guided,
 			boolean arcs, boolean enemy, boolean infinite) {
 		this.name = name;
 		this.count = count;
@@ -34,12 +34,12 @@ public class Ammo{
 	
 	public static void createBullets() {
 		bullets = new ArrayList<Ammo>();
-		bullets.add(new Ammo("Pistol", 999, 1.0, 1.0, 1.0, false, false, false, false, true));
-		bullets.add(new Ammo("Assault Rifle", 0, 1.0, 0.25, 1.0, false, false, false, false, true));
-		bullets.add(new Ammo("Sniper Rifle", 0, 5.0, 2.5, 0.75, false, false, false, false, true));
-		bullets.add(new Ammo("RPG-Launcher", 0, 10.0, 5.0, 0.5, true, false, false, false, true));
-		bullets.add(new Ammo("Granade-Launcher", 0, 10.0, 5.0, 0.5, true, false, true, false, true));
-		bullets.add(new Ammo("Guided RPG", 0, 10.0, 5.0, 0.5, true, true, false, false, true));
+		bullets.add(new Ammo("Pistol", 999, 100, 100, 1.0f, false, false, false, false, true));
+		bullets.add(new Ammo("Assault Rifle", 0, 100, 25, 1.0f, false, false, false, false, true));
+		bullets.add(new Ammo("Sniper Rifle", 0, 500, 250, 1.5f, false, false, false, false, true));
+		bullets.add(new Ammo("RPG-Launcher", 0, 1000, 500, 0.7f, true, false, false, false, true));
+		bullets.add(new Ammo("Granade-Launcher", 0, 1000, 500, 0.7f, true, false, true, false, true));
+		bullets.add(new Ammo("Guided RPG", 0, 1000, 500, 0.7f, true, true, false, false, true));
 	}
 	public static ArrayList<Ammo> getBullets() {
 		return bullets;
@@ -60,24 +60,24 @@ public class Ammo{
 		if(!infinite) this.count = count;
 	}
 	
-	public double getDamage() {
+	public int getDamage() {
 		return damage;
 	}
-	public void setDamage(double damage) {
+	public void setDamage(int damage) {
 		this.damage = damage;
 	}
 	
-	public double getFiringSpeed() {
+	public int getFiringSpeed() {
 		return firingSpeed;
 	}
-	public void setFiringSpeed(double firingSpeed) {
+	public void setFiringSpeed(int firingSpeed) {
 		this.firingSpeed = firingSpeed;
 	}
 	
-	public double getProjectileSpeed() {
+	public float getProjectileSpeed() {
 		return projectileSpeed;
 	}
-	public void setProjectileSpeed(double projectileSpeed) {
+	public void setProjectileSpeed(float projectileSpeed) {
 		this.projectileSpeed = projectileSpeed;
 	}
 	
@@ -125,28 +125,32 @@ class Bullet{
 	private Vector2f v;
 	private Vector2f g;
 	private Shape hitBox;
-	private Ammo ammo;
+	private int ammo;
+	private boolean hit;
 	
-	public Bullet(int x, int y, int destX, int destY, Ammo ammo) {
-		if(ammo.getCount() > 0) {
-			
+	public Bullet(int x, int y, int destX, int destY, int ammo) {
+		if(x == destX && y == destY) {
+			destY++;
+		}
+		
+		if(Ammo.getBullets().get(ammo).getCount() > 0) {
 			hitBox = new Rectangle(0, 0, 20, 8);
 			p = new Vector2f(x,y);
 			pm = new Vector2f(destX, destY);
 			v = new Vector2f(0,0);
-			g = new Vector2f(0,0.00f);
+			g = new Vector2f(0,0);
 			this.ammo = ammo;
+			hit = false;
 			
 			v.sub(p);
 			v.add(pm);
 			v.normalise();
 			
-			if(ammo.getName().equals("Pistol") || ammo.getName().equals("Assault Rifle") || ammo.getName().equals("Sniper Rifle"))
+			if(Ammo.getBullets().get(ammo).getName().equals("Pistol") || Ammo.getBullets().get(ammo).getName().equals("Assault Rifle") ||
+					Ammo.getBullets().get(ammo).getName().equals("Sniper Rifle"))
 				hitBox = new Rectangle(0, 0, 9, 3);
-			if(ammo.isArcs())
-				
-			if(!ammo.isInfinite())
-				ammo.setCount(ammo.getCount()-1);
+			if(!Ammo.getBullets().get(ammo).isInfinite())
+				Ammo.getBullets().get(ammo).setCount(Ammo.getBullets().get(ammo).getCount()-1);
 		}
 	}
 	
@@ -158,12 +162,17 @@ class Bullet{
 	}
 	
 	public void update(int delta) {
-		for(int i = 0; i < ammo.getProjectileSpeed()*delta; i++) {
+		for(int i = 0; i < Ammo.getBullets().get(ammo).getProjectileSpeed()*delta; i++) {
 			p.add(v);
 			if(groundCollision()) {
+				hit = true;
 				break;
 			}
 		}
+	}
+	
+	public boolean isHit() {
+		return hit;
 	}
 	
 	public boolean groundCollision() {
@@ -180,7 +189,7 @@ class Bullet{
 	}
 	
 	public void doDamage() {
-		ammo.getDamage();
+		Ammo.getBullets().get(ammo).getDamage();
 	}
 	
 }

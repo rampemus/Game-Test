@@ -50,12 +50,20 @@ public class Emptygame extends BasicGameState {
 		if (input.isKeyDown(Input.KEY_G) && iList.size() > 0) {
 			iList.remove(0);
 		}
+		
 		if(input.isMouseButtonDown(0)) {
-			bList.add(new Bullet((int)player.getX(), (int)player.getY(), input.getMouseX(), input.getMouseY(), Ammo.getBullets().get(0)));
+			bList.add(new Bullet((int)player.getX(), (int)player.getY(), input.getMouseX(), input.getMouseY(), 0));
 		}
 		for (Bullet b : bList) {
 			b.update(delta);
 		}
+		ArrayList<Bullet> currentBullets = new ArrayList<Bullet>(bList);
+		for (Bullet b : currentBullets) {
+			if(b.isHit())
+				bList.remove(b);
+		}
+		
+		
 	}
 
 	@Override
