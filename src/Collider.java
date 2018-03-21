@@ -10,6 +10,7 @@ public class Collider {
 	protected Vector2f g;
 	protected float friction = 0.001f; //
 	protected float xMaxSpeed = 0.6f;  //
+	protected float elasticity = 0; //value between 0-1
 	
 	protected float jumpStrength = 0.5f;
 	protected float jumpCooldown = 0;
@@ -66,7 +67,7 @@ public class Collider {
 				p.add(ystep);
 				if (groundCollision()) {
 					p.sub(ystep);
-					v.set(v.getX(),0);
+					v.set(v.getX(),v.getY()*-elasticity);
 					break;
 				}
 			} else {
@@ -79,13 +80,13 @@ public class Collider {
 				p.add(xstep);
 				if ( groundCollision()) {
 					p.sub(xstep);
-					v.set(0,v.getY());
+					v.set(v.getY()*-elasticity,v.getY());
 				}
 			} else if (v.getX() < 0 ) {
 				p.sub(xstep);
 				if ( groundCollision()) {
 					p.add(xstep);
-					v.set(0,v.getY());
+					v.set(v.getY()*-elasticity,v.getY());
 				}
 			}
 		}
