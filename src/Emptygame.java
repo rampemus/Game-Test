@@ -13,13 +13,14 @@ public class Emptygame extends BasicGameState {
 	private Player player;
 	private String deltaNumber = "0";
 	private ArrayList<Item> iList = new ArrayList<Item>();
+	private ArrayList<Bullet> bList = new ArrayList<Bullet>();
 	private Input input;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		player = new Player(350,300);
 		input = gc.getInput();
-
+		Ammo.createBullets();
 	}
 
 	@Override
@@ -27,6 +28,9 @@ public class Emptygame extends BasicGameState {
 		player.display(g);
 		for (Collider c : iList) {
 			c.display(g);
+		}
+		for (Bullet b : bList) {
+			b.display(g);
 		}
 		g.drawString(deltaNumber,100,100);
 	}
@@ -44,6 +48,9 @@ public class Emptygame extends BasicGameState {
 		}
 		if (input.isKeyDown(Input.KEY_G) && iList.size() > 0) {
 			iList.remove(0);
+		}
+		if(input.isMouseButtonDown(0)) {
+			bList.add(new Bullet(100, 100, 300, 300, Ammo.getBullets().get(0)));
 		}
 	}
 

@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Vector2f;
 
 public class Ammo{
 	
@@ -30,26 +33,17 @@ public class Ammo{
 		this.infinite = infinite;
 	}
 	
-	public void createBullets() {
+	public static void createBullets() {
 		bullets = new ArrayList<Ammo>();
-		bullets.add(new Ammo("Pistol", 0, 1.0, 1.0, 1.0, false, false, false, false, true));
+		bullets.add(new Ammo("Pistol", 999, 1.0, 1.0, 1.0, false, false, false, false, true));
 		bullets.add(new Ammo("Assault Rifle", 0, 1.0, 0.25, 1.0, false, false, false, false, true));
 		bullets.add(new Ammo("Sniper Rifle", 0, 5.0, 2.5, 0.75, false, false, false, false, true));
 		bullets.add(new Ammo("RPG-Launcher", 0, 10.0, 5.0, 0.5, true, false, false, false, true));
 		bullets.add(new Ammo("Granade-Launcher", 0, 10.0, 5.0, 0.5, true, false, true, false, true));
 		bullets.add(new Ammo("Guided RPG", 0, 10.0, 5.0, 0.5, true, true, false, false, true));
 	}
-	public ArrayList<Ammo> getBullets() {
+	public static ArrayList<Ammo> getBullets() {
 		return bullets;
-	}
-	
-	public void shoot(int x, int y, int destX, int destY) {
-		if(count > 0) {
-			Bullet bullet = new Bullet(x, y, destX, destY, this);
-			bullet.hitBox = new Rectangle(0, 0, 2, 1);
-			
-			count--;
-		}
 	}
 	
 	public String getName() {
@@ -123,11 +117,49 @@ public class Ammo{
 		this.enemy = enemy;
 	}
 	
-	private class Bullet extends Collider{
-		
-		public Bullet(int x, int y, int destX, int destY, Ammo ammo) {
-			super(x, y);
+}
+
+class Bullet{
+	
+	private Vector2f pm;
+	private Vector2f p;
+	private Vector2f v;
+	private Vector2f g;
+	private Shape hitBox;
+	private Ammo ammo;
+	
+	public Bullet(int x, int y, int destX, int destY, Ammo ammo) {
+		if(ammo.getCount() > 0) {
 			
+			hitBox = new Rectangle(0, 0, 20, 8);
+			p = new Vector2f(x,y);
+			pm = new Vector2f(destX, destY);
+			v = new Vector2f(0,0);
+			g = new Vector2f(0,0.00f);
+			this.ammo = ammo;
+			
+			v.sub(pm);
+			v.add(p);
+			v.normalise();
+			
+			if(ammo.getName().equals("Pistol") || ammo.getName().equals("Assault Rifle") || ammo.getName().equals("Sniper Rifle"))
+				hitBox = new Rectangle(0, 0, 9, 3);
+			if(ammo.isArcs())
+				
+			if(!ammo.isInfinite())
+				ammo.setCount(ammo.getCount()-1);
 		}
 	}
+	
+	public void display(Graphics g) {
+		hitBox.setCenterX(p.getX());
+		hitBox.setCenterY(p.getY());
+		g.draw(hitBox);
+		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
+	}
+	
+	public void doDamage() {
+		ammo.getDamage();
+	}
+	
 }
