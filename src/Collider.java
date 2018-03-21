@@ -8,16 +8,18 @@ public class Collider {
 	protected Vector2f p;
 	protected Vector2f v;
 	protected Vector2f g;
-	protected float friction = 0.001f;
-	protected float xMaxSpeed = 0.6f;
+	protected float friction = 0.001f; //
+	protected float xMaxSpeed = 0.6f;  //
 	
 	protected float jumpStrength = 0.5f;
 	protected float jumpCooldown = 0;
 	protected float threshold = 1; // can climb 1 pixel up = 45° angled incline
 	
+	protected int hp = 100;
+	
 	//Hitbox
-	protected int height = 64;
-	protected int width = 32;
+	protected int height = 16;
+	protected int width = 16;
 	protected Shape hitBox = null;
 	
 	public Collider(int x, int y) {

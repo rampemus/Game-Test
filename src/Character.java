@@ -1,5 +1,4 @@
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Input;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Character extends Collider{
@@ -7,6 +6,9 @@ public class Character extends Collider{
 	
 	public Character(int x, int y) {
 		super(x,y);
+		height = 64; //resize hitbox
+		width = 32;
+		hitBox = new Rectangle(0, 0, width, height);
 	}
 	
 	public void walkRight(int delta) {
@@ -30,6 +32,4 @@ public class Character extends Collider{
 			v.set(v.getX(),-jumpStrength);
 		}
 	}
-	
-
 }
