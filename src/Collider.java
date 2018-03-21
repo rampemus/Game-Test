@@ -33,7 +33,7 @@ public class Collider {
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
 		g.draw(hitBox);
-		g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
+		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
 	}
 	
 	public boolean groundCollision() {

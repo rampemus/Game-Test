@@ -12,22 +12,22 @@ public class Emptygame extends BasicGameState {
 	public static int id = 1;
 	private Player player;
 	private String deltaNumber = "0";
-	private ArrayList<Collider> cList;
+	private ArrayList<Item> iList = new ArrayList<Item>();
 	private Input input;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		player = new Player(350,300);
 		input = gc.getInput();
-		//cList.add(new Collider(20,20));
+
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
 		player.display(g);
-		//for (Collider c : cList) {
-		//	c.display(g);
-		//}
+		for (Collider c : iList) {
+			c.display(g);
+		}
 		g.drawString(deltaNumber,100,100);
 	}
 
@@ -35,10 +35,16 @@ public class Emptygame extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		player.update(delta);
 		player.updateInput(gc,delta);
-		//for (Collider c : cList) {
-		//	c.update(delta);
-		//}
+		for (Collider c : iList) {
+			c.update(delta);
+		}
 		deltaNumber = "Delta: " + delta;
+		if (input.isKeyDown(Input.KEY_F)) {
+			iList.add(new Item(100,400));
+		}
+		if (input.isKeyDown(Input.KEY_G) && iList.size() > 0) {
+			iList.remove(0);
+		}
 	}
 
 	@Override
