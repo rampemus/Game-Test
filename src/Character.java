@@ -31,20 +31,5 @@ public class Character extends Collider{
 		}
 	}
 	
-	public void updateInput(GameContainer gc, int delta) {
-		
-		Input input = gc.getInput();
-		
-		//horozontal movement
-		if ( input.isKeyDown(Input.KEY_D)) {
-			walkRight(delta);
-		} else if ( input.isKeyDown(Input.KEY_A)) {
-			walkLeft(delta);
-		} 
-		
-		//jump mecanic
-		if ( input.isKeyDown(Input.KEY_SPACE) ){
-			jump();
-		}
-	}
+
 }

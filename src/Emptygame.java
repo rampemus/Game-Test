@@ -7,12 +7,12 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Emptygame extends BasicGameState {
 	
 	public static int id = 1;
-	private Character player;
+	private Player player;
 	private String deltaNumber = "0";
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		player = new Character(350,300);
+		player = new Player(350,300);
 	}
 
 	@Override
