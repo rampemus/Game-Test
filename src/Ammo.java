@@ -16,7 +16,7 @@ public class Ammo{
 	private boolean arcs;
 	private boolean enemy;
 	private boolean infinite;
-	private static ArrayList<Ammo> bullets;
+	private static ArrayList<Ammo> ammoTypes;
 	
 	public Ammo(String name, int count, int damage, int firingSpeed, float projectileSpeed, boolean destroyable, boolean guided,
 			boolean arcs, boolean enemy, boolean infinite) {
@@ -33,16 +33,16 @@ public class Ammo{
 	}
 	
 	public static void createAmmo() {
-		bullets = new ArrayList<Ammo>();
-		bullets.add(new Ammo("Pistol", 999, 100, 100, 1.0f, false, false, false, false, true));
-		bullets.add(new Ammo("Assault Rifle", 0, 100, 25, 1.0f, false, false, false, false, true));
-		bullets.add(new Ammo("Sniper Rifle", 0, 500, 250, 1.5f, false, false, false, false, true));
-		bullets.add(new Ammo("RPG-Launcher", 0, 1000, 500, 0.7f, true, false, false, false, true));
-		bullets.add(new Ammo("Granade-Launcher", 0, 1000, 500, 0.7f, true, false, true, false, true));
-		bullets.add(new Ammo("Guided RPG", 0, 1000, 500, 0.7f, true, true, false, false, true));
+		ammoTypes = new ArrayList<Ammo>();
+		ammoTypes.add(new Ammo("Pistol", 999, 100, 1000, 1.0f, false, false, false, false, true));
+		ammoTypes.add(new Ammo("Assault Rifle", 0, 100, 2500, 1.0f, false, false, false, false, true));
+		ammoTypes.add(new Ammo("Sniper Rifle", 0, 500, 2500, 1.5f, false, false, false, false, true));
+		ammoTypes.add(new Ammo("RPG-Launcher", 0, 1000, 5000, 0.7f, true, false, false, false, true));
+		ammoTypes.add(new Ammo("Granade-Launcher", 0, 1000, 5000, 0.7f, true, false, true, false, true));
+		ammoTypes.add(new Ammo("Guided RPG", 0, 1000, 5000, 0.7f, true, true, false, false, true));
 	}
 	public static ArrayList<Ammo> getAmmo() {
-		return bullets;
+		return ammoTypes;
 	}
 	
 	public String getName() {
@@ -129,6 +129,7 @@ class Bullet{
 	private boolean hit;
 	
 	public Bullet(int x, int y, int destX, int destY, int ammo) {
+		
 		if(x == destX && y == destY) {
 			destY++;
 		}
