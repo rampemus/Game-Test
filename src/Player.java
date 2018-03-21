@@ -5,8 +5,11 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Player extends Character {
+	private int maxItemSwallowDistance;
+	
 	public Player(int x, int y) {
 		super(x,y);
+		maxItemSwallowDistance = height;
 	}
 	
 	public void updateInput(GameContainer gc, int delta) {
@@ -26,14 +29,26 @@ public class Player extends Character {
 		}
 	}
 	
+	public void collectItem(Item i) {
+		//tähän instance of, muutetaan ammusten määrää playerillä mitä lie juttuja TÄHÄN
+	}
+	
 	public void pullItems(ArrayList<Item> items, int delta) {
-		for (Item item : items) {
+		for (int i = items.size()-1; i >= 0; i--) {
+			Item item = items.get(i);
 			Vector2f a = new Vector2f(p);
 			a.sub(item.getP());
 			float distance = a.length();
-			a.normalise();
-			a.scale(delta/distance/10);
-			item.vAdd(a, delta);
+			if (distance < 10) {
+				collectItem(item);
+				items.remove(item);
+				continue;
+			}
+			if ( distance < maxItemSwallowDistance) {
+				a.normalise();
+				a.scale(delta/distance/2);
+				item.vAdd(a, delta);
+			}
 		}
 	}
 }
