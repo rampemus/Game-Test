@@ -19,14 +19,15 @@ public class Emptygame extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		player = new Player(350,300);
 		input = gc.getInput();
+		//cList.add(new Collider(20,20));
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
 		player.display(g);
-		for (Collider c : cList) {
-			c.display(g);
-		}
+		//for (Collider c : cList) {
+		//	c.display(g);
+		//}
 		g.drawString(deltaNumber,100,100);
 	}
 
@@ -34,9 +35,9 @@ public class Emptygame extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		player.update(delta);
 		player.updateInput(gc,delta);
-		for (Collider c : cList) {
-			c.update(delta);
-		}
+		//for (Collider c : cList) {
+		//	c.update(delta);
+		//}
 		deltaNumber = "Delta: " + delta;
 	}
 
