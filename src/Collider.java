@@ -126,4 +126,22 @@ public class Collider {
 			v.set(0,v.getY());
 		}
 	}
+	
+	public Vector2f getP() {
+		return p;
+	}
+	
+	public float getX() {
+		return p.getX();
+	}
+	
+	public float getY() {
+		return p.getY();
+	}
+	
+	public void vAdd(Vector2f a, int delta) {
+		a.scale(delta);
+		v.add(a);
+		a.scale(1/delta);
+	}
 }
