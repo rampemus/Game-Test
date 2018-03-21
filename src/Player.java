@@ -32,7 +32,7 @@ public class Player extends Character {
 			a.sub(item.getP());
 			float distance = a.length();
 			a.normalise();
-			a.scale(delta/distance);
+			a.scale(delta/distance/10);
 			item.vAdd(a, delta);
 		}
 	}

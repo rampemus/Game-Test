@@ -39,6 +39,7 @@ public class Emptygame extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		player.update(delta);
 		player.updateInput(gc,delta);
+		player.pullItems(iList,delta);
 		for (Collider c : iList) {
 			c.update(delta);
 		}
