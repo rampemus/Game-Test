@@ -32,7 +32,7 @@ public class Ammo{
 		this.infinite = infinite;
 	}
 	
-	public static void createBullets() {
+	public static void createAmmo() {
 		bullets = new ArrayList<Ammo>();
 		bullets.add(new Ammo("Pistol", 999, 100, 100, 1.0f, false, false, false, false, true));
 		bullets.add(new Ammo("Assault Rifle", 0, 100, 25, 1.0f, false, false, false, false, true));
@@ -41,7 +41,7 @@ public class Ammo{
 		bullets.add(new Ammo("Granade-Launcher", 0, 1000, 500, 0.7f, true, false, true, false, true));
 		bullets.add(new Ammo("Guided RPG", 0, 1000, 500, 0.7f, true, true, false, false, true));
 	}
-	public static ArrayList<Ammo> getBullets() {
+	public static ArrayList<Ammo> getAmmo() {
 		return bullets;
 	}
 	
@@ -133,7 +133,7 @@ class Bullet{
 			destY++;
 		}
 		
-		if(Ammo.getBullets().get(ammo).getCount() > 0) {
+		if(Ammo.getAmmo().get(ammo).getCount() > 0) {
 			hitBox = new Rectangle(0, 0, 20, 8);
 			p = new Vector2f(x,y);
 			pm = new Vector2f(destX, destY);
@@ -146,11 +146,11 @@ class Bullet{
 			v.add(pm);
 			v.normalise();
 			
-			if(Ammo.getBullets().get(ammo).getName().equals("Pistol") || Ammo.getBullets().get(ammo).getName().equals("Assault Rifle") ||
-					Ammo.getBullets().get(ammo).getName().equals("Sniper Rifle"))
+			if(Ammo.getAmmo().get(ammo).getName().equals("Pistol") || Ammo.getAmmo().get(ammo).getName().equals("Assault Rifle") ||
+					Ammo.getAmmo().get(ammo).getName().equals("Sniper Rifle"))
 				hitBox = new Rectangle(0, 0, 9, 3);
-			if(!Ammo.getBullets().get(ammo).isInfinite())
-				Ammo.getBullets().get(ammo).setCount(Ammo.getBullets().get(ammo).getCount()-1);
+			if(!Ammo.getAmmo().get(ammo).isInfinite())
+				Ammo.getAmmo().get(ammo).setCount(Ammo.getAmmo().get(ammo).getCount()-1);
 		}
 	}
 	
@@ -162,7 +162,7 @@ class Bullet{
 	}
 	
 	public void update(int delta) {
-		for(int i = 0; i < Ammo.getBullets().get(ammo).getProjectileSpeed()*delta; i++) {
+		for(int i = 0; i < Ammo.getAmmo().get(ammo).getProjectileSpeed()*delta; i++) {
 			p.add(v);
 			if(groundCollision()) {
 				hit = true;
@@ -188,8 +188,9 @@ class Bullet{
 		return false;
 	}
 	
-	public void doDamage() {
-		Ammo.getBullets().get(ammo).getDamage();
+	public int doDamage() {
+		hit = true;
+		return Ammo.getAmmo().get(ammo).getDamage();
 	}
 	
 }

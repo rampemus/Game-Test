@@ -20,7 +20,7 @@ public class Emptygame extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		player = new Player(350,300);
 		input = gc.getInput();
-		Ammo.createBullets();
+		Ammo.createAmmo();
 	}
 
 	@Override
