@@ -50,7 +50,10 @@ public class Emptygame extends BasicGameState {
 			iList.remove(0);
 		}
 		if(input.isMouseButtonDown(0)) {
-			bList.add(new Bullet(100, 100, 300, 300, Ammo.getBullets().get(0)));
+			bList.add(new Bullet((int)player.getX(), (int)player.getY(), input.getMouseX(), input.getMouseY(), Ammo.getBullets().get(0)));
+		}
+		for (Bullet b : bList) {
+			b.update(delta);
 		}
 	}
 

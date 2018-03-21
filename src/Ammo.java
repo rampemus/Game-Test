@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -138,8 +137,8 @@ class Bullet{
 			g = new Vector2f(0,0.00f);
 			this.ammo = ammo;
 			
-			v.sub(pm);
-			v.add(p);
+			v.sub(p);
+			v.add(pm);
 			v.normalise();
 			
 			if(ammo.getName().equals("Pistol") || ammo.getName().equals("Assault Rifle") || ammo.getName().equals("Sniper Rifle"))
@@ -156,6 +155,28 @@ class Bullet{
 		hitBox.setCenterY(p.getY());
 		g.draw(hitBox);
 		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
+	}
+	
+	public void update(int delta) {
+		for(int i = 0; i < ammo.getProjectileSpeed()*delta; i++) {
+			p.add(v);
+			if(groundCollision()) {
+				break;
+			}
+		}
+	}
+	
+	public boolean groundCollision() {
+		if (p.getY() > 600) {
+			return true;
+		}
+		if (p.getX() > 800 ) {
+			return true;
+		}
+		if (p.getX() < 0 ) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void doDamage() {
