@@ -15,12 +15,13 @@ public class Emptygame extends BasicGameState {
 	private Input input;
 	
 	private ArrayList<Object> oList = new ArrayList<Object>();
-	private Map m = null;
+	private Map m;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		player = new Player(350,300);
 		oList.add(player);
+		m = new Map();
 		input = gc.getInput();
 	}
 
