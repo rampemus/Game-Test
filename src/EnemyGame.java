@@ -24,7 +24,6 @@ public class EnemyGame extends BasicGameState {
 		oList.add(player);
 		oList.add(new Blockade_Barrel(100,100));
 		input = gc.getInput();
-		Weapon.createAmmo();
 	}
 
 	@Override

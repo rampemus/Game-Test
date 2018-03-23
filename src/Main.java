@@ -14,6 +14,7 @@ public class Main extends StateBasedGame {
 	public static void main(String[] args) {
 
 		AppGameContainer appgc;
+		Weapon.createAmmo();
 		
 		try {
 			appgc = new AppGameContainer(new Main("Collider-luokan testaukseen"));
