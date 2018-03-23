@@ -33,25 +33,25 @@ public class Map{
 			e.printStackTrace();
 		}
 		try{
-			slopeL = new Image("res/ground.jpg");
+			slopeL = new Image("res/groundSlopeL.jpg");
 		}
 		catch (SlickException e){
 			e.printStackTrace();
 		}
 		try{
-			slopeR = new Image("res/ground.jpg");
+			slopeR = new Image("res/groundSlopeR.jpg");
 		}
 		catch (SlickException e){
 			e.printStackTrace();
 		}
 		try{
-			ice = new Image("res/ground.jpg");
+			ice = new Image("res/ice.jpg");
 		}
 		catch (SlickException e){
 			e.printStackTrace();
 		}
 		try{
-			grass = new Image("res/ground.jpg");
+			grass = new Image("res/grass.jpg");
 		}
 		catch (SlickException e){
 			e.printStackTrace();
