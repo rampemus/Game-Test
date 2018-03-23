@@ -7,22 +7,22 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Collider {
 	//Galileian kinematics
-	protected Vector2f p;
-	protected Vector2f v;
-	protected Vector2f g;
-	protected float friction = 0.001f; //
-	protected float xMaxSpeed = 0.6f;  //
-	protected float elasticity = 0; //value between 0-1
+	protected Vector2f p; //position vector
+	protected Vector2f v; //velocity vector
+	protected Vector2f g; //gravity acceleration vector
+	protected float friction = 0.001f; // how fast collider stops while no interactions
+	protected float xMaxSpeed = 0.6f;  // how fast can collider travel in direction of x-axis
+	protected float elasticity = 0; //value between 0-1, how much collider bounces when hitting to wall or floor
 	
-	protected float jumpStrength = 0.5f;
-	protected float jumpCooldown = 0;
+	protected float jumpStrength = 0.5f; // how high can a collider jump if it could jump (obviously it can't
+	protected float jumpCooldown = 0; // for calculating the jumping strength of "input"
 	protected float threshold = 1; // can climb 1 pixel up = 45° angled incline
 	
-	protected int hp = 100;
+	protected int hp = 100; // health points
 	
 	//Hitbox
-	protected int height = 16;
-	protected int width = 16;
+	protected int height = 16; // the height of the hitbox
+	protected int width = 16; // the width of the hitbox
 	protected Shape hitBox = null;
 	
 	public Collider(int x, int y) {
@@ -49,7 +49,7 @@ public class Collider {
 		if (p.getX() < 0 ) {
 			return true;
 		}
-		if ( m.ground(p.getX(),p.getY())) {
+		if ( m.ground(p.getX(),p.getY())) { //this might be wrong
 			return true;
 		}
 		return false;
