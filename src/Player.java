@@ -12,7 +12,7 @@ public class Player extends Character {
 		maxItemSwallowDistance = height;
 	}
 	
-	public void updateInput(GameContainer gc, Map m, int delta) {
+	public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
 		
 		Input input = gc.getInput();
 		
@@ -30,7 +30,10 @@ public class Player extends Character {
 		
 		//shoot!!!
 		if ( input.isMouseButtonDown(0)) {
-			shoot();
+			if(currentWeapon == null) {
+				currentWeapon = Weapon.getAmmo().get(0);
+			}
+			shoot(oList, input.getMouseX(), input.getMouseY());
 		}
 	}
 	
