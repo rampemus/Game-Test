@@ -36,7 +36,7 @@ public class Collider {
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
 		g.draw(hitBox);
-		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
+		g.drawString("HP:" + hp,getX()-25,getY()-height);
 	}
 	
 	public boolean groundCollision(Map m) {
@@ -148,5 +148,13 @@ public class Collider {
 		a.scale(delta);
 		v.add(a);
 		a.scale(1/delta);
+	}
+	
+	public Shape getHitbox() {
+		return hitBox;
+	}
+	
+	public void takeDamage(int amount) {
+		hp -= amount;
 	}
 }

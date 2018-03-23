@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
@@ -14,7 +15,8 @@ public class Character extends Collider{
 		height = 64; //resize hitbox
 		width = 32;
 		hitBox = new Rectangle(0, 0, width, height);
-		weapons = Weapon.getAmmo();
+		weapons = new ArrayList<>(Arrays.asList(Weapon.getAmmo().get(0)));
+		currentWeapon = weapons.get(0);
 	}
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
@@ -28,8 +30,6 @@ public class Character extends Collider{
 	}
 	
 	public void shoot(ArrayList<Object> oList, int x, int y) {
-		if(currentWeapon == null)
-			currentWeapon = Weapon.getAmmo().get(1);
 		if (shootCooldown == 0) {
 			oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, currentWeapon));
 			//animaation vaihtaminen ampumiseen jne.

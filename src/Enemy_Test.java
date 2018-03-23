@@ -15,7 +15,7 @@ public class Enemy_Test extends StateBasedGame {
 		Weapon.createAmmo();
 		
 		try {
-			appgc = new AppGameContainer(new Enemy_Test("Collider-luokan testaukseen"));
+			appgc = new AppGameContainer(new Enemy_Test("Testataan vihollisten toimintaa"));
 			appgc.setDisplayMode(800, 600, false);
 			appgc.setAlwaysRender(true);
 			appgc.start();

@@ -17,7 +17,7 @@ public class MapTest extends StateBasedGame {
 		Weapon.createAmmo();
 		
 		try {
-			appgc = new AppGameContainer(new MapTest("Collider-luokan testaukseen"));
+			appgc = new AppGameContainer(new MapTest("Testataan miten mäppi toimii"));
 			appgc.setDisplayMode(800, 600, false);
 			appgc.setAlwaysRender(true);
 			appgc.start();
