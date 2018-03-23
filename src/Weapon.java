@@ -202,11 +202,19 @@ class Bullet implements Active,Visible{
 	//hits an enemy
 	private boolean enemyCollision(ArrayList<Object> oList) {
 		
+		for(Object o : oList) {
+			if(o instanceof Collider) {
+				if(hitBox.intersects(((Collider)o).getHitbox())) {
+					((Collider)o).takeDamage(currentWeapon.getDamage());
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
 	//hits the ground or goes out of the map
-	public boolean groundCollision(Map m) {
+	private boolean groundCollision(Map m) {
 		if (p.getY() > 600) {
 			return true;
 		}
@@ -220,11 +228,6 @@ class Bullet implements Active,Visible{
 			return true;
 		}
 		return false;
-	}
-	
-	//get the current damage of the bullet
-	public int getDamage() {
-		return currentWeapon.getDamage();
 	}
 	
 }

@@ -51,6 +51,10 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 		barrels[5] = barrel5;
 		barrels[6] = b;
 		barrel_phases = new Animation(barrels,100,false);
+		
+		for(Weapon w : weapons) {
+			w.setEnemy(true);
+		}
 	}
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
