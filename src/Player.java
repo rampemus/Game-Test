@@ -62,14 +62,14 @@ public class Player extends Character {
 				Vector2f a = new Vector2f(p);
 				a.sub(item.getP());
 				float distance = a.length();
-				if (distance < 10) {
+				if (distance < 30) {
 					collectItem(item);
-					items.remove(item);
+					items.remove(i);
 					continue;
 				}
 				if ( distance < maxItemSwallowDistance) {
 					a.normalise();
-					a.scale(delta/distance/2);
+					a.scale(delta/distance/20);
 					item.vAdd(a, delta);
 				}
 			}
