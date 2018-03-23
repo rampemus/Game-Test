@@ -39,7 +39,7 @@ public class Collider {
 		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
 	}
 	
-	public boolean groundCollision() {
+	public boolean groundCollision(Map m) {
 		if (p.getY() > 600 - height/2) {
 			return true;
 		}
@@ -49,25 +49,28 @@ public class Collider {
 		if (p.getX() < 0 ) {
 			return true;
 		}
+		if ( m.ground(p.getX(),p.getY())) {
+			return true;
+		}
 		return false;
 	}
 
-	public boolean onGround() {
+	public boolean onGround(Map m) {
 		Vector2f below = new Vector2f(0,1);
 		boolean result = false;
 		p.add(below); //if one pixel below there is ground
-		result = groundCollision();
+		result = groundCollision(m);
 		p.sub(below); //remove side effects
-		return result && !groundCollision();
+		return result && !groundCollision(m);
 	}
 	
-	private void pAddV() {
+	private void pAddV(Map m) {
 		Vector2f xstep = new Vector2f(0.1f,0);
 		Vector2f ystep = new Vector2f(0,0.1f);
 		for ( int i = 0; i < Math.abs(v.getY())*10; i++) {
 			if ( v.getY() > 0) {
 				p.add(ystep);
-				if (groundCollision()) {
+				if (groundCollision(m)) {
 					p.sub(ystep);
 					v.set(v.getX(),v.getY()*-elasticity);
 					break;
@@ -80,13 +83,13 @@ public class Collider {
 		for ( int i = 0; i < speed*10; i++) {
 			if ( v.getX() > 0) {
 				p.add(xstep);
-				if ( groundCollision()) {
+				if ( groundCollision(m)) {
 					p.sub(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
 				}
 			} else if (v.getX() < 0 ) {
 				p.sub(xstep);
-				if ( groundCollision()) {
+				if ( groundCollision(m)) {
 					p.add(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
 				}
@@ -101,12 +104,12 @@ public class Collider {
 		
 		if (Math.abs(v.getX()) + Math.abs(v.getY()) > 1) {
 			p.add(v);
-			if ( groundCollision() ) {
+			if ( groundCollision(m) ) {
 				p.sub(v);
-				pAddV();
+				pAddV(m);
 			}
 		} else {
-			pAddV();
+			pAddV(m);
 		}
 		
 		//reset
