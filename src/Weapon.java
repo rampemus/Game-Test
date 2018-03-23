@@ -168,16 +168,8 @@ class Bullet implements Active,Visible{
 			for(int i = 0; i < Weapon.getAmmo().get(ammo).getProjectileSpeed()*delta; i++) {
 				p.add(v);
 				if(groundCollision()) {
-					hit = true;
+					oList.remove(this);
 					break;
-				}
-			}
-		}
-		for(int i = oList.size()-1; i > 1; i--) {
-			Object o = oList.get(i);
-			if(o instanceof Bullet) {
-				if(((Bullet)o).isHit()) {
-					oList.remove(o);
 				}
 			}
 		}
