@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -92,7 +94,7 @@ public class Collider {
 		}
 	}
 	
-	public void update(int delta) {
+	public void update(ArrayList<Object> o, Map m, int delta) {
 		g.scale(delta);
 		v.add(g);
 		v.scale(delta);

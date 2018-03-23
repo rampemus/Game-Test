@@ -118,7 +118,7 @@ public class Weapon{
 	
 }
 
-class Bullet{
+class Bullet implements Active,Visible{
 	
 	private Vector2f pm;
 	private Vector2f p;
@@ -162,7 +162,7 @@ class Bullet{
 		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
 	}
 	
-	public void update(int delta) {
+	public void update(ArrayList<Object> oList, Map m, int delta) {
 		if(Weapon.getAmmo().get(ammo).getName().equals("Pistol") || Weapon.getAmmo().get(ammo).getName().equals("Assault Rifle") ||
 				Weapon.getAmmo().get(ammo).getName().equals("Sniper Rifle")) {
 			for(int i = 0; i < Weapon.getAmmo().get(ammo).getProjectileSpeed()*delta; i++) {

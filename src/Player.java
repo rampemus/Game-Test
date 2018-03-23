@@ -29,25 +29,32 @@ public class Player extends Character {
 		}
 	}
 	
+	public void update(ArrayList<Object> o, Map m, int delta) {
+		super.update(o, m, delta);
+		pullItems(o,delta);
+	}
+	
 	public void collectItem(Item i) {
 		//tähän instance of, muutetaan ammusten määrää playerillä mitä lie juttuja TÄHÄN
 	}
 	
-	public void pullItems(ArrayList<Item> items, int delta) {
+	public void pullItems(ArrayList<Object> items, int delta) {
 		for (int i = items.size()-1; i >= 0; i--) {
-			Item item = items.get(i);
-			Vector2f a = new Vector2f(p);
-			a.sub(item.getP());
-			float distance = a.length();
-			if (distance < 10) {
-				collectItem(item);
-				items.remove(item);
-				continue;
-			}
-			if ( distance < maxItemSwallowDistance) {
-				a.normalise();
-				a.scale(delta/distance/2);
-				item.vAdd(a, delta);
+			if ( items.get(i) instanceof Item) {
+				Item item = (Item)items.get(i);
+				Vector2f a = new Vector2f(p);
+				a.sub(item.getP());
+				float distance = a.length();
+				if (distance < 10) {
+					collectItem(item);
+					items.remove(item);
+					continue;
+				}
+				if ( distance < maxItemSwallowDistance) {
+					a.normalise();
+					a.scale(delta/distance/2);
+					item.vAdd(a, delta);
+				}
 			}
 		}
 	}
