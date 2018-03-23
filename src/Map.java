@@ -27,31 +27,31 @@ public class Map{
 		tiles[11][8] = 4;
 		tiles[12][8] = 5;
 		try{
-			ground = new Image("res/ground.png");
+			ground = new Image("res/ground.jpg");
 		}
 		catch (SlickException e){
 			e.printStackTrace();
 		}
 		try{
-			slopeL = new Image("res/groundSlopeL.png");
+			slopeL = new Image("res/ground.jpg");
 		}
 		catch (SlickException e){
 			e.printStackTrace();
 		}
 		try{
-			slopeR = new Image("res/groundSlopeR.png");
+			slopeR = new Image("res/ground.jpg");
 		}
 		catch (SlickException e){
 			e.printStackTrace();
 		}
 		try{
-			ice = new Image("res/ice.png");
+			ice = new Image("res/ground.jpg");
 		}
 		catch (SlickException e){
 			e.printStackTrace();
 		}
 		try{
-			grass = new Image("res/grass.png");
+			grass = new Image("res/ground.jpg");
 		}
 		catch (SlickException e){
 			e.printStackTrace();
