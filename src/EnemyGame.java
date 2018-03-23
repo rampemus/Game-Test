@@ -1,178 +1,72 @@
+import java.util.ArrayList;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.GameState;
+import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class EnemyGame implements GameState {
+public class EnemyGame extends BasicGameState {
+
+	public static int id = 1;
+	private Player player;
+	private String deltaNumber = "0";
+	private Input input;
+	
+	private ArrayList<Object> oList = new ArrayList<Object>();
+	private Map m = null;
 
 	@Override
-	public void mouseClicked(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+		player = new Player(350,300);
+		oList.add(player);
+		oList.add(new Blockade_Barrel());
+		input = gc.getInput();
+		Weapon.createAmmo();
 	}
 
 	@Override
-	public void mouseDragged(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-
+	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
+		player.display(g);
+		for (Object o : oList) {
+			if ( o instanceof Visible) {
+				((Visible)o).display(g);
+			}
+		}
+		g.drawString(deltaNumber,100,100);
 	}
 
 	@Override
-	public void mouseMoved(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		player.updateInput(gc,delta);
+		
+		player.update(oList,m,delta);
+		for (int i = oList.size()-1; i >= 0; i--) {
+			Object o = oList.get(i);
+			if ( o instanceof Active) {
+				((Active)o).update(oList, m, delta);
+			}
+		}
 
-	}
-
-	@Override
-	public void mousePressed(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseWheelMoved(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void inputEnded() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void inputStarted() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean isAcceptingInput() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setInput(Input arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyPressed(int arg0, char arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void keyReleased(int arg0, char arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void controllerButtonPressed(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void controllerButtonReleased(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void controllerDownPressed(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void controllerDownReleased(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void controllerLeftPressed(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void controllerLeftReleased(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void controllerRightPressed(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void controllerRightReleased(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void controllerUpPressed(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void controllerUpReleased(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void enter(GameContainer arg0, StateBasedGame arg1) throws SlickException {
-		// TODO Auto-generated method stub
-
+		deltaNumber = "Delta: " + delta;
+		// god-mode
+		if (input.isKeyDown(Input.KEY_F)) {
+			oList.add(new Item(100,400));
+		}
+		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
+			oList.remove(1);
+		}
+		
+		if(input.isMouseButtonDown(0)) {
+			oList.add(new Bullet((int)player.getX(), (int)player.getY(), input.getMouseX(), input.getMouseY(), 0));
+		}
 	}
 
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Emptygame.id;
 	}
-
-	@Override
-	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void leave(GameContainer arg0, StateBasedGame arg1) throws SlickException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 }

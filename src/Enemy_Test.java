@@ -14,7 +14,7 @@ public class Enemy_Test extends StateBasedGame {
 		AppGameContainer appgc;
 		
 		try {
-			appgc = new AppGameContainer(new Main("Collider-luokan testaukseen"));
+			appgc = new AppGameContainer(new Enemy_Test("Collider-luokan testaukseen"));
 			appgc.setDisplayMode(800, 600, false);
 			appgc.setAlwaysRender(true);
 			appgc.start();
@@ -26,7 +26,7 @@ public class Enemy_Test extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
-		addState(new Emptygame());
+		addState(new EnemyGame());
 	}
 
 }
