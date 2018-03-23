@@ -56,10 +56,6 @@ public class Emptygame extends BasicGameState {
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
 			oList.remove(1);
 		}
-		
-		if(input.isMouseButtonDown(0)) {
-			oList.add(new Bullet((int)player.getX(), (int)player.getY(), input.getMouseX(), input.getMouseY(), 0));
-		}
 	}
 
 	@Override

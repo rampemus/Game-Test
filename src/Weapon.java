@@ -9,7 +9,7 @@ public class Weapon{
 	private String name;
 	private int count;
 	private int damage;
-	private int firingSpeed;
+	private int firingRate;
 	private float projectileSpeed;
 	private boolean destroyable;
 	private boolean guided;
@@ -18,12 +18,12 @@ public class Weapon{
 	private boolean infinite;
 	private static ArrayList<Weapon> ammoTypes;
 	
-	public Weapon(String name, int count, int damage, int firingSpeed, float projectileSpeed, boolean destroyable, boolean guided,
+	public Weapon(String name, int count, int damage, int firingRate, float projectileSpeed, boolean destroyable, boolean guided,
 			boolean arcs, boolean enemy, boolean infinite) {
 		this.name = name;
 		this.count = count;
 		this.damage = damage;
-		this.firingSpeed = firingSpeed;
+		this.firingRate = firingRate;
 		this.projectileSpeed = projectileSpeed;
 		this.destroyable = destroyable;
 		this.guided = guided;
@@ -36,7 +36,7 @@ public class Weapon{
 		ammoTypes = new ArrayList<Weapon>();
 		ammoTypes.add(new Weapon("Pistol", 999, 100, 1000, 1.0f, false, false, false, false, true));
 		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 2500, 1.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("Sniper Rifle", 0, 500, 2500, 1.5f, false, false, false, false, true));
+		ammoTypes.add(new Weapon("Sniper Rifle", 0, 500, 2500, 2.0f, false, false, false, false, true));
 		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 0.7f, true, false, false, false, true));
 		ammoTypes.add(new Weapon("Granade-Launcher", 0, 1000, 5000, 0.7f, true, false, true, false, true));
 		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 0.7f, true, true, false, false, true));
@@ -67,11 +67,11 @@ public class Weapon{
 		this.damage = damage;
 	}
 	
-	public int getFiringSpeed() {
-		return firingSpeed;
+	public int getFiringRate() {
+		return firingRate;
 	}
-	public void setFiringSpeed(int firingSpeed) {
-		this.firingSpeed = firingSpeed;
+	public void setFiringRate(int firingRate) {
+		this.firingRate = firingRate;
 	}
 	
 	public float getProjectileSpeed() {
