@@ -27,6 +27,11 @@ public class Player extends Character {
 		if ( input.isKeyDown(Input.KEY_SPACE) ){
 			jump(m);
 		}
+		
+		//shoot!!!
+		if ( input.isMouseButtonDown(0)) {
+			shoot();
+		}
 	}
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
