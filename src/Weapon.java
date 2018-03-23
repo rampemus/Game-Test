@@ -201,12 +201,19 @@ class Bullet implements Active,Visible{
 
 	//hits an enemy
 	private boolean enemyCollision(ArrayList<Object> oList) {
-		
 		for(Object o : oList) {
 			if(o instanceof Collider) {
-				if(hitBox.intersects(((Collider)o).getHitbox())) {
-					((Collider)o).takeDamage(currentWeapon.getDamage());
-					return true;
+				if(o instanceof Player && currentWeapon.isEnemy()) {
+					if(hitBox.intersects(((Collider)o).getHitbox())) {
+						((Collider)o).takeDamage(currentWeapon.getDamage());
+						return true;
+					}
+				}
+				if (o instanceof Character && !(o instanceof Player) && !currentWeapon.isEnemy()) {
+					if(hitBox.intersects(((Collider)o).getHitbox())) {
+						((Collider)o).takeDamage(currentWeapon.getDamage());
+						return true;
+					}
 				}
 			}
 		}
