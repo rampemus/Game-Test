@@ -22,7 +22,6 @@ public class MapGame extends BasicGameState {
 		player = new Player(350,300);
 		oList.add(player);
 		input = gc.getInput();
-		Weapon.createAmmo();
 	}
 
 	@Override
