@@ -167,7 +167,7 @@ class Bullet implements Active,Visible{
 				Weapon.getAmmo().get(ammo).getName().equals("Sniper Rifle")) {
 			for(int i = 0; i < Weapon.getAmmo().get(ammo).getProjectileSpeed()*delta; i++) {
 				p.add(v);
-				if(groundCollision()) {
+				if(groundCollision(m)) {
 					oList.remove(this);
 					break;
 				}
@@ -179,7 +179,7 @@ class Bullet implements Active,Visible{
 		return hit;
 	}
 	
-	public boolean groundCollision() {
+	public boolean groundCollision(Map m) {
 		if (p.getY() > 600) {
 			return true;
 		}
@@ -187,6 +187,9 @@ class Bullet implements Active,Visible{
 			return true;
 		}
 		if (p.getX() < 0 ) {
+			return true;
+		}
+		if ( m.ground(p.getX(),p.getY())) {
 			return true;
 		}
 		return false;
