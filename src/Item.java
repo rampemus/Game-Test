@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Item extends Collider{
+public class Item extends Collider implements Active,Visible{
 
 	public Item(int x, int y) {
 		super(x, y);
