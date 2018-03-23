@@ -23,8 +23,8 @@ public class Character extends Collider{
 		}
 	}
 	
-	public void jump() {
-		if ( onGround() ) {
+	public void jump(Map m) {
+		if ( onGround(m) ) {
 			jumpCooldown = jumpStrength;
 		}
 		

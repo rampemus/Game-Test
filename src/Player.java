@@ -12,7 +12,7 @@ public class Player extends Character {
 		maxItemSwallowDistance = height;
 	}
 	
-	public void updateInput(GameContainer gc, int delta) {
+	public void updateInput(GameContainer gc, Map m, int delta) {
 		
 		Input input = gc.getInput();
 		
@@ -25,7 +25,7 @@ public class Player extends Character {
 		
 		//jump mecanic
 		if ( input.isKeyDown(Input.KEY_SPACE) ){
-			jump();
+			jump(m);
 		}
 	}
 	
