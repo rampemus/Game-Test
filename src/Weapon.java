@@ -152,7 +152,6 @@ class Bullet implements Active,Visible{
 	private Vector2f g;
 	private Shape hitBox;
 	private Weapon currentWeapon;
-	private boolean hit;
 	
 	public Bullet(int x, int y, int destX, int destY, Weapon currentWeapon) {
 		
@@ -169,7 +168,6 @@ class Bullet implements Active,Visible{
 				v = new Vector2f(0,0);
 				g = new Vector2f(0,0);
 				this.currentWeapon = currentWeapon;
-				hit = false;
 				
 				v.sub(p);
 				v.add(pm);
@@ -193,18 +191,21 @@ class Bullet implements Active,Visible{
 				currentWeapon.getName().equals("Sniper Rifle")) {
 			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
 				p.add(v);
-				if(groundCollision(m)) {
+				if(groundCollision(m) || enemyCollision(oList)) {
 					oList.remove(this);
 					break;
 				}
 			}
 		}
 	}
-	
-	public boolean isHit() {
-		return hit;
+
+	//hits an enemy
+	private boolean enemyCollision(ArrayList<Object> oList) {
+		
+		return false;
 	}
 
+	//hits the ground or goes out of the map
 	public boolean groundCollision(Map m) {
 		if (p.getY() > 600) {
 			return true;
@@ -221,8 +222,8 @@ class Bullet implements Active,Visible{
 		return false;
 	}
 	
-	public int doDamage() {
-		hit = true;
+	//get the current damage of the bullet
+	public int getDamage() {
 		return currentWeapon.getDamage();
 	}
 	
