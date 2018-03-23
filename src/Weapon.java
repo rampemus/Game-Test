@@ -32,10 +32,36 @@ public class Weapon{
 		this.infinite = infinite;
 	}
 	
+	public Weapon(Weapon weapon) {
+		this.name = weapon.getName();
+		this.count = weapon.getCount();
+		this.damage = weapon.getDamage();
+		this.firingRate = weapon.getFiringRate();
+		this.projectileSpeed = weapon.getProjectileSpeed();
+		this.destroyable = weapon.isDestroyable();
+		this.guided = weapon.isGuided();
+		this.arcs = weapon.isArcs();
+		this.enemy = weapon.isEnemy();
+		this.infinite = weapon.isInfinite();
+	}
+	
+	public Weapon(Weapon weapon, boolean enemy) {
+		this.name = weapon.getName();
+		this.count = weapon.getCount();
+		this.damage = weapon.getDamage();
+		this.firingRate = weapon.getFiringRate();
+		this.projectileSpeed = weapon.getProjectileSpeed();
+		this.destroyable = weapon.isDestroyable();
+		this.guided = weapon.isGuided();
+		this.arcs = weapon.isArcs();
+		this.enemy = enemy;
+		this.infinite = weapon.isInfinite();
+	}
+
 	public static void createAmmo() {
 		ammoTypes = new ArrayList<Weapon>();
-		ammoTypes.add(new Weapon("Pistol", 999, 100, 1000, 1.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 2500, 1.0f, false, false, false, false, true));
+		ammoTypes.add(new Weapon("Pistol", 999, 200, 500, 1.0f, false, false, false, false, true));
+		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 100, 1.0f, false, false, false, false, true));
 		ammoTypes.add(new Weapon("Sniper Rifle", 0, 500, 2500, 2.0f, false, false, false, false, true));
 		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 0.7f, true, false, false, false, true));
 		ammoTypes.add(new Weapon("Granade-Launcher", 0, 1000, 5000, 0.7f, true, false, true, false, true));
@@ -125,31 +151,31 @@ class Bullet implements Active,Visible{
 	private Vector2f v;
 	private Vector2f g;
 	private Shape hitBox;
-	private int ammo;
+	private Weapon currentWeapon;
 	private boolean hit;
 	
-	public Bullet(int x, int y, int destX, int destY, int ammo) {
+	public Bullet(int x, int y, int destX, int destY, Weapon currentWeapon) {
 		
 		if(x == destX && y == destY) {
 			destY++;
 		}
 		
-		if(Weapon.getAmmo().get(ammo).getCount() > 0) {
-			if(Weapon.getAmmo().get(ammo).getName().equals("Pistol") || Weapon.getAmmo().get(ammo).getName().equals("Assault Rifle") ||
-					Weapon.getAmmo().get(ammo).getName().equals("Sniper Rifle")) {
+		if(currentWeapon.getCount() > 0) {
+			if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
+					currentWeapon.getName().equals("Sniper Rifle")) {
 				hitBox = new Rectangle(0, 0, 9, 3);
 				p = new Vector2f(x,y);
 				pm = new Vector2f(destX, destY);
 				v = new Vector2f(0,0);
 				g = new Vector2f(0,0);
-				this.ammo = ammo;
+				this.currentWeapon = currentWeapon;
 				hit = false;
 				
 				v.sub(p);
 				v.add(pm);
 				v.normalise();
-				if(!Weapon.getAmmo().get(ammo).isInfinite())
-					Weapon.getAmmo().get(ammo).setCount(Weapon.getAmmo().get(ammo).getCount()-1);
+				if(!currentWeapon.isInfinite())
+					currentWeapon.setCount(currentWeapon.getCount()-1);
 			}
 			
 		}
@@ -163,9 +189,9 @@ class Bullet implements Active,Visible{
 	}
 	
 	public void update(ArrayList<Object> oList, Map m, int delta) {
-		if(Weapon.getAmmo().get(ammo).getName().equals("Pistol") || Weapon.getAmmo().get(ammo).getName().equals("Assault Rifle") ||
-				Weapon.getAmmo().get(ammo).getName().equals("Sniper Rifle")) {
-			for(int i = 0; i < Weapon.getAmmo().get(ammo).getProjectileSpeed()*delta; i++) {
+		if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
+				currentWeapon.getName().equals("Sniper Rifle")) {
+			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
 				p.add(v);
 				if(groundCollision(m)) {
 					oList.remove(this);
@@ -178,7 +204,7 @@ class Bullet implements Active,Visible{
 	public boolean isHit() {
 		return hit;
 	}
-	
+
 	public boolean groundCollision(Map m) {
 		if (p.getY() > 600) {
 			return true;
@@ -197,7 +223,7 @@ class Bullet implements Active,Visible{
 	
 	public int doDamage() {
 		hit = true;
-		return Weapon.getAmmo().get(ammo).getDamage();
+		return currentWeapon.getDamage();
 	}
 	
 }

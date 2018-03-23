@@ -6,12 +6,15 @@ import org.newdawn.slick.geom.Vector2f;
 public class Character extends Collider{
 	protected float xAcceleration = 0.005f;
 	protected int shootCooldown = 0;
+	protected Weapon currentWeapon;
+	protected ArrayList<Weapon> weapons;
 	
 	public Character(int x, int y) {
 		super(x,y);
 		height = 64; //resize hitbox
 		width = 32;
 		hitBox = new Rectangle(0, 0, width, height);
+		weapons = Weapon.getAmmo();
 	}
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
@@ -24,11 +27,11 @@ public class Character extends Collider{
 		}
 	}
 	
-	public void shoot() {
+	public void shoot(ArrayList<Object> oList, int x, int y) {
 		if (shootCooldown == 0) {
-			// bulletin luominen
+			oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, currentWeapon));
 			//animaation vaihtaminen ampumiseen jne.
-			//shootCooldown = weaponArray.get(joku).fireRate
+			shootCooldown = currentWeapon.getFiringRate();
 		}
 	}
 	
