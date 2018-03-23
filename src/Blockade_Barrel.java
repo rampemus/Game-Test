@@ -70,7 +70,7 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 			}
 		}
 		shoot(o, (int)((Character) o.get(0)).getX(), (int)((Character) o.get(0)).getY());
-		if((((Character) o.get(0)).getX() < (this.getX() +10))&& (((Character) o.get(0)).getX() > (this.getX() -10)))  {
+		if(hp <0)  {
 			barrel_phases.update(100);
 		}
 		if(barrel_phases.getFrame() == 3) {
