@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -13,7 +15,6 @@ public class EnemyGame extends BasicGameState {
 	private Player player;
 	private String deltaNumber = "0";
 	private Input input;
-	
 	private ArrayList<Object> oList = new ArrayList<Object>();
 	private Map m = new Map();
 
