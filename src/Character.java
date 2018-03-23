@@ -14,6 +14,7 @@ public class Character extends Collider{
 		height = 64; //resize hitbox
 		width = 32;
 		hitBox = new Rectangle(0, 0, width, height);
+		weapons = Weapon.getAmmo();
 	}
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {

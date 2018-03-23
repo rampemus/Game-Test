@@ -32,8 +32,20 @@ public class Player extends Character {
 		if ( input.isMouseButtonDown(0)) {
 			if(currentWeapon == null) {
 				currentWeapon = Weapon.getAmmo().get(0);
+				weapons = Weapon.getAmmo();
 			}
 			shoot(oList, input.getMouseX(), input.getMouseY());
+		}
+		
+		//Change weapon
+		if(input.isKeyPressed(input.KEY_1)) {
+			currentWeapon = weapons.get(0);
+		}
+		if(input.isKeyPressed(input.KEY_2)) {
+			currentWeapon = weapons.get(1);
+		}
+		if(input.isKeyPressed(input.KEY_3)) {
+			currentWeapon = weapons.get(2);
 		}
 	}
 	
