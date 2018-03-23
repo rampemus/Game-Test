@@ -149,4 +149,8 @@ public class Collider {
 		v.add(a);
 		a.scale(1/delta);
 	}
+	
+	public Shape getHitbox() {
+		return hitBox;
+	}
 }
