@@ -9,12 +9,17 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class Blockade_Barrel extends Character implements Visible, Active{
 //anything at all
-	public Blockade_Barrel() {
-		super(100,100);
-		hitBox = new Rectangle(100, 100, 31, 54);
+	public Blockade_Barrel(int defx, int defy) {
+		super(defx,defy);
+		hitBox = new Rectangle(defx, defy, 31, 54);
 	}
+	
 	public void attack(int delta) {
 			walkRight(delta);
 	}
+	public void update(ArrayList<Object> o, Map m, int delta) {
+		attack(delta);
+	}
+	
 }
 

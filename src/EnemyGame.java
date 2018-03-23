@@ -15,13 +15,13 @@ public class EnemyGame extends BasicGameState {
 	private Input input;
 	
 	private ArrayList<Object> oList = new ArrayList<Object>();
-	private Map m = null;
+	private Map m = new Map();
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		player = new Player(350,300);
 		oList.add(player);
-		oList.add(new Blockade_Barrel());
+		oList.add(new Blockade_Barrel(100,100));
 		input = gc.getInput();
 		Weapon.createAmmo();
 	}
