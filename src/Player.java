@@ -9,6 +9,7 @@ public class Player extends Character {
 	
 	public Player(int x, int y) {
 		super(x,y);
+		weapons = Weapon.getAmmo();
 		maxItemSwallowDistance = height;
 	}
 	
@@ -30,10 +31,6 @@ public class Player extends Character {
 		
 		//shoot!!!
 		if ( input.isMouseButtonDown(0)) {
-			if(currentWeapon == null) {
-				currentWeapon = Weapon.getAmmo().get(0);
-				weapons = Weapon.getAmmo();
-			}
 			shoot(oList, input.getMouseX(), input.getMouseY());
 		}
 		
