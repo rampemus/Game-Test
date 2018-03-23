@@ -28,6 +28,8 @@ public class Character extends Collider{
 	}
 	
 	public void shoot(ArrayList<Object> oList, int x, int y) {
+		if(currentWeapon == null)
+			currentWeapon = Weapon.getAmmo().get(0);
 		if (shootCooldown == 0) {
 			oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, currentWeapon));
 			//animaation vaihtaminen ampumiseen jne.
