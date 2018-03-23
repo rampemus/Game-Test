@@ -65,6 +65,7 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 			walkLeft(delta);
 			}
 		}
+		shoot(o, (int)((Character) o.get(0)).getX(), (int)((Character) o.get(0)).getY());
 		if((((Character) o.get(0)).getX() < (this.getX() +10))&& (((Character) o.get(0)).getX() > (this.getX() -10)))  {
 			barrel_phases.update(100);
 		}
