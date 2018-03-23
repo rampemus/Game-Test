@@ -32,13 +32,13 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 		hp = 100;
 		
 		try {
-			b = new Image ("C:\\Users\\tommi\\Desktop\\T\\Pictures\\Sprite art\\blank.png");
-			barrel = new Image ("C:\\Users\\tommi\\Desktop\\T\\Pictures\\Sprite art\\barrel.png");
-			barrel1 = new Image ("C:\\Users\\tommi\\Desktop\\T\\Pictures\\Sprite art\\barrel_b1.png");
-			barrel2 = new Image ("C:\\Users\\tommi\\Desktop\\T\\Pictures\\Sprite art\\barrel_b2.png");
-			barrel3 = new Image ("C:\\Users\\tommi\\Desktop\\T\\Pictures\\Sprite art\\barrel_b3.png");
-			barrel4 = new Image ("C:\\Users\\tommi\\Desktop\\T\\Pictures\\Sprite art\\barrel_b4.png");
-			barrel5 = new Image ("C:\\Users\\tommi\\Desktop\\T\\Pictures\\Sprite art\\barrel_b5.png");
+			b = new Image ("/res/blank.png");
+			barrel = new Image ("/res/barrel.png");
+			barrel1 = new Image ("/res/barrel_b1.png");
+			barrel2 = new Image ("/res/barrel_b2.png");
+			barrel3 = new Image ("/res/barrel_b3.png");
+			barrel4 = new Image ("/res/barrel_b4.png");
+			barrel5 = new Image ("/res/barrel_b5.png");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
