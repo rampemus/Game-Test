@@ -37,6 +37,11 @@ public class Character extends Collider{
 		}
 	}
 	
+	public boolean isShooting() {
+		if ( shootCooldown == currentWeapon.getFiringRate() - 1) return true;
+		return false;
+	}
+	
 	public void walkRight(int delta) {
 		if ( v.getX() < xMaxSpeed ) {
 			v.add(new Vector2f(xAcceleration*delta,0));
