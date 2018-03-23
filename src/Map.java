@@ -85,6 +85,11 @@ public class Map{
 			}
 		}
 	}
+	
+	public boolean ground(float x, float y) {
+		return false;
+	}
+	
 	public int getTile(float x, float y){
 		return 0;
 	}
