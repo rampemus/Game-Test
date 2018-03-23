@@ -46,6 +46,6 @@ enum Collect {
 	private static Random r = new Random();
 	private static final List<Collect> items = Collections.unmodifiableList(Arrays.asList(values()));
 	public static Collect randomItem() {
-		return items.get(r.nextInt());
+		return items.get(r.nextInt(items.size()));
 	}
 }
