@@ -15,7 +15,7 @@ public class Character extends Collider{
 		height = 64; //resize hitbox
 		width = 32;
 		hitBox = new Rectangle(0, 0, width, height);
-		weapons = new ArrayList<>(Arrays.asList(Weapon.getAmmo().get(0)));
+		weapons = new ArrayList<>(Arrays.asList(new Weapon(Weapon.getAmmo().get(0))));
 		currentWeapon = weapons.get(0);
 	}
 	
