@@ -39,7 +39,7 @@ public class EnemyGame extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		player.updateInput(gc,delta);
+		player.updateInput(gc, m, delta);
 		
 		player.update(oList,m,delta);
 		for (int i = oList.size()-1; i >= 0; i--) {
