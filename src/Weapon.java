@@ -64,7 +64,7 @@ public class Weapon{
 		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 100, 1.0f, false, false, false, false, true));
 		ammoTypes.add(new Weapon("Sniper Rifle", 0, 500, 2500, 2.0f, false, false, false, false, true));
 		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 0.7f, true, false, false, false, true));
-		ammoTypes.add(new Weapon("Granade-Launcher", 0, 1000, 5000, 0.7f, true, false, true, false, true));
+		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 0.7f, true, false, true, false, true));
 		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 0.7f, true, true, false, false, true));
 	}
 	public static ArrayList<Weapon> getAmmo() {
@@ -172,7 +172,7 @@ class Bullet implements Active,Visible{
 				v.sub(p);
 				v.add(pm);
 				v.normalise();
-				if(!currentWeapon.isInfinite())
+				if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
 					currentWeapon.setCount(currentWeapon.getCount()-1);
 			}
 			
