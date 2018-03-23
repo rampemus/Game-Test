@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.newdawn.slick.Graphics;
+
 public class Item extends Collider implements Active,Visible{
 	private Collect type;
 	private int amount;
@@ -15,6 +17,15 @@ public class Item extends Collider implements Active,Visible{
 		elasticity = 0.5f;
 		xMaxSpeed = 10f;
 		hp = 1;
+		type = Collect.HP;
+		amount = 10;
+	}
+	
+	public void display(Graphics g) {
+		hitBox.setCenterX(p.getX());
+		hitBox.setCenterY(p.getY());
+		g.draw(hitBox);
+		g.drawString("H",p.getX()-width/2+3,p.getY()-height/2-1);
 	}
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
@@ -23,6 +34,10 @@ public class Item extends Collider implements Active,Visible{
 			o.remove(this);
 		}
 	}
+	
+	public int getAmount() { return amount; }
+	
+	public Collect getType() { return type; }
 }
 
 enum Collect {

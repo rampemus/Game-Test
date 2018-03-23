@@ -52,7 +52,9 @@ public class Player extends Character {
 	}
 	
 	public void collectItem(Item i) {
-		//tähän instance of, muutetaan ammusten määrää playerillä mitä lie juttuja TÄHÄN
+		if (i.getType() == Collect.HP) {
+			hp += i.getAmount();
+		}
 	}
 	
 	public void pullItems(ArrayList<Object> items, int delta) {
