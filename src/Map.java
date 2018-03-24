@@ -1,5 +1,7 @@
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+
 
 public class Map{
 	
@@ -10,22 +12,22 @@ public class Map{
 	private Image grass;
 	private Image slopeR;
 	private Image slopeL;
-	
+
 	public Map(){
 		tiles = new int[40][40];
+		
+		
 		tiles[0][8] = 3;
 		tiles[1][8] = 1;
 		tiles[2][8] = 2;
-		tiles[3][8] = 0;
 		tiles[4][8] = 3;
+		tiles[4][8] = 1;
 		tiles[5][8] = 1;
-		tiles[6][8] = 2;
-		tiles[7][8] = 0;
+		tiles[6][8] = 4;
+		tiles[7][7] = 5;
 		tiles[8][8] = 3;
 		tiles[9][8] = 1;
 		tiles[10][8] = 2;
-		tiles[11][8] = 4;
-		tiles[12][8] = 5;
 		try{
 			ground = new Image("res/ground.png");
 		}
@@ -87,10 +89,32 @@ public class Map{
 	}
 	
 	public boolean ground(float x, float y) {
+		if(isTile(x,y+32) || isTile(x,y-32)) {
+			return true;
+		}
+		if(isTile(x+15,y) || isTile(x-15,y)) {
+			return true;
+		}
 		return false;
 	}
 	
-	public int getTile(float x, float y){
-		return 0;
+	public boolean isTile(float x, float y){
+		
+		if(x>0 && y>0) {
+			if(tiles[(int)x/tileSize][(int)y/tileSize]!=0) {
+				return true;
+			}
+		}if(x<0) {
+			if(tiles[0][(int)y/tileSize]!=0) {
+				return true;
+			}
+		}if(y<0) {
+			if(tiles[(int)x/tileSize][0]!=0) {
+				return true;
+			}
+
+		}
+		
+		return false;
 	}
 }
