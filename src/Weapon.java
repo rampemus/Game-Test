@@ -231,7 +231,7 @@ class Bullet implements Active,Visible{
 		if (p.getX() < 0 ) {
 			return true;
 		}
-		if ( m.ground(p.getX(),p.getY())) {
+		if ( m.ground(p.getX(),p.getY(),9,3)) {
 			return true;
 		}
 		return false;

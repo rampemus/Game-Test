@@ -49,7 +49,7 @@ public class Collider {
 		if (p.getX() < 0 ) {
 			return true;
 		}
-		if ( m.ground(p.getX(),p.getY(),this)) { //this might be wrong
+		if ( m.ground(p.getX(),p.getY(),height,width)) { //this might be wrong
 			return true;
 		}
 		return false;

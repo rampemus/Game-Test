@@ -89,11 +89,11 @@ public class Map{
 		}
 	}
 	
-	public boolean ground(float x, float y,Collider c) {
-		if(isTile(x,y+c.height/2) || isTile(x,y-c.height/2)) {
+	public boolean ground(float x, float y,int height,int width) {
+		if(isTile(x,y+height/2) || isTile(x,y-height/2)) {
 			return true;
 		}
-		if(isTile(x+c.width/2,y) || isTile(x-c.width/2,y)) {
+		if(isTile(x+width/2,y) || isTile(x-width/2,y)) {
 			return true;
 		}
 		return false;
