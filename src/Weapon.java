@@ -159,23 +159,20 @@ class Bullet implements Active,Visible{
 			destY++;
 		}
 		
-		if(currentWeapon.getCount() > 0) {
-			if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
-					currentWeapon.getName().equals("Sniper Rifle")) {
-				hitBox = new Rectangle(0, 0, 9, 3);
-				p = new Vector2f(x,y);
-				pm = new Vector2f(destX, destY);
-				v = new Vector2f(0,0);
-				g = new Vector2f(0,0);
-				this.currentWeapon = currentWeapon;
-				
-				v.sub(p);
-				v.add(pm);
-				v.normalise();
-				if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
-					currentWeapon.setCount(currentWeapon.getCount()-1);
-			}
+		if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
+				currentWeapon.getName().equals("Sniper Rifle")) {
+			hitBox = new Rectangle(0, 0, 9, 3);
+			p = new Vector2f(x,y);
+			pm = new Vector2f(destX, destY);
+			v = new Vector2f(0,0);
+			g = new Vector2f(0,0);
+			this.currentWeapon = currentWeapon;
 			
+			v.sub(p);
+			v.add(pm);
+			v.normalise();
+			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
+				currentWeapon.setCount(currentWeapon.getCount()-1);
 		}
 	}
 	
