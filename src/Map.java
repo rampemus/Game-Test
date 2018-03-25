@@ -1,4 +1,6 @@
 
+import java.util.Random;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -12,22 +14,22 @@ public class Map{
 	private Image grass;
 	private Image slopeR;
 	private Image slopeL;
+	
 
 	public Map(){
 		tiles = new int[40][40];
+		//tiles[0][8]=3;
+		//tiles[1][8]=1;
+		//tiles[2][8]=2;
+		//tiles[4][8]=3;
+		//tiles[4][8]=1;
+		//tiles[5][8]=1;
+		//tiles[6][8]=4;
+		//tiles[7][7]=5;
+		//tiles[8][8]=3;
+		//tiles[9][8]=1;
+		//tiles[10][8]=2;
 		
-		
-		tiles[0][8] = 3;
-		tiles[1][8] = 1;
-		tiles[2][8] = 2;
-		tiles[4][8] = 3;
-		tiles[4][8] = 1;
-		tiles[5][8] = 1;
-		tiles[6][8] = 4;
-		tiles[7][7] = 5;
-		tiles[8][8] = 3;
-		tiles[9][8] = 1;
-		tiles[10][8] = 2;
 		try{
 			ground = new Image("res/ground.png");
 		}
@@ -58,6 +60,7 @@ public class Map{
 		catch (SlickException e){
 			e.printStackTrace();
 		}
+		
 	}
 	
 	
@@ -97,19 +100,37 @@ public class Map{
 		}
 		return false;
 	}
-	
+	public void add(int shape,int type,int startx,int starty) {
+		switch(shape) {
+		
+		//ground
+		case 1:for(int j=startx;j<startx+20;j++) {
+			tiles[j][starty]=type;
+		}
+		break;
+		//platform
+		case 2:for(int j=startx;j<startx+3;j++) {
+			tiles[j][starty]=type;
+		}
+		
+		break;
+		default : break;       
+		
+		}
+		
+	}
 	public boolean isTile(float x, float y){
 		
 		if(x>0 && y>0) {
-			if(tiles[(int)x/tileSize][(int)y/tileSize]!=0) {
+			if(tiles[(int)x/tileSize][(int)y/tileSize]>0 ) {
 				return true;
 			}
 		}if(x<0) {
-			if(tiles[0][(int)y/tileSize]!=0) {
+			if(tiles[0][(int)y/tileSize]>0) {
 				return true;
 			}
 		}if(y<0) {
-			if(tiles[(int)x/tileSize][0]!=0) {
+			if(tiles[(int)x/tileSize][0]>0) {
 				return true;
 			}
 
