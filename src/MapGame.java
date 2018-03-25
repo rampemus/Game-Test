@@ -23,7 +23,7 @@ public class MapGame extends BasicGameState {
 		oList.add(player);
 		input = gc.getInput();
 		m.add(2,4,4,6);
-		m.add(2,4,0,5);
+		m.add(2,4,0,8);
 		m.add(2,4,7,5);
 		m.add(1,1,0,9);
 	}

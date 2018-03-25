@@ -1,6 +1,4 @@
 
-import java.util.Random;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -91,11 +89,11 @@ public class Map{
 		}
 	}
 	
-	public boolean ground(float x, float y) {
-		if(isTile(x,y+32) || isTile(x,y-32)) {
+	public boolean ground(float x, float y,Collider c) {
+		if(isTile(x,y+c.height/2) || isTile(x,y-c.height/2)) {
 			return true;
 		}
-		if(isTile(x+15,y) || isTile(x-15,y)) {
+		if(isTile(x+c.width/2,y) || isTile(x-c.width/2,y)) {
 			return true;
 		}
 		return false;
