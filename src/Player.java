@@ -1,16 +1,27 @@
 import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Player extends Character {
 	private int maxItemSwallowDistance;
+	private Image character;
 	
 	public Player(int x, int y) {
 		super(x,y);
-		weapons = Weapon.getAmmo();
+		weapons = Weapon.getWeapons();
 		maxItemSwallowDistance = height;
+		try {
+			character = new Image ("/res/main_char_stand1.png");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		hp = 1000;
 	}
 	
 	public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
@@ -49,6 +60,11 @@ public class Player extends Character {
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		pullItems(o,delta);
+	}
+	
+	public void display(Graphics g) {
+		super.display(g);
+		character.draw(this.getX()-width/2-12,this.getY()-height/2);
 	}
 	
 	public void collectItem(Item i) {

@@ -58,7 +58,7 @@ public class Weapon{
 		this.infinite = weapon.isInfinite();
 	}
 
-	public static void createAmmo() {
+	public static void createWeapons() {
 		ammoTypes = new ArrayList<Weapon>();
 		ammoTypes.add(new Weapon("Pistol", 999, 200, 500, 1.0f, false, false, false, false, true));
 		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 100, 1.0f, false, false, false, false, true));
@@ -67,7 +67,7 @@ public class Weapon{
 		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 0.7f, true, false, true, false, true));
 		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 0.7f, true, true, false, false, true));
 	}
-	public static ArrayList<Weapon> getAmmo() {
+	public static ArrayList<Weapon> getWeapons() {
 		return ammoTypes;
 	}
 	

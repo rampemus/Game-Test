@@ -14,7 +14,7 @@ public class MapTest extends StateBasedGame {
 	public static void main(String[] args) {
 
 		AppGameContainer appgc;
-		Weapon.createAmmo();
+		Weapon.createWeapons();
 		
 		try {
 			appgc = new AppGameContainer(new MapTest("Testataan miten mäppi toimii"));
