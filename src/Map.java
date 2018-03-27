@@ -16,6 +16,7 @@ public class Map{
 
 	public Map(){
 		tiles = new int[40][40];
+		
 		//tiles[0][8]=3;
 		//tiles[1][8]=1;
 		//tiles[2][8]=2;
@@ -59,6 +60,7 @@ public class Map{
 			e.printStackTrace();
 		}
 		
+		
 	}
 	
 	
@@ -85,6 +87,8 @@ public class Map{
 								if (tiles[i][j]==5){
 									ice.draw(i*tileSize, j*tileSize, tileSize, tileSize);
 								}
+								
+				
 			}
 		}
 	}
@@ -102,7 +106,7 @@ public class Map{
 		switch(shape) {
 		
 		//ground
-		case 1:for(int j=startx;j<startx+20;j++) {
+		case 1:for(int j=startx;j<startx+10;j++) {
 			tiles[j][starty]=type;
 		}
 		break;

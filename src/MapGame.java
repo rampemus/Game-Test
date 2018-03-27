@@ -25,11 +25,18 @@ public class MapGame extends BasicGameState {
 		m.add(2,4,4,6);
 		m.add(2,4,0,8);
 		m.add(2,4,7,5);
+		m.add(2,4,10,4);
+		m.add(2,4,12,11);
 		m.add(1,1,0,9);
+		m.add(1,1,10,13);
+		m.add(2,1,7,20);
+		
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
+		g.translate(-(player.getX()-400),-(player.getY()-300));
+		
 		m.display();
 		player.display(g);
 		for (Object o : oList) {
@@ -43,7 +50,6 @@ public class MapGame extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		player.updateInput(gc, m,delta, oList);
-		
 		player.update(oList,m,delta);
 		for (int i = oList.size()-1; i >= 0; i--) {
 			Object o = oList.get(i);
@@ -57,6 +63,7 @@ public class MapGame extends BasicGameState {
 		if (input.isKeyDown(Input.KEY_F)) {
 			oList.add(new Item(100,400));
 		}
+		
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
 			oList.remove(1);
 		}
