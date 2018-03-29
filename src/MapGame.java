@@ -13,6 +13,7 @@ public class MapGame extends BasicGameState {
 	private Player player;
 	private String deltaNumber = "0";
 	private Input input;
+	private boolean isTile;
 	
 	private ArrayList<Object> oList = new ArrayList<Object>();
 	private Map m = new Map();
@@ -44,7 +45,7 @@ public class MapGame extends BasicGameState {
 				((Visible)o).display(g);
 			}
 		}
-		g.drawString(deltaNumber,100,100);
+		g.drawString("isTile:" + isTile,100,100);
 	}
 
 	@Override
@@ -57,7 +58,9 @@ public class MapGame extends BasicGameState {
 				((Active)o).update(oList, m, delta);
 			}
 		}
-
+		
+		isTile = m.isTile(input.getMouseX(), input.getMouseY());
+		
 		deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {

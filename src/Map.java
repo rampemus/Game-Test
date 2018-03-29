@@ -93,7 +93,7 @@ public class Map{
 		}
 	}
 	
-	public boolean ground(float x, float y,int height,int width) {
+	public boolean ground(float x, float y,int height,int width) { //bullets are using this one
 		if(isTile(x,y+height/2) || isTile(x,y-height/2)) {
 			return true;
 		}
@@ -102,6 +102,14 @@ public class Map{
 		}
 		return false;
 	}
+	
+	public boolean ground(float x, float y) {
+		if(isTile(x,y)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void add(int shape,int type,int startx,int starty) {
 		switch(shape) {
 		

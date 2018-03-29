@@ -49,12 +49,23 @@ public class Collider {
 		if (p.getX() < 0 ) {
 			return true;
 		}
-		if ( m.ground(p.getX(),p.getY(),height,width)) { //this might be wrong
+		if ( m.ground(p.getX(),p.getY()+height/2)) { //this might be wrong
 			return true;
 		}
 		return false;
 	}
-
+	
+	public boolean headCollision( Map m ) { //detects if player head is touching ground
+		return m.ground(p.getX(),p.getY()-height/2);
+	}
+	
+	public boolean checkMap(Map m, float x, float y ) { //returns if there is ground if you add x,y to collider's coordinates
+		if ( m.ground(p.getX() + x,p.getY()+y)) { 
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean onGround(Map m) {
 		Vector2f below = new Vector2f(0,1);
 		boolean result = false;
@@ -67,6 +78,8 @@ public class Collider {
 	private void pAddV(Map m) {
 		Vector2f xstep = new Vector2f(0.1f,0);
 		Vector2f ystep = new Vector2f(0,0.1f);
+		
+		//detecting ground underneath
 		for ( int i = 0; i < Math.abs(v.getY())*10; i++) {
 			if ( v.getY() > 0) {
 				p.add(ystep);
@@ -75,18 +88,24 @@ public class Collider {
 					v.set(v.getX(),v.getY()*-elasticity);
 					break;
 				}
-			} else {
+			} else if ( v.getY() < 0 ) {
 				p.sub(ystep);
-			}
+				if (headCollision(m)) {
+					p.add(ystep);
+					v.set(v.getX(),v.getY()*-elasticity);
+					break;
+				}
+			} 
 		}
 		float speed = Math.abs(v.getX());
 		for ( int i = 0; i < speed*10; i++) {
 			if ( v.getX() > 0) {
 				p.add(xstep);
+				//detect ground next to leg
 				if ( groundCollision(m)) {
 					p.sub(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
-				}
+				} 
 			} else if (v.getX() < 0 ) {
 				p.sub(xstep);
 				if ( groundCollision(m)) {
@@ -151,6 +170,8 @@ public class Collider {
 	}
 	
 	public Shape getHitbox() {
+		hitBox.setCenterX(p.getX());
+		hitBox.setCenterY(p.getY());
 		return hitBox;
 	}
 	
