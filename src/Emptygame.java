@@ -23,6 +23,8 @@ public class Emptygame extends BasicGameState {
 		oList.add(player);
 		m = new Map();
 		input = gc.getInput();
+		m.add(1,1,0,9);
+		m.add(1, 1, 5, 9);
 	}
 
 	@Override
