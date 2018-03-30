@@ -47,6 +47,16 @@ public class Player extends Character {
 		}
 		
 		//Change weapon
+		if(org.lwjgl.input.Mouse.hasWheel()) {
+			int x = org.lwjgl.input.Mouse.getDWheel();
+			int y = weapons.indexOf(currentWeapon);
+			if(x < 0 && y > 0) {
+				currentWeapon = weapons.get(y-1);
+			}
+			if(x > 0 && y < 2) {
+				currentWeapon = weapons.get(y+1);
+			}
+		}
 		if(input.isKeyPressed(input.KEY_1)) {
 			currentWeapon = weapons.get(0);
 		}

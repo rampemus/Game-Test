@@ -219,16 +219,16 @@ class Bullet implements Active,Visible{
 
 	//hits the ground or goes out of the map
 	private boolean groundCollision(Map m) {
-		if (p.getY() > 600) {
+		if (p.getY() > 2480) {
 			return true;
 		}
-		if (p.getX() > 800 ) {
+		if (p.getX() > 2480 ) {
 			return true;
 		}
 		if (p.getX() < 0 ) {
 			return true;
 		}
-		if ( m.ground(p.getX(),p.getY(),9,3)) {
+		if ( m.ground(p.getX(),p.getY())) {
 			return true;
 		}
 		return false;
