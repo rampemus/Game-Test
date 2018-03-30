@@ -43,7 +43,7 @@ public class Player extends Character {
 		
 		//shoot!!!
 		if ( input.isMouseButtonDown(0)) {
-			shoot(oList, input.getMouseX(), input.getMouseY());
+			shoot(oList, input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300);
 		}
 		
 		//Change weapon
