@@ -22,6 +22,7 @@ public class Player extends Character {
 			e.printStackTrace();
 		}
 		hp = 1000;
+		jumpStrength = 0.8f;
 	}
 	
 	public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {

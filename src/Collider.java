@@ -123,7 +123,7 @@ public class Collider {
 		
 		if (Math.abs(v.getX()) + Math.abs(v.getY()) > 1) {
 			p.add(v);
-			if ( groundCollision(m) ) {
+			if ( groundCollision(m) || headCollision(m)) {
 				p.sub(v);
 				pAddV(m);
 			}

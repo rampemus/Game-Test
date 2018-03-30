@@ -57,11 +57,11 @@ public class Character extends Collider{
 	}
 	
 	public void jump(Map m) {
-		if ( onGround(m) ) {
+		if ( onGround(m) && !headCollision(m)) {
 			jumpCooldown = jumpStrength;
 		}
 		
-		if (jumpCooldown > jumpStrength/400) {
+		if (jumpCooldown > jumpStrength/400 && !headCollision(m)) {
 			v.set(v.getX(),-jumpStrength);
 		}
 	}
