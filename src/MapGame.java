@@ -27,16 +27,19 @@ public class MapGame extends BasicGameState {
 		m.add(2,4,0,8);
 		m.add(2,4,7,5);
 		m.add(2,4,10,4);
-		m.add(2,4,12,11);
+		m.add(3,1,12,11);
 		m.add(1,1,0,9);
+		m.add(1,1,3,13);
+		m.add(4,1,3,13);
 		m.add(1,1,10,13);
 		m.add(2,1,7,20);
+		m.add(4,1,20,13);
 		
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
-		g.translate(-(player.getX()-400),-(player.getY()-300));
+		g.translate(-(player.getX()-200),-(player.getY()-300));
 		
 		m.display();
 		player.display(g);

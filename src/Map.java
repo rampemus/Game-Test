@@ -122,7 +122,25 @@ public class Map{
 		case 2:for(int j=startx;j<startx+3;j++) {
 			tiles[j][starty]=type;
 		}
+		break;
+		//slope platform
+		//only for ground
+		case 3:tiles[startx][starty]=3;
+		tiles[startx-1][starty+1]=3;
+		tiles[startx+3][starty]=2;
+		tiles[startx+4][starty+1]=2;
+		for(int j=startx+1;j<startx+3;j++) {
+			tiles[j][starty]=type;
+		}
+		for(int j=startx;j<startx+4;j++) {
+			tiles[j][starty+1]=type;
+		}
 		
+		break;
+		//wall 
+		case 4: for(int j=starty;j>starty-5;j--) {
+			             tiles[startx][j]=type;
+		              } 
 		break;
 		default : break;       
 		
