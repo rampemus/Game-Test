@@ -38,7 +38,7 @@ public class MapGame2 extends BasicGameState {
 		m.add(3,1,15,13);
 		m.add(3,1,21,10);
 		m.add(3,1,28,14);
-		m.add(3,1,34,8);
+		m.add(3,1,34,10);
 		
 	
 	}
