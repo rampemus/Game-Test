@@ -29,6 +29,9 @@ public class Emptygame extends BasicGameState {
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
+		g.translate(-(player.getX()-400),-(player.getY()-300));
+		
+		m.display();
 		player.display(g);
 		for (Object o : oList) {
 			if ( o instanceof Visible) {
@@ -43,7 +46,7 @@ public class Emptygame extends BasicGameState {
 		player.updateInput(gc,m,delta, oList);
 		
 		player.update(oList,m,delta);
-		for (int i = oList.size()-1; i >= 0; i--) {
+		for (int i = oList.size()-1; i > 0; i--) {
 			Object o = oList.get(i);
 			if ( o instanceof Active) {
 				((Active)o).update(oList, m, delta);
@@ -53,7 +56,7 @@ public class Emptygame extends BasicGameState {
 		deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {
-			oList.add(new Item(100,400));
+			oList.add(new Item(input.getMouseX()+(int)player.getX()-400,input.getMouseY()+(int)player.getY() - 300));
 		}
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
 			oList.remove(1);

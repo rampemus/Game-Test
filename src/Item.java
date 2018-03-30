@@ -17,15 +17,38 @@ public class Item extends Collider implements Active,Visible{
 		elasticity = 0.5f;
 		xMaxSpeed = 10f;
 		hp = 1;
-		type = Collect.HP;
-		amount = 10;
+		type = Collect.randomItem();
+		amount = 100;
 	}
 	
 	public void display(Graphics g) {
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
 		g.draw(hitBox);
-		g.drawString("H",p.getX()-width/2+3,p.getY()-height/2-1);
+		
+		//This will be changed into a real graphics
+		String displayLetter = "";
+		switch (type) {
+			case HP : 
+				displayLetter = "H";
+				break;
+			case PISTOL_AMMO :
+				displayLetter = "P";
+				break;
+			case ASSAULT_AMMO :
+				displayLetter = "A";
+				break;
+			case SNIPER_AMMO :
+				displayLetter = "S";
+				break;
+			case ROCKET : 
+				displayLetter = "R";
+				break;
+			case GRENADE :
+				displayLetter = "G";
+				break;
+		}
+		g.drawString(displayLetter,p.getX()-width/2+3,p.getY()-height/2-1);
 	}
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
