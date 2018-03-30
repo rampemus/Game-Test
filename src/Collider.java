@@ -102,13 +102,13 @@ public class Collider {
 			if ( v.getX() > 0) {
 				p.add(xstep);
 				//detect ground next to leg
-				if ( groundCollision(m)) {
+				if ( groundCollision(m) || headCollision(m) ) {
 					p.sub(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
 				} 
 			} else if (v.getX() < 0 ) {
 				p.sub(xstep);
-				if ( groundCollision(m)) {
+				if ( groundCollision(m) || headCollision(m) ) {
 					p.add(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
 				}
