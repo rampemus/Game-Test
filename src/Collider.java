@@ -36,7 +36,7 @@ public class Collider {
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
 		g.draw(hitBox);
-		g.drawString("HP:" + hp,getX()-25,getY()-height);
+		g.drawString("HP: " + hp,getX()-25,getY()-height);
 	}
 	
 	public boolean groundCollision(Map m) {

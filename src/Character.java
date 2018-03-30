@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
@@ -17,6 +18,11 @@ public class Character extends Collider{
 		hitBox = new Rectangle(0, 0, width, height);
 		weapons = new ArrayList<>(Arrays.asList(new Weapon(Weapon.getWeapons().get(0))));
 		currentWeapon = weapons.get(0);
+	}
+	
+	public void display(Graphics g) {
+		super.display(g);
+		g.drawString("Weapon: " + currentWeapon.getName(),getX()-70,getY()-height-15);
 	}
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
