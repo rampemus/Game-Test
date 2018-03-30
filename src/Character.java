@@ -57,7 +57,7 @@ public class Character extends Collider{
 	}
 	
 	public void jump(Map m) {
-		if ( onGround(m) && !headCollision(m)) {
+		if ( onGround(m) && !underCeiling(m) && !headCollision(m) ) {
 			jumpCooldown = jumpStrength;
 		}
 		

@@ -56,7 +56,19 @@ public class Collider {
 	}
 	
 	public boolean headCollision( Map m ) { //detects if player head is touching ground
+		return m.ground(p.getX(),p.getY()-height/2+1);
+	}
+	
+	public boolean underCeiling( Map m ) {
 		return m.ground(p.getX(),p.getY()-height/2);
+	}
+	
+	public boolean rightCollision( Map m ) { //detects if players right side is overlapping with an obstacle
+		return m.ground(p.getX()+width/2,p.getY()+height/2 - width/2);
+	}
+	
+	public boolean leftCollision( Map m ) { //detects if players right side is overlapping with an obstacle
+		return m.ground(p.getX()-width/2,p.getY()+height/2 - width/2);
 	}
 	
 	public boolean checkMap(Map m, float x, float y ) { //returns if there is ground if you add x,y to collider's coordinates
@@ -97,18 +109,24 @@ public class Collider {
 				}
 			} 
 		}
+		while ( leftCollision(m) ) { //if player is overlapping with obstacle during y-axis movement, this will prevent overlapping
+			p.add(xstep);
+		}
+		while ( rightCollision(m) ) {
+			p.sub(xstep);
+		}
 		float speed = Math.abs(v.getX());
 		for ( int i = 0; i < speed*10; i++) {
 			if ( v.getX() > 0) {
 				p.add(xstep);
 				//detect ground next to leg
-				if ( groundCollision(m) || headCollision(m) ) {
+				if ( groundCollision(m) || headCollision(m) || rightCollision(m)) {
 					p.sub(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
 				} 
 			} else if (v.getX() < 0 ) {
 				p.sub(xstep);
-				if ( groundCollision(m) || headCollision(m) ) {
+				if ( groundCollision(m) || headCollision(m) || leftCollision(m) ) {
 					p.add(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
 				}
@@ -123,7 +141,7 @@ public class Collider {
 		
 		if (Math.abs(v.getX()) + Math.abs(v.getY()) > 1) {
 			p.add(v);
-			if ( groundCollision(m) || headCollision(m)) {
+			if ( groundCollision(m) || headCollision(m) || rightCollision(m) || leftCollision(m) ) {
 				p.sub(v);
 				pAddV(m);
 			}
@@ -135,7 +153,7 @@ public class Collider {
 		v.scale(1f/delta);
 		g.scale(1f/delta);
 		
-		if (jumpCooldown > jumpStrength/400) {
+		if (jumpCooldown > jumpStrength/400 && !headCollision(m)) {
 			jumpCooldown -= jumpStrength/200*delta; //jump takes framerate in account
 		} else {
 			jumpCooldown = 0;
