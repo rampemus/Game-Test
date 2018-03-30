@@ -30,6 +30,7 @@ public class MapTest extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
 		addState(new MapGame());
+		addState(new MapGame2());
 	}
 
 }

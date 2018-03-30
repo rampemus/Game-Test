@@ -7,9 +7,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class MapGame extends BasicGameState {
+public class MapGame2 extends BasicGameState {
 	
-	public static int id = 1;
+	public static int id = 2;
 	private Player player;
 	private String deltaNumber = "0";
 	private Input input;
@@ -22,20 +22,25 @@ public class MapGame extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		player = new Player(350,300);
 		oList.add(player);
-		oList.add(new Blockade_Barrel(100,100));
 		input = gc.getInput();
-		m.add(2,4,4,6);
-		m.add(2,4,0,8);
-		m.add(2,4,7,5);
-		m.add(2,4,10,4);
-		m.add(3,1,12,11);
-		m.add(1,1,0,9);
-		m.add(1,1,3,13);
-		m.add(4,1,3,13);
-		m.add(1,1,10,13);
-		m.add(2,1,7,20);
-		m.add(4,1,20,13);
 		
+		m.add(1,1,0,15);
+		m.add(1,1,0,20);
+		m.add(4,1,0,19);
+		m.add(2,1,10,21);
+		m.add(2,1,12,22);
+		m.add(2,1,14,23);
+		m.add(2,1,16,24);
+		m.add(2,1,18,25);
+		m.add(1,1,20,26);
+		m.add(1,1,30,26);
+		m.add(4,1,37,25);
+		m.add(3,1,15,13);
+		m.add(3,1,21,10);
+		m.add(3,1,28,14);
+		m.add(3,1,34,8);
+		
+	
 	}
 
 	@Override
@@ -63,7 +68,6 @@ public class MapGame extends BasicGameState {
 			}
 		}
 		if(oList.size()<2) {
-			sbg.enterState(2);
 		}
 		
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());
@@ -82,7 +86,7 @@ public class MapGame extends BasicGameState {
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return MapGame.id;
+		return MapGame2.id;
 	}
 	
 }
