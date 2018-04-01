@@ -25,6 +25,12 @@ public class Collider {
 	protected int width = 16; // the width of the hitbox
 	protected Shape hitBox = null;
 	
+	/**
+	 * Creates collider to given coordinates with zero velocity and with gravitation
+	 * @author Pasi Toivanen
+	 * @param x x-coordinate
+	 * @param y y-coordinate
+	 */
 	public Collider(int x, int y) {
 		hitBox = new Rectangle(0, 0, width, height);
 		p = new Vector2f(x,y);
@@ -32,6 +38,11 @@ public class Collider {
 		g = new Vector2f(0,0.005f);
 	}
 	
+	/**
+	 * Draws collider to graphics object (mostly for debugging)
+	 * @param g Graphics object from the gameState
+	 * @author Pasi Toivanen
+	 */
 	public void display(Graphics g) {
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
@@ -39,6 +50,12 @@ public class Collider {
 		g.drawString("HP: " + hp,getX()-25,getY()-height);
 	}
 	
+	/**
+	 * Will tell if the collider's feet are overlapping to the existing map
+	 * @param m Map object that is called through the update-method
+	 * @return true, if there is anything to collide with
+	 * @author Pasi Toivanen
+	 */
 	public boolean groundCollision(Map m) {
 		if (p.getY() > 2480 - height/2) {
 			return true;
@@ -49,28 +66,59 @@ public class Collider {
 		if (p.getX() < 0 ) {
 			return true;
 		}
-		if ( m.ground(p.getX(),p.getY()+height/2)) { //this might be wrong
+		if ( m.ground(p.getX(),p.getY()+height/2)) { //this might be wrong in the future
 			return true;
 		}
 		return false;
 	}
 	
+	/**
+	 * Will tell if the collider's upper body is overlapping to the existing map
+	 * @param m Map object that is called through the update-method
+	 * @return true, if there is anything to collide with
+	 * @author Pasi Toivanen
+	 */
 	public boolean headCollision( Map m ) { //detects if player head is touching ground
 		return m.ground(p.getX(),p.getY()-height/2+1);
 	}
 	
+	/**
+	 * Will tell if the collider's upper body's above pixel is overlapping to the existing map
+	 * @param m Map object that is called through the update-method
+	 * @return true, if there is anything to collide with
+	 * @author Pasi Toivanen
+	 */
 	public boolean underCeiling( Map m ) {
 		return m.ground(p.getX(),p.getY()-height/2);
 	}
 	
+	/**
+	 * Will tell if the collider's right side is overlapping to the existing map
+	 * @param m Map object that is called through the update-method
+	 * @return true, if there is anything to collide with
+	 * @author Pasi Toivanen
+	 */
 	public boolean rightCollision( Map m ) { //detects if players right side is overlapping with an obstacle
 		return m.ground(p.getX()+width/2,p.getY()+height/2 - width/2);
 	}
 	
+	/**
+	 * Will tell the collider's left side is overlapping to the existing map
+	 * @param m Map object that is called through the update-method
+	 * @return true, if there is anything to collide with
+	 * @author Pasi Toivanen
+	 */
 	public boolean leftCollision( Map m ) { //detects if players right side is overlapping with an obstacle
 		return m.ground(p.getX()-width/2,p.getY()+height/2 - width/2);
 	}
 	
+	/**
+	 * Will tell if any pixel relative to collider is overlapping to the existing map
+	 * Will be used to create AI
+	 * @param m Map object that is called through the update-method
+	 * @return true, if there is anything to collide with
+	 * @author Pasi Toivanen
+	 */
 	public boolean checkMap(Map m, float x, float y ) { //returns if there is ground if you add x,y to collider's coordinates
 		if ( m.ground(p.getX() + x,p.getY()+y)) { 
 			return true;
@@ -78,6 +126,12 @@ public class Collider {
 		return false;
 	}
 	
+	/**
+	 * Will tell if the collider's feet are on top of existing map tile
+	 * @param m Map object that is called through the update-method
+	 * @return true, if there is anything to collide with
+	 * @author Pasi Toivanen
+	 */
 	public boolean onGround(Map m) {
 		Vector2f below = new Vector2f(0,1);
 		boolean result = false;
@@ -87,6 +141,12 @@ public class Collider {
 		return result && !groundCollision(m);
 	}
 	
+	/**
+	 * Method that will make p.add(v) (adding velocity to position vector) in a certain steps to prevent any overlapping with the map-object
+	 * 
+	 * @param m Map object that is called through the update-method
+	 * @author Pasi Toivanen
+	 */
 	private void pAddV(Map m) {
 		Vector2f xstep = new Vector2f(0.1f,0);
 		Vector2f ystep = new Vector2f(0,0.1f);
@@ -134,6 +194,14 @@ public class Collider {
 		}
 	}
 	
+	/**
+	 * updates collider so that it will obey the mechanics with map and other objects in the gameState
+	 * 
+	 * @param o Other objects in the gameState
+	 * @param m Map object of the gameState
+	 * @param delta Number of updates to do in single run
+	 */
+	
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		g.scale(delta);
 		v.add(g);
@@ -153,13 +221,14 @@ public class Collider {
 		v.scale(1f/delta);
 		g.scale(1f/delta);
 		
+		//make the collider jump if it anything has made it to jump
 		if (jumpCooldown > jumpStrength/400 && !headCollision(m)) {
 			jumpCooldown -= jumpStrength/200*delta; //jump takes framerate in account
 		} else {
 			jumpCooldown = 0;
 		}
 		
-		//stop the character
+		//stop the character using friction
 		if (v.getX() < -delta*friction) {
 			v.set(v.getX() + delta*friction,v.getY());
 		} else if (v.getX() > delta*friction) {
@@ -169,14 +238,26 @@ public class Collider {
 		}
 	}
 	
+	/**
+	 * Get collider position
+	 * @return Vector2f
+	 */
 	public Vector2f getP() {
 		return p;
 	}
 	
+	/**
+	 * Get collider x-position
+	 * @return float
+	 */
 	public float getX() {
 		return p.getX();
 	}
 	
+	/**
+	 * Get collider y-position
+	 * @return float
+	 */
 	public float getY() {
 		return p.getY();
 	}
