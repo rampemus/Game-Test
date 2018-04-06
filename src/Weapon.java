@@ -63,9 +63,9 @@ public class Weapon{
 		ammoTypes.add(new Weapon("Pistol", 999, 200, 500, 1.0f, false, false, false, false, true));
 		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 100, 1.0f, false, false, false, false, true));
 		ammoTypes.add(new Weapon("Sniper Rifle", 0, 500, 2500, 2.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 0.7f, true, false, false, false, true));
-		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 0.7f, true, false, true, false, true));
-		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 0.7f, true, true, false, false, true));
+		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 1.0f, true, false, false, false, true));
+		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 1.0f, true, false, true, false, true));
+		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1.0f, true, true, false, false, true));
 	}
 	public static ArrayList<Weapon> getWeapons() {
 		return ammoTypes;
@@ -152,6 +152,8 @@ class Bullet implements Active,Visible{
 	private Vector2f g;
 	private Shape hitBox;
 	private Weapon currentWeapon;
+	private int cycle;
+	private int cycle2;
 	
 	public Bullet(int x, int y, int destX, int destY, Weapon currentWeapon) {
 		
@@ -161,7 +163,7 @@ class Bullet implements Active,Visible{
 		
 		if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
 				currentWeapon.getName().equals("Sniper Rifle")) {
-			hitBox = new Rectangle(0, 0, 9, 3);
+			hitBox = new Rectangle(0, 0, 3, 3);
 			p = new Vector2f(x,y);
 			pm = new Vector2f(destX, destY);
 			v = new Vector2f(0,0);
@@ -173,6 +175,40 @@ class Bullet implements Active,Visible{
 			v.normalise();
 			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
 				currentWeapon.setCount(currentWeapon.getCount()-1);
+		}
+		if(currentWeapon.getName().equals("RPG-Launcher")) {
+			hitBox = new Rectangle(0, 0, 9, 9);
+			p = new Vector2f(x,y);
+			pm = new Vector2f(destX, destY);
+			v = new Vector2f(0,0);
+			g = new Vector2f(0,0);
+			this.currentWeapon = currentWeapon;
+			this.cycle2 = 0;
+			
+			v.sub(p);
+			v.add(pm);
+			v.normalise();
+		}
+		if(currentWeapon.getName().equals("Grenade-Launcher")) {
+			hitBox = new Rectangle(0, 0, 9, 9);
+			p = new Vector2f(x,y);
+			pm = new Vector2f(destX, destY);
+			v = new Vector2f(0,0);
+			g = new Vector2f(0,0.005f);
+			this.currentWeapon = currentWeapon;
+			this.cycle = 0;
+			this.cycle2 = 0;
+			
+			v.sub(p);
+			v.add(pm);
+			int i = (int) v.length();
+			v.normalise();
+			Vector2f test = new Vector2f(v);
+			test.scale(0.002f);
+			while(i > 1) {
+				v.add(test);
+				i--;
+			}
 		}
 	}
 	
@@ -192,6 +228,36 @@ class Bullet implements Active,Visible{
 					oList.remove(this);
 					break;
 				}
+			}
+		}
+		if(currentWeapon.getName().equals("RPG-Launcher")) {
+			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
+				if(cycle2 == 0) {
+					cycle2++;
+					p.add(v);
+					if(groundCollision(m) || enemyCollision(oList)) {
+						oList.remove(this);
+						break;
+					}
+				}
+				else cycle2--;
+			}
+		}
+		if(currentWeapon.getName().equals("Grenade-Launcher")) {
+			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
+				if(cycle2 == 0) {
+					cycle++;
+					cycle2++;
+					p.add(v);
+					for(int x = 0; x < cycle; x++) {
+						p.add(g);
+					}
+					if(groundCollision(m) || enemyCollision(oList)) {
+						oList.remove(this);
+						break;
+					}
+				}
+				else cycle2--;
 			}
 		}
 	}

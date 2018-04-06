@@ -56,7 +56,7 @@ public class Player extends Character {
 			if(x < 0 && y > 0) {
 				currentWeapon = weapons.get(y-1);
 			}
-			if(x > 0 && y < 2) {
+			if(x > 0 && y < 4) {
 				currentWeapon = weapons.get(y+1);
 			}
 		}
@@ -68,6 +68,12 @@ public class Player extends Character {
 		}
 		if(input.isKeyPressed(input.KEY_3)) {
 			currentWeapon = weapons.get(2);
+		}
+		if(input.isKeyPressed(input.KEY_4)) {
+			currentWeapon = weapons.get(3);
+		}
+		if(input.isKeyPressed(input.KEY_5)) {
+			currentWeapon = weapons.get(4);
 		}
 	}
 	
