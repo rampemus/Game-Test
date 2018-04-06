@@ -277,4 +277,12 @@ public class Collider {
 	public void takeDamage(int amount) {
 		hp -= amount;
 	}
+	
+	public void modifyGravitation(Vector2f g) {
+		this.g.set(g);
+	}
+	
+	public void setMaxXSpeed(float maxSpeed) {
+		xMaxSpeed = maxSpeed;
+	}
 }

@@ -10,10 +10,13 @@ import org.newdawn.slick.geom.Vector2f;
 public class Player extends Character {
 	private int maxItemSwallowDistance;
 	private Image character;
+	private Collider drone;
+	private Vector2f mouse = new Vector2f(0,0);
 	
 	public Player(int x, int y) {
 		super(x,y);
 		weapons = Weapon.getWeapons();
+		
 		maxItemSwallowDistance = height;
 		try {
 			character = new Image ("/res/main_char_stand1.png");
@@ -28,6 +31,8 @@ public class Player extends Character {
 	public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
 		
 		Input input = gc.getInput();
+		
+		mouse.set(input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300);
 		
 		//horozontal movement
 		if ( input.isKeyDown(Input.KEY_D)) {
@@ -53,7 +58,7 @@ public class Player extends Character {
 			if(x < 0 && y > 0) {
 				currentWeapon = weapons.get(y-1);
 			}
-			if(x > 0 && y < 2) {
+			if(x > 0 && y < 4) {
 				currentWeapon = weapons.get(y+1);
 			}
 		}
@@ -65,6 +70,12 @@ public class Player extends Character {
 		}
 		if(input.isKeyPressed(input.KEY_3)) {
 			currentWeapon = weapons.get(2);
+		}
+		if(input.isKeyPressed(input.KEY_4)) {
+			currentWeapon = weapons.get(3);
+		}
+		if(input.isKeyPressed(input.KEY_5)) {
+			currentWeapon = weapons.get(4);
 		}
 	}
 	
@@ -103,5 +114,9 @@ public class Player extends Character {
 				}
 			}
 		}
+	}
+	
+	public Vector2f getMouse() {
+		return mouse;
 	}
 }
