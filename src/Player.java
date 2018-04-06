@@ -15,8 +15,7 @@ public class Player extends Character {
 	public Player(int x, int y) {
 		super(x,y);
 		weapons = Weapon.getWeapons();
-		drone = new Collider((int)p.getX(),(int)p.getY());
-		drone.setMaxXSpeed(10);
+		
 		maxItemSwallowDistance = height;
 		try {
 			character = new Image ("/res/main_char_stand1.png");
@@ -79,17 +78,11 @@ public class Player extends Character {
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
-		Vector2f dronePull = new Vector2f(getX()-drone.getX(),getY()-drone.getY());
-		dronePull.normalise();
-		dronePull.scale(0.001f);
-		drone.modifyGravitation(dronePull);
-		drone.update(new ArrayList<Object>(), m, delta);
 		pullItems(o,delta);
 	}
 	
 	public void display(Graphics g) {
 		super.display(g);
-		drone.display(g);
 		character.draw(this.getX()-width/2-12,this.getY()-height/2);
 	}
 	
