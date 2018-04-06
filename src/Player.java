@@ -116,11 +116,7 @@ public class Player extends Character {
 		}
 	}
 	
-	public int getMouseX() {
-		return (int)mouse.getX();
-	}
-	
-	public int getMouseY() {
-		return (int)mouse.getY();
+	public Vector2f getMouse() {
+		return mouse;
 	}
 }
