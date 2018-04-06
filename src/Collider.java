@@ -5,6 +5,13 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
 
+/**
+ * Collider-class is basically anything that interacts with gravity and doesn't go through map obstacles.
+ * Most of objects will be destroyable, so they will automaticly implement health points and taking damage
+ * @author rampemus
+ *
+ */
+
 public class Collider {
 	//Galileian kinematics
 	protected Vector2f p; //position vector
@@ -180,12 +187,26 @@ public class Collider {
 			if ( v.getX() > 0) {
 				p.add(xstep);
 				//detect ground next to leg
+				if ( groundCollision(m) && !headCollision(m) && !rightCollision(m)) { //if ground is only one pixel try the upper one
+					p.sub(ystep);
+					if ( groundCollision(m) ) {
+						p.add(ystep);
+						break;
+					}
+				} 
 				if ( groundCollision(m) || headCollision(m) || rightCollision(m)) {
 					p.sub(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
 				} 
 			} else if (v.getX() < 0 ) {
 				p.sub(xstep);
+				if ( groundCollision(m) && !headCollision(m) && !rightCollision(m)) { //if ground is only one pixel try the upper one
+					p.sub(ystep);
+					if ( groundCollision(m) ) {
+						p.add(ystep);
+						break;
+					}
+				} 
 				if ( groundCollision(m) || headCollision(m) || leftCollision(m) ) {
 					p.add(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
@@ -200,6 +221,7 @@ public class Collider {
 	 * @param o Other objects in the gameState
 	 * @param m Map object of the gameState
 	 * @param delta Number of updates to do in single run
+	 * @author Pasi Toivanen
 	 */
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
@@ -241,6 +263,7 @@ public class Collider {
 	/**
 	 * Get collider position
 	 * @return Vector2f
+	 * @author Pasi Toivanen
 	 */
 	public Vector2f getP() {
 		return p;
@@ -249,6 +272,7 @@ public class Collider {
 	/**
 	 * Get collider x-position
 	 * @return float
+	 * @author Pasi Toivanen
 	 */
 	public float getX() {
 		return p.getX();
@@ -257,31 +281,57 @@ public class Collider {
 	/**
 	 * Get collider y-position
 	 * @return float
+	 * @author Pasi Toivanen
 	 */
 	public float getY() {
 		return p.getY();
 	}
-	
+	/**
+	 * Normal v.add(a) but using delta-scale without side effects
+	 * @param a
+	 * @param delta
+	 * @author Pasi Toivanen
+	 */
 	public void vAdd(Vector2f a, int delta) {
 		a.scale(delta);
 		v.add(a);
 		a.scale(1/delta);
 	}
 	
+	/**
+	 * For collision detection objects need to know if they are colliding with any hitbox
+	 * @return hitbox Shape
+	 * @author Pasi Toivanen
+	 */
 	public Shape getHitbox() {
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
 		return hitBox;
 	}
 	
+	/**
+	 * Will make any object with health points to take damage
+	 * @param amount
+	 * @author Pasi Toivanen
+	 */
 	public void takeDamage(int amount) {
 		hp -= amount;
 	}
 	
+	/**
+	 * For debugging mostly. Doesn't really work because the physics engine doesn't support any other gravity than the ones which are pointing down
+	 * @param g
+	 * @author Pasi Toivanen
+	 */
 	public void modifyGravitation(Vector2f g) {
 		this.g.set(g);
 	}
 	
+	/**
+	 * If walking speeds of players must be changed, you can change it through here
+	 * @param maxSpeed
+	 * @author Pasi Toivanen
+	 */
 	public void setMaxXSpeed(float maxSpeed) {
 		xMaxSpeed = maxSpeed;
 	}
