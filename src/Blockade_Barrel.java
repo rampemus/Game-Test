@@ -50,7 +50,7 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 		barrels[4] = barrel4;
 		barrels[5] = barrel5;
 		barrels[6] = b;
-		barrel_phases = new Animation(barrels,200,false);
+		barrel_phases = new Animation(barrels,200,true);
 		
 		for(Weapon w : weapons) {
 			w.setEnemy(true);
@@ -70,21 +70,17 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 			}
 		}
 		shoot(o, (int)((Character) o.get(0)).getX(), (int)((Character) o.get(0)).getY());
+		
+		
 		if(hp <=600)  {
-			barrel_phases.setAutoUpdate(true);
-		}
-		if(barrel_phases.getFrame() == 1) {
-			barrel_phases.setAutoUpdate(false);
+			barrel_phases.setCurrentFrame(1);
 		}
 		if(hp <=300)  {
-			barrel_phases.setAutoUpdate(true);
-		}
-		if(barrel_phases.getFrame() == 2) {
-			barrel_phases.setAutoUpdate(false);
+			barrel_phases.setCurrentFrame(2);
 		}
 		if(hp<=0) {
-			barrel_phases.setAutoUpdate(true);
-			barrel_phases.setSpeed(2);
+			barrel_phases.setCurrentFrame(3);
+			barrel_phases.start();
 		}
 		if (barrel_phases.getFrame() == 6) {
 			barrel_phases.stop();
