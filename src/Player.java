@@ -11,6 +11,7 @@ public class Player extends Character {
 	private int maxItemSwallowDistance;
 	private Image character;
 	private Collider drone;
+	private Vector2f mouse = new Vector2f(0,0);
 	
 	public Player(int x, int y) {
 		super(x,y);
@@ -30,6 +31,8 @@ public class Player extends Character {
 	public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
 		
 		Input input = gc.getInput();
+		
+		mouse.set(input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300);
 		
 		//horozontal movement
 		if ( input.isKeyDown(Input.KEY_D)) {
@@ -111,5 +114,13 @@ public class Player extends Character {
 				}
 			}
 		}
+	}
+	
+	public int getMouseX() {
+		return (int)mouse.getX();
+	}
+	
+	public int getMouseY() {
+		return (int)mouse.getY();
 	}
 }
