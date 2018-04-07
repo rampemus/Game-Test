@@ -6,9 +6,9 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
 
 /**
- * Collider-class is basically anything that interacts with gravity and doesn't go through map obstacles.
+ * Collider-class is anything that interacts with gravity and doesn't go through map obstacles.
  * Most of objects will be destroyable, so they will automaticly implement health points and taking damage
- * @author rampemus
+ * @author Pasi Toivanen
  *
  */
 
