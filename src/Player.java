@@ -86,7 +86,7 @@ public class Player extends Character {
 	
 	public void display(Graphics g) {
 		super.display(g);
-		character.draw(this.getX()-width/2-12,this.getY()-height/2);
+		character.getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
 	}
 	
 	public void collectItem(Item i) {

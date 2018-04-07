@@ -10,6 +10,7 @@ public class Character extends Collider{
 	protected int shootCooldown = 0;
 	protected Weapon currentWeapon;
 	protected ArrayList<Weapon> weapons;
+	protected boolean lookingRight;
 	
 	public Character(int x, int y) {
 		super(x,y);
@@ -54,12 +55,14 @@ public class Character extends Collider{
 		if ( v.getX() < xMaxSpeed ) {
 			v.add(new Vector2f(xAcceleration*delta,0));
 		}
+		lookingRight = true;
 	}
 	
 	public void walkLeft(int delta) {
 		if ( v.getX() > -xMaxSpeed ) {
 			v.add(new Vector2f(-xAcceleration*delta,0));
 		}
+		lookingRight = false;
 	}
 	
 	public void jump(Map m) {
