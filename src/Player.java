@@ -10,7 +10,7 @@ import org.newdawn.slick.geom.Vector2f;
 public class Player extends Character {
 	private int maxItemSwallowDistance;
 	private Image character;
-	private Collider drone;
+	private Vector2f dp = new Vector2f(-12f,-32f); //position of the drone
 	private Vector2f mouse = new Vector2f(0,0);
 	
 	public Player(int x, int y) {
