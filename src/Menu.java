@@ -40,7 +40,7 @@ public class Menu extends BasicGameState {
 		MapTest.draw(100, 300, 280, 330);
 		exit.draw(100, 300, 350, 400);
 		
-		m.display();
+		//m.display();
 		for (Object o : oList) {
 			if ( o instanceof Visible) {
 				((Visible)o).display(g);
