@@ -176,7 +176,7 @@ class Bullet implements Active,Visible{
 			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
 				currentWeapon.setCount(currentWeapon.getCount()-1);
 		}
-		if(currentWeapon.getName().equals("RPG-Launcher")) {
+		if(currentWeapon.getName().equals("RPG-Launcher") || currentWeapon.getName().equals("Guided RPG")) {
 			hitBox = new Rectangle(0, 0, 9, 9);
 			p = new Vector2f(x,y);
 			pm = new Vector2f(destX, destY);
@@ -232,6 +232,33 @@ class Bullet implements Active,Visible{
 		}
 		if(currentWeapon.getName().equals("RPG-Launcher")) {
 			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
+				if(cycle2 == 0) {
+					cycle2++;
+					p.add(v);
+					if(groundCollision(m) || enemyCollision(oList)) {
+						oList.remove(this);
+						break;
+					}
+				}
+				else cycle2--;
+			}
+		}
+		if(currentWeapon.getName().equals("Guided RPG")) {
+			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
+				if(currentWeapon.isEnemy()) {
+					pm = new Vector2f(((Player)oList.get(0)).getX() + ((Player)oList.get(0)).getY());
+					v = new Vector2f(0,0);
+					v.sub(p);
+					v.add(pm);
+					v.normalise();
+				}
+				else {
+					pm = new Vector2f(((Player)oList.get(0)).getMouse());
+					v = new Vector2f(0,0);
+					v.sub(p);
+					v.add(pm);
+					v.normalise();
+				}
 				if(cycle2 == 0) {
 					cycle2++;
 					p.add(v);
