@@ -21,6 +21,7 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 	Image barrel5;
 	Image[] barrels = new Image [7];
 	Animation barrel_phases;
+	boolean destroyed = true;
 	
 	public Blockade_Barrel(int defx, int defy) {
 		super(defx,defy);
@@ -50,7 +51,9 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 		barrels[4] = barrel4;
 		barrels[5] = barrel5;
 		barrels[6] = b;
-		barrel_phases = new Animation(barrels,200,true);
+		barrel_phases = new Animation(barrels,100,true);
+		barrel_phases.stop();
+		
 		
 		for(Weapon w : weapons) {
 			w.setEnemy(true);
@@ -72,14 +75,14 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 		shoot(o, (int)((Character) o.get(0)).getX(), (int)((Character) o.get(0)).getY());
 		
 		
-		if(hp <=600)  {
+		if(hp <=600 && destroyed)  {
 			barrel_phases.setCurrentFrame(1);
 		}
-		if(hp <=300)  {
+		if(hp <=300 && destroyed)  {
 			barrel_phases.setCurrentFrame(2);
 		}
-		if(hp<=0) {
-			barrel_phases.setCurrentFrame(3);
+		if(hp<=0 && destroyed) {
+			destroyed = false;
 			barrel_phases.start();
 		}
 		if (barrel_phases.getFrame() == 6) {
