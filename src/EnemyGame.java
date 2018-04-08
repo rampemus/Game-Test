@@ -22,7 +22,8 @@ public class EnemyGame extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		player = new Player(350,300);
 		oList.add(player);
-		oList.add(new Blockade_Barrel(100,100));
+		/*oList.add(new Blockade_Barrel(100,100));*/
+		oList.add(new Flame_Tank(600,200));
 		input = gc.getInput();
 		m.add(1,1,0,9);
 		m.add(1, 1, 5, 9);
