@@ -24,7 +24,7 @@ public class Flame_Tank extends Character implements Visible, Active {
 
 	public Flame_Tank(int defx, int defy) {
 		super(defx,defy);
-		hitBox = new Rectangle(defx, defy, 58, 35);
+		hitBox = new Rectangle(defx, defy, 58, 35); // fix this
 		xMaxSpeed = 0.3f;
 		friction = 0.01f;
 		jumpStrength = 0.5f;
@@ -53,9 +53,11 @@ public class Flame_Tank extends Character implements Visible, Active {
 		ftank[7] = blank;
 		Flame_tank = new Animation(ftank,200,true);
 		
+		weapons.add(new Weapon(Weapon.getWeapons().get(3)));
 		for(Weapon w : weapons) {
 			w.setEnemy(true);
 		}
+		currentWeapon = weapons.get(0);
 	}
 		public void update(ArrayList<Object> o, Map m, int delta) {
 			super.update(o, m, delta);
