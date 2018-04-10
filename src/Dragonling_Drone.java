@@ -33,7 +33,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		xMaxSpeed = 0.6f;
 		friction = 0.01f;
 		jumpStrength = 0.7f;
-		elasticity = 0.1f;
+		elasticity = 0.2f;
 		hp = 500;
 		
 		try {
