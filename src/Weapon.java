@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Random;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -10,6 +12,7 @@ public class Weapon{
 	private int count;
 	private int damage;
 	private int firingRate;
+	private int amountOfBullets;
 	private float projectileSpeed;
 	private boolean destroyable;
 	private boolean guided;
@@ -18,12 +21,13 @@ public class Weapon{
 	private boolean infinite;
 	private static ArrayList<Weapon> ammoTypes;
 	
-	public Weapon(String name, int count, int damage, int firingRate, float projectileSpeed, boolean destroyable, boolean guided,
+	public Weapon(String name, int count, int damage, int firingRate, int amountOfBullets, float projectileSpeed, boolean destroyable, boolean guided,
 			boolean arcs, boolean enemy, boolean infinite) {
 		this.name = name;
 		this.count = count;
 		this.damage = damage;
 		this.firingRate = firingRate;
+		this.amountOfBullets = amountOfBullets;
 		this.projectileSpeed = projectileSpeed;
 		this.destroyable = destroyable;
 		this.guided = guided;
@@ -37,6 +41,7 @@ public class Weapon{
 		this.count = weapon.getCount();
 		this.damage = weapon.getDamage();
 		this.firingRate = weapon.getFiringRate();
+		this.amountOfBullets = weapon.getAmountOfBullets();
 		this.projectileSpeed = weapon.getProjectileSpeed();
 		this.destroyable = weapon.isDestroyable();
 		this.guided = weapon.isGuided();
@@ -44,12 +49,13 @@ public class Weapon{
 		this.enemy = weapon.isEnemy();
 		this.infinite = weapon.isInfinite();
 	}
-	
+
 	public Weapon(Weapon weapon, boolean enemy) {
 		this.name = weapon.getName();
 		this.count = weapon.getCount();
 		this.damage = weapon.getDamage();
 		this.firingRate = weapon.getFiringRate();
+		this.amountOfBullets = weapon.getAmountOfBullets();
 		this.projectileSpeed = weapon.getProjectileSpeed();
 		this.destroyable = weapon.isDestroyable();
 		this.guided = weapon.isGuided();
@@ -60,12 +66,14 @@ public class Weapon{
 
 	public static void createWeapons() {
 		ammoTypes = new ArrayList<Weapon>();
-		ammoTypes.add(new Weapon("Pistol", 999, 200, 500, 1.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 100, 1.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("Sniper Rifle", 0, 500, 2500, 2.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 1.0f, true, false, false, false, true));
-		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 1.0f, true, false, true, false, true));
-		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1.0f, true, true, false, false, true));
+		ammoTypes.add(new Weapon("Pistol", 999, 200, 500, 1, 1.0f, false, false, false, false, true));
+		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 100, 1, 1.0f, false, false, false, false, true));
+		ammoTypes.add(new Weapon("Sniper Rifle", 0, 500, 2500, 1, 2.0f, false, false, false, false, true));
+		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, false, false, true));
+		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, true, false, true));
+		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1, 1.0f, true, true, false, false, true));
+		ammoTypes.add(new Weapon("Shotgun", 0, 200, 2000, 5, 1.0f, false, false, false, false, true));
+		ammoTypes.add(new Weapon("Flamethrower", 0, 10, 50, 10, 1.0f, false, false, false, false, true));
 	}
 	public static ArrayList<Weapon> getWeapons() {
 		return ammoTypes;
@@ -98,6 +106,13 @@ public class Weapon{
 	}
 	public void setFiringRate(int firingRate) {
 		this.firingRate = firingRate;
+	}
+	
+	public int getAmountOfBullets() {
+		return amountOfBullets;
+	}
+	public void setAmountOfBullets(int amountOfBullets) {
+		this.amountOfBullets = amountOfBullets;
 	}
 	
 	public float getProjectileSpeed() {
@@ -176,6 +191,27 @@ class Bullet implements Active,Visible{
 			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
 				currentWeapon.setCount(currentWeapon.getCount()-1);
 		}
+		if(currentWeapon.getName().equals("Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
+			hitBox = new Rectangle(0, 0, 3, 3);
+			p = new Vector2f(x,y);
+			pm = new Vector2f(destX, destY);
+			v = new Vector2f(0,0);
+			g = new Vector2f(0,0);
+			this.currentWeapon = currentWeapon;
+			Random r = new Random();
+			v.sub(p);
+			v.add(pm);
+			int i = r.nextInt(21);
+			if(i > 10) {
+				v.add(i-10);
+			}
+			else {
+				v.sub(i);
+			}
+			v.normalise();
+			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
+				currentWeapon.setCount(currentWeapon.getCount()-1);
+		}
 		if(currentWeapon.getName().equals("RPG-Launcher") || currentWeapon.getName().equals("Guided RPG")) {
 			hitBox = new Rectangle(0, 0, 9, 9);
 			p = new Vector2f(x,y);
@@ -221,7 +257,8 @@ class Bullet implements Active,Visible{
 	
 	public void update(ArrayList<Object> oList, Map m, int delta) {
 		if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
-				currentWeapon.getName().equals("Sniper Rifle")) {
+				currentWeapon.getName().equals("Sniper Rifle") ||
+				currentWeapon.getName().equals("Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
 			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
 				p.add(v);
 				if(groundCollision(m) || enemyCollision(oList)) {
@@ -327,10 +364,8 @@ class Bullet implements Active,Visible{
 		return false;
 	}
 	
-	public Vector2f trajectory() {
-		Vector2f t = new Vector2f(v);
-		t.scale(1000);
-		return t;
+	public void trajectory() {
+		
 	}
 	
 }

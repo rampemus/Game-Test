@@ -53,11 +53,11 @@ public class Flame_Tank extends Character implements Visible, Active {
 		ftank[7] = blank;
 		Flame_tank = new Animation(ftank,200,true);
 		
-		weapons.add(new Weapon(Weapon.getWeapons().get(3)));
+		weapons.add(new Weapon(Weapon.getWeapons().get(7)));
 		for(Weapon w : weapons) {
 			w.setEnemy(true);
 		}
-		currentWeapon = weapons.get(0);
+		currentWeapon = weapons.get(1);
 	}
 		public void update(ArrayList<Object> o, Map m, int delta) {
 			super.update(o, m, delta);

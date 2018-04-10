@@ -31,15 +31,14 @@ public class Character extends Collider{
 		
 		if ( shootCooldown > 0) {
 			shootCooldown -= delta;
-		} else {
-			shootCooldown = 0;
 		}
 	}
 	
 	public void shoot(ArrayList<Object> oList, int x, int y) {
-		if (shootCooldown == 0) {
+		if (shootCooldown <= 0) {
 			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
-				oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, currentWeapon));
+				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
+					oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, currentWeapon));
 			}
 			//animaation vaihtaminen ampumiseen jne.
 			shootCooldown = currentWeapon.getFiringRate();
