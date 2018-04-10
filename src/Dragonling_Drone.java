@@ -27,6 +27,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 	Image[] Dradrone = new Image[15];
 	Animation Dragonling_drone;
 	boolean alive = true;
+	boolean notChasing = false;
 
 	public Dragonling_Drone (int defx, int defy) {
 		super(defx, defy);
@@ -79,10 +80,13 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		
+		if (shootCooldown>0) {
+			shootCooldown-= delta;
+		}
+		
 		if (Dragonling_drone.getFrame()==4 && alive) {
 			Dragonling_drone.setCurrentFrame(0);
 		}
-		//Frames 5-9 when attacking
 		if (hp<=0 && alive) {
 			Dragonling_drone.setCurrentFrame(10);
 			Dragonling_drone.setSpeed(2);
@@ -97,8 +101,28 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 				jump(m);
 			}
 		}
-		
+		if(hitBox.intersects(((Collider)o.get(0)).getHitbox()) && shootCooldown<= 0) {
+		      ((Collider)o.get(0)).takeDamage(50);
+		      shootCooldown = 1000;
+		}
+		if(((Character)o.get(0)).getX()>this.getX()) {
+			if (notChasing) {
+				Dragonling_drone.setCurrentFrame(5);
+				notChasing = false;
+				//Do chasing
+			}
+		}else {
+			notChasing = true;
+			if (Dragonling_drone.getFrame()==9 && alive) {
+				Dragonling_drone.setCurrentFrame(0);
+			}
+		}
+		//Frames 5-9 when attacking
+		if (Dragonling_drone.getFrame()==9 && alive) {
+			Dragonling_drone.setCurrentFrame(5);
+		}
 	}
+
 	public void display(Graphics g) {
 		super.display(g);
 		Dragonling_drone.draw(this.getX()-width/2-14,this.getY()-height/2-3 );
