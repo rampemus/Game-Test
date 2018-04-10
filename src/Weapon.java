@@ -327,4 +327,10 @@ class Bullet implements Active,Visible{
 		return false;
 	}
 	
+	public Vector2f trajectory() {
+		Vector2f t = new Vector2f(v);
+		t.scale(1000);
+		return t;
+	}
+	
 }
