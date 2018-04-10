@@ -24,6 +24,7 @@ public class EnemyGame extends BasicGameState {
 		oList.add(player);
 		oList.add(new Blockade_Barrel(100,100));
 		oList.add(new Flame_Tank(600,200));
+		oList.add(new Dragonling_Drone(500,100));
 		input = gc.getInput();
 		m.add(1,1,0,9);
 		m.add(1, 1, 5, 9);
