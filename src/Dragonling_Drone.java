@@ -33,7 +33,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		hitBox = new Rectangle(defx, defy, 58, 35); // fix this
 		xMaxSpeed = 0.6f;
 		friction = 0.01f;
-		jumpStrength = 0.7f;
+		jumpStrength = 0.9f;
 		elasticity = 0.2f;
 		hp = 500;
 		
@@ -93,9 +93,9 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 			o.remove(this);
 		}
 		if (((Character) o.get(0)).isShooting()){
-			/*if () {
+			if (((Player)o.get(0)).getLineOfFire().intersects(hitBox)) {
 				jump(m);
-			}*/
+			}
 		}
 		
 	}
