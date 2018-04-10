@@ -72,8 +72,8 @@ public class Weapon{
 		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, false, false, true));
 		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, true, false, true));
 		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1, 1.0f, true, true, false, false, true));
-		ammoTypes.add(new Weapon("Shotgun", 0, 200, 2000, 5, 1.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("Flamethrower", 0, 10, 50, 10, 1.0f, false, false, false, false, true));
+		ammoTypes.add(new Weapon("Shotgun", 0, 200, 2000, 7, 1.0f, false, false, false, false, true));
+		ammoTypes.add(new Weapon("Flamethrower", 0, 1, 100, 15, 1.0f, false, false, false, false, true));
 	}
 	public static ArrayList<Weapon> getWeapons() {
 		return ammoTypes;
