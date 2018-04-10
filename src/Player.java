@@ -5,6 +5,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.geom.Vector2f;
 
 public class Player extends Character {
@@ -12,6 +15,8 @@ public class Player extends Character {
 	private Image character;
 	private Vector2f dp = new Vector2f(-12f,-32f); //position of the drone
 	private Vector2f mouse = new Vector2f(0,0);
+	private Vector2f v;
+	private Shape r;
 	
 	public Player(int x, int y) {
 		super(x,y);
@@ -26,6 +31,7 @@ public class Player extends Character {
 		}
 		hp = 1000;
 		jumpStrength = 0.8f;
+		r = new Rectangle(x,y,1,1000);
 	}
 	
 	public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
@@ -89,6 +95,12 @@ public class Player extends Character {
 	
 	public void display(Graphics g) {
 		super.display(g);
+		v = new Vector2f(0,0);
+		v.sub(p);
+		v.add(getMouse());
+		r.setLocation(this.getX(), this.getY());
+		r = r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY()));
+		g.draw((Shape)r);
 		character.getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
 	}
 	
@@ -121,5 +133,9 @@ public class Player extends Character {
 	
 	public Vector2f getMouse() {
 		return mouse;
+	}
+	
+	public Shape getLineOfFire() {
+		return r;
 	}
 }
