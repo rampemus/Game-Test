@@ -7,6 +7,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class Dragonling_Drone extends Character implements Visible, Active {
@@ -91,8 +92,10 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 			Dragonling_drone.stop();
 			o.remove(this);
 		}
-		if (((Character) o.get(0)).isShooting()) {
-			jump(m);
+		if (((Character) o.get(0)).isShooting()){
+			/*if () {
+				jump(m);
+			}*/
 		}
 		
 	}

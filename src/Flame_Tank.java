@@ -91,6 +91,6 @@ public class Flame_Tank extends Character implements Visible, Active {
 	
 	public void display(Graphics g) {
 		super.display(g);
-		Flame_tank.getCurrentFrame().getFlippedCopy(lookingRight, false).draw(this.getX()-width/2-14,this.getY()-height/2-16 );
+		Flame_tank.draw(this.getX()-width/2-14,this.getY()-height/2-16 );
 	}
 }
