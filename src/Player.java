@@ -105,7 +105,7 @@ public class Player extends Character {
 		v.sub(p);
 		v.add(getMouse());
 		r.setLocation(this.getX(), this.getY());
-		//g.draw((Shape)r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
+		//g.draw(r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
 		character.getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
 	}
 	
@@ -141,6 +141,6 @@ public class Player extends Character {
 	}
 	
 	public Shape getLineOfFire() {
-		return (Shape)r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY()));
+		return r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY()));
 	}
 }

@@ -46,7 +46,7 @@ public class Character extends Collider{
 	}
 	
 	public boolean isShooting() {
-		if ( shootCooldown == currentWeapon.getFiringRate() - 1) return true;
+		if ( shootCooldown > currentWeapon.getFiringRate()-50) return true;
 		return false;
 	}
 	

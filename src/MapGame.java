@@ -23,6 +23,7 @@ public class MapGame extends BasicGameState {
 		player = new Player(350,300);
 		oList.add(player);
 		oList.add(new Blockade_Barrel(100,100));
+		oList.add(new Dragonling_Drone(500,50));
 		input = gc.getInput();
 		m.add(2,4,4,6);
 		m.add(2,4,0,8);
