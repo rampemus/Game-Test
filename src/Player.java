@@ -17,6 +17,9 @@ public class Player extends Character {
 	private Vector2f mouse = new Vector2f(0,0);
 	private Vector2f v;
 	private Shape r;
+	private int doubleDamageTimer;
+	private int infiniteAmmoTimer;
+	private int invulnerabilityTimer;
 	
 	public Player(int x, int y) {
 		super(x,y);
@@ -115,6 +118,34 @@ public class Player extends Character {
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		pullItems(o,delta);
+		
+		if(doubleDamageTimer > 0) {
+			doubleDamageTimer -= delta;
+			if(doubleDamageTimer <= 0) {
+				for(Weapon w : weapons) {
+					w.setDamage(w.getDamage()/2);
+				}
+				doubleDamageTimer = 0;
+			}
+		}
+		if(infiniteAmmoTimer > 0) {
+			infiniteAmmoTimer -= delta;
+			if(infiniteAmmoTimer <= 0) {
+				for(Weapon w : weapons) {
+					if(!(w.getName().equals("Pistol"))) {
+						w.setInfinite(false);
+					}
+				}
+				infiniteAmmoTimer = 0;
+			}
+		}
+		if(invulnerabilityTimer > 0) {
+			invulnerabilityTimer -= delta;
+			if(invulnerabilityTimer <= 0) {
+				invulnerable = true;
+				invulnerabilityTimer = 0;
+			}
+		}
 	}
 	
 	public void display(Graphics g) {
@@ -152,6 +183,22 @@ public class Player extends Character {
 				break;
 			case FLAMETHROWER_AMMO :
 				weapons.get(6).setCount(weapons.get(7).getCount() + amount);
+				break;
+			case DOUBLE_DAMAGE :
+				for(Weapon w : weapons) {
+					w.setDamage(w.getDamage()*2);
+				}
+				doubleDamageTimer = amount;
+				break;
+			case INFINITE_AMMO :
+				for(Weapon w : weapons) {
+					w.setInfinite(true);
+				}
+				infiniteAmmoTimer = amount;
+				break;
+			case INVULNERABILITY :
+				invulnerable = true;
+				invulnerabilityTimer = amount;
 				break;
 		}
 	}

@@ -27,7 +27,7 @@ public class Collider {
 	protected float jumpCooldown = 0; // for calculating the jumping strength of "input"
 	protected float threshold = 1; // can climb 1 pixel up = 45° angled incline
 	protected boolean airborne; // boolean value for flying objects
-	
+	protected boolean invulnerable;
 	
 	protected int hp = 100; // health points
 	
@@ -330,7 +330,9 @@ public class Collider {
 	 * @author Pasi Toivanen
 	 */
 	public void takeDamage(int amount) {
-		hp -= amount;
+		if(!invulnerable) {
+			hp -= amount;
+		}
 	}
 	
 	/**

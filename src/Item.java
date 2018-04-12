@@ -57,6 +57,15 @@ public class Item extends Collider implements Active,Visible{
 			case FLAMETHROWER_AMMO :
 				amount = 250;
 				break;
+			case DOUBLE_DAMAGE :
+				amount = 10000;
+				break;
+			case INFINITE_AMMO :
+				amount = 10000;
+				break;
+			case INVULNERABILITY :
+				amount = 10000;
+				break;
 		}
 	}
 	
@@ -92,6 +101,15 @@ public class Item extends Collider implements Active,Visible{
 			case FLAMETHROWER_AMMO :
 				displayLetter = "F";
 				break;
+			case DOUBLE_DAMAGE :
+				displayLetter = "x2";
+				break;
+			case INFINITE_AMMO :
+				displayLetter = "∞";
+				break;
+			case INVULNERABILITY :
+				displayLetter = "I";
+				break;
 		}
 		g.drawString(displayLetter,p.getX()-width/2+3,p.getY()-height/2-1);
 	}
@@ -115,7 +133,7 @@ public class Item extends Collider implements Active,Visible{
 }
 
 enum Collect {
-	HP, ASSAULT_AMMO, SNIPER_AMMO, ROCKET, GRENADE, PUMP_SHOTGUN_AMMO, FLAMETHROWER_AMMO;
+	HP, ASSAULT_AMMO, SNIPER_AMMO, ROCKET, GRENADE, PUMP_SHOTGUN_AMMO, FLAMETHROWER_AMMO, DOUBLE_DAMAGE, INFINITE_AMMO, INVULNERABILITY;
 	
 	//method for getting a random item
 	private static Random r = new Random();
