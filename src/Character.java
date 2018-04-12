@@ -107,4 +107,8 @@ public class Character extends Collider{
 	public void setFlying(boolean airborne) {
 		this.airborne = airborne;
 	}
+	
+	public ArrayList<Weapon> getWeapons() {
+		return weapons;
+	}
 }

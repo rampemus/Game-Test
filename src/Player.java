@@ -128,8 +128,31 @@ public class Player extends Character {
 	}
 	
 	public void collectItem(Item i) {
-		if (i.getType() == Collect.HP) {
-			hp += i.getAmount();
+		Collect type = i.getType();
+		int amount = i.getAmount();
+		switch (type) {
+			case HP : 
+				hp += 100;
+				break;
+			case ASSAULT_AMMO :
+				weapons.get(1).setCount(weapons.get(1).getCount() + amount);
+				break;
+			case SNIPER_AMMO :
+				weapons.get(2).setCount(weapons.get(2).getCount() + amount);
+				break;
+			case ROCKET : 
+				weapons.get(3).setCount(weapons.get(3).getCount() + amount);
+				weapons.get(5).setCount(weapons.get(5).getCount() + amount);
+				break;
+			case GRENADE :
+				weapons.get(4).setCount(weapons.get(4).getCount() + amount);
+				break;
+			case PUMP_SHOTGUN_AMMO :
+				weapons.get(5).setCount(weapons.get(6).getCount() + amount);
+				break;
+			case FLAMETHROWER_AMMO :
+				weapons.get(6).setCount(weapons.get(7).getCount() + amount);
+				break;
 		}
 	}
 	
