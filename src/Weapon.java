@@ -304,7 +304,7 @@ class Bullet implements Active,Visible{
 	private boolean destroyed;
 	
 	/**
-	 * A constructor for the bullet. It needs the current weapon and coordinates of the shooter and the destination to work.
+	 * A constructor for a bullet. It needs the current weapon and coordinates of the shooter and the destination to work.
 	 * @param x
 	 * @param y
 	 * @param destX
@@ -544,7 +544,7 @@ class Bullet implements Active,Visible{
 	}
 
 	/**
-	 * Checks if the bullet is hitting anyone and acts accordingily.
+	 * Checks if the bullet is hitting anything and acts accordingily.
 	 * @param oList
 	 * @return
 	 */
@@ -557,7 +557,13 @@ class Bullet implements Active,Visible{
 						return true;
 					}
 				}
-				if (!(o instanceof Player) && !currentWeapon.isEnemy()) {
+				else if (!(o instanceof Player) && !currentWeapon.isEnemy()) {
+					if(hitBox.intersects(((Collider)o).getHitbox())) {
+						((Collider)o).takeDamage(currentWeapon.getDamage());
+						return true;
+					}
+				}
+				else if(o instanceof Blockade_Barrel) {
 					if(hitBox.intersects(((Collider)o).getHitbox())) {
 						((Collider)o).takeDamage(currentWeapon.getDamage());
 						return true;

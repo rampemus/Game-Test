@@ -72,7 +72,6 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 			walkLeft(delta);
 			}
 		}
-		shoot(o, (int)((Character) o.get(0)).getX(), (int)((Character) o.get(0)).getY());
 		
 		
 		if(hp <=600 && alive)  {
