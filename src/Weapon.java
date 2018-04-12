@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
@@ -105,7 +107,7 @@ public class Weapon{
 		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, 9999, false, true));
 		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1, 1.0f, true, true, 9999, false, true));
 		ammoTypes.add(new Weapon("Shotgun", 0, 200, 2000, 7, 1.0f, false, false, 500, false, true));
-		ammoTypes.add(new Weapon("Flamethrower", 0, 1, 100, 15, 1.0f, false, false, 250, false, true));
+		ammoTypes.add(new Weapon("Flamethrower", 0, 5, 100, 15, 1.0f, false, false, 250, false, true));
 	}
 	
 	/**
@@ -302,6 +304,8 @@ class Bullet implements Active,Visible{
 	private int bulletSpeedSlowerCycle;
 	private int range;
 	private boolean destroyed;
+	private Image texture;
+	private boolean lookingRight;
 	
 	/**
 	 * A constructor for a bullet. It needs the current weapon and coordinates of the shooter and the destination to work.
@@ -326,7 +330,11 @@ class Bullet implements Active,Visible{
 			this.currentWeapon = currentWeapon;
 			this.gravityAccelerationCycle = 0;
 			this.bulletSpeedSlowerCycle = 0;
-			
+			try {
+				texture = new Image("/res/blank.png");
+			}catch(SlickException e) {
+				
+			}
 			v.sub(p);
 			v.add(pm);
 			int i = (int) v.length();
@@ -347,7 +355,11 @@ class Bullet implements Active,Visible{
 			g = new Vector2f(0,0);
 			this.currentWeapon = currentWeapon;
 			this.range = currentWeapon.getRange();
-			
+			try {
+				texture = new Image("/res/blank.png");
+			}catch(SlickException e) {
+				
+			}
 			v.sub(p);
 			v.add(pm);
 			v.normalise();
@@ -355,13 +367,28 @@ class Bullet implements Active,Visible{
 				currentWeapon.setCount(currentWeapon.getCount()-1);
 		}
 		else if(currentWeapon.getName().equals("Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
-			hitBox = new Rectangle(0, 0, 3, 3);
 			p = new Vector2f(x,y);
 			pm = new Vector2f(destX, destY);
 			v = new Vector2f(0,0);
 			g = new Vector2f(0,0);
 			this.currentWeapon = currentWeapon;
 			this.range = currentWeapon.getRange();
+			if(currentWeapon.getName().equals("Flamethrower")) {
+				try {
+					hitBox = new Rectangle(0, 0, 9, 9);
+					texture = new Image("/res/Fire.png");
+				}catch(SlickException e) {
+					
+				}
+			}
+			else {
+				try {
+					hitBox = new Rectangle(0, 0, 3, 3);
+					texture = new Image("/res/blank.png");
+				}catch(SlickException e) {
+					
+				}
+			}
 			Random r = new Random();
 			
 			v.sub(p);
@@ -386,7 +413,11 @@ class Bullet implements Active,Visible{
 			this.currentWeapon = currentWeapon;
 			this.range = currentWeapon.getRange();
 			this.bulletSpeedSlowerCycle = 0;
-			
+			try {
+				texture = new Image("/res/blank.png");
+			}catch(SlickException e) {
+				
+			}
 			v.sub(p);
 			v.add(pm);
 			v.normalise();
@@ -414,7 +445,11 @@ class Bullet implements Active,Visible{
 		this.gravityAccelerationCycle = 0;
 		this.bulletSpeedSlowerCycle = 0;
 		this.test = test;
-		
+		try {
+			texture = new Image("/res/blank.png");
+		}catch(SlickException e) {
+			
+		}
 		v.sub(p);
 		v.add(pm);
 		int i = (int) v.length();
@@ -434,6 +469,7 @@ class Bullet implements Active,Visible{
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
 		g.draw(hitBox);
+		texture.getFlippedCopy(!lookingRight, false).draw(p.getX()-32, p.getY()-32);
 		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
 	}
 	
