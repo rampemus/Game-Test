@@ -62,17 +62,6 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
-		if (((Character) o.get(0)).getX() > this.getX() +10) {
-			if (((Character) o.get(0)).getX() < this.getX() +100){
-				walkRight(delta);
-			}
-		}
-		if (((Character) o.get(0)).getX() < this.getX() -10) {
-			if (((Character) o.get(0)).getX() > this.getX() -100){
-			walkLeft(delta);
-			}
-		}
-		
 		
 		if(hp <=600 && alive)  {
 			barrel_phases.setCurrentFrame(1);
