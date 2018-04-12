@@ -305,7 +305,6 @@ class Bullet implements Active,Visible{
 	private int range;
 	private boolean destroyed;
 	private Image texture;
-	private boolean lookingRight;
 	
 	/**
 	 * A constructor for a bullet. It needs the current weapon and coordinates of the shooter and the destination to work.
@@ -401,6 +400,7 @@ class Bullet implements Active,Visible{
 				v.sub(i);
 			}
 			v.normalise();
+			texture.rotate((float)v.getTheta()-90);
 			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
 				currentWeapon.setCount(currentWeapon.getCount()-1);
 		}
@@ -469,7 +469,7 @@ class Bullet implements Active,Visible{
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
 		g.draw(hitBox);
-		texture.getFlippedCopy(!lookingRight, false).draw(p.getX()-32, p.getY()-32);
+		texture.draw(p.getX()-32, p.getY()-32);
 		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
 	}
 	
