@@ -28,7 +28,7 @@ public class Weapon{
 	private static ArrayList<Weapon> ammoTypes;
 	
 	/**
-	 * Creates a weapon from the given values.
+	 * Constructor for a weapon object created from the given values.
 	 * @param name
 	 * @param count
 	 * @param damage
@@ -295,12 +295,13 @@ class Bullet implements Active,Visible{
 	private Vector2f p;
 	private Vector2f v;
 	private Vector2f g;
-	private Shape hitBox;
+	public Shape hitBox;
 	private Shape test;
-	private Weapon currentWeapon;
+	public Weapon currentWeapon;
 	private int gravityAccelerationCycle;
 	private int bulletSpeedSlowerCycle;
 	private int range;
+	private boolean destroyed;
 	
 	/**
 	 * A constructor for the bullet. It needs the current weapon and coordinates of the shooter and the destination to work.
@@ -393,7 +394,7 @@ class Bullet implements Active,Visible{
 	}
 	
 	/**
-	 * Create a dummy bullet for aiming.
+	 * Constructor for a dummy bullet used in grenade aiming.
 	 * @param x
 	 * @param y
 	 * @param destX
@@ -466,7 +467,7 @@ class Bullet implements Active,Visible{
 					for(int x = 0; x < gravityAccelerationCycle; x++) {
 						p.add(g);
 					}
-					if(groundCollision(m) || enemyCollision(oList)) {
+					if(groundCollision(m) || enemyCollision(oList) || getDestroyed()) {
 						oList.remove(this);
 						break;
 					}
@@ -479,7 +480,7 @@ class Bullet implements Active,Visible{
 				currentWeapon.getName().equals("Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
 			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
 				p.add(v);
-				if(groundCollision(m) || enemyCollision(oList) || range <= 0) {
+				if(groundCollision(m) || enemyCollision(oList) || range <= 0 || getDestroyed()) {
 					oList.remove(this);
 					break;
 				}
@@ -491,7 +492,7 @@ class Bullet implements Active,Visible{
 				if(bulletSpeedSlowerCycle == 0) {
 					bulletSpeedSlowerCycle++;
 					p.add(v);
-					if(groundCollision(m) || enemyCollision(oList) || range <= 0) {
+					if(groundCollision(m) || enemyCollision(oList) || range <= 0 || getDestroyed()) {
 						oList.remove(this);
 						break;
 					}
@@ -519,7 +520,7 @@ class Bullet implements Active,Visible{
 				if(bulletSpeedSlowerCycle == 0) {
 					bulletSpeedSlowerCycle++;
 					p.add(v);
-					if(groundCollision(m) || enemyCollision(oList) || range <= 0) {
+					if(groundCollision(m) || enemyCollision(oList) || range <= 0 || getDestroyed()) {
 						oList.remove(this);
 						break;
 					}
@@ -531,7 +532,7 @@ class Bullet implements Active,Visible{
 	}
 
 	/**
-	 * Checks for changes in the player's position.
+	 * Checks for changes in the cursor's position.
 	 * @param oList
 	 * @return
 	 */
@@ -563,8 +564,27 @@ class Bullet implements Active,Visible{
 					}
 				}
 			}
+			else if(o instanceof Bullet) {
+				try {
+					if(((Bullet)o).currentWeapon.isDestroyable() && !o.equals(this)) {
+						if(hitBox.intersects(((Bullet)o).hitBox)) {
+							((Bullet)o).setDestroyed();
+							return true;
+						}
+					}
+				} catch(NullPointerException e) {
+					
+				}
+			}
 		}
 		return false;
+	}
+	
+	public boolean getDestroyed() {
+		return destroyed;
+	}
+	public void setDestroyed() {
+		destroyed = true;
 	}
 
 	/**
