@@ -5,6 +5,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Point;
+import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
@@ -13,13 +15,13 @@ import org.newdawn.slick.geom.Vector2f;
 public class Player extends Character {
 	private int maxItemSwallowDistance;
 	private Image character;
-	private Vector2f dp = new Vector2f(-12f,-32f); //position of the drone
 	private Vector2f mouse = new Vector2f(0,0);
 	private Vector2f v;
 	private Shape r;
 	private int doubleDamageTimer;
 	private int infiniteAmmoTimer;
 	private int invulnerabilityTimer;
+	private Polygon viewArea;
 	
 	public Player(int x, int y) {
 		super(x,y);
@@ -35,6 +37,7 @@ public class Player extends Character {
 		hp = 10000;
 		jumpStrength = 0.8f;
 		r = new Rectangle(x,y,1,1000);
+		viewArea = new Polygon();
 	}
 	
 	public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
@@ -150,6 +153,7 @@ public class Player extends Character {
 	
 	public void display(Graphics g) {
 		super.display(g);
+		//updateViewArea();
 		v = new Vector2f(0,0);
 		v.sub(p);
 		v.add(getMouse());
@@ -158,6 +162,14 @@ public class Player extends Character {
 		character.getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
 	}
 	
+	/*
+	private void updateViewArea() {
+		viewArea = new Polygon();
+		for ( int i = 0; i < 32; i++) {
+			Vector2f point = new Vector2f(p.getX(),p.getY());
+		}
+	}*/
+
 	public void collectItem(Item i) {
 		Collect type = i.getType();
 		int amount = i.getAmount();
