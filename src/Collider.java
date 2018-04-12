@@ -343,11 +343,14 @@ public class Collider {
 	}
 	
 	/**
-	 * If walking speeds of players must be changed, you can change it through here
+	 * If walking(or flying) speeds of players must be changed, you can change it through here
 	 * @param maxSpeed
 	 * @author Pasi Toivanen
 	 */
 	public void setMaxXSpeed(float maxSpeed) {
 		xMaxSpeed = maxSpeed;
+	}
+	public void setMaxYSpeed(float maxSpeed) {
+		yMaxSpeed = maxSpeed;
 	}
 }
