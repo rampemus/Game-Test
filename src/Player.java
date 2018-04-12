@@ -29,7 +29,7 @@ public class Player extends Character {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		hp = 1000;
+		hp = 10000;
 		jumpStrength = 0.8f;
 		r = new Rectangle(x,y,1,1000);
 	}
