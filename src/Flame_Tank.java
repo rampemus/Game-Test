@@ -24,7 +24,9 @@ public class Flame_Tank extends Character implements Visible, Active {
 
 	public Flame_Tank(int defx, int defy) {
 		super(defx,defy);
-		hitBox = new Rectangle(defx, defy, 58, 31); // fix this
+		width = 58;
+		height = 31;
+		hitBox = new Rectangle(defx, defy, width, height); // fix this
 		xMaxSpeed = 0.3f;
 		friction = 0.01f;
 		jumpStrength = 0.5f;
