@@ -400,7 +400,7 @@ class Bullet implements Active,Visible{
 				v.sub(i);
 			}
 			v.normalise();
-			texture.rotate((float)v.getTheta()-90);
+			texture.rotate((float)v.getTheta() - 90);
 			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
 				currentWeapon.setCount(currentWeapon.getCount()-1);
 		}
@@ -648,10 +648,6 @@ class Bullet implements Active,Visible{
 			return true;
 		}
 		return false;
-	}
-	
-	public void trajectory() {
-		
 	}
 	
 }
