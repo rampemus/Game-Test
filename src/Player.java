@@ -47,6 +47,20 @@ public class Player extends Character {
 			walkLeft(delta);
 		} 
 		
+		//vertical movement, when airborne
+		if ( input.isKeyDown(Input.KEY_W)) {
+			ascend(delta);
+		} else if ( input.isKeyDown(Input.KEY_S)) {
+			descend(delta);
+		} 
+		
+		//jetpack by pressing J (for testing flying)
+		if ( input.isKeyDown(Input.KEY_J)) {
+			airborne = true;
+		} else {
+			airborne = false;
+		}
+		
 		//jump mecanic
 		if ( input.isKeyDown(Input.KEY_SPACE) ){
 			jump(m);
