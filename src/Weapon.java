@@ -106,7 +106,7 @@ public class Weapon{
 		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, 9999, false, true));
 		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, 9999, false, true));
 		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1, 1.0f, true, true, 9999, false, true));
-		ammoTypes.add(new Weapon("Shotgun", 0, 200, 2000, 7, 1.0f, false, false, 500, false, true));
+		ammoTypes.add(new Weapon("Pump Shotgun", 0, 200, 2000, 7, 1.0f, false, false, 500, false, true));
 		ammoTypes.add(new Weapon("Flamethrower", 0, 5, 100, 15, 1.0f, false, false, 250, false, true));
 	}
 	
@@ -298,14 +298,14 @@ class Bullet implements Active,Visible{
 	private Vector2f v;
 	private Vector2f g;
 	public Shape hitBox;
-	private Shape test;
+	private Shape oldLineOfFire;
 	public Weapon currentWeapon;
 	private int gravityAccelerationCycle;
 	private int bulletSpeedSlowerCycle;
 	private int range;
 	private boolean destroyed;
 	private Image texture;
-	private boolean lookingRight;
+	private boolean removeKebab;
 	
 	/**
 	 * A constructor for a bullet. It needs the current weapon and coordinates of the shooter and the destination to work.
@@ -339,10 +339,10 @@ class Bullet implements Active,Visible{
 			v.add(pm);
 			int i = (int) v.length();
 			v.normalise();
-			Vector2f test = new Vector2f(v);
-			test.scale(0.002f);
+			Vector2f force = new Vector2f(v);
+			force.scale(0.002f);
 			while(i > 1) {
-				v.add(test);
+				v.add(force);
 				i--;
 			}
 		}
@@ -363,10 +363,8 @@ class Bullet implements Active,Visible{
 			v.sub(p);
 			v.add(pm);
 			v.normalise();
-			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
-				currentWeapon.setCount(currentWeapon.getCount()-1);
 		}
-		else if(currentWeapon.getName().equals("Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
+		else if(currentWeapon.getName().equals("Pump Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
 			p = new Vector2f(x,y);
 			pm = new Vector2f(destX, destY);
 			v = new Vector2f(0,0);
@@ -401,8 +399,7 @@ class Bullet implements Active,Visible{
 				v.sub(i);
 			}
 			v.normalise();
-			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
-				currentWeapon.setCount(currentWeapon.getCount()-1);
+			texture.rotate((float)v.getTheta() - 90);
 		}
 		else if(currentWeapon.getName().equals("RPG-Launcher") || currentWeapon.getName().equals("Guided RPG")) {
 			hitBox = new Rectangle(0, 0, 9, 9);
@@ -421,6 +418,16 @@ class Bullet implements Active,Visible{
 			v.sub(p);
 			v.add(pm);
 			v.normalise();
+		}
+		
+		if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy()) {
+			if(currentWeapon.getName().equals("RPG-Launcher") || currentWeapon.getName().equals("Guided RPG")) {
+				removeKebab = true;
+			}
+			else {
+				currentWeapon.setCount(currentWeapon.getCount()-1);
+			}
+			
 		}
 	}
 	
@@ -444,7 +451,7 @@ class Bullet implements Active,Visible{
 		g = new Vector2f(0,0.005f);
 		this.gravityAccelerationCycle = 0;
 		this.bulletSpeedSlowerCycle = 0;
-		this.test = test;
+		this.oldLineOfFire = test;
 		try {
 			texture = new Image("/res/blank.png");
 		}catch(SlickException e) {
@@ -454,10 +461,10 @@ class Bullet implements Active,Visible{
 		v.add(pm);
 		int i = (int) v.length();
 		v.normalise();
-		Vector2f grav = new Vector2f(v);
-		grav.scale(0.002f);
+		Vector2f force = new Vector2f(v);
+		force.scale(0.002f);
 		while(i > 1) {
-			v.add(grav);
+			v.add(force);
 			i--;
 		}
 	}
@@ -469,7 +476,7 @@ class Bullet implements Active,Visible{
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
 		g.draw(hitBox);
-		texture.getFlippedCopy(!lookingRight, false).draw(p.getX()-32, p.getY()-32);
+		texture.draw(p.getX()-32, p.getY()-32);
 		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
 	}
 	
@@ -513,7 +520,7 @@ class Bullet implements Active,Visible{
 		}
 		else if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
 				currentWeapon.getName().equals("Sniper Rifle") ||
-				currentWeapon.getName().equals("Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
+				currentWeapon.getName().equals("Pump Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
 			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
 				p.add(v);
 				if(groundCollision(m) || enemyCollision(oList) || range <= 0 || getDestroyed()) {
@@ -565,6 +572,11 @@ class Bullet implements Active,Visible{
 				else bulletSpeedSlowerCycle--;
 			}
 		}
+		if(removeKebab) {
+			((Player)(oList.get(0))).getWeapons().get(3).setCount(((Player)(oList.get(0))).getWeapons().get(3).getCount() - 1);
+			((Player)(oList.get(0))).getWeapons().get(5).setCount(((Player)(oList.get(0))).getWeapons().get(5).getCount() - 1);
+			removeKebab = false;
+		}
 	}
 
 	/**
@@ -573,7 +585,7 @@ class Bullet implements Active,Visible{
 	 * @return
 	 */
 	private boolean thingsMoved(ArrayList<Object> oList) {
-		if((int)(test.getCenterX()) != (int)(((Player)oList.get(0)).getLineOfFire().getCenterX())) {
+		if((int)(oldLineOfFire.getCenterX()) != (int)(((Player)oList.get(0)).getLineOfFire().getCenterX())) {
 			return true;
 		}
 		return false;
@@ -648,10 +660,6 @@ class Bullet implements Active,Visible{
 			return true;
 		}
 		return false;
-	}
-	
-	public void trajectory() {
-		
 	}
 	
 }
