@@ -6,6 +6,12 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
 
+/**
+ * 
+ * A class needed for the creation of weapons for the game.
+ * @author Santeri Loitomaa
+ *
+ */
 public class Weapon{
 	
 	private String name;
@@ -16,13 +22,27 @@ public class Weapon{
 	private float projectileSpeed;
 	private boolean destroyable;
 	private boolean guided;
-	private boolean arcs;
+	private int range;
 	private boolean enemy;
 	private boolean infinite;
 	private static ArrayList<Weapon> ammoTypes;
 	
+	/**
+	 * Creates a weapon from the given values.
+	 * @param name
+	 * @param count
+	 * @param damage
+	 * @param firingRate
+	 * @param amountOfBullets
+	 * @param projectileSpeed
+	 * @param destroyable
+	 * @param guided
+	 * @param range
+	 * @param enemy
+	 * @param infinite
+	 */
 	public Weapon(String name, int count, int damage, int firingRate, int amountOfBullets, float projectileSpeed, boolean destroyable, boolean guided,
-			boolean arcs, boolean enemy, boolean infinite) {
+			int range, boolean enemy, boolean infinite) {
 		this.name = name;
 		this.count = count;
 		this.damage = damage;
@@ -31,11 +51,15 @@ public class Weapon{
 		this.projectileSpeed = projectileSpeed;
 		this.destroyable = destroyable;
 		this.guided = guided;
-		this.arcs = arcs;
+		this.range = range;
 		this.enemy = enemy;
 		this.infinite = infinite;
 	}
 	
+	/**
+	 * Creates a copy of a weapon.
+	 * @param weapon
+	 */
 	public Weapon(Weapon weapon) {
 		this.name = weapon.getName();
 		this.count = weapon.getCount();
@@ -45,11 +69,16 @@ public class Weapon{
 		this.projectileSpeed = weapon.getProjectileSpeed();
 		this.destroyable = weapon.isDestroyable();
 		this.guided = weapon.isGuided();
-		this.arcs = weapon.isArcs();
+		this.range = weapon.getRange();
 		this.enemy = weapon.isEnemy();
 		this.infinite = weapon.isInfinite();
 	}
 
+	/**
+	 * Creates a copy of a weapon with a defined enemy value.
+	 * @param weapon
+	 * @param enemy
+	 */
 	public Weapon(Weapon weapon, boolean enemy) {
 		this.name = weapon.getName();
 		this.count = weapon.getCount();
@@ -59,106 +88,207 @@ public class Weapon{
 		this.projectileSpeed = weapon.getProjectileSpeed();
 		this.destroyable = weapon.isDestroyable();
 		this.guided = weapon.isGuided();
-		this.arcs = weapon.isArcs();
+		this.range = weapon.getRange();
 		this.enemy = enemy;
 		this.infinite = weapon.isInfinite();
 	}
 
+	/**
+	 * Creates all the possible weapons in the game and adds them to an ArrayList.
+	 */
 	public static void createWeapons() {
 		ammoTypes = new ArrayList<Weapon>();
-		ammoTypes.add(new Weapon("Pistol", 999, 200, 500, 1, 1.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 100, 1, 1.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("Sniper Rifle", 0, 500, 2500, 1, 2.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, false, false, true));
-		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, true, false, true));
-		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1, 1.0f, true, true, false, false, true));
-		ammoTypes.add(new Weapon("Shotgun", 0, 200, 2000, 7, 1.0f, false, false, false, false, true));
-		ammoTypes.add(new Weapon("Flamethrower", 0, 1, 100, 15, 1.0f, false, false, false, false, true));
+		ammoTypes.add(new Weapon("Pistol", 999, 200, 500, 1, 1.0f, false, false, 9999, false, true));
+		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 100, 1, 1.0f, false, false, 9999, false, true));
+		ammoTypes.add(new Weapon("Sniper Rifle", 0, 500, 2500, 1, 2.0f, false, false, 9999, false, true));
+		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, 9999, false, true));
+		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, 9999, false, true));
+		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1, 1.0f, true, true, 9999, false, true));
+		ammoTypes.add(new Weapon("Shotgun", 0, 200, 2000, 7, 1.0f, false, false, 500, false, true));
+		ammoTypes.add(new Weapon("Flamethrower", 0, 1, 100, 15, 1.0f, false, false, 250, false, true));
 	}
+	
+	/**
+	 * Returns an ArrayList containing every weapon in the game.
+	 * @return ArrayList<Weapon> ammoTypes
+	 */
 	public static ArrayList<Weapon> getWeapons() {
 		return ammoTypes;
 	}
 	
+	/**
+	 * Getter for the name of the weapon.
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
+	/**
+	 * Setter for the name of the weapon.
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/**
+	 * Getter for the ammo count of the weapon.
+	 * @return
+	 */
 	public int getCount() {
 		if(!infinite) return count;
 		else return 999;
 	}
+	/**
+	 * Setter for the ammo count of the weapon.
+	 * @param count
+	 */
 	public void setCount(int count) {
 		if(!infinite) this.count = count;
 	}
 	
+	/**
+	 * Getter for the damage of the weapon.
+	 * @return
+	 */
 	public int getDamage() {
 		return damage;
 	}
+	/**
+	 * Setter for the damage of the weapon.
+	 * @param damage
+	 */
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
 	
+	/**
+	 * Getter for the firing rate of the weapon.
+	 * @return
+	 */
 	public int getFiringRate() {
 		return firingRate;
 	}
+	/**
+	 * Setter for the firing rate of the weapon.
+	 * @param firingRate
+	 */
 	public void setFiringRate(int firingRate) {
 		this.firingRate = firingRate;
 	}
 	
+	/**
+	 * Getter for the amount of bullets per shot of the weapon.
+	 * @return
+	 */
 	public int getAmountOfBullets() {
 		return amountOfBullets;
 	}
+	/**
+	 * Setter for the amount of bullets per shot of the weapon.
+	 * @param amountOfBullets
+	 */
 	public void setAmountOfBullets(int amountOfBullets) {
 		this.amountOfBullets = amountOfBullets;
 	}
 	
+	/**
+	 * Getter for the projectile speed of the bullets of the weapon.
+	 * @return
+	 */
 	public float getProjectileSpeed() {
 		return projectileSpeed;
 	}
+	/**
+	 * Setter for the projectile speed of the bullets of the weapon.
+	 * @param projectileSpeed
+	 */
 	public void setProjectileSpeed(float projectileSpeed) {
 		this.projectileSpeed = projectileSpeed;
 	}
 	
+	/**
+	 * Getter for the destroyability of the bullets of the weapon.
+	 * @return
+	 */
 	public boolean isDestroyable() {
 		return destroyable;
 	}
+	/**
+	 * Setter for the destroyability of the bullets of the weapon.
+	 * @param destroyable
+	 */
 	public void setDestroyable(boolean destroyable) {
 		this.destroyable = destroyable;
 	}
 	
+	/**
+	 * Getter for the guidability of the bullets of the weapon.
+	 * @return
+	 */
 	public boolean isGuided() {
 		return guided;
 	}
+	/**
+	 * Setter for the guidability of the bullets of the weapon.
+	 * @param guided
+	 */
 	public void setGuided(boolean guided) {
 		this.guided = guided;
 	}
 	
-	public boolean isArcs() {
-		return arcs;
+	/**
+	 * Getter for the range of the bullets of the weapon.
+	 * @return
+	 */
+	public int getRange() {
+		return range;
 	}
-	public void setArcs(boolean arcs) {
-		this.arcs = arcs;
+	/**
+	 * Setter for the range of the bullets of the weapon.
+	 * @param arcs
+	 */
+	public void setArcs(int range) {
+		this.range = range;
 	}
 	
+	/**
+	 * Getter for the infinity of the bullets of the weapon.
+	 * @return
+	 */
 	public boolean isInfinite() {
 		return infinite;
 	}
+	/**
+	 * Setter for the infinity of the bullets of the weapon.
+	 * @param infinite
+	 */
 	public void setInfinite(boolean infinite) {
 		this.infinite = infinite;
 	}
 	
+	/**
+	 * Getter for the owner of the weapon (Is it an enemy or not?).
+	 * @return
+	 */
 	public boolean isEnemy() {
 		return enemy;
 	}
+	/**
+	 * Setter for the owner of the weapon (Is it an enemy or not?).
+	 * @param enemy
+	 */
 	public void setEnemy(boolean enemy) {
 		this.enemy = enemy;
 	}
 	
 }
 
+/**
+ * This class is used to create and uphold a bullet object so the shooting can work.
+ * @author Santeri Loitomaa
+ *
+ */
 class Bullet implements Active,Visible{
 	
 	private Vector2f pm;
@@ -166,17 +296,48 @@ class Bullet implements Active,Visible{
 	private Vector2f v;
 	private Vector2f g;
 	private Shape hitBox;
+	private Shape test;
 	private Weapon currentWeapon;
-	private int cycle;
-	private int cycle2;
+	private int gravityAccelerationCycle;
+	private int bulletSpeedSlowerCycle;
+	private int range;
 	
+	/**
+	 * A constructor for the bullet. It needs the current weapon and coordinates of the shooter and the destination to work.
+	 * @param x
+	 * @param y
+	 * @param destX
+	 * @param destY
+	 * @param currentWeapon
+	 */
 	public Bullet(int x, int y, int destX, int destY, Weapon currentWeapon) {
 		
 		if(x == destX && y == destY) {
 			destY++;
 		}
 		
-		if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
+		if(currentWeapon.getName().equals("Grenade-Launcher")) {
+			hitBox = new Rectangle(0, 0, 9, 9);
+			p = new Vector2f(x,y);
+			pm = new Vector2f(destX, destY);
+			v = new Vector2f(0,0);
+			g = new Vector2f(0,0.005f);
+			this.currentWeapon = currentWeapon;
+			this.gravityAccelerationCycle = 0;
+			this.bulletSpeedSlowerCycle = 0;
+			
+			v.sub(p);
+			v.add(pm);
+			int i = (int) v.length();
+			v.normalise();
+			Vector2f test = new Vector2f(v);
+			test.scale(0.002f);
+			while(i > 1) {
+				v.add(test);
+				i--;
+			}
+		}
+		else if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
 				currentWeapon.getName().equals("Sniper Rifle")) {
 			hitBox = new Rectangle(0, 0, 3, 3);
 			p = new Vector2f(x,y);
@@ -184,6 +345,7 @@ class Bullet implements Active,Visible{
 			v = new Vector2f(0,0);
 			g = new Vector2f(0,0);
 			this.currentWeapon = currentWeapon;
+			this.range = currentWeapon.getRange();
 			
 			v.sub(p);
 			v.add(pm);
@@ -191,14 +353,16 @@ class Bullet implements Active,Visible{
 			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
 				currentWeapon.setCount(currentWeapon.getCount()-1);
 		}
-		if(currentWeapon.getName().equals("Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
+		else if(currentWeapon.getName().equals("Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
 			hitBox = new Rectangle(0, 0, 3, 3);
 			p = new Vector2f(x,y);
 			pm = new Vector2f(destX, destY);
 			v = new Vector2f(0,0);
 			g = new Vector2f(0,0);
 			this.currentWeapon = currentWeapon;
+			this.range = currentWeapon.getRange();
 			Random r = new Random();
+			
 			v.sub(p);
 			v.add(pm);
 			int i = r.nextInt(21);
@@ -212,42 +376,59 @@ class Bullet implements Active,Visible{
 			if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy())
 				currentWeapon.setCount(currentWeapon.getCount()-1);
 		}
-		if(currentWeapon.getName().equals("RPG-Launcher") || currentWeapon.getName().equals("Guided RPG")) {
+		else if(currentWeapon.getName().equals("RPG-Launcher") || currentWeapon.getName().equals("Guided RPG")) {
 			hitBox = new Rectangle(0, 0, 9, 9);
 			p = new Vector2f(x,y);
 			pm = new Vector2f(destX, destY);
 			v = new Vector2f(0,0);
 			g = new Vector2f(0,0);
 			this.currentWeapon = currentWeapon;
-			this.cycle2 = 0;
+			this.range = currentWeapon.getRange();
+			this.bulletSpeedSlowerCycle = 0;
 			
 			v.sub(p);
 			v.add(pm);
 			v.normalise();
-		}
-		if(currentWeapon.getName().equals("Grenade-Launcher")) {
-			hitBox = new Rectangle(0, 0, 9, 9);
-			p = new Vector2f(x,y);
-			pm = new Vector2f(destX, destY);
-			v = new Vector2f(0,0);
-			g = new Vector2f(0,0.005f);
-			this.currentWeapon = currentWeapon;
-			this.cycle = 0;
-			this.cycle2 = 0;
-			
-			v.sub(p);
-			v.add(pm);
-			int i = (int) v.length();
-			v.normalise();
-			Vector2f test = new Vector2f(v);
-			test.scale(0.002f);
-			while(i > 1) {
-				v.add(test);
-				i--;
-			}
 		}
 	}
 	
+	/**
+	 * Create a dummy bullet for aiming.
+	 * @param x
+	 * @param y
+	 * @param destX
+	 * @param destY
+	 * @param test
+	 */
+	public Bullet(int x, int y, int destX, int destY, Shape test) {
+		if(x == destX && y == destY) {
+			destY++;
+		}
+
+		hitBox = new Rectangle(0, 0, 3, 3);
+		p = new Vector2f(x,y);
+		pm = new Vector2f(destX, destY);
+		v = new Vector2f(0,0);
+		g = new Vector2f(0,0.005f);
+		this.gravityAccelerationCycle = 0;
+		this.bulletSpeedSlowerCycle = 0;
+		this.test = test;
+		
+		v.sub(p);
+		v.add(pm);
+		int i = (int) v.length();
+		v.normalise();
+		Vector2f grav = new Vector2f(v);
+		grav.scale(0.002f);
+		while(i > 1) {
+			v.add(grav);
+			i--;
+		}
+	}
+	
+	/**
+	 * Implementation of visibility.
+	 */
 	public void display(Graphics g) {
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
@@ -255,32 +436,71 @@ class Bullet implements Active,Visible{
 		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
 	}
 	
+	/**
+	 * Implementation of activity.
+	 */
 	public void update(ArrayList<Object> oList, Map m, int delta) {
-		if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
-				currentWeapon.getName().equals("Sniper Rifle") ||
-				currentWeapon.getName().equals("Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
-			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
-				p.add(v);
-				if(groundCollision(m) || enemyCollision(oList)) {
-					oList.remove(this);
-					break;
+		if(currentWeapon == null) {
+			for(int i = 0; i < 1*delta; i++) {
+				if(bulletSpeedSlowerCycle == 0) {
+					gravityAccelerationCycle++;
+					bulletSpeedSlowerCycle++;
+					p.add(v);
+					for(int x = 0; x < gravityAccelerationCycle; x++) {
+						p.add(g);
+					}
+					if(groundCollision(m) || thingsMoved(oList)) {
+						oList.remove(this);
+						break;
+					}
 				}
+				else bulletSpeedSlowerCycle--;
 			}
 		}
-		if(currentWeapon.getName().equals("RPG-Launcher")) {
+		else if(currentWeapon.getName().equals("Grenade-Launcher")) {
 			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
-				if(cycle2 == 0) {
-					cycle2++;
+				if(bulletSpeedSlowerCycle == 0) {
+					gravityAccelerationCycle++;
+					bulletSpeedSlowerCycle++;
 					p.add(v);
+					for(int x = 0; x < gravityAccelerationCycle; x++) {
+						p.add(g);
+					}
 					if(groundCollision(m) || enemyCollision(oList)) {
 						oList.remove(this);
 						break;
 					}
 				}
-				else cycle2--;
+				else bulletSpeedSlowerCycle--;
 			}
 		}
-		if(currentWeapon.getName().equals("Guided RPG")) {
+		else if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
+				currentWeapon.getName().equals("Sniper Rifle") ||
+				currentWeapon.getName().equals("Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
+			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
+				p.add(v);
+				if(groundCollision(m) || enemyCollision(oList) || range <= 0) {
+					oList.remove(this);
+					break;
+				}
+				range--;
+			}
+		}
+		else if(currentWeapon.getName().equals("RPG-Launcher")) {
+			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
+				if(bulletSpeedSlowerCycle == 0) {
+					bulletSpeedSlowerCycle++;
+					p.add(v);
+					if(groundCollision(m) || enemyCollision(oList) || range <= 0) {
+						oList.remove(this);
+						break;
+					}
+					range--;
+				}
+				else bulletSpeedSlowerCycle--;
+			}
+		}
+		else if(currentWeapon.getName().equals("Guided RPG")) {
 			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
 				if(currentWeapon.isEnemy()) {
 					pm = new Vector2f(((Player)oList.get(0)).getX() + ((Player)oList.get(0)).getY());
@@ -296,37 +516,37 @@ class Bullet implements Active,Visible{
 					v.add(pm);
 					v.normalise();
 				}
-				if(cycle2 == 0) {
-					cycle2++;
+				if(bulletSpeedSlowerCycle == 0) {
+					bulletSpeedSlowerCycle++;
 					p.add(v);
-					if(groundCollision(m) || enemyCollision(oList)) {
+					if(groundCollision(m) || enemyCollision(oList) || range <= 0) {
 						oList.remove(this);
 						break;
 					}
+					range--;
 				}
-				else cycle2--;
-			}
-		}
-		if(currentWeapon.getName().equals("Grenade-Launcher")) {
-			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
-				if(cycle2 == 0) {
-					cycle++;
-					cycle2++;
-					p.add(v);
-					for(int x = 0; x < cycle; x++) {
-						p.add(g);
-					}
-					if(groundCollision(m) || enemyCollision(oList)) {
-						oList.remove(this);
-						break;
-					}
-				}
-				else cycle2--;
+				else bulletSpeedSlowerCycle--;
 			}
 		}
 	}
 
-	//hits an enemy
+	/**
+	 * Checks for changes in the player's position.
+	 * @param oList
+	 * @return
+	 */
+	private boolean thingsMoved(ArrayList<Object> oList) {
+		if((int)(test.getCenterX()) != (int)(((Player)oList.get(0)).getLineOfFire().getCenterX())) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if the bullet is hitting anyone and acts accordingily.
+	 * @param oList
+	 * @return
+	 */
 	private boolean enemyCollision(ArrayList<Object> oList) {
 		for(Object o : oList) {
 			if(o instanceof Collider) {
@@ -347,7 +567,11 @@ class Bullet implements Active,Visible{
 		return false;
 	}
 
-	//hits the ground or goes out of the map
+	/**
+	 * Checks if the bullets are hitting the ground or fly off the map.
+	 * @param m
+	 * @return
+	 */
 	private boolean groundCollision(Map m) {
 		if (p.getY() > 2480) {
 			return true;

@@ -57,6 +57,10 @@ public class Player extends Character {
 			shoot(oList, input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300);
 		}
 		
+		if(currentWeapon.getName().equals("Grenade-Launcher")) {
+			shoot(oList, input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300, true);
+		}
+		
 		//Change weapon
 		if(org.lwjgl.input.Mouse.hasWheel()) {
 			int x = org.lwjgl.input.Mouse.getDWheel();

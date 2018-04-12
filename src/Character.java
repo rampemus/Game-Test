@@ -8,6 +8,7 @@ import org.newdawn.slick.geom.Vector2f;
 public class Character extends Collider{
 	protected float xAcceleration = 0.005f;
 	protected int shootCooldown = 0;
+	protected int dummyCooldown = 0;
 	protected Weapon currentWeapon;
 	protected ArrayList<Weapon> weapons;
 	protected boolean lookingRight;
@@ -32,6 +33,9 @@ public class Character extends Collider{
 		if ( shootCooldown > 0) {
 			shootCooldown -= delta;
 		}
+		if ( dummyCooldown > 0) {
+			dummyCooldown -= delta;
+		}
 	}
 	
 	public void shoot(ArrayList<Object> oList, int x, int y) {
@@ -42,6 +46,17 @@ public class Character extends Collider{
 			}
 			//animaation vaihtaminen ampumiseen jne.
 			shootCooldown = currentWeapon.getFiringRate();
+		}
+	}
+	
+	public void shoot(ArrayList<Object> oList, int x, int y, boolean kk) {
+		if (kk && dummyCooldown <= 0) {
+			if((!(currentWeapon.getCount() == 0)) || kk) {
+				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
+					oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, ((Player)(oList.get(0))).getLineOfFire()));
+				dummyCooldown = 250;
+			}
+			//animaation vaihtaminen ampumiseen jne.
 		}
 	}
 	
