@@ -47,17 +47,15 @@ public class MenuButton extends BasicGameState {
 		//play button
 		if((mouseX>100 && mouseX<300) && (mouseY>350 && mouseY<400)){
 			if(Mouse.isButtonDown(0)){
-				sbg.enterState(4);
+				sbg.enterState(5);
 			}
 		}
 		
-		/*story button - STATE NOT CREATED
 		if((posX>100 && posX<300) && (posY>190 && posY<240)){
 			if(Mouse.isButtonDown(0)){
-				sbg.enterState();
+				sbg.enterState(4);
 			}
 		}
-		*/
 		
 		//EnemyGame button
 		if((mouseX>100 && mouseX<300) && (mouseY>280 && mouseY<330)){
