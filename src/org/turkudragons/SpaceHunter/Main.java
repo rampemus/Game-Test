@@ -17,7 +17,7 @@ public class Main extends StateBasedGame {
 		Weapon.createWeapons();
 		
 		try {
-			appgc = new AppGameContainer(new Main("Collider-luokan testaukseen"));
+			appgc = new AppGameContainer(new Main("Space Hunter"));
 			appgc.setDisplayMode(800, 600, false);
 			appgc.setAlwaysRender(true);
 			appgc.start();

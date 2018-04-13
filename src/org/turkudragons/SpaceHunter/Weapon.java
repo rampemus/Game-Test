@@ -334,7 +334,7 @@ class Bullet implements Active,Visible{
 			this.gravityAccelerationCycle = 0;
 			this.bulletSpeedSlowerCycle = 0;
 			try {
-				texture = new Image("/res/Granade.png");
+				texture = new Image("res/Granade.png");
 			}catch(SlickException e) {
 				
 			}
@@ -360,7 +360,7 @@ class Bullet implements Active,Visible{
 			this.currentWeapon = currentWeapon;
 			this.range = currentWeapon.getRange();
 			try {
-				texture = new Image("/res/bullet.png");
+				texture = new Image("res/bullet.png");
 			}catch(SlickException e) {
 				
 			}
@@ -379,7 +379,7 @@ class Bullet implements Active,Visible{
 			if(currentWeapon.getName().equals("Flamethrower")) {
 				try {
 					hitBox = new Rectangle(0, 0, 9, 9);
-					texture = new Image("/res/Fire.png");
+					texture = new Image("res/Fire.png");
 				}catch(SlickException e) {
 					
 				}
@@ -387,7 +387,7 @@ class Bullet implements Active,Visible{
 			else {
 				try {
 					hitBox = new Rectangle(0, 0, 3, 3);
-					texture = new Image("/res/bullet.png");
+					texture = new Image("res/bullet.png");
 				}catch(SlickException e) {
 					
 				}
@@ -416,7 +416,7 @@ class Bullet implements Active,Visible{
 			this.range = currentWeapon.getRange();
 			this.bulletSpeedSlowerCycle = 0;
 			try {
-				texture = new Image("/res/Guided.png");
+				texture = new Image("res/Guided.png");
 			}catch(SlickException e) {
 				
 			}
@@ -460,7 +460,7 @@ class Bullet implements Active,Visible{
 		this.bulletSpeedSlowerCycle = 0;
 		this.oldLineOfFire = test;
 		try {
-			texture = new Image("/res/Aim.png");
+			texture = new Image("res/Aim.png");
 		}catch(SlickException e) {
 			
 		}

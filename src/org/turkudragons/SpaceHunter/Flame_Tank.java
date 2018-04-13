@@ -32,13 +32,13 @@ public class Flame_Tank extends Character implements Visible, Active {
 		hp = 1000;
 		
 		try {
-			blank = new Image ("/res/blank.png");
-			ft1 = new Image ("/res/Flare_Tank1.png");
-			ft2 = new Image ("/res/Flare_Tank2.png");
-			ftb1 = new Image ("/res/Flare_Tank_b1.png");
-			ftb2 = new Image ("/res/Flare_Tank_b2.png");
-			ftb3 = new Image ("/res/Flare_Tank_b3.png");
-			ftb4 = new Image ("/res/Flare_Tank_b4.png");
+			blank = new Image ("res/blank.png");
+			ft1 = new Image ("res/Flare_Tank1.png");
+			ft2 = new Image ("res/Flare_Tank2.png");
+			ftb1 = new Image ("res/Flare_Tank_b1.png");
+			ftb2 = new Image ("res/Flare_Tank_b2.png");
+			ftb3 = new Image ("res/Flare_Tank_b3.png");
+			ftb4 = new Image ("res/Flare_Tank_b4.png");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

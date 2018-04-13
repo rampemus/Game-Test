@@ -44,19 +44,19 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		airborne = true;
 		
 		try {
-			blank = new Image ("/res/blank.png");
-			d1 = new Image ("/res/Dragoling_Drone1.png");
-			d2 = new Image ("/res/Dragoling_Drone2.png");
-			d3 = new Image ("/res/Dragoling_Drone3.png");
-			d4 = new Image ("/res/Dragoling_Drone4.png");
-			da1 = new Image ("/res/Dragoling_Drone_a1.png");
-			da2 = new Image ("/res/Dragoling_Drone_a2.png");
-			da3 = new Image ("/res/Dragoling_Drone_a3.png");
-			da4 = new Image ("/res/Dragoling_Drone_a4.png");
-			dd1 = new Image ("/res/Dragoling_Drone_d1.png");
-			dd2 = new Image ("/res/Dragoling_Drone_d2.png");
-			dd3 = new Image ("/res/Dragoling_Drone_d3.png");
-			dd4 = new Image ("/res/Dragoling_Drone_d4.png");
+			blank = new Image ("res/blank.png");
+			d1 = new Image ("res/Dragoling_Drone1.png");
+			d2 = new Image ("res/Dragoling_Drone2.png");
+			d3 = new Image ("res/Dragoling_Drone3.png");
+			d4 = new Image ("res/Dragoling_Drone4.png");
+			da1 = new Image ("res/Dragoling_Drone_a1.png");
+			da2 = new Image ("res/Dragoling_Drone_a2.png");
+			da3 = new Image ("res/Dragoling_Drone_a3.png");
+			da4 = new Image ("res/Dragoling_Drone_a4.png");
+			dd1 = new Image ("res/Dragoling_Drone_d1.png");
+			dd2 = new Image ("res/Dragoling_Drone_d2.png");
+			dd3 = new Image ("res/Dragoling_Drone_d3.png");
+			dd4 = new Image ("res/Dragoling_Drone_d4.png");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
