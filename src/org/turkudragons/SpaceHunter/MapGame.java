@@ -14,7 +14,7 @@ public class MapGame extends BasicGameState {
 	
 	public static int id = 2;
 	private Player player;
-	private String deltaNumber = "0";
+	//private String deltaNumber = "0";
 	private Input input;
 	private boolean isTile;
 	private Music backgroundMusic;
@@ -121,7 +121,7 @@ public class MapGame extends BasicGameState {
 		
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());
 		
-		deltaNumber = "Delta: " + delta;
+		//deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {
 			oList.add(new Item(100,400));

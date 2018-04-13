@@ -7,7 +7,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Point;
 import org.newdawn.slick.geom.Polygon;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
@@ -23,6 +22,7 @@ public class Player extends Character {
 	private int doubleDamageTimer;
 	private int infiniteAmmoTimer;
 	private int invulnerabilityTimer;
+	@SuppressWarnings("unused")
 	private Polygon viewArea;
 	
 	public Player(int x, int y) {
@@ -95,28 +95,28 @@ public class Player extends Character {
 				currentWeapon = weapons.get(y+1);
 			}
 		}
-		if(input.isKeyPressed(input.KEY_1)) {
+		if(input.isKeyPressed(Input.KEY_1)) {
 			currentWeapon = weapons.get(0);
 		}
-		if(input.isKeyPressed(input.KEY_2)) {
+		if(input.isKeyPressed(Input.KEY_2)) {
 			currentWeapon = weapons.get(1);
 		}
-		if(input.isKeyPressed(input.KEY_3)) {
+		if(input.isKeyPressed(Input.KEY_3)) {
 			currentWeapon = weapons.get(2);
 		}
-		if(input.isKeyPressed(input.KEY_4)) {
+		if(input.isKeyPressed(Input.KEY_4)) {
 			currentWeapon = weapons.get(3);
 		}
-		if(input.isKeyPressed(input.KEY_5)) {
+		if(input.isKeyPressed(Input.KEY_5)) {
 			currentWeapon = weapons.get(4);
 		}
-		if(input.isKeyPressed(input.KEY_6)) {
+		if(input.isKeyPressed(Input.KEY_6)) {
 			currentWeapon = weapons.get(5);
 		}
-		if(input.isKeyPressed(input.KEY_7)) {
+		if(input.isKeyPressed(Input.KEY_7)) {
 			currentWeapon = weapons.get(6);
 		}
-		if(input.isKeyPressed(input.KEY_8)) {
+		if(input.isKeyPressed(Input.KEY_8)) {
 			currentWeapon = weapons.get(7);
 		}
 	}

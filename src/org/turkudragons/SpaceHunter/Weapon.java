@@ -18,18 +18,18 @@ import org.newdawn.slick.geom.Vector2f;
  */
 public class Weapon{
 	
-	private String name;
-	private int count;
-	private int damage;
-	private int firingRate;
-	private int amountOfBullets;
-	private float projectileSpeed;
-	private boolean destroyable;
-	private boolean guided;
-	private int range;
-	private boolean enemy;
-	private boolean infinite;
-	private static ArrayList<Weapon> ammoTypes;
+	private String name; // The name of the weapon.
+	private int count; // The ammo count of the weapon.
+	private int damage; // The damege one bullet does.
+	private int firingRate; // The time you need to wait in between shots.
+	private int amountOfBullets; // The amount of bullets per shot.
+	private float projectileSpeed; // The speed of a bullet.
+	private boolean destroyable; // The bullet can be destroyed.
+	private boolean guided; // The bullet is homing.
+	private int range; // The maximum of tics the bullet is allowed to live.
+	private boolean enemy; // The weapon belongs to an enemy.
+	private boolean infinite; // The ammo is infinite.
+	private static ArrayList<Weapon> ammoTypes; // A list of all possible weapons in the game.
 	
 	/**
 	 * Constructor for a weapon object created from the given values.
