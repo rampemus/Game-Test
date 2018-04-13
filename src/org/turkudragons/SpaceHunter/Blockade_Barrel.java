@@ -23,7 +23,9 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 	
 	public Blockade_Barrel(int defx, int defy) {
 		super(defx,defy);
-		hitBox = new Rectangle(defx, defy, 31, 54);
+		width = 31;
+		height = 54;
+		hitBox = new Rectangle(defx, defy, width, height);
 		xMaxSpeed = 0.3f;
 		friction = 0.01f;
 		jumpStrength = 0.5f;

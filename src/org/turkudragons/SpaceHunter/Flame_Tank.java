@@ -74,25 +74,25 @@ public class Flame_Tank extends Character implements Visible, Active {
 				o.remove(this);
 			}
 			// Walks left
-			if ((((Character) o.get(0)).getX() > this.getX() -500) && ((Character) o.get(0)).getX() < this.getX()){
+			if ((((Character) o.get(0)).getX() > this.getX() -500) && ((Character) o.get(0)).getX() < this.getX() && alive){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
 					walkLeft(delta);
 				}
 			}
 			// Shoots left
-			if ((((Character) o.get(0)).getX() > this.getX() -300) && ((Character) o.get(0)).getX() < this.getX()){
+			if ((((Character) o.get(0)).getX() > this.getX() -300) && ((Character) o.get(0)).getX() < this.getX() && alive){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
 					shoot(o, (int)((Character) o.get(0)).getX(), (int)this.getY());
 				}
 			}
-			if ((((Character) o.get(0)).getX() < this.getX() +500) && ((Character) o.get(0)).getX() > this.getX()){
+			if ((((Character) o.get(0)).getX() < this.getX() +500) && ((Character) o.get(0)).getX() > this.getX() && alive){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
 					walkRight(delta);
 					//Needs to turn + flamethrower
 				}
 			}
 			//Shoots right
-			if ((((Character) o.get(0)).getX() < this.getX() +300) && ((Character) o.get(0)).getX() > this.getX()){
+			if ((((Character) o.get(0)).getX() < this.getX() +300) && ((Character) o.get(0)).getX() > this.getX() && alive){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
 					shoot(o, (int)((Character) o.get(0)).getX(), (int)this.getY());
 					//Needs to turn + flamethrower
@@ -103,6 +103,6 @@ public class Flame_Tank extends Character implements Visible, Active {
 	
 	public void display(Graphics g) {
 		super.display(g);
-		Flame_tank.draw(this.getX()-width/2-14,this.getY()-height/2-16 );
+		Flame_tank.draw(this.getX()-width/2-3,this.getY()-height/2-34 );
 	}
 }

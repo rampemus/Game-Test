@@ -27,13 +27,16 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 	Animation Dragonling_drone;
 	boolean alive = true;
 	boolean notChasing = false;
+	int cooldown = 0;
+	boolean evade = false;
+	int evasionT = 0;
 
 	public Dragonling_Drone (int defx, int defy) {
 		super(defx, defy);
-		width = 58;
-		height = 35;
+		width = 37;
+		height = 22;
 		hitBox = new Rectangle(defx, defy, width, height); // fix this
-		xMaxSpeed = 0.6f;
+		xMaxSpeed = 1.01f;
 		friction = 0.01f;
 		jumpStrength = 0.9f;
 		elasticity = 0.2f;
@@ -73,7 +76,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		Dradrone[12] = dd3;
 		Dradrone[13] = dd4;
 		Dradrone[14] = blank;
-		Dragonling_drone = new Animation(Dradrone,200,true);
+		Dragonling_drone = new Animation(Dradrone,300,true);
 		
 		for(Weapon w : weapons) {
 			w.setEnemy(true);
@@ -81,11 +84,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 	}
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
-		
-		if (shootCooldown>0) {
-			shootCooldown-= delta;
-		}
-		
+		//basic animation
 		if (Dragonling_drone.getFrame()==4 && alive) {
 			Dragonling_drone.setCurrentFrame(0);
 		}
@@ -103,19 +102,74 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 			Dragonling_drone.stop();
 			o.remove(this);
 		}
-		if (((Character) o.get(0)).isShooting()){
+		//evasion
+		if (((Character) o.get(0)).isShooting() && alive){
 			if (((Player)o.get(0)).getLineOfFire().intersects(hitBox)) {
-				ascend(100);
+				evade = true;
+				evasionT = 150;
 			}
 		}
-		if(hitBox.intersects(((Collider)o.get(0)).getHitbox()) && shootCooldown<= 0) {
-		      ((Collider)o.get(0)).takeDamage(50);
-		      shootCooldown = 1000;
+		if (evade == true) {
+			if (m.isTile(this.getX(), this.getY()-20)) {
+				descend(10);
+			}else {
+				ascend(10);
+			}
+			evasionT = evasionT-1;
+			if (evasionT <= 0) {
+				evade = false;
+			}
+		} 
+		//attacks
+		if (shootCooldown>0) {
+			shootCooldown-= delta;
 		}
-		if((((Character)o.get(0)).getX()<this.getX())&&(((Character)o.get(0)).getX()>this.getX()-600)) {
-			walkLeft(delta);
-			if ((((Character)o.get(0)).getY()<this.getY())){
+		if(hitBox.intersects(((Collider)o.get(0)).getHitbox()) && shootCooldown<= 0 && alive) {
+		      ((Collider)o.get(0)).takeDamage(100);
+		      shootCooldown = 300;
+		}
+
+		//attacks to the left
+		if((((Character)o.get(0)).getX()<this.getX())&&(((Character)o.get(0)).getX()>this.getX()-600) && alive) {
+			if (((Character)o.get(0)).getY()<this.getY()){
 				ascend(5);
+			}else {
+				descend(5);
+			}
+			if (cooldown == 0) {
+					walkLeft(170);
+					cooldown = 99;
+			}else {
+				cooldown = cooldown -1;
+			}
+			if (notChasing) {
+				Dragonling_drone.setCurrentFrame(5);
+				notChasing = false;
+				//Do chasing
+			}
+		}else {
+			notChasing = true;
+			if (Dragonling_drone.getFrame()==9 && alive) {
+				Dragonling_drone.setCurrentFrame(0);
+			}
+		}
+		//Frames 5-9 when attacking
+		if (Dragonling_drone.getFrame()==9 && alive) {
+			Dragonling_drone.setCurrentFrame(5);
+		}
+		
+		//attacking to the right
+		if((((Character)o.get(0)).getX()>this.getX())&&(((Character)o.get(0)).getX()<this.getX()+600) && alive) {
+			if (((Character)o.get(0)).getY()<this.getY()){
+				ascend(5);
+			}else {
+				descend(5);
+			}
+			if (cooldown == 0) {
+					walkRight(170);
+					cooldown = 99;
+			}else {
+				cooldown = cooldown -1;
 			}
 			if (notChasing) {
 				Dragonling_drone.setCurrentFrame(5);
@@ -136,6 +190,6 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 
 	public void display(Graphics g) {
 		super.display(g);
-		Dragonling_drone.draw(this.getX()-width/2-14,this.getY()-height/2-3 );
+		Dragonling_drone.draw(this.getX()-width/2-7,this.getY()-height/2-20 );
 	}
 }
