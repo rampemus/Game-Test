@@ -31,7 +31,7 @@ public class Player extends Character {
 		
 		maxItemSwallowDistance = height;
 		try {
-			character = new Image ("/res/main_char_stand1.png");
+			character = new Image ("res/main_char_stand1.png");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
