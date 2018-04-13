@@ -40,6 +40,12 @@ public class Character extends Collider{
 		}
 	}
 	
+	/**
+	 * A shooting method that fires a bullet at the cooridnates given, originating from the centre of the Character.
+	 * @param oList
+	 * @param x
+	 * @param y
+	 */
 	public void shoot(ArrayList<Object> oList, int x, int y) {
 		if (shootCooldown <= 0) {
 			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
@@ -51,20 +57,14 @@ public class Character extends Collider{
 		}
 	}
 	
-	public boolean shootReturn(ArrayList<Object> oList, int x, int y) {
-		if (shootCooldown <= 0) {
-			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
-				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
-					oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, currentWeapon));
-				shootCooldown = currentWeapon.getFiringRate();
-				return false;
-			}
-			//animaation vaihtaminen ampumiseen jne.
-			
-		}
-		return true;
-	}
-	
+	/**
+	 * A shooting method that allows a defined hotspot.
+	 * @param oList
+	 * @param x
+	 * @param y
+	 * @param destX
+	 * @param destY
+	 */
 	public void shoot(ArrayList<Object> oList, int x, int y, int destX, int destY) {
 		if (shootCooldown <= 0) {
 			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
@@ -76,6 +76,13 @@ public class Character extends Collider{
 		}
 	}
 	
+	/**
+	 * A shooting method that can be given an additional boolean for more constant firing. Used by aiming.
+	 * @param oList
+	 * @param x
+	 * @param y
+	 * @param kk
+	 */
 	public void shoot(ArrayList<Object> oList, int x, int y, boolean kk) {
 		if (kk && dummyCooldown <= 0) {
 			if((!(currentWeapon.getCount() == 0)) || kk) {

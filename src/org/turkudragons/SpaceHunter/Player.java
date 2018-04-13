@@ -1,7 +1,6 @@
 package org.turkudragons.SpaceHunter;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -25,12 +24,10 @@ public class Player extends Character {
 	private int invulnerabilityTimer;
 	@SuppressWarnings("unused")
 	private Polygon viewArea;
-	private Random random;
-	private boolean randomized;
 	
 	public Player(int x, int y) {
 		super(x,y);
-		weapons = Weapon.getWeapons();
+		weapons = new ArrayList<Weapon>(Weapon.getWeapons());
 		
 		maxItemSwallowDistance = height;
 		try {
@@ -44,7 +41,6 @@ public class Player extends Character {
 		jumpStrength = 0.8f;
 		r = new Rectangle(x,y,1,1000);
 		viewArea = new Polygon();
-		random = new Random();
 	}
 	
 	public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
@@ -81,7 +77,7 @@ public class Player extends Character {
 		
 		//shoot!!!
 		if ( input.isMouseButtonDown(0)) {
-			randomized = shootReturn(oList, input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300);
+			shoot(oList, input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300);
 		}
 		
 		if(currentWeapon.getName().equals("Grenade-Launcher")) {
@@ -155,13 +151,6 @@ public class Player extends Character {
 				invulnerable = false;
 				invulnerabilityTimer = 0;
 			}
-		}
-		
-		if(currentWeapon.getName().equals("Flamethrower") && shootCooldown == currentWeapon.getFiringRate() && !randomized) {
-			int i = random.nextInt(2);
-			if(i == 0) currentWeapon.setFiringRate(shootCooldown - 50);
-			if(i == 1) currentWeapon.setFiringRate(shootCooldown + 50);
-			randomized = true;
 		}
 	}
 	
