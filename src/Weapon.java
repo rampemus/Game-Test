@@ -306,6 +306,7 @@ class Bullet implements Active,Visible{
 	private boolean destroyed;
 	private Image texture;
 	private boolean removeKebab;
+	private float oldTheta;
 	
 	/**
 	 * A constructor for a bullet. It needs the current weapon and coordinates of the shooter and the destination to work.
@@ -317,9 +318,9 @@ class Bullet implements Active,Visible{
 	 */
 	public Bullet(int x, int y, int destX, int destY, Weapon currentWeapon) {
 		
-		if(x == destX && y == destY) {
+		/*if(x == destX && y == destY) {
 			destY++;
-		}
+		}*/
 		
 		if(currentWeapon.getName().equals("Grenade-Launcher")) {
 			hitBox = new Rectangle(0, 0, 9, 9);
@@ -331,7 +332,7 @@ class Bullet implements Active,Visible{
 			this.gravityAccelerationCycle = 0;
 			this.bulletSpeedSlowerCycle = 0;
 			try {
-				texture = new Image("/res/blank.png");
+				texture = new Image("/res/Granade.png");
 			}catch(SlickException e) {
 				
 			}
@@ -345,6 +346,7 @@ class Bullet implements Active,Visible{
 				v.add(force);
 				i--;
 			}
+			texture.rotate((float)v.getTheta());
 		}
 		else if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle") ||
 				currentWeapon.getName().equals("Sniper Rifle")) {
@@ -356,13 +358,14 @@ class Bullet implements Active,Visible{
 			this.currentWeapon = currentWeapon;
 			this.range = currentWeapon.getRange();
 			try {
-				texture = new Image("/res/blank.png");
+				texture = new Image("/res/bullet.png");
 			}catch(SlickException e) {
 				
 			}
 			v.sub(p);
 			v.add(pm);
 			v.normalise();
+			texture.rotate((float)v.getTheta());
 		}
 		else if(currentWeapon.getName().equals("Pump Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
 			p = new Vector2f(x,y);
@@ -382,7 +385,7 @@ class Bullet implements Active,Visible{
 			else {
 				try {
 					hitBox = new Rectangle(0, 0, 3, 3);
-					texture = new Image("/res/blank.png");
+					texture = new Image("/res/bullet.png");
 				}catch(SlickException e) {
 					
 				}
@@ -399,7 +402,7 @@ class Bullet implements Active,Visible{
 				v.sub(i);
 			}
 			v.normalise();
-			texture.rotate((float)v.getTheta() - 90);
+			texture.rotate((float)v.getTheta());
 		}
 		else if(currentWeapon.getName().equals("RPG-Launcher") || currentWeapon.getName().equals("Guided RPG")) {
 			hitBox = new Rectangle(0, 0, 9, 9);
@@ -411,13 +414,15 @@ class Bullet implements Active,Visible{
 			this.range = currentWeapon.getRange();
 			this.bulletSpeedSlowerCycle = 0;
 			try {
-				texture = new Image("/res/blank.png");
+				texture = new Image("/res/Guided.png");
 			}catch(SlickException e) {
 				
 			}
 			v.sub(p);
 			v.add(pm);
 			v.normalise();
+			texture.rotate((float)v.getTheta());
+			this.oldTheta = (float)v.getTheta();
 		}
 		
 		if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy()) {
@@ -453,7 +458,7 @@ class Bullet implements Active,Visible{
 		this.bulletSpeedSlowerCycle = 0;
 		this.oldLineOfFire = test;
 		try {
-			texture = new Image("/res/blank.png");
+			texture = new Image("/res/Aim.png");
 		}catch(SlickException e) {
 			
 		}
@@ -475,7 +480,7 @@ class Bullet implements Active,Visible{
 	public void display(Graphics g) {
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
-		g.draw(hitBox);
+		//g.draw(hitBox);
 		texture.draw(p.getX()-32, p.getY()-32);
 		//g.drawString("v:" + v.getX() + "," + v.getY(), p.getX(), p.getY());
 	}
@@ -493,6 +498,7 @@ class Bullet implements Active,Visible{
 					for(int x = 0; x < gravityAccelerationCycle; x++) {
 						p.add(g);
 					}
+					texture.rotate(0.1f);
 					if(groundCollision(m) || thingsMoved(oList)) {
 						oList.remove(this);
 						break;
@@ -507,6 +513,7 @@ class Bullet implements Active,Visible{
 					gravityAccelerationCycle++;
 					bulletSpeedSlowerCycle++;
 					p.add(v);
+					texture.rotate(1);
 					for(int x = 0; x < gravityAccelerationCycle; x++) {
 						p.add(g);
 					}
@@ -560,6 +567,8 @@ class Bullet implements Active,Visible{
 					v.add(pm);
 					v.normalise();
 				}
+				texture.rotate((float)v.getTheta()-oldTheta);
+				oldTheta = (float)v.getTheta();
 				if(bulletSpeedSlowerCycle == 0) {
 					bulletSpeedSlowerCycle++;
 					p.add(v);
