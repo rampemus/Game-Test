@@ -21,7 +21,6 @@ public class Menu extends BasicGameState {
 	Image exit;
 	
 	private ArrayList<Object> oList = new ArrayList<Object>();
-	private Map m;
 
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		play = new Image("res/play.png");
@@ -41,7 +40,6 @@ public class Menu extends BasicGameState {
 		exit.draw(100, 420, 180, 60);
 		
 		
-		//m.display();
 		for (Object o : oList) {
 			if ( o instanceof Visible) {
 				((Visible)o).display(g);
@@ -57,7 +55,7 @@ public class Menu extends BasicGameState {
 		int mouseY = Mouse.getY();
 		
 		/*play button
-		if((mouseX>1000 && mouseX<280) && (mouseY>400 && mouseY<460)){
+		if((mouseX>100 && mouseX<280) && (mouseY>400 && mouseY<460)){
 			if(Mouse.isButtonDown(0)){
 				sbg.enterState(5);
 			}
@@ -81,7 +79,7 @@ public class Menu extends BasicGameState {
 		}
 		
 		//MapGame button
-		if((mouseX>100 && mouseX<280) && (mouseY>330 && mouseY<390)){
+		if((mouseX>100 && mouseX<280) && (mouseY>290 && mouseY<320)){
 			if(Mouse.isButtonDown(0)){
 				sbg.enterState(MapGame.id);
 			}
