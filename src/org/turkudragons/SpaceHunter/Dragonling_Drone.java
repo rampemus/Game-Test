@@ -1,3 +1,5 @@
+package org.turkudragons.SpaceHunter;
+
 import java.util.ArrayList;
 import java.util.Random;
 

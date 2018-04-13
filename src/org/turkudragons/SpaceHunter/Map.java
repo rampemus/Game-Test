@@ -1,3 +1,4 @@
+package org.turkudragons.SpaceHunter;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;

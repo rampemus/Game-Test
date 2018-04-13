@@ -1,3 +1,5 @@
+package org.turkudragons.SpaceHunter;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -656,10 +658,10 @@ class Bullet implements Active,Visible{
 	 * @return
 	 */
 	private boolean groundCollision(Map m) {
-		if (p.getY() > 2480) {
+		if (p.getY() > 3840) {
 			return true;
 		}
-		if (p.getX() > 2480 ) {
+		if (p.getX() > 3840 ) {
 			return true;
 		}
 		if (p.getX() < 0 ) {

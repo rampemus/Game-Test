@@ -1,11 +1,13 @@
+package org.turkudragons.SpaceHunter;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class Enemy_Test extends StateBasedGame {
-	
-	public Enemy_Test(String name) {
+public class MapTest extends StateBasedGame {
+
+	public MapTest(String name) {
 		super(name);
 	}
 
@@ -15,7 +17,7 @@ public class Enemy_Test extends StateBasedGame {
 		Weapon.createWeapons();
 		
 		try {
-			appgc = new AppGameContainer(new Enemy_Test("Testataan vihollisten toimintaa"));
+			appgc = new AppGameContainer(new MapTest("Testataan miten mäppi toimii"));
 			appgc.setDisplayMode(800, 600, false);
 			appgc.setAlwaysRender(true);
 			appgc.start();
@@ -27,8 +29,10 @@ public class Enemy_Test extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
-		addState(new EnemyGame());
+		addState(new MapGame());
+		addState(new MapGame2());
+		MapGame.id = 1;
+		MapGame2.id = 2;
 	}
 
 }
-
