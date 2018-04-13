@@ -10,7 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class MapGame extends BasicGameState {
 	
-	public static int id = 2;
+	public static int id = 1;
 	private Player player;
 	private String deltaNumber = "0";
 	private Input input;
@@ -38,13 +38,12 @@ public class MapGame extends BasicGameState {
 		m.add(1,1,10,13);
 		m.add(2,1,7,20);
 		m.add(4,1,20,13);
-		/*try {
+		try {
 			backgroundMusic = new Music("/res/Music.ogg");
-			backgroundMusic.play();
 			backgroundMusic.loop();
 		}catch(SlickException e) {
 			
-		}*/
+		}
 	}
 
 	@Override
@@ -72,7 +71,7 @@ public class MapGame extends BasicGameState {
 			}
 		}
 		if(oList.size()<2) {
-			sbg.enterState(2);
+			sbg.enterState(1);
 		}
 		
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());
@@ -82,7 +81,9 @@ public class MapGame extends BasicGameState {
 		if (input.isKeyDown(Input.KEY_F)) {
 			oList.add(new Item(100,400));
 		}
-		
+		if(input.isKeyPressed(Input.KEY_M)) {
+			backgroundMusic.play(0,10);
+		}
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
 			oList.remove(1);
 		}
