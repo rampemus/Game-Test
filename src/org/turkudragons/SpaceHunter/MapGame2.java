@@ -23,26 +23,48 @@ public class MapGame2 extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if(!initialized) {
-			player = new Player(350,300);
+			player = new Player(350,3700);
 			oList.add(player);
+			oList.add(new Blockade_Barrel(3456,3712));
+			//tunnel enemy placement
+			oList.add(new Flame_Tank(2048,3136));
+			oList.add(new Flame_Tank(3100,3136));
+			oList.add(new Flame_Tank(2400,3136));
+			oList.add(new Flame_Tank(2800,3136));
+			//another path 
+			oList.add(new Dragonling_Drone(2800,3712));
+			oList.add(new Dragonling_Drone(2200,3712));
+			oList.add(new Dragonling_Drone(2500,3712));
 			input = gc.getInput();
 			
-			m.add(1,1,0,15);
-			m.add(1,1,0,20);
-			m.add(4,1,0,19);
-			m.add(2,1,10,21);
-			m.add(2,1,12,22);
-			m.add(2,1,14,23);
-			m.add(2,1,16,24);
-			m.add(2,1,18,25);
-			m.add(1,1,20,26);
-			m.add(1,1,30,26);
-			m.add(4,1,37,25);
-			m.add(3,1,15,13);
-			m.add(3,1,21,10);
-			m.add(3,1,28,14);
-			m.add(3,1,34,10);
-	    	
+			m.add(1,4,2,59);
+			m.add(2,4,10,58);
+			m.add(2,4,12,57);
+			m.add(2,4,14,56);
+			m.add(2,4,16,55);
+			
+			m.add(1,4,19,55);
+			m.add(2,5,17,52);
+			m.add(2,5,23,50);
+			
+			m.add(4,4,29,59);
+			m.add(1,4,30,59);
+			m.add(1,4,40,59);
+			m.add(2,4,47,58);
+			m.add(2,4,47,57);
+			
+			m.add(1,5,30,46);
+			m.add(1,5,40,46);
+			m.add(1,5,30,50);
+			m.add(1,5,40,50);
+			
+			m.add(2,4,50,59);
+			m.add(2,4,53,59);
+			m.add(2,4,54,56);
+			m.add(2,4,51,53);
+			m.add(4,4,56,59);
+			m.add(4,4,56,54);
+			m.add(2,4,54,49);
 			
 			initialized = true;
 		}

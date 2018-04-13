@@ -38,7 +38,7 @@ public class MapGame extends BasicGameState {
 			oList.add(new Blockade_Barrel(640,1400));
 			
 			
-		    oList.add(new Blockade_Barrel(960,300));
+		    oList.add(new Blockade_Barrel(960,300));//boss location
 		    input = gc.getInput();
 			m.add(4,1,5,6);
 			m.add(4,1,5,11);
