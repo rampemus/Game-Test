@@ -15,19 +15,8 @@ public class Map{
 	
 
 	public Map(){
-		tiles = new int[40][40];
+		tiles = new int[60][60];
 		
-		//tiles[0][8]=3;
-		//tiles[1][8]=1;
-		//tiles[2][8]=2;
-		//tiles[4][8]=3;
-		//tiles[4][8]=1;
-		//tiles[5][8]=1;
-		//tiles[6][8]=4;
-		//tiles[7][7]=5;
-		//tiles[8][8]=3;
-		//tiles[9][8]=1;
-		//tiles[10][8]=2;
 		
 		try{
 			ground = new Image("res/ground.png");

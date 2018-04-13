@@ -69,10 +69,12 @@ public class Collider {
 	 * @author Pasi Toivanen
 	 */
 	public boolean groundCollision(Map m) {
-		if (p.getY() > 2480 - height/2) {
+		//if (p.getY() > 2480 - height/2) {
+		if (p.getY() > 3800 - height/2) {
 			return true;
 		}
-		if (p.getX() > 2480 ) {
+		//if (p.getX() > 2480 ) {
+		if (p.getX() > 3800 ) {
 			return true;
 		}
 		if (p.getX() < 0 ) {
