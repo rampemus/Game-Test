@@ -11,7 +11,7 @@ import org.newdawn.slick.Image;
 
 public class Menu extends BasicGameState {
 	
-	public static int id = 1;
+	public static int id = 0;
 	private String deltaNumber = "0";
 	private Input input;
 	Image play;
@@ -75,23 +75,25 @@ public class Menu extends BasicGameState {
 		//EnemyGame button
 		if((mouseX>100 && mouseX<280) && (mouseY>260 && mouseY<320)){
 			if(Mouse.isButtonDown(0)){
-				sbg.enterState(3);
+				sbg.enterState(1);
 			}
 		}
 		
-		//MapGame button
+		/*MapGame button
 		if((mouseX>100 && mouseX<280) && (mouseY>190 && mouseY<250)){
 			if(Mouse.isButtonDown(0)){
 				sbg.enterState(2);
 			}
 		}
+		*/
 		
-		//exit button
+		/*exit button
 		if((mouseX>100 && mouseX<280) && (mouseY>120 && mouseY<180)){
 			if((Mouse.isButtonDown(0))){
 				System.exit(0);
 			}
 		}
+		*/
 		
 		for (int i = oList.size()-1; i > 0; i--) {
 			Object o = oList.get(i);
