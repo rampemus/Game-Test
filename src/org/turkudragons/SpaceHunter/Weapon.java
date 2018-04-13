@@ -109,7 +109,7 @@ public class Weapon{
 		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, 9999, false, true));
 		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1, 1.0f, true, true, 9999, false, true));
 		ammoTypes.add(new Weapon("Pump Shotgun", 0, 200, 2000, 7, 1.0f, false, false, 500, false, true));
-		ammoTypes.add(new Weapon("Flamethrower", 0, 5, 100, 15, 1.0f, false, false, 250, false, true));
+		ammoTypes.add(new Weapon("Flamethrower", 0, 5, 50, 15, 1.0f, false, false, 250, false, true));
 	}
 	
 	/**
@@ -376,6 +376,7 @@ class Bullet implements Active,Visible{
 			g = new Vector2f(0,0);
 			this.currentWeapon = currentWeapon;
 			this.range = currentWeapon.getRange();
+			Random r = new Random();
 			if(currentWeapon.getName().equals("Flamethrower")) {
 				try {
 					hitBox = new Rectangle(0, 0, 9, 9);
@@ -383,6 +384,13 @@ class Bullet implements Active,Visible{
 				}catch(SlickException e) {
 					
 				}
+				if(r.nextInt(4) == 0) {
+					currentWeapon.setFiringRate(200);
+				}
+				else {
+					currentWeapon.setFiringRate(50);
+				}
+				
 			}
 			else {
 				try {
@@ -392,7 +400,6 @@ class Bullet implements Active,Visible{
 					
 				}
 			}
-			Random r = new Random();
 			
 			v.sub(p);
 			v.add(pm);
