@@ -75,6 +75,7 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 		}
 		if (barrel_phases.getFrame() == 6) {
 			barrel_phases.stop();
+			o.add(new Item((int)this.getX(), (int)this.getY(), Collect.INVULNERABILITY));
 			o.remove(this);
 		}
 	}

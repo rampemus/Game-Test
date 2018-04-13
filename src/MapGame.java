@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -14,6 +15,7 @@ public class MapGame extends BasicGameState {
 	private String deltaNumber = "0";
 	private Input input;
 	private boolean isTile;
+	private Music backgroundMusic;
 	
 	private ArrayList<Object> oList = new ArrayList<Object>();
 	private Map m = new Map();
@@ -36,7 +38,13 @@ public class MapGame extends BasicGameState {
 		m.add(1,1,10,13);
 		m.add(2,1,7,20);
 		m.add(4,1,20,13);
-		
+		/*try {
+			backgroundMusic = new Music("/res/Music.ogg");
+			backgroundMusic.play();
+			backgroundMusic.loop();
+		}catch(SlickException e) {
+			
+		}*/
 	}
 
 	@Override

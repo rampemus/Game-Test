@@ -145,7 +145,7 @@ public class Player extends Character {
 		if(invulnerabilityTimer > 0) {
 			invulnerabilityTimer -= delta;
 			if(invulnerabilityTimer <= 0) {
-				invulnerable = true;
+				invulnerable = false;
 				invulnerabilityTimer = 0;
 			}
 		}
@@ -158,6 +158,7 @@ public class Player extends Character {
 		v.sub(p);
 		v.add(getMouse());
 		r.setLocation(this.getX(), this.getY());
+		g.drawString("Invulnerability Timer: " + invulnerabilityTimer,getX()-90,getY()-height-30);
 		//g.draw(r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
 		character.getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
 	}
