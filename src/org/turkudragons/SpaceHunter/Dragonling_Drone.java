@@ -35,7 +35,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		super(defx, defy);
 		width = 37;
 		height = 22;
-		hitBox = new Rectangle(defx, defy, width, height); // fix this
+		hitBox = new Rectangle(defx, defy, width, height);
 		xMaxSpeed = 1.01f;
 		friction = 0.01f;
 		jumpStrength = 0.9f;
