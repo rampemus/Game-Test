@@ -88,4 +88,27 @@ public class Character extends Collider{
 			v.set(v.getX(),-jumpStrength);
 		}
 	}
+	
+	/**
+	 * For airborne colliders moving method when the character is flying
+	 */
+	public void ascend(int delta) {
+		if (airborne && v.getY() > -yMaxSpeed) {
+			v.set(v.getX(), v.getY()+b.getY()*delta);
+		}
+	}
+	
+	public void descend(int delta) {
+		if (airborne && v.getY() < yMaxSpeed ) {
+			v.set(v.getX(), v.getY()-b.getY()*delta);
+		}
+	}
+	
+	public void setFlying(boolean airborne) {
+		this.airborne = airborne;
+	}
+	
+	public ArrayList<Weapon> getWeapons() {
+		return weapons;
+	}
 }

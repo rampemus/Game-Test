@@ -17,13 +17,17 @@ public class Collider {
 	protected Vector2f p; //position vector
 	protected Vector2f v; //velocity vector
 	protected Vector2f g; //gravity acceleration vector
+	protected Vector2f b; //buoyancy acceleration vector
 	protected float friction = 0.001f; // how fast collider stops while no interactions
 	protected float xMaxSpeed = 0.6f;  // how fast can collider travel in direction of x-axis
+	protected float yMaxSpeed = xMaxSpeed; // how fast can collider travel in direction of x-axis when airborne
 	protected float elasticity = 0; //value between 0-1, how much collider bounces when hitting to wall or floor
 	
 	protected float jumpStrength = 0.5f; // how high can a collider jump if it could jump (obviously it can't
 	protected float jumpCooldown = 0; // for calculating the jumping strength of "input"
 	protected float threshold = 1; // can climb 1 pixel up = 45° angled incline
+	protected boolean airborne; // boolean value for flying objects
+	protected boolean invulnerable;
 	
 	protected int hp = 100; // health points
 	
@@ -43,6 +47,7 @@ public class Collider {
 		p = new Vector2f(x,y);
 		v = new Vector2f(0,0);
 		g = new Vector2f(0,0.005f);
+		b = new Vector2f(0,-0.005f);
 	}
 	
 	/**
@@ -226,7 +231,17 @@ public class Collider {
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		g.scale(delta);
-		v.add(g);
+		if (airborne) {
+			if ( v.getY() > friction*delta) {
+				v.set(v.getX(), v.getY()-friction*delta);
+			} else if ( v.getY() < -friction*delta) {
+				v.set(v.getX(), v.getY()+friction*delta);
+			} else {
+				v.set(v.getX(), 0);
+			}
+		} else {
+			v.add(g);
+		}
 		v.scale(delta);
 		
 		if (Math.abs(v.getX()) + Math.abs(v.getY()) > 1) {
@@ -315,7 +330,9 @@ public class Collider {
 	 * @author Pasi Toivanen
 	 */
 	public void takeDamage(int amount) {
-		hp -= amount;
+		if(!invulnerable) {
+			hp -= amount;
+		}
 	}
 	
 	/**
@@ -328,11 +345,14 @@ public class Collider {
 	}
 	
 	/**
-	 * If walking speeds of players must be changed, you can change it through here
+	 * If walking(or flying) speeds of players must be changed, you can change it through here
 	 * @param maxSpeed
 	 * @author Pasi Toivanen
 	 */
 	public void setMaxXSpeed(float maxSpeed) {
 		xMaxSpeed = maxSpeed;
+	}
+	public void setMaxYSpeed(float maxSpeed) {
+		yMaxSpeed = maxSpeed;
 	}
 }

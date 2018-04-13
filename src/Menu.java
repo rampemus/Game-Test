@@ -34,11 +34,11 @@ public class Menu extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
 
-		play.draw(100, 300, 70, 120);
-		story.draw(100, 300, 140, 190);
-		EnemyTest.draw(100, 300, 210, 260);
-		MapTest.draw(100, 300, 280, 330);
-		exit.draw(100, 300, 350, 400);
+		play.draw(100, 140, 180, 60);
+		story.draw(100, 210, 180, 60);
+		EnemyTest.draw(100, 280, 180, 60);
+		MapTest.draw(100, 350, 180, 60);
+		exit.draw(100, 420, 180, 60);
 		
 		//m.display();
 		for (Object o : oList) {
@@ -52,18 +52,18 @@ public class Menu extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
-		int posX = Mouse.getX();
-		int posY = Mouse.getY();
+		int mouseX = Mouse.getX();
+		int mouseY = Mouse.getY();
 		
 		//play button
-		if((posX>100 && posX<300) && (posY>350 && posY<400)){
+		if((mouseX>1000 && mouseX<280) && (mouseY>400 && mouseY<460)){
 			if(Mouse.isButtonDown(0)){
 				sbg.enterState(4);
 			}
 		}
 		
-		/*story button - STATE NOT CREATED
-		if((posX>100 && posX<300) && (posY>190 && posY<240)){
+		/*story button - STATE NOT CREATED, crashes on launch
+		if((posX>100 && posX<280) && (posY>330 && posY<390)){
 			if(Mouse.isButtonDown(0)){
 				sbg.enterState();
 			}
@@ -71,22 +71,22 @@ public class Menu extends BasicGameState {
 		*/
 		
 		//EnemyGame button
-		if((posX>100 && posX<300) && (posY>280 && posY<330)){
+		if((mouseX>100 && mouseX<280) && (mouseY>260 && mouseY<320)){
 			if(Mouse.isButtonDown(0)){
 				sbg.enterState(3);
 			}
 		}
 		
 		//MapGame button
-		if((posX>100 && posX<300) && (posY>210 && posY<260)){
+		if((mouseX>100 && mouseX<280) && (mouseY>190 && mouseY<250)){
 			if(Mouse.isButtonDown(0)){
 				sbg.enterState(2);
 			}
 		}
 		
 		//exit button
-		if((posX>100 && posX<300) && (posY>120 && posY<170)){
-			if((Mouse.isButtonDown(0)) || (input.isKeyPressed(input.KEY_ESCAPE))){ 
+		if((mouseX>100 && mouseX<280) && (mouseY>120 && mouseY<180)){
+			if((Mouse.isButtonDown(0))){
 				System.exit(0);
 			}
 		}
