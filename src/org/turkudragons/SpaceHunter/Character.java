@@ -51,6 +51,31 @@ public class Character extends Collider{
 		}
 	}
 	
+	public boolean shootReturn(ArrayList<Object> oList, int x, int y) {
+		if (shootCooldown <= 0) {
+			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
+				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
+					oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, currentWeapon));
+				shootCooldown = currentWeapon.getFiringRate();
+				return false;
+			}
+			//animaation vaihtaminen ampumiseen jne.
+			
+		}
+		return true;
+	}
+	
+	public void shoot(ArrayList<Object> oList, int x, int y, int destX, int destY) {
+		if (shootCooldown <= 0) {
+			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
+				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
+					oList.add(new Bullet(x, y, destX, destY, currentWeapon));
+			}
+			//animaation vaihtaminen ampumiseen jne.
+			shootCooldown = currentWeapon.getFiringRate();
+		}
+	}
+	
 	public void shoot(ArrayList<Object> oList, int x, int y, boolean kk) {
 		if (kk && dummyCooldown <= 0) {
 			if((!(currentWeapon.getCount() == 0)) || kk) {

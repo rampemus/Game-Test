@@ -343,7 +343,7 @@ class Bullet implements Active,Visible{
 			int i = (int) v.length();
 			v.normalise();
 			Vector2f force = new Vector2f(v);
-			force.scale(0.002f);
+			force.scale(0.003f);
 			while(i > 1) {
 				v.add(force);
 				i--;
@@ -469,7 +469,7 @@ class Bullet implements Active,Visible{
 		int i = (int) v.length();
 		v.normalise();
 		Vector2f force = new Vector2f(v);
-		force.scale(0.002f);
+		force.scale(0.003f);
 		while(i > 1) {
 			v.add(force);
 			i--;
