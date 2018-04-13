@@ -16,6 +16,7 @@ public class MenuButton extends BasicGameState {
 	private int drawToX;
 	private int drawToY;
 	private Image image;
+	private Input input;
 	
 	public MenuButton(){
 		this.posX=posX;
@@ -38,6 +39,7 @@ public class MenuButton extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		//whole section copied from Menu for easier referencing; needs overhaul to make usable
 		
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
@@ -73,7 +75,7 @@ public class MenuButton extends BasicGameState {
 		
 		//exit button
 		if((mouseX>100 && mouseX<300) && (mouseY>120 && mouseY<170)){
-			if((Mouse.isButtonDown(0)){ 
+			if((Mouse.isButtonDown(0))){ 
 				System.exit(0);
 			}
 		}
