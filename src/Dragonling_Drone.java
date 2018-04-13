@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Random;
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -39,6 +41,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		jumpStrength = 0.9f;
 		elasticity = 0.2f;
 		hp = 500;
+		airborne = true;
 		
 		try {
 			blank = new Image ("/res/blank.png");
@@ -95,19 +98,28 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 			alive = false;
 		}
 		if (Dragonling_drone.getFrame()==14) {
+			Random r = new Random();
+			int i = r.nextInt(10);
+			if (i == 9) {
+				o.add(new Item((int)this.getX(),(int)this.getY(),Collect.HP));
+			}
 			Dragonling_drone.stop();
 			o.remove(this);
 		}
 		if (((Character) o.get(0)).isShooting()){
 			if (((Player)o.get(0)).getLineOfFire().intersects(hitBox)) {
-				jump(m);
+				ascend(100);
 			}
 		}
 		if(hitBox.intersects(((Collider)o.get(0)).getHitbox()) && shootCooldown<= 0) {
 		      ((Collider)o.get(0)).takeDamage(50);
 		      shootCooldown = 1000;
 		}
-		if(((Character)o.get(0)).getX()>this.getX()) {
+		if((((Character)o.get(0)).getX()<this.getX())&&(((Character)o.get(0)).getX()>this.getX()-600)) {
+			walkLeft(delta);
+			if ((((Character)o.get(0)).getY()<this.getY())){
+				ascend(5);
+			}
 			if (notChasing) {
 				Dragonling_drone.setCurrentFrame(5);
 				notChasing = false;
