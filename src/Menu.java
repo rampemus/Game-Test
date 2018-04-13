@@ -79,7 +79,7 @@ public class Menu extends BasicGameState {
 		}
 		
 		//MapGame button
-		if((mouseX>100 && mouseX<280) && (mouseY>290 && mouseY<320)){
+		if((mouseX>100 && mouseX<280) && (mouseY>190 && mouseY<250)){
 			if(Mouse.isButtonDown(0)){
 				sbg.enterState(MapGame.id);
 			}
