@@ -30,6 +30,9 @@ public class Main extends StateBasedGame {
 		addState(new Menu());
 		addState(new MapGame());
 		addState(new EnemyGame());
+		this.getState(Menu.id).init(gc, this);
+		this.getState(EnemyGame.id).init(gc, this);
+		this.getState(MapGame.id).init(gc, this);
 	}
 
 }
