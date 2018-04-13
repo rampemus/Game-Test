@@ -41,8 +41,6 @@ public class MapGame extends BasicGameState {
 			m.add(4,1,20,13);
 			try {
 				backgroundMusic = new Music("/res/Music.ogg");
-				backgroundMusic.loop();
-				backgroundMusic.stop();
 			}catch(SlickException e) {
 				
 			}
@@ -86,7 +84,7 @@ public class MapGame extends BasicGameState {
 			oList.add(new Item(100,400));
 		}
 		if(input.isKeyPressed(Input.KEY_M)) {
-			backgroundMusic.play(0,10);
+			backgroundMusic.loop(1.0f,0.1f);
 		}
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
 			oList.remove(1);

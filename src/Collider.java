@@ -27,7 +27,7 @@ public class Collider {
 	protected float jumpCooldown = 0; // for calculating the jumping strength of "input"
 	protected float threshold = 1; // can climb 1 pixel up = 45° angled incline
 	protected boolean airborne; // boolean value for flying objects
-	protected boolean invulnerable;
+	protected boolean invulnerable; // boolean for being invulnerable
 	
 	protected int hp = 100; // health points
 	
