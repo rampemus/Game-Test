@@ -10,7 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class MapGame extends BasicGameState {
 	
-	public static int id = 1;
+	public static int id = 4;
 	private Player player;
 	private String deltaNumber = "0";
 	private Input input;
