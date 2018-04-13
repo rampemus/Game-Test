@@ -16,33 +16,37 @@ public class MapGame extends BasicGameState {
 	private Input input;
 	private boolean isTile;
 	private Music backgroundMusic;
-	
+	private boolean initialized = false;
 	private ArrayList<Object> oList = new ArrayList<Object>();
 	private Map m = new Map();
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		player = new Player(350,300);
-		oList.add(player);
-		oList.add(new Blockade_Barrel(100,100));
-		oList.add(new Dragonling_Drone(500,50));
-		input = gc.getInput();
-		m.add(2,4,4,6);
-		m.add(2,4,0,8);
-		m.add(2,4,7,5);
-		m.add(2,4,10,4);
-		m.add(3,1,12,11);
-		m.add(1,1,0,9);
-		m.add(1,1,3,13);
-		m.add(4,1,3,13);
-		m.add(1,1,10,13);
-		m.add(2,1,7,20);
-		m.add(4,1,20,13);
-		try {
-			backgroundMusic = new Music("/res/Music.ogg");
-			backgroundMusic.loop();
-		}catch(SlickException e) {
-			
+		if(!initialized) {
+			player = new Player(350,300);
+			oList.add(player);
+			oList.add(new Blockade_Barrel(100,100));
+			oList.add(new Dragonling_Drone(500,50));
+			input = gc.getInput();
+			m.add(2,4,4,6);
+			m.add(2,4,0,8);
+			m.add(2,4,7,5);
+			m.add(2,4,10,4);
+			m.add(3,1,12,11);
+			m.add(1,1,0,9);
+			m.add(1,1,3,13);
+			m.add(4,1,3,13);
+			m.add(1,1,10,13);
+			m.add(2,1,7,20);
+			m.add(4,1,20,13);
+			try {
+				backgroundMusic = new Music("/res/Music.ogg");
+				backgroundMusic.loop();
+				backgroundMusic.stop();
+			}catch(SlickException e) {
+				
+			}
+			initialized = true;
 		}
 	}
 
@@ -71,7 +75,7 @@ public class MapGame extends BasicGameState {
 			}
 		}
 		if(oList.size()<2) {
-			sbg.enterState(1);
+			sbg.enterState(MapGame2.id);
 		}
 		
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());

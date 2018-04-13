@@ -17,17 +17,21 @@ public class EnemyGame extends BasicGameState {
 	private Input input;
 	private ArrayList<Object> oList = new ArrayList<Object>();
 	private Map m = new Map();
+	private boolean initialized = false;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		player = new Player(350,300);
-		oList.add(player);
-		oList.add(new Blockade_Barrel(100,100));
-		oList.add(new Flame_Tank(600,200));
-		oList.add(new Dragonling_Drone(500,500));
-		input = gc.getInput();
-		m.add(1,1,0,9);
-		m.add(1, 1, 5, 9);
+		if(!initialized) {
+			player = new Player(350,300);
+			oList.add(player);
+			oList.add(new Blockade_Barrel(100,100));
+			oList.add(new Flame_Tank(600,200));
+			oList.add(new Dragonling_Drone(500,500));
+			input = gc.getInput();
+			m.add(1,1,0,9);
+			m.add(1, 1, 5, 9);
+			initialized = true;
+		}
 	}
 
 	@Override

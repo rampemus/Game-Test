@@ -74,7 +74,7 @@ public class Menu extends BasicGameState {
 		if((mouseX>100 && mouseX<280) && (mouseY>260 && mouseY<320)){
 			if(Mouse.isButtonDown(0)){
 				//sbg.enterState(EnemyGame.id);
-				sbg.enterState(MapGame.id);
+				sbg.enterState(EnemyGame.id);
 			}
 		}
 		
@@ -92,13 +92,6 @@ public class Menu extends BasicGameState {
 			}
 		}
 		*/
-		
-		for (int i = oList.size()-1; i > 0; i--) {
-			Object o = oList.get(i);
-			if ( o instanceof Active) {
-				((Active)o).update(oList, m, delta);
-			}
-		}
 
 		deltaNumber = "Delta: " + delta;
 		

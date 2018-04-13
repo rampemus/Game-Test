@@ -14,33 +14,34 @@ public class MapGame2 extends BasicGameState {
 	private String deltaNumber = "0";
 	private Input input;
 	private boolean isTile;
-	
+	private boolean initialized = false;
 	private ArrayList<Object> oList = new ArrayList<Object>();
 	private Map m = new Map();
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		player = new Player(350,300);
-		oList.add(player);
-		input = gc.getInput();
-		
-		m.add(1,1,0,15);
-		m.add(1,1,0,20);
-		m.add(4,1,0,19);
-		m.add(2,1,10,21);
-		m.add(2,1,12,22);
-		m.add(2,1,14,23);
-		m.add(2,1,16,24);
-		m.add(2,1,18,25);
-		m.add(1,1,20,26);
-		m.add(1,1,30,26);
-		m.add(4,1,37,25);
-		m.add(3,1,15,13);
-		m.add(3,1,21,10);
-		m.add(3,1,28,14);
-		m.add(3,1,34,10);
-		
-	
+		if(!initialized) {
+			player = new Player(350,300);
+			oList.add(player);
+			input = gc.getInput();
+			
+			m.add(1,1,0,15);
+			m.add(1,1,0,20);
+			m.add(4,1,0,19);
+			m.add(2,1,10,21);
+			m.add(2,1,12,22);
+			m.add(2,1,14,23);
+			m.add(2,1,16,24);
+			m.add(2,1,18,25);
+			m.add(1,1,20,26);
+			m.add(1,1,30,26);
+			m.add(4,1,37,25);
+			m.add(3,1,15,13);
+			m.add(3,1,21,10);
+			m.add(3,1,28,14);
+			m.add(3,1,34,10);
+			initialized = true;
+		}
 	}
 
 	@Override
