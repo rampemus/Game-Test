@@ -277,6 +277,11 @@ public class Collider {
 		} else {
 			v.set(0,v.getY());
 		}
+		
+		//remove player from middle of ground
+		while ( checkMap(m, 0, height/2 ) ) {
+			p.add(new Vector2f(0,-1));
+		}
 	}
 	
 	/**
