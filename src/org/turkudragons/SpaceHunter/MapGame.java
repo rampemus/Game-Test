@@ -41,7 +41,7 @@ public class MapGame extends BasicGameState {
 			
 			
 			
-		    oList.add(new Mecha_Dragon(960,500));
+		    oList.add(new Blockade_Barrel(960,500));
 		    oList.add(new Dragonling_Drone(1200,500));
 		    oList.add(new Dragonling_Drone(1100,500));
 		    oList.add(new Dragonling_Drone(1300,500));
