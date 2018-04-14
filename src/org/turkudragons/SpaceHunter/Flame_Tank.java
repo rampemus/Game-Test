@@ -83,9 +83,11 @@ public class Flame_Tank extends Character implements Visible, Active {
 				o.remove(this);
 			}
 			// Walks left
-			if ((((Character) o.get(0)).getX() > this.getX() -500) && ((Character) o.get(0)).getX() < this.getX() && alive){
+			if ((((Character) o.get(0)).getX() > this.getX() -500) && ((Character) o.get(0)).getX() < this.getX()-200 && alive){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
+					if (checkMap(m,-36,36)){
 						walkLeft(delta);
+					}
 				}
 			}
 			// Shoots left
@@ -94,17 +96,18 @@ public class Flame_Tank extends Character implements Visible, Active {
 					shoot(o, (int)this.getX()-30,(int)this.getY()-5,(int)((Character) o.get(0)).getX(), (int)this.getY());
 				}
 			}
-			if ((((Character) o.get(0)).getX() < this.getX() +500) && ((Character) o.get(0)).getX() > this.getX() && alive){
+			if ((((Character) o.get(0)).getX() < this.getX() +500) && ((Character) o.get(0)).getX() > this.getX()+200 && alive){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
-					walkRight(delta);
-					//Needs to turn + flamethrower
+					if (checkMap(m,36,36)){
+						walkRight(delta);
+					}
 				}
 			}
 			//Shoots right
 			if ((((Character) o.get(0)).getX() < this.getX() +300) && ((Character) o.get(0)).getX() > this.getX() && alive){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
 					shoot(o,(int)this.getX()+30,(int)this.getY()-5,(int)((Character) o.get(0)).getX(), (int)this.getY());
-					//Needs to turn + flamethrower
+					
 				}
 			}
 			Flame_tank.update(delta);
