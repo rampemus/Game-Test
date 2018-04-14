@@ -75,12 +75,9 @@ public class Menu extends BasicGameState {
 		//Story button
 		if((mouseX>100 && mouseX<280) && (mouseY>330 && mouseY<390)){
 			if(Mouse.isButtonDown(0)){
-<<<<<<< HEAD
 				sbg.enterState(6);
-=======
 				titleScreen.stop();
 				sbg.enterState(4);
->>>>>>> 7345791e9224b22a3ffd320a7933eb0aa595a64d
 			}
 		}
 		
