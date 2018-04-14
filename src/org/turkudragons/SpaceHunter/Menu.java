@@ -77,7 +77,6 @@ public class Menu extends BasicGameState {
 			if(Mouse.isButtonDown(0)){
 				sbg.enterState(6);
 				titleScreen.stop();
-				sbg.enterState(4);
 			}
 		}
 		
