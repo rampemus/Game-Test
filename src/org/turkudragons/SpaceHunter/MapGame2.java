@@ -140,6 +140,9 @@ public class MapGame2 extends BasicGameState {
 		if(oList.size()<2) {
 			sbg.enterState(BossMap.id);
 		}
+		if (player.getHP() <= 0) {
+			sbg.enterState(GameOver.id);
+		}
 		
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());
 		

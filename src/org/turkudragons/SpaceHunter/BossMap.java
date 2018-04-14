@@ -90,6 +90,9 @@ public class BossMap extends BasicGameState {
 		}
 		if(oList.size()<2) {
 		}
+		if (player.getHP() <= 0) {
+			sbg.enterState(GameOver.id);
+		}
 		
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());
 		
