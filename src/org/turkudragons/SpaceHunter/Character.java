@@ -14,9 +14,11 @@ public class Character extends Collider{
 	protected Weapon currentWeapon;
 	protected ArrayList<Weapon> weapons;
 	protected boolean lookingRight;
+	private Vector2f hotSpot;
 	
 	public Character(int x, int y) {
 		super(x,y);
+		hotSpot = new Vector2f(0,0);
 		height = 64; //resize hitbox
 		width = 32;
 		hitBox = new Rectangle(0, 0, width, height);
@@ -83,11 +85,11 @@ public class Character extends Collider{
 	 * @param y
 	 * @param kk
 	 */
-	public void shoot(ArrayList<Object> oList, int x, int y, boolean kk) {
+	public void shoot(ArrayList<Object> oList, int xTarget, int yTarget, boolean kk) {
 		if (kk && dummyCooldown <= 0) {
 			if((!(currentWeapon.getCount() == 0)) || kk) {
 				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
-					oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, ((Player)(oList.get(0))).getLineOfFire()));
+					oList.add(new Bullet((int)this.getX()+(int)hotSpot.getX(), (int)this.getY()+(int)hotSpot.getY(), xTarget, yTarget, ((Player)(oList.get(0))).getLineOfFire()));
 				dummyCooldown = 250;
 			}
 			//animaation vaihtaminen ampumiseen jne.

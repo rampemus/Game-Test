@@ -17,7 +17,6 @@ public class Player extends Character {
 	private int maxItemSwallowDistance;
 	private Image character;
 	private Image hand;
-	private Vector2f hotSpot;
 	private Vector2f mouse = new Vector2f(0,0);
 	private Vector2f v;
 	private Shape r;
