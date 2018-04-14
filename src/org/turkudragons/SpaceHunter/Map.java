@@ -86,7 +86,10 @@ public class Map{
 		
 		return false;
 	}
-	
+	/**constructs one of the 5 tile shapes 
+	in one of the 3 types in 
+	given point of the tiles matrix
+	*/ 
 	public void add(int shape,int type,int startx,int starty) {
 		switch(shape) {
 		
@@ -101,7 +104,7 @@ public class Map{
 		}
 		break;
 		//slope platform
-		//only for ground
+		//only for type 1
 		case 3:tiles[startx][starty]=3;
 		tiles[startx-1][starty+1]=3;
 		tiles[startx+3][starty]=2;
@@ -130,6 +133,7 @@ public class Map{
 		}
 		
 	}
+	//returns true if there is a slope in given coordinates
 	public boolean isSlope(float x, float y) {
 		if(x>0 && y>0 && x<3840 && y<3840) {
 			if(tiles[(int)x/tileSize][(int)y/tileSize]==2 ||tiles[(int)x/tileSize][(int)y/tileSize]==3) {
@@ -138,6 +142,7 @@ public class Map{
 		}
 		return false;
 	}
+	//returns true if there is an any type of tile in given coordinates
 	public boolean isTile(float x, float y){
 		
 		if(x>0 && y>0&&x<3840 && y<3840) {
