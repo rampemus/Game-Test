@@ -174,6 +174,10 @@ public class Alien extends Character implements Active, Visible {
 		if (alien_m.getFrame()==6) {
 			alien_m.setCurrentFrame(1);
 		}
+		if(hp <= 0) {
+			alien_m.setCurrentFrame(7);
+			o.remove(this);
+		}
 		alien_m.update(delta);
 	}
 	

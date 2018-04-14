@@ -3,6 +3,7 @@ package org.turkudragons.SpaceHunter;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -12,6 +13,7 @@ public class Story extends BasicGameState{
 	public static final int id = 6;
 	private boolean initialized;
 	Input input;
+	private Music storyM;
 	String[] story = {	"Date: 20XX, March 6th",
 						"Location: Orbiting TLX-278 (Sigmar System)",
 						"Weather: 17,2% chance of meteor showers, 42,8% chance for UV-burst",
@@ -41,6 +43,7 @@ public class Story extends BasicGameState{
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if(!initialized) {
+			storyM = new Music("res/Story.ogg");
 			input = gc.getInput();
 			initialized = true;
 		}
@@ -58,10 +61,12 @@ public class Story extends BasicGameState{
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		if(initialized) {
+			storyM.loop(1,0.1f);
 			initialized = false;
 		}
 		// TODO Auto-generated method stub
 		if (input.isKeyDown(Input.KEY_ESCAPE)) {
+			storyM.stop();
 			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
 		}

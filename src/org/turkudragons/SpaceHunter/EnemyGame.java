@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -18,6 +19,7 @@ public class EnemyGame extends BasicGameState {
 	private ArrayList<Object> oList;
 	private Map m;
 	private boolean initialized;
+	private Music story;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -34,6 +36,7 @@ public class EnemyGame extends BasicGameState {
 			input = gc.getInput();
 			m.add(1,1,0,9);
 			m.add(1, 1, 5, 9);
+			story = new Music("res/Story.ogg");
 			initialized = true;
 		}
 	}
@@ -52,6 +55,7 @@ public class EnemyGame extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		if(initialized) {
+			story.loop(1,0.1f);
 			initialized = false;
 		}
 		player.updateInput(gc, m, delta, oList);
@@ -65,6 +69,7 @@ public class EnemyGame extends BasicGameState {
 		}
 
 		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
+			story.stop();
 			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
 		}
