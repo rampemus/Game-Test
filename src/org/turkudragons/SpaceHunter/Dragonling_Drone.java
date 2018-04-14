@@ -116,7 +116,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 			}else {
 				ascend(delta*10);
 			}
-			evasionT = evasionT-1;
+			evasionT = evasionT-delta;
 			if (evasionT <= 0) {
 				evade = false;
 			}
