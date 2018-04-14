@@ -65,7 +65,7 @@ public class Player extends Character {
 			player_a[8] = player_w7;
 			player_a[9] = blank;
 			
-			player_m = new Animation(player_a,200,true);
+			player_m = new Animation(player_a,100,true);
 			
 			hand = new Image("res/player_hand.png");
 			hand.setCenterOfRotation(22, 25);
@@ -93,12 +93,13 @@ public class Player extends Character {
 		if (player_m.getFrame()==8) {
 			player_m.setCurrentFrame(1);
 		}
-		if (input.isKeyPressed(Input.KEY_D)||input.isKeyPressed(Input.KEY_A)) {
+		if (!input.isKeyDown(Input.KEY_D)&&!input.isKeyDown(Input.KEY_A)) {
 			player_m.setCurrentFrame(0);
 		}
 		if (input.isKeyDown(Input.KEY_D)||input.isKeyDown(Input.KEY_A)) {
 			player_m.start();
 		}
+		player_m.update(delta);
 		//horizontal movement
 		if ( input.isKeyDown(Input.KEY_D)) {
 			walkRight(delta);
