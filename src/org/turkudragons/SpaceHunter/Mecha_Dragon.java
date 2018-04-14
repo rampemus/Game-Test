@@ -42,7 +42,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		Dragon[1] = dr2;
 		Dragon[2] = dr3;
 		
-		Dragon_Boss = new Animation(Dragon,100,true);
+		Dragon_Boss = new Animation(Dragon,250,true);
 		//lacks animations stuff
 		
 		for(Weapon w : weapons) {
@@ -51,6 +51,8 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	}
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
+		
+		Dragon_Boss.update(delta);
 	}
 	public void display(Graphics g) {
 		super.display(g);
