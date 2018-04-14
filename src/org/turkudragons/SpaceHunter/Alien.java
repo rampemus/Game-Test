@@ -53,7 +53,7 @@ public class Alien extends Character {
 			
 			alien_m = new Animation(alien_a,100,true);
 			
-			hand = new Image("res/alien_hand.png");
+			hand = new Image("res/humanoid_hand.png");
 			handFlipped = hand.getFlippedCopy(false, true);
 			hotSpot = new Vector2f(0,0);
 		} catch (SlickException e) {
