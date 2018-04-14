@@ -76,7 +76,6 @@ public class BossMap extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		if(initialized) {
-			((MapGame)sbg.getState(MapGame.id)).backgroundMusic.stop();
 			bossTheme.loop(1.0f,0.1f);
 			initialized = false;
 		}
@@ -89,6 +88,16 @@ public class BossMap extends BasicGameState {
 			}
 		}
 		if(oList.size()<2) {
+			bossTheme.stop();
+		}
+		if (player.getHP() <= 0) {
+			bossTheme.stop();
+			sbg.enterState(GameOver.id);
+		}
+		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
+			bossTheme.stop();
+			sbg.getState(Menu.id).init(gc, sbg);
+			sbg.enterState(Menu.id);
 		}
 		
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());

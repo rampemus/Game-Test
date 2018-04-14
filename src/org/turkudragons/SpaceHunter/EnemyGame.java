@@ -59,6 +59,11 @@ public class EnemyGame extends BasicGameState {
 			}
 		}
 
+		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
+			sbg.getState(Menu.id).init(gc, sbg);
+			sbg.enterState(Menu.id);
+		}
+		
 		deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {

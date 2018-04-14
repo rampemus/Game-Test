@@ -33,15 +33,17 @@ public class MapGame extends BasicGameState {
 			oList.add(new Flame_Tank(2800,1600));
 			oList.add(new Flame_Tank(576,700));
 			
+			oList.add(new Flame_Tank(3200,1400));
+			oList.add(new Flame_Tank(3500,1000));
+			
 			oList.add(new Dragonling_Drone(1900,1600));
 			oList.add(new Dragonling_Drone(1700,1600));
 			oList.add(new Dragonling_Drone(1200,1600));
 			oList.add(new Dragonling_Drone(1500,1600));
 			oList.add(new Dragonling_Drone(2000,1600));
 			
-			
-			
-		    oList.add(new Blockade_Barrel(960,500));
+			oList.add(new Alien(3000,600));
+			oList.add(new Alien(960,500));
 		    oList.add(new Dragonling_Drone(1200,500));
 		    oList.add(new Dragonling_Drone(1100,500));
 		    oList.add(new Dragonling_Drone(1300,500));
@@ -129,13 +131,22 @@ public class MapGame extends BasicGameState {
 		if(oList.size()<2) {
 			sbg.enterState(MapGame2.id);
 		}
+		if (player.getHP() <= 0) {
+			backgroundMusic.stop();
+			sbg.enterState(GameOver.id);
+		}
+		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
+			backgroundMusic.stop();
+			sbg.getState(Menu.id).init(gc, sbg);
+			sbg.enterState(Menu.id);
+		}
 		
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());
 		
 		//deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {
-			oList.add(new Item(100,400,Collect.randomItem()));
+			oList.add(new Item(600,-400,Collect.randomItem()));
 		}
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
 			oList.remove(1);

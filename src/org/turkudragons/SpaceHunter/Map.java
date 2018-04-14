@@ -21,36 +21,14 @@ public class Map{
 		
 		try{
 			ground = new Image("res/ground.png");
-		}
-		catch (SlickException e){
-			e.printStackTrace();
-		}
-		try{
 			slopeL = new Image("res/groundSlopeL.png");
-		}
-		catch (SlickException e){
-			e.printStackTrace();
-		}
-		try{
 			slopeR = new Image("res/groundSlopeR.png");
-		}
-		catch (SlickException e){
-			e.printStackTrace();
-		}
-		try{
 			ice = new Image("res/ice.png");
-		}
-		catch (SlickException e){
-			e.printStackTrace();
-		}
-		try{
 			grass = new Image("res/grass.png");
 		}
 		catch (SlickException e){
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	
@@ -59,7 +37,6 @@ public class Map{
 			for (int j=0; j<tiles.length; j++){
 				if (tiles[i][j]==1){
 					ground.draw(i*tileSize, j*tileSize, tileSize, tileSize);
-					//g.drawString(i + "," + j, i*tileSize, j*tileSize);
 				}
 				else
 					if (tiles[i][j]==2){
@@ -81,16 +58,6 @@ public class Map{
 				
 			}
 		}
-	}
-	
-	public boolean ground(float x, float y,int height,int width) { //bullets are using this one
-		if(isTile(x,y+height/2) || isTile(x,y-height/2)) {
-			return true;
-		}
-		if(isTile(x+width/2,y) || isTile(x-width/2,y)) {
-			return true;
-		}
-		return false;
 	}
 	
 	public boolean ground(float x, float y) {
