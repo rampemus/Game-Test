@@ -8,28 +8,38 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
+import java.util.ArrayList;
+import java.util.Random;
+import org.newdawn.slick.geom.Rectangle;
 
-public class Alien extends Character {
+public class Alien extends Character implements Active, Visible {
 	
-	private Image alien_s;
-	private Image hand;
-	private Image handFlipped;
-	private Image alien_w1;
-	private Image alien_w2;
-	private Image alien_w3;
-	private Image alien_w4;
-	private Image alien_w5;
-	private Image alien_w6;
-	private Image blank;
-	private Image [] alien_a = new Image[8];
-	private Animation alien_m;
+	Image alien_s;
+	Image hand;
+	Image handFlipped;
+	Image alien_w1;
+	Image alien_w2;
+	Image alien_w3;
+	Image alien_w4;
+	Image alien_w5;
+	Image alien_w6;
+	Image blank;
+	Image [] alien_a = new Image[8];
+	Animation alien_m;
 	
 	private Vector2f aim;
 	private Vector2f mouse;
 
 	
-	public Alien(int x, int y) {
-		super(x,y);
+	public Alien(int defx, int defy) {
+		super(defx,defy);
+		width = 37;
+		height = 22;
+		hitBox = new Rectangle(defx, defy, width, height);
+		hp = 1000;
+		aim = new Vector2f(100, 0);
+		jumpStrength = 0.8f;
+		xMaxSpeed = 0.6f;
 		
 		try {
 			alien_s = new Image ("res/humanoid_char_stand1.png");//0
@@ -59,10 +69,6 @@ public class Alien extends Character {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		hp = 1000;
-		aim = new Vector2f(100, 0);
-		jumpStrength = 0.8f;
-		xMaxSpeed = 0.6f;
 	}
 	
 	/*public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
@@ -165,7 +171,7 @@ public class Alien extends Character {
 		if(alien_m.getFrame() == 0) {
 			alien_m.stop();
 		}
-		if (alien_m.getFrame()==8) {
+		if (alien_m.getFrame()==6) {
 			alien_m.setCurrentFrame(1);
 		}
 		alien_m.update(delta);
@@ -179,9 +185,10 @@ public class Alien extends Character {
 		aim = new Vector2f(0,0);
 
 		//g.draw(r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
-		if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;
-		alien_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
-		
+		/*if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;
+		alien_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);		 
+		 */
+		alien_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-7,this.getY()-height/2-20 );
 		//draw hand
 		if ( alien_m.getFrame() == 0 ) hotSpot.set(-8,-10);
 		if ( alien_m.getFrame() == 1 ) hotSpot.set(-6,-11);
