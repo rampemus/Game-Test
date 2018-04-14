@@ -2,6 +2,7 @@ package org.turkudragons.SpaceHunter;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -15,8 +16,19 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Player extends Character {
 	private int maxItemSwallowDistance;
-	private Image character;
+	private Image player_s;
 	private Image hand;
+	private Image player_w1;
+	private Image player_w2;
+	private Image player_w3;
+	private Image player_w4;
+	private Image player_w5;
+	private Image player_w6;
+	private Image player_w7;
+	private Image blank;
+	private Image [] player_a = new Image[10];
+	private Animation player_m;
+	
 	private Vector2f mouse = new Vector2f(0,0);
 	private Vector2f v;
 	private Shape r;
@@ -32,8 +44,30 @@ public class Player extends Character {
 		
 		maxItemSwallowDistance = height;
 		try {
-			character = new Image ("res/main_char_stand1.png");
-			hand = new Image("res/main_char_hand.png");
+			player_s = new Image ("res/main_char_stand1.png");
+			blank = new Image ("res/blank.png");
+			player_w1 = new Image ("res/main_char_walk1.png");
+			player_w2 = new Image ("res/main_char_walk2.png");
+			player_w3 = new Image ("res/main_char_walk3.png");
+			player_w4 = new Image ("res/main_char_walk4.png");
+			player_w5 = new Image ("res/main_char_walk5.png");
+			player_w6 = new Image ("res/main_char_walk6.png");
+			player_w7 = new Image ("res/main_char_walk7.png");
+			
+			player_a[0] = player_s;
+			player_a[1] = player_w1;
+			player_a[2] = player_w2;
+			player_a[3] = player_w3;
+			player_a[4] = player_w4;
+			player_a[5] = player_w5;
+			player_a[6] = player_w6;
+			player_a[7] = player_w7;
+			player_a[8] = player_w7;
+			player_a[9] = blank;
+			
+			player_m = new Animation(player_a,200,true);
+			
+			hand = new Image("res/player_hand.png");
 			hand.setCenterOfRotation(22, 25);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
@@ -52,7 +86,20 @@ public class Player extends Character {
 		
 		mouse.set(input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300);
 		
-		//horozontal movement
+		// animation
+		if(player_m.getFrame() == 0) {
+			player_m.stop();
+		}
+		if (player_m.getFrame()==8) {
+			player_m.setCurrentFrame(1);
+		}
+		if (input.isKeyPressed(Input.KEY_D)||input.isKeyPressed(Input.KEY_A)) {
+			player_m.setCurrentFrame(0);
+		}
+		if (input.isKeyDown(Input.KEY_D)||input.isKeyDown(Input.KEY_A)) {
+			player_m.start();
+		}
+		//horizontal movement
 		if ( input.isKeyDown(Input.KEY_D)) {
 			walkRight(delta);
 		} else if ( input.isKeyDown(Input.KEY_A)) {
@@ -168,7 +215,7 @@ public class Player extends Character {
 		g.drawString("Reload Timer: " + shootCooldown,getX()-90,getY()-height-45);
 		//g.draw(r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
 		if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;
-		character.getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
+		player_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
 		Vector2f shootingDirection = new Vector2f(mouse);
 		shootingDirection.sub(p);
 		hand.setRotation((float)shootingDirection.getTheta());
@@ -211,11 +258,13 @@ public class Player extends Character {
 				weapons.get(6).setCount(weapons.get(7).getCount() + amount);
 				break;
 			case DOUBLE_DAMAGE :
-				for(Weapon w : weapons) {
-					w.setDamage(w.getDamage()*2);
+				if (doubleDamageTimer == 0) {
+					for(Weapon w : weapons) {
+						w.setDamage(w.getDamage()*2);
+					}
+					doubleDamageTimer = amount;
+					break;
 				}
-				doubleDamageTimer = amount;
-				break;
 			case INFINITE_AMMO :
 				for(Weapon w : weapons) {
 					w.setInfinite(true);
