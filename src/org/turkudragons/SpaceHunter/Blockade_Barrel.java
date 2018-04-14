@@ -1,6 +1,7 @@
 package org.turkudragons.SpaceHunter;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
@@ -20,6 +21,7 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 	Image[] barrels = new Image [7];
 	Animation barrel_phases;
 	boolean alive = true;
+	private int drops;
 	
 	public Blockade_Barrel(int defx, int defy) {
 		super(defx,defy);
@@ -31,6 +33,8 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 		jumpStrength = 0.5f;
 		elasticity = 0.2f;
 		hp = 1000;
+		Random r = new Random();
+		drops = r.nextInt(5);
 		
 		try {
 			b = new Image ("res/blank.png");
@@ -75,8 +79,10 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 		}
 		if (barrel_phases.getFrame() == 6) {
 			barrel_phases.stop();
-			o.add(new Item((int)this.getX(), (int)this.getY(), Collect.INVULNERABILITY));
-			o.remove(this);
+			for(int i = 0; i < drops; i++) {
+				o.add(new Item((int)this.getX(), (int)this.getY(), Collect.randomItem()));
+				o.remove(this);
+			}
 		}
 	}
 
