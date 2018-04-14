@@ -166,4 +166,24 @@ public class Character extends Collider{
 	public ArrayList<Weapon> getWeapons() {
 		return weapons;
 	}
+	/**
+	 * Returns true, if this can see character from the parameter
+	 * This is a bit slow, so: DO NOT call this method during every single update!
+	 */
+	public boolean canSeeCharacter(Character c, Map m) {
+		int steplength = 10;
+		Vector2f start = new Vector2f(p);
+		Vector2f end	   = new Vector2f(c.getP());
+		Vector2f step = new Vector2f(end);
+		step.sub(start);
+		int distance = (int)step.length();
+		int numberOfSteps = distance/steplength;
+		step.normalise();
+		step.scale(steplength);
+		for ( int i = 0; i < numberOfSteps; i++) {
+			start.add(step);
+			if ( m.ground(start.getX(), start.getY()) ) return false;
+		}
+		return true;
+	}
 }
