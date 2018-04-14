@@ -94,9 +94,29 @@ public class Map{
 	}
 	
 	public boolean ground(float x, float y) {
-		if(isTile(x,y)) {
+		if(isTile(x,y)&&!isSlope(x,y)) {
 			return true;
+		}else if(isSlope(x,y)) {
+			return checkSlope(x,y);
 		}
+		return false;
+	}
+	public boolean checkSlope(float x,float y) {
+		if(tiles[(int)x/tileSize][(int)y/tileSize]==2 ) {
+			float ex =(x%64)*64;
+			float ey =(y%64)*64;
+			if((y-ey)-(x-ex)<0) {
+				return true;
+			}
+		}
+		if(tiles[(int)x/tileSize][(int)y/tileSize]==3 ) {
+			float ex =(x%64)*64;
+			float ey =(y%64)*64;
+			if((ex-x)+(ey-y)>64) {
+				return true;
+			}
+		}
+		
 		return false;
 	}
 	
@@ -136,6 +156,12 @@ public class Map{
 		
 		}
 		
+	}
+	public boolean isSlope(float x, float y) {
+		if(tiles[(int)x/tileSize][(int)y/tileSize]==2 ||tiles[(int)x/tileSize][(int)y/tileSize]==3) {
+			return true;
+		}
+		return false;
 	}
 	public boolean isTile(float x, float y){
 		
