@@ -45,15 +45,15 @@ public class Player extends Character {
 		
 		maxItemSwallowDistance = height;
 		try {
-			player_s = new Image ("res/main_char_stand1.png");
-			blank = new Image ("res/blank.png");
-			player_w1 = new Image ("res/main_char_walk1.png");
-			player_w2 = new Image ("res/main_char_walk2.png");
-			player_w3 = new Image ("res/main_char_walk3.png");
-			player_w4 = new Image ("res/main_char_walk4.png");
-			player_w5 = new Image ("res/main_char_walk5.png");
-			player_w6 = new Image ("res/main_char_walk6.png");
-			player_w7 = new Image ("res/main_char_walk7.png");
+			player_s = new Image ("res/main_char_stand1.png"); 	//0
+			player_w1 = new Image ("res/main_char_walk1.png"); 	//1
+			player_w2 = new Image ("res/main_char_walk2.png");	//2
+			player_w3 = new Image ("res/main_char_walk3.png");	//3
+			player_w4 = new Image ("res/main_char_walk4.png");	//4
+			player_w5 = new Image ("res/main_char_walk5.png");	//5
+			player_w6 = new Image ("res/main_char_walk6.png");	//6
+			player_w7 = new Image ("res/main_char_walk7.png");	//7
+			blank = new Image ("res/blank.png");					//8
 			
 			player_a[0] = player_s;
 			player_a[1] = player_w1;
@@ -70,7 +70,7 @@ public class Player extends Character {
 			
 			hand = new Image("res/player_hand.png");
 			handFlipped = hand.getFlippedCopy(false, true);
-			hotSpot = new Vector2f(0,-8);
+			hotSpot = new Vector2f(0,0);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,11 +96,13 @@ public class Player extends Character {
 		if (player_m.getFrame()==8) {
 			player_m.setCurrentFrame(1);
 		}
-		if (!input.isKeyDown(Input.KEY_D)&&!input.isKeyDown(Input.KEY_A)) {
-			player_m.setCurrentFrame(0);
-		}
+		//if (!input.isKeyDown(Input.KEY_D)&&!input.isKeyDown(Input.KEY_A)) {
+			
+		//}
 		if (input.isKeyDown(Input.KEY_D)||input.isKeyDown(Input.KEY_A)) {
 			player_m.start();
+		} else {
+			player_m.setCurrentFrame(0);
 		}
 		player_m.update(delta);
 		//horizontal movement
@@ -218,14 +220,28 @@ public class Player extends Character {
 		//g.draw(r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
 		if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;
 		player_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
+		
+		//draw hand
+		if ( player_m.getFrame() == 0 ) hotSpot.set(-8,-10);
+		if ( player_m.getFrame() == 1 ) hotSpot.set(-6,-11);
+		if ( player_m.getFrame() == 2 ) hotSpot.set(-2,-12);
+		if ( player_m.getFrame() == 3 ) hotSpot.set(-2,-12);
+		if ( player_m.getFrame() == 4 ) hotSpot.set(-1,-12);
+		if ( player_m.getFrame() == 5 ) hotSpot.set(-2,-12);
+		if ( player_m.getFrame() == 6 ) hotSpot.set(-2,-12);
+		if ( player_m.getFrame() == 7 ) hotSpot.set(-2,-12);
+		if ( player_m.getFrame() == 8 ) hotSpot.set(-7,-12);
+		if (!lookingRight) {
+			hotSpot.set(hotSpot.getX()*-1,hotSpot.getY());
+		}
 		aim = new Vector2f(mouse);
 		aim.sub(p);
 		if ( lookingRight ) {
 			hand.setRotation((float)aim.getTheta());
-			hand.draw(this.getX()-width/2-16+hotSpot.getX(),this.getY()-height/2+ hotSpot.getY());
+			hand.draw(this.getX()+hotSpot.getX() - 32,this.getY()+ hotSpot.getY()-32);
 		} else {
 			handFlipped.setRotation((float)aim.getTheta());
-			handFlipped.draw(this.getX()-width/2-16+hotSpot.getX(),this.getY()-height/2+hotSpot.getY());
+			handFlipped.draw(this.getX()+hotSpot.getX()-32,this.getY()+hotSpot.getY()-32);
 		}
 		
 		//getFlippedCopy(!lookingRight, false)
