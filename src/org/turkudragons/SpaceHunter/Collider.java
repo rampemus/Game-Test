@@ -115,7 +115,7 @@ public class Collider {
 	 * @author Pasi Toivanen
 	 */
 	public boolean rightCollision( Map m ) { //detects if players right side is overlapping with an obstacle
-		return m.ground(p.getX()+width/2,p.getY()+height/2 - width/2);
+		return m.ground(p.getX()+width/2,p.getY() - 5 );
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class Collider {
 	 * @author Pasi Toivanen
 	 */
 	public boolean leftCollision( Map m ) { //detects if players right side is overlapping with an obstacle
-		return m.ground(p.getX()-width/2,p.getY()+height/2 - width/2);
+		return m.ground(p.getX()-width/2,p.getY() - 5);
 	}
 	
 	/**
@@ -185,12 +185,7 @@ public class Collider {
 				}
 			} 
 		}
-		while ( leftCollision(m) ) { //if player is overlapping with obstacle during y-axis movement, this will prevent overlapping
-			p.add(xstep);
-		}
-		while ( rightCollision(m) ) {
-			p.sub(xstep);
-		}
+
 		float speed = Math.abs(v.getX());
 		for ( int i = 0; i < speed*10; i++) {
 			if ( v.getX() > 0) {
@@ -200,7 +195,6 @@ public class Collider {
 					p.sub(ystep);
 					p.sub(ystep);
 					if ( groundCollision(m) ) {
-						p.add(ystep);
 						p.add(ystep);
 						break;
 					}
@@ -215,7 +209,6 @@ public class Collider {
 					p.sub(ystep);
 					p.sub(ystep);
 					if ( groundCollision(m) ) {
-						p.add(ystep);
 						p.add(ystep);
 						break;
 					}
@@ -285,6 +278,12 @@ public class Collider {
 		//remove player from middle of ground
 		while ( checkMap(m, 0, height/2 ) ) {
 			p.add(new Vector2f(0,-1));
+		}
+		while ( leftCollision(m) && !rightCollision(m)) { //if player is overlapping with obstacle during y-axis movement, this will prevent overlapping
+			p.add(new Vector2f(1,0));
+		}
+		while ( rightCollision(m) && !leftCollision(m)) {
+			p.sub(new Vector2f(1,0));
 		}
 	}
 	
