@@ -76,7 +76,7 @@ public class Player extends Character {
 			e.printStackTrace();
 		}
 		hp = 10000;
-		v = new Vector2f(0, 0);
+		aim = new Vector2f(0, 0);
 		jumpStrength = 0.8f;
 		r = new Rectangle(x,y,1,1000);
 		viewArea = new Polygon();
