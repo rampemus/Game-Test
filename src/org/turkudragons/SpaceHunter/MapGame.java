@@ -113,6 +113,10 @@ public class MapGame extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		if(initialized) {
+			backgroundMusic.loop(1.0f,0.1f);
+			initialized = false;
+		}
 		player.updateInput(gc, m,delta, oList);
 		player.update(oList,m,delta);
 		for (int i = oList.size()-1; i >= 0; i--) {
@@ -130,10 +134,7 @@ public class MapGame extends BasicGameState {
 		//deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {
-			oList.add(new Item(100,400));
-		}
-		if(input.isKeyPressed(Input.KEY_M)) {
-			backgroundMusic.loop(1.0f,0.1f);
+			oList.add(new Item(100,400,Collect.randomItem()));
 		}
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
 			oList.remove(1);

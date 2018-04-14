@@ -35,6 +35,15 @@ public class MapGame2 extends BasicGameState {
 			oList.add(new Dragonling_Drone(2800,3712));
 			oList.add(new Dragonling_Drone(2200,3712));
 			oList.add(new Dragonling_Drone(2500,3712));
+			
+			oList.add(new Blockade_Barrel(1220,2200));
+			oList.add(new Blockade_Barrel(1440,2200));
+			oList.add(new Blockade_Barrel(2000,2200));
+			oList.add(new Blockade_Barrel(1780,2200));
+			
+			oList.add(new Blockade_Barrel(880,1240));
+			oList.add(new Blockade_Barrel(1000,1500));
+			oList.add(new Blockade_Barrel(1200,1500));
 			input = gc.getInput();
 			
 			m.add(1,4,2,59);
@@ -73,24 +82,21 @@ public class MapGame2 extends BasicGameState {
 			m.add(2,5,47,35);
 			
 			
-			m.add(2,5,33,35);
-			m.add(2,5,30,35);
-			m.add(2,5,27,36);
-			m.add(2,5,24,36);
-			m.add(2,5,21,35);
-			m.add(2,5,18,35);
-			m.add(2,5,15,36);
-			m.add(2,5,12,36);
+			m.add(2,5,32,35);
+			m.add(2,5,24,35);
+			m.add(2,5,15,35);
+			m.add(1,5,15,36);
+			m.add(1,5,25,36);
 			
 			m.add(2,5,21,32);
 			m.add(2,5,24,29);
-			m.add(2,5,17,29);
-			m.add(2,4,19,26);
-			m.add(2,4,22,26);
-			
+			m.add(1,4,14,26);
+			m.add(4,4,13,26);
+			m.add(2,4,13,21);
 			initialized = true;
 		}
 	}
+
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
@@ -124,7 +130,7 @@ public class MapGame2 extends BasicGameState {
 		//deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {
-			oList.add(new Item(100,400));
+			oList.add(new Item(100,400,Collect.randomItem()));
 		}
 		
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 /**
  * Class of all collectable items in the game. Holds information of which type of item it is and how much does it hold items.
  * Constructor takes care of how big amount of ammo or health is included. If it is not declared in the constructor which type
@@ -18,18 +20,7 @@ public class Item extends Collider implements Active,Visible{
 	private Collect type;
 	private int amount;
 	private int age;
-
-	public Item(int x, int y) {
-		super(x, y);
-		Random r = new Random();
-		v.set(((float)r.nextInt(200))/100-0.5f,((float)r.nextInt(200))/100-0.5f);
-		elasticity = 0.5f;
-		xMaxSpeed = 10f;
-		type = Collect.randomItem();
-		amount = 100;
-		invulnerable = true;
-		age = 10000;
-	}
+	private Image texture;
 	
 	public Item(int x, int y, Collect type) {
 		super(x, y);
@@ -43,33 +34,83 @@ public class Item extends Collider implements Active,Visible{
 		switch (type) {
 			case HP : 
 				amount = 100;
+				try {
+					texture = new Image("res/HP.png");
+				}catch(SlickException e) {
+					
+				}
 				break;
 			case ASSAULT_AMMO :
 				amount = 200;
+				try {
+					texture = new Image("res/a_ammo.png");
+				}catch(SlickException e) {
+					
+				}
 				break;
 			case SNIPER_AMMO :
 				amount = 20;
+				try {
+					texture = new Image("res/s_ammo.png");
+				}catch(SlickException e) {
+					
+				}
 				break;
 			case ROCKET : 
 				amount = 10;
+				try {
+					texture = new Image("res/r_ammo.png");
+				}catch(SlickException e) {
+					
+				}
 				break;
 			case GRENADE :
 				amount = 10;
+				try {
+					texture = new Image("res/g_ammo.png");
+				}catch(SlickException e) {
+					
+				}
 				break;
 			case PUMP_SHOTGUN_AMMO :
 				amount = 40;
+				try {
+					texture = new Image("res/p_ammo.png");
+				}catch(SlickException e) {
+					
+				}
 				break;
 			case FLAMETHROWER_AMMO :
 				amount = 250;
+				try {
+					texture = new Image("res/f_ammo.png");
+				}catch(SlickException e) {
+					
+				}
 				break;
 			case DOUBLE_DAMAGE :
 				amount = 10000;
+				try {
+					texture = new Image("res/double.png");
+				}catch(SlickException e) {
+					
+				}
 				break;
 			case INFINITE_AMMO :
 				amount = 10000;
+				try {
+					texture = new Image("res/infinite.png");
+				}catch(SlickException e) {
+					
+				}
 				break;
 			case INVULNERABILITY :
 				amount = 10000;
+				try {
+					texture = new Image("res/invulnerability.png");
+				}catch(SlickException e) {
+					
+				}
 				break;
 		}
 	}
@@ -80,43 +121,8 @@ public class Item extends Collider implements Active,Visible{
 	public void display(Graphics g) {
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
-		g.draw(hitBox);
-		
-		//This will be changed into a real graphics
-		String displayLetter = "";
-		switch (type) {
-			case HP : 
-				displayLetter = "H";
-				break;
-			case ASSAULT_AMMO :
-				displayLetter = "A";
-				break;
-			case SNIPER_AMMO :
-				displayLetter = "S";
-				break;
-			case ROCKET : 
-				displayLetter = "R";
-				break;
-			case GRENADE :
-				displayLetter = "G";
-				break;
-			case PUMP_SHOTGUN_AMMO :
-				displayLetter = "P";
-				break;
-			case FLAMETHROWER_AMMO :
-				displayLetter = "F";
-				break;
-			case DOUBLE_DAMAGE :
-				displayLetter = "x2";
-				break;
-			case INFINITE_AMMO :
-				displayLetter = "∞";
-				break;
-			case INVULNERABILITY :
-				displayLetter = "I";
-				break;
-		}
-		g.drawString(displayLetter,p.getX()-width/2+3,p.getY()-height/2-1);
+		//g.draw(hitBox);
+		texture.draw(p.getX()-33,p.getY()-35);
 	}
 	
 	/**

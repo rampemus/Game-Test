@@ -31,7 +31,7 @@ public class Player extends Character {
 	private Animation player_m;
 	
 	private Vector2f mouse = new Vector2f(0,0);
-	private Vector2f v;
+	private Vector2f aim;
 	private Shape r;
 	private int doubleDamageTimer;
 	private int infiniteAmmoTimer;
@@ -76,7 +76,7 @@ public class Player extends Character {
 			e.printStackTrace();
 		}
 		hp = 10000;
-		v = new Vector2f(0, 0);
+		aim = new Vector2f(0, 0);
 		jumpStrength = 0.8f;
 		r = new Rectangle(x,y,1,1000);
 		viewArea = new Polygon();
@@ -211,22 +211,20 @@ public class Player extends Character {
 	public void display(Graphics g) {
 		super.display(g);
 		//updateViewArea();
-		v = new Vector2f(0,0);
-		v.sub(p);
-		v.add(getMouse());
+		aim = new Vector2f(0,0);
 		r.setLocation(this.getX(), this.getY());
 		g.drawString("Invulnerability Timer: " + invulnerabilityTimer,getX()-90,getY()-height-30);
 		g.drawString("Reload Timer: " + shootCooldown,getX()-90,getY()-height-45);
 		//g.draw(r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
 		if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;
 		player_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
-		Vector2f shootingDirection = new Vector2f(mouse);
-		shootingDirection.sub(p);
+		aim = new Vector2f(mouse);
+		aim.sub(p);
 		if ( lookingRight ) {
-			hand.setRotation((float)shootingDirection.getTheta());
+			hand.setRotation((float)aim.getTheta());
 			hand.draw(this.getX()-width/2-16+hotSpot.getX(),this.getY()-height/2+ hotSpot.getY());
 		} else {
-			handFlipped.setRotation((float)shootingDirection.getTheta());
+			handFlipped.setRotation((float)aim.getTheta());
 			handFlipped.draw(this.getX()-width/2-16+hotSpot.getX(),this.getY()-height/2+hotSpot.getY());
 		}
 		
@@ -314,6 +312,6 @@ public class Player extends Character {
 	}
 	
 	public Shape getLineOfFire() {
-		return r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY()));
+		return r.transform(Transform.createRotateTransform((float)aim.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY()));
 	}
 }

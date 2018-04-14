@@ -158,26 +158,19 @@ public class Map{
 		
 	}
 	public boolean isSlope(float x, float y) {
-		if(tiles[(int)x/tileSize][(int)y/tileSize]==2 ||tiles[(int)x/tileSize][(int)y/tileSize]==3) {
-			return true;
+		if(x>0 && y>0 && x<3840 && y<3840) {
+			if(tiles[(int)x/tileSize][(int)y/tileSize]==2 ||tiles[(int)x/tileSize][(int)y/tileSize]==3) {
+				return true;
+			}
 		}
 		return false;
 	}
 	public boolean isTile(float x, float y){
 		
-		if(x>0 && y>0) {
+		if(x>0 && y>0&&x<3840 && y<3840) {
 			if(tiles[(int)x/tileSize][(int)y/tileSize]>0 ) {
 				return true;
 			}
-		}if(x<0) {
-			if(tiles[0][(int)y/tileSize]>0) {
-				return true;
-			}
-		}if(y<0) {
-			if(tiles[(int)x/tileSize][0]>0) {
-				return true;
-			}
-
 		}
 		
 		return false;
