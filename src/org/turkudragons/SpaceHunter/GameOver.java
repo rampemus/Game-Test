@@ -8,28 +8,29 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class GameOver extends BasicGameState{
 
+	public static final int id = 5;
+
 	@Override
-	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
+	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException {
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void update(GameContainer arg0, StateBasedGame arg1, int arg2) throws SlickException {
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
-		return 5;
+		return GameOver.id;
 	}
 
 }
