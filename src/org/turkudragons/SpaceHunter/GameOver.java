@@ -18,7 +18,7 @@ public class GameOver extends BasicGameState{
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
+		g.drawString("Hävisit pelin, nännäsnää!", 100, 100);
 		
 	}
 
