@@ -72,14 +72,13 @@ public class Menu extends BasicGameState {
 		}
 		*/
 		
-		/*story button - STATE NOT CREATED, crashes on launch
-		if((posX>100 && posX<280) && (posY>330 && posY<390)){
+		//Story button
+		if((mouseX>100 && mouseX<280) && (mouseY>330 && mouseY<390)){
 			if(Mouse.isButtonDown(0)){
+				sbg.enterState(6);
 				titleScreen.stop();
-				sbg.enterState(4);
 			}
 		}
-		*/
 		
 		//EnemyGame button
 		if((mouseX>100 && mouseX<280) && (mouseY>260 && mouseY<320)){

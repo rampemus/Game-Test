@@ -28,6 +28,7 @@ public class EnemyGame extends BasicGameState {
 			oList.add(new Flame_Tank(600,200));
 			oList.add(new Dragonling_Drone(500,500));*/
 			oList.add(new Alien(100,100));
+			oList.add(new Mecha_Dragon(100,100));
 			input = gc.getInput();
 			m.add(1,1,0,9);
 			m.add(1, 1, 5, 9);
@@ -58,6 +59,11 @@ public class EnemyGame extends BasicGameState {
 			}
 		}
 
+		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
+			sbg.getState(Menu.id).init(gc, sbg);
+			sbg.enterState(Menu.id);
+		}
+		
 		deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {

@@ -132,7 +132,13 @@ public class MapGame extends BasicGameState {
 			sbg.enterState(MapGame2.id);
 		}
 		if (player.getHP() <= 0) {
+			backgroundMusic.stop();
 			sbg.enterState(GameOver.id);
+		}
+		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
+			backgroundMusic.stop();
+			sbg.getState(Menu.id).init(gc, sbg);
+			sbg.enterState(Menu.id);
 		}
 		
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());
