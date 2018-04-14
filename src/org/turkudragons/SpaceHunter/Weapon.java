@@ -110,13 +110,13 @@ public class Weapon{
 	 */
 	public static void createWeapons() {
 		ammoTypes = new ArrayList<Weapon>();
-		ammoTypes.add(new Weapon("Pistol", 999, 200, 500, 1, 1.0f, false, false, 9999, false, true));
+		ammoTypes.add(new Weapon("Pistol", 999, 250, 500, 1, 1.0f, false, false, 9999, false, true));
 		ammoTypes.add(new Weapon("Assault Rifle", 0, 100, 100, 1, 1.0f, false, false, 9999, false, true));
-		ammoTypes.add(new Weapon("Sniper Rifle", 0, 500, 2500, 1, 2.0f, false, false, 9999, false, true));
-		ammoTypes.add(new Weapon("RPG-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, 9999, false, true));
-		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 1000, 5000, 1, 1.0f, true, false, 9999, false, true));
-		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1, 1.0f, true, true, 9999, false, true));
-		ammoTypes.add(new Weapon("Pump Shotgun", 0, 200, 2000, 7, 1.0f, false, false, 500, false, true));
+		ammoTypes.add(new Weapon("Sniper Rifle", 0, 1000, 1000, 1, 2.0f, false, false, 9999, false, true));
+		ammoTypes.add(new Weapon("RPG-Launcher", 0, 2000, 1750, 1, 1.0f, true, false, 9999, false, true));
+		ammoTypes.add(new Weapon("Grenade-Launcher", 0, 2000, 1750, 1, 1.0f, true, false, 9999, false, true));
+		ammoTypes.add(new Weapon("Guided RPG", 0, 2000, 1750, 1, 1.0f, true, true, 9999, false, true));
+		ammoTypes.add(new Weapon("Pump Shotgun", 0, 250, 1100, 7, 1.0f, false, false, 500, false, true));
 		ammoTypes.add(new Weapon("Flamethrower", 0, 5, 50, 15, 1.0f, false, false, 250, false, true));
 		try {
 			bullet = new Sound("res/Bullet.ogg");
@@ -314,20 +314,20 @@ public class Weapon{
  */
 class Bullet implements Active,Visible{
 	
-	private Vector2f pm;
-	private Vector2f p;
-	private Vector2f v;
-	private Vector2f g;
-	public Shape hitBox;
-	private Shape oldLineOfFire;
-	public Weapon currentWeapon;
-	private int gravityAccelerationCycle;
-	private int bulletSpeedSlowerCycle;
-	private int range;
-	private boolean destroyed;
-	private Image texture;
-	private boolean removeKebab;
-	private float oldTheta;
+	private Vector2f pm; // Location of the mouse.
+	private Vector2f p; // Location of the bullet.
+	private Vector2f v; // Direction of the bullet.
+	private Vector2f g; // Gravity of the bullet.
+	Shape hitBox; // Hit box of the bullet.
+	private Shape oldLineOfFire; // The direction of the mouse.
+	Weapon currentWeapon; // The weapon used for the bullet.
+	private int gravityAccelerationCycle; // Used to define how much gravity has to be added.
+	private int bulletSpeedSlowerCycle; // Used to slow down slower bullets.
+	private int range; // The range of the bullet.
+	private boolean destroyed; // The bullet is destroyed.
+	private Image texture; // The texture of the bullet.
+	private boolean removeKebab; // Is there a reason to remove a rocket from the weapons count.
+	private float oldTheta; // The old direction of the bullet.
 	
 	/**
 	 * A constructor for a bullet. It needs the current weapon and coordinates of the shooter and the destination to work.
