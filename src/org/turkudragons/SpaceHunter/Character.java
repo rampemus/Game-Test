@@ -15,6 +15,8 @@ public class Character extends Collider{
 	protected ArrayList<Weapon> weapons;
 	protected boolean lookingRight;
 	protected Vector2f hotSpot;
+	protected int ascendCooldown;
+	protected int descendCooldown;
 	
 	public Character(int x, int y) {
 		super(x,y);
@@ -39,6 +41,15 @@ public class Character extends Collider{
 		}
 		if ( dummyCooldown > 0) {
 			dummyCooldown -= delta;
+		}
+		
+		if (ascendCooldown > 0) {
+			ascend(delta);
+			ascendCooldown -= delta;
+		}
+		if (descendCooldown > 0) {
+			descend(delta);
+			descendCooldown -= delta;
 		}
 	}
 	
@@ -132,6 +143,14 @@ public class Character extends Collider{
 		if (airborne && v.getY() > -yMaxSpeed) {
 			v.set(v.getX(), v.getY()+b.getY()*delta);
 		}
+	}
+	
+	public void ascend(int delta, int millisecs) {
+		ascendCooldown = millisecs;
+	}
+	
+	public void descend(int delta, int millisecs) {
+		descendCooldown = millisecs;
 	}
 	
 	public void descend(int delta) {
