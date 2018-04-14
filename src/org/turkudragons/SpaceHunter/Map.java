@@ -152,6 +152,12 @@ public class Map{
 			             tiles[startx][j]=type;
 		              } 
 		break;
+		//square
+		case 5: tiles[startx][starty]=type;
+		tiles[startx+1][starty]=type;
+		tiles[startx][starty+1]=type;
+		tiles[startx+1][starty+1]=type;
+		break;
 		default : break;       
 		
 		}

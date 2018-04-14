@@ -15,6 +15,8 @@ public class Character extends Collider{
 	protected ArrayList<Weapon> weapons;
 	protected boolean lookingRight;
 	protected Vector2f hotSpot;
+	protected int ascendCooldown;
+	protected int descendCooldown;
 	
 	public Character(int x, int y) {
 		super(x,y);
@@ -40,6 +42,15 @@ public class Character extends Collider{
 		if ( dummyCooldown > 0) {
 			dummyCooldown -= delta;
 		}
+		
+		if (ascendCooldown > 0) {
+			ascend(delta);
+			ascendCooldown -= delta;
+		}
+		if (descendCooldown > 0) {
+			descend(delta);
+			descendCooldown -= delta;
+		}
 	}
 	
 	/**
@@ -53,6 +64,10 @@ public class Character extends Collider{
 			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
 				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
 					oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, currentWeapon));
+				if(currentWeapon.getName().equals("Flamethrower"))
+					Weapon.fire.play(1, 0.1f);
+				if(currentWeapon.getName().equals("Pump Shotgun"))
+					Weapon.shotgun.play(1, 0.1f);
 			}
 			//animaation vaihtaminen ampumiseen jne.
 			shootCooldown = currentWeapon.getFiringRate();
@@ -71,7 +86,12 @@ public class Character extends Collider{
 		if (shootCooldown <= 0) {
 			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
 				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
-					oList.add(new Bullet(x, y, destX, destY, currentWeapon));
+					oList.add(new Bullet(x+(int)hotSpot.getX(), y+(int)hotSpot.getY(), destX, destY, currentWeapon));
+				if(currentWeapon.getName().equals("Flamethrower"))
+					Weapon.fire.play(1, 0.1f);
+				if(currentWeapon.getName().equals("Pump Shotgun"))
+					Weapon.shotgun.play(1, 0.1f);
+				
 			}
 			//animaation vaihtaminen ampumiseen jne.
 			shootCooldown = currentWeapon.getFiringRate();
@@ -89,7 +109,7 @@ public class Character extends Collider{
 		if (kk && dummyCooldown <= 0) {
 			if((!(currentWeapon.getCount() == 0)) || kk) {
 				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
-					oList.add(new Bullet((int)this.getX()+(int)hotSpot.getX(), (int)this.getY()+(int)hotSpot.getY(), xTarget, yTarget, ((Player)(oList.get(0))).getLineOfFire()));
+					oList.add(new Bullet((int)this.getX(), (int)this.getY(), xTarget, yTarget, ((Player)(oList.get(0))).getLineOfFire()));
 				dummyCooldown = 250;
 			}
 			//animaation vaihtaminen ampumiseen jne.
@@ -134,6 +154,14 @@ public class Character extends Collider{
 		}
 	}
 	
+	public void ascend(int delta, int millisecs) {
+		ascendCooldown = millisecs;
+	}
+	
+	public void descend(int delta, int millisecs) {
+		descendCooldown = millisecs;
+	}
+	
 	public void descend(int delta) {
 		if (airborne && v.getY() < yMaxSpeed ) {
 			v.set(v.getX(), v.getY()-b.getY()*delta);
@@ -146,5 +174,25 @@ public class Character extends Collider{
 	
 	public ArrayList<Weapon> getWeapons() {
 		return weapons;
+	}
+	/**
+	 * Returns true, if this can see character from the parameter
+	 * This is a bit slow, so: DO NOT call this method during every single update!
+	 */
+	public boolean canSeeCharacter(Character c, Map m) {
+		int steplength = 10;
+		Vector2f start = new Vector2f(p);
+		Vector2f end	   = new Vector2f(c.getP());
+		Vector2f step = new Vector2f(end);
+		step.sub(start);
+		int distance = (int)step.length();
+		int numberOfSteps = distance/steplength;
+		step.normalise();
+		step.scale(steplength);
+		for ( int i = 0; i < numberOfSteps; i++) {
+			start.add(step);
+			if ( m.ground(start.getX(), start.getY()) ) return false;
+		}
+		return true;
 	}
 }

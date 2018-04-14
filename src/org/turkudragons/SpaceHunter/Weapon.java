@@ -6,6 +6,7 @@ import java.util.Random;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
@@ -30,6 +31,13 @@ public class Weapon{
 	private boolean enemy; // The weapon belongs to an enemy.
 	private boolean infinite; // The ammo is infinite.
 	private static ArrayList<Weapon> ammoTypes; // A list of all possible weapons in the game.
+	static Sound bullet;
+	static Sound fire;
+	static Sound grenade;
+	static Sound missile;
+	static Sound plop;
+	static Sound rifle;
+	static Sound shotgun;
 	
 	/**
 	 * Constructor for a weapon object created from the given values.
@@ -110,6 +118,17 @@ public class Weapon{
 		ammoTypes.add(new Weapon("Guided RPG", 0, 1000, 5000, 1, 1.0f, true, true, 9999, false, true));
 		ammoTypes.add(new Weapon("Pump Shotgun", 0, 200, 2000, 7, 1.0f, false, false, 500, false, true));
 		ammoTypes.add(new Weapon("Flamethrower", 0, 5, 50, 15, 1.0f, false, false, 250, false, true));
+		try {
+			bullet = new Sound("res/Bullet.ogg");
+			fire = new Sound("res/Fire.ogg");
+			grenade = new Sound("res/Grenade.ogg");
+			missile = new Sound("res/Missile.ogg");
+			plop = new Sound("res/Plop.ogg");
+			rifle = new Sound("res/Rifle.ogg");
+			shotgun = new Sound("res/Shotgun.ogg");
+		}catch(SlickException e) {
+			
+		}
 	}
 	
 	/**
@@ -335,6 +354,7 @@ class Bullet implements Active,Visible{
 			this.bulletSpeedSlowerCycle = 0;
 			try {
 				texture = new Image("res/Granade.png");
+				Weapon.plop.play(1, 0.1f);
 			}catch(SlickException e) {
 				
 			}
@@ -368,6 +388,11 @@ class Bullet implements Active,Visible{
 			v.add(pm);
 			v.normalise();
 			texture.rotate((float)v.getTheta());
+			if(currentWeapon.getName().equals("Pistol") || currentWeapon.getName().equals("Assault Rifle")) {
+				Weapon.bullet.play(1, 0.2f);
+			} else {
+				Weapon.rifle.play(1, 0.1f);
+			}
 		}
 		else if(currentWeapon.getName().equals("Pump Shotgun") || currentWeapon.getName().equals("Flamethrower")) {
 			p = new Vector2f(x,y);
@@ -424,6 +449,7 @@ class Bullet implements Active,Visible{
 			this.bulletSpeedSlowerCycle = 0;
 			try {
 				texture = new Image("res/Guided.png");
+				Weapon.missile.play(1, 0.1f);
 			}catch(SlickException e) {
 				
 			}
@@ -528,6 +554,7 @@ class Bullet implements Active,Visible{
 					}
 					if(groundCollision(m) || enemyCollision(oList) || getDestroyed()) {
 						oList.remove(this);
+						Weapon.grenade.play(1, 0.1f);
 						break;
 					}
 				}
@@ -553,6 +580,7 @@ class Bullet implements Active,Visible{
 					p.add(v);
 					if(groundCollision(m) || enemyCollision(oList) || range <= 0 || getDestroyed()) {
 						oList.remove(this);
+						Weapon.grenade.play(1, 0.1f);
 						break;
 					}
 					range--;
@@ -583,6 +611,7 @@ class Bullet implements Active,Visible{
 					p.add(v);
 					if(groundCollision(m) || enemyCollision(oList) || range <= 0 || getDestroyed()) {
 						oList.remove(this);
+						Weapon.grenade.play(1, 0.1f);
 						break;
 					}
 					range--;

@@ -31,6 +31,7 @@ public class MapTest extends StateBasedGame {
 	public void initStatesList(GameContainer gc) throws SlickException {
 		addState(new MapGame());
 		addState(new MapGame2());
+		addState(new BossMap());
 		//MapGame.id = 1;
 		//MapGame2.id = 2;
 	}
