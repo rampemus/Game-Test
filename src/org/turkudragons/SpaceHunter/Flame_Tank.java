@@ -1,6 +1,7 @@
 package org.turkudragons.SpaceHunter;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
@@ -70,13 +71,21 @@ public class Flame_Tank extends Character implements Visible, Active {
 				alive = false;
 			}
 			if (Flame_tank.getFrame()==7) {
+				Random r = new Random();
+				int i = r.nextInt(10)+1;
+				if (i<8) {
+					o.add(new Item((int)this.getX(),(int)this.getY(),Collect.FLAMETHROWER_AMMO));
+				}
+				if (i==8) {
+					o.add(new Item((int)this.getX(),(int)this.getY(),Collect.HP));
+				}
 				Flame_tank.stop();
 				o.remove(this);
 			}
 			// Walks left
 			if ((((Character) o.get(0)).getX() > this.getX() -500) && ((Character) o.get(0)).getX() < this.getX() && alive){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
-					walkLeft(delta);
+						walkLeft(delta);
 				}
 			}
 			// Shoots left

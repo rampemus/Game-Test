@@ -36,7 +36,8 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		width = 37;
 		height = 22;
 		hitBox = new Rectangle(defx, defy, width, height);
-		xMaxSpeed = 1.01f;
+		xMaxSpeed = 0.80f;
+		xAcceleration = 0.0107f;
 		friction = 0.01f;
 		jumpStrength = 0.9f;
 		elasticity = 0.2f;
@@ -136,12 +137,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 			}else {
 				descend(5);
 			}
-			if (cooldown == 0) {
-					walkLeft(170);
-					cooldown = 99;
-			}else {
-				cooldown = cooldown -1;
-			}
+			walkLeft(delta);
 			if (notChasing) {
 				Dragonling_drone.setCurrentFrame(5);
 				notChasing = false;
@@ -165,12 +161,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 			}else {
 				descend(5);
 			}
-			if (cooldown == 0) {
-					walkRight(170);
-					cooldown = 99;
-			}else {
-				cooldown = cooldown -1;
-			}
+			walkRight(delta);
 			if (notChasing) {
 				Dragonling_drone.setCurrentFrame(5);
 				notChasing = false;
