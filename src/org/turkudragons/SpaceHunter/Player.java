@@ -16,6 +16,8 @@ import org.newdawn.slick.geom.Vector2f;
 public class Player extends Character {
 	private int maxItemSwallowDistance;
 	private Image character;
+	private Image hand;
+	private Vector2f hotSpot;
 	private Vector2f mouse = new Vector2f(0,0);
 	private Vector2f v;
 	private Shape r;
@@ -32,6 +34,8 @@ public class Player extends Character {
 		maxItemSwallowDistance = height;
 		try {
 			character = new Image ("res/main_char_stand1.png");
+			hand = new Image("res/main_char_hand.png");
+			hand.setCenterOfRotation(22, 25);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -164,7 +168,13 @@ public class Player extends Character {
 		g.drawString("Invulnerability Timer: " + invulnerabilityTimer,getX()-90,getY()-height-30);
 		g.drawString("Reload Timer: " + shootCooldown,getX()-90,getY()-height-45);
 		//g.draw(r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
+		if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;
 		character.getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
+		Vector2f shootingDirection = new Vector2f(mouse);
+		shootingDirection.sub(p);
+		hand.setRotation((float)shootingDirection.getTheta());
+		hand.draw(this.getX()-width/2-16,this.getY()-height/2);
+		//getFlippedCopy(!lookingRight, false)
 	}
 	
 	/*
