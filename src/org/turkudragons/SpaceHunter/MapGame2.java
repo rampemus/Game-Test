@@ -26,36 +26,29 @@ public class MapGame2 extends BasicGameState {
 			player = new Player(350,3700);
 			oList.add(player);
 			oList.add(new Blockade_Barrel(3456,3712));
-			//tunnel
-			//aliens don't work yet
-			//oList.add(new Alien(2048,3136));
-			//oList.add(new Alien(3100,3136));
-			//oList.add(new Alien(2400,3136));
-			//oList.add(new Alien(2800,3136));
-			//another path 
+			
+			oList.add(new Alien(2048,3136));
+			oList.add(new Alien(3100,3136));
+			oList.add(new Alien(2400,3136));
+			oList.add(new Alien(2800,3136));
+			
 			oList.add(new Dragonling_Drone(2800,3712));
 			oList.add(new Dragonling_Drone(2200,3712));
 			oList.add(new Dragonling_Drone(2500,3712));
 			
-			//oList.add(new Alien(1220,2200));
-			//oList.add(new Alien(1440,2200));
-			//oList.add(new Alien(2000,2200));
-			//oList.add(new Alien(1780,2200));
+			oList.add(new Alien(1220,2200));
+			oList.add(new Alien(1440,2200));
+			oList.add(new Alien(2000,2200));
+			oList.add(new Alien(1780,2200));
 			
-			oList.add(new Flame_Tank(1500,2176));
-			oList.add(new Flame_Tank(2000,2176));
-			oList.add(new Flame_Tank(1200,2176));
-			oList.add(new Flame_Tank(1800,2176));
-			
-			//oList.add(new Alien(550,1536));
-			//oList.add(new Alien(1320,1536));
+			oList.add(new Alien(550,1536));
+			oList.add(new Alien(1320,1536));
 			oList.add(new Flame_Tank(600,1536));
 			oList.add(new Flame_Tank(1100,1536));
-			oList.add(new Flame_Tank(1850,1536));
+			oList.add(new Flame_Tank(800,1536));
 			
 			oList.add(new Blockade_Barrel(3100,1500));
 			oList.add(new Alien(2900,1500));
-			
 			
 			
 			input = gc.getInput();
