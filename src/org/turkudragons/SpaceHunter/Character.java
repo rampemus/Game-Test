@@ -14,7 +14,7 @@ public class Character extends Collider{
 	protected Weapon currentWeapon;
 	protected ArrayList<Weapon> weapons;
 	protected boolean lookingRight;
-	private Vector2f hotSpot;
+	protected Vector2f hotSpot;
 	
 	public Character(int x, int y) {
 		super(x,y);

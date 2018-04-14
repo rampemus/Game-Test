@@ -18,6 +18,7 @@ public class Player extends Character {
 	private int maxItemSwallowDistance;
 	private Image player_s;
 	private Image hand;
+	private Image handFlipped;
 	private Image player_w1;
 	private Image player_w2;
 	private Image player_w3;
@@ -68,7 +69,8 @@ public class Player extends Character {
 			player_m = new Animation(player_a,100,true);
 			
 			hand = new Image("res/player_hand.png");
-			hand.setCenterOfRotation(22, 25);
+			handFlipped = hand.getFlippedCopy(false, true);
+			hotSpot = new Vector2f(0,-8);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,6 +80,7 @@ public class Player extends Character {
 		jumpStrength = 0.8f;
 		r = new Rectangle(x,y,1,1000);
 		viewArea = new Polygon();
+		xMaxSpeed = 0.6f;
 	}
 	
 	public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
@@ -219,8 +222,14 @@ public class Player extends Character {
 		player_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
 		Vector2f shootingDirection = new Vector2f(mouse);
 		shootingDirection.sub(p);
-		hand.setRotation((float)shootingDirection.getTheta());
-		hand.draw(this.getX()-width/2-16,this.getY()-height/2);
+		if ( lookingRight ) {
+			hand.setRotation((float)shootingDirection.getTheta());
+			hand.draw(this.getX()-width/2-16,this.getY()-height/2-8);
+		} else {
+			handFlipped.setRotation((float)shootingDirection.getTheta());
+			handFlipped.draw(this.getX()-width/2-16,this.getY()-height/2-8);
+		}
+		
 		//getFlippedCopy(!lookingRight, false)
 	}
 	
