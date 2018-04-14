@@ -3,6 +3,7 @@ package org.turkudragons.SpaceHunter;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Animation;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -19,9 +20,8 @@ public class Alien extends Character {
 	private Image alien_w4;
 	private Image alien_w5;
 	private Image alien_w6;
-	private Image alien_w7;
 	private Image blank;
-	private Image [] alien_a = new Image[10];
+	private Image [] alien_a = new Image[8];
 	private Animation alien_m;
 	
 	private Vector2f aim;
@@ -30,7 +30,6 @@ public class Alien extends Character {
 	
 	public Alien(int x, int y) {
 		super(x,y);
-		weapons = new ArrayList<Weapon>(Weapon.getWeapons());
 		
 		try {
 			alien_s = new Image ("res/humanoid_char_stand1.png");//0
@@ -162,7 +161,14 @@ public class Alien extends Character {
 	
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
-		
+		// animation
+		if(alien_m.getFrame() == 0) {
+			alien_m.stop();
+		}
+		if (alien_m.getFrame()==8) {
+			alien_m.setCurrentFrame(1);
+		}
+		alien_m.update(delta);
 	}
 	
 	public void display(Graphics g) {
