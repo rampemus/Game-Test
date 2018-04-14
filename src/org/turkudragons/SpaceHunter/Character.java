@@ -64,6 +64,10 @@ public class Character extends Collider{
 			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
 				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
 					oList.add(new Bullet((int)this.getX(), (int)this.getY(), x, y, currentWeapon));
+				if(currentWeapon.getName().equals("Flamethrower"))
+					Weapon.fire.play(1, 0.1f);
+				if(currentWeapon.getName().equals("Pump Shotgun"))
+					Weapon.shotgun.play(1, 0.1f);
 			}
 			//animaation vaihtaminen ampumiseen jne.
 			shootCooldown = currentWeapon.getFiringRate();
@@ -82,7 +86,12 @@ public class Character extends Collider{
 		if (shootCooldown <= 0) {
 			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
 				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
-					oList.add(new Bullet(x, y, destX, destY, currentWeapon));
+					oList.add(new Bullet(x+(int)hotSpot.getX(), y+(int)hotSpot.getY(), destX, destY, currentWeapon));
+				if(currentWeapon.getName().equals("Flamethrower"))
+					Weapon.fire.play(1, 0.1f);
+				if(currentWeapon.getName().equals("Pump Shotgun"))
+					Weapon.shotgun.play(1, 0.1f);
+				
 			}
 			//animaation vaihtaminen ampumiseen jne.
 			shootCooldown = currentWeapon.getFiringRate();
@@ -100,7 +109,7 @@ public class Character extends Collider{
 		if (kk && dummyCooldown <= 0) {
 			if((!(currentWeapon.getCount() == 0)) || kk) {
 				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
-					oList.add(new Bullet((int)this.getX()+(int)hotSpot.getX(), (int)this.getY()+(int)hotSpot.getY(), xTarget, yTarget, ((Player)(oList.get(0))).getLineOfFire()));
+					oList.add(new Bullet((int)this.getX(), (int)this.getY(), xTarget, yTarget, ((Player)(oList.get(0))).getLineOfFire()));
 				dummyCooldown = 250;
 			}
 			//animaation vaihtaminen ampumiseen jne.

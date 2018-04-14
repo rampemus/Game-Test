@@ -406,7 +406,6 @@ class Bullet implements Active,Visible{
 				try {
 					hitBox = new Rectangle(0, 0, 9, 9);
 					texture = new Image("res/Fire.png");
-					Weapon.fire.play(1, 0.013f);
 				}catch(SlickException e) {
 					
 				}
@@ -422,7 +421,6 @@ class Bullet implements Active,Visible{
 				try {
 					hitBox = new Rectangle(0, 0, 3, 3);
 					texture = new Image("res/bullet.png");
-					Weapon.shotgun.play(1, 0.03f);
 				}catch(SlickException e) {
 					
 				}
