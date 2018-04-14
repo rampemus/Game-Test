@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -17,6 +18,7 @@ public class BossMap extends BasicGameState {
 	private Input input;
 	private boolean isTile;
 	private boolean initialized = false;
+	private Music bossTheme;
 	private ArrayList<Object> oList = new ArrayList<Object>();
 	private Map m = new Map();
 
@@ -45,6 +47,12 @@ public class BossMap extends BasicGameState {
 			m.add(2,1,9,54);
 			m.add(2,1,28,54);
 			
+			try {
+				//Drone Hunting by Niklas Johansson, downloaded from player.epidemicsound.com
+				bossTheme = new Music("res/BossTheme.ogg");
+			}catch(SlickException e) {
+				
+			}
 			
 			initialized = true;
 		}
@@ -67,6 +75,11 @@ public class BossMap extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		if(initialized) {
+			((MapGame)sbg.getState(MapGame.id)).backgroundMusic.stop();
+			bossTheme.loop(1.0f,0.1f);
+			initialized = false;
+		}
 		player.updateInput(gc, m,delta, oList);
 		player.update(oList,m,delta);
 		for (int i = oList.size()-1; i >= 0; i--) {

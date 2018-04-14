@@ -17,8 +17,7 @@ public class MapGame extends BasicGameState {
 	//private String deltaNumber = "0";
 	private Input input;
 	private boolean isTile;
-	private Music backgroundMusic;
-	private Music bossTheme;
+	public Music backgroundMusic;
 	private boolean initialized = false;
 	private ArrayList<Object> oList = new ArrayList<Object>();
 	private Map m = new Map();
@@ -92,8 +91,6 @@ public class MapGame extends BasicGameState {
 			try {
 				//For The Win 16 by Håkan Eriksson, downloaded from player.epidemicsound.com
 				backgroundMusic = new Music("res/Music.ogg");
-				//Drone Hunting by Niklas Johansson, downloaded from player.epidemicsound.com
-				bossTheme = new Music("res/BossTheme.ogg");
 			}catch(SlickException e) {
 				
 			}
