@@ -26,7 +26,7 @@ public class MapGame2 extends BasicGameState {
 			player = new Player(350,3700);
 			oList.add(player);
 			oList.add(new Blockade_Barrel(3456,3712));
-			//tunnel enemy placement
+			//tunnel
 			oList.add(new Flame_Tank(2048,3136));
 			oList.add(new Flame_Tank(3100,3136));
 			oList.add(new Flame_Tank(2400,3136));
@@ -65,6 +65,28 @@ public class MapGame2 extends BasicGameState {
 			m.add(4,4,56,59);
 			m.add(4,4,56,54);
 			m.add(2,4,54,49);
+			
+			m.add(2,5,34,43);
+			m.add(2,5,37,40);
+			m.add(2,5,40,37);
+			m.add(2,5,44,35);
+			m.add(2,5,47,35);
+			
+			
+			m.add(2,5,33,35);
+			m.add(2,5,30,35);
+			m.add(2,5,27,36);
+			m.add(2,5,24,36);
+			m.add(2,5,21,35);
+			m.add(2,5,18,35);
+			m.add(2,5,15,36);
+			m.add(2,5,12,36);
+			
+			m.add(2,5,21,32);
+			m.add(2,5,24,29);
+			m.add(2,5,17,29);
+			m.add(2,4,19,26);
+			m.add(2,4,22,26);
 			
 			initialized = true;
 		}

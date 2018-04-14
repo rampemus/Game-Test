@@ -32,13 +32,19 @@ public class MapGame extends BasicGameState {
 			oList.add(new Flame_Tank(3500,1600));
 			oList.add(new Flame_Tank(2800,1600));
 			oList.add(new Flame_Tank(576,700));
+			
 			oList.add(new Dragonling_Drone(1900,1600));
-			oList.add(new Dragonling_Drone(1540,1600));
-			oList.add(new Dragonling_Drone(1930,1600));
-			oList.add(new Blockade_Barrel(640,1400));
+			oList.add(new Dragonling_Drone(1700,1600));
+			oList.add(new Dragonling_Drone(1200,1600));
+			oList.add(new Dragonling_Drone(1500,1600));
+			oList.add(new Dragonling_Drone(2000,1600));
 			
 			
-		    oList.add(new Blockade_Barrel(960,300));//boss location
+			
+		    oList.add(new Mecha_Dragon(960,500));
+		    oList.add(new Dragonling_Drone(1200,500));
+		    oList.add(new Dragonling_Drone(1100,500));
+		    oList.add(new Dragonling_Drone(1300,500));
 		    input = gc.getInput();
 			m.add(4,1,5,6);
 			m.add(4,1,5,11);
