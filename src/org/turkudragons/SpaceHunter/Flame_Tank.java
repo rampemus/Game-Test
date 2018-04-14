@@ -98,11 +98,12 @@ public class Flame_Tank extends Character implements Visible, Active {
 					//Needs to turn + flamethrower
 				}
 			}
+			Flame_tank.update(delta);
 		}
 	
 	
 	public void display(Graphics g) {
 		super.display(g);
-		Flame_tank.draw(this.getX()-width/2-3,this.getY()-height/2-34 );
+		Flame_tank.getCurrentFrame().getFlippedCopy(lookingRight, false).draw(this.getX()-width/2-3,this.getY()-height/2-34 );
 	}
 }

@@ -186,10 +186,11 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		if (Dragonling_drone.getFrame()==9 && alive) {
 			Dragonling_drone.setCurrentFrame(5);
 		}
+		Dragonling_drone.update(delta);
 	}
 
 	public void display(Graphics g) {
 		super.display(g);
-		Dragonling_drone.draw(this.getX()-width/2-7,this.getY()-height/2-20 );
+		Dragonling_drone.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-7,this.getY()-height/2-20 );
 	}
 }
