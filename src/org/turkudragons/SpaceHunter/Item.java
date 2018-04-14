@@ -17,6 +17,7 @@ import org.newdawn.slick.Graphics;
 public class Item extends Collider implements Active,Visible{
 	private Collect type;
 	private int amount;
+	private int age;
 
 	public Item(int x, int y) {
 		super(x, y);
@@ -24,10 +25,10 @@ public class Item extends Collider implements Active,Visible{
 		v.set(((float)r.nextInt(200))/100-0.5f,((float)r.nextInt(200))/100-0.5f);
 		elasticity = 0.5f;
 		xMaxSpeed = 10f;
-		hp = 1;
 		type = Collect.randomItem();
 		amount = 100;
 		invulnerable = true;
+		age = 10000;
 	}
 	
 	public Item(int x, int y, Collect type) {
@@ -36,8 +37,8 @@ public class Item extends Collider implements Active,Visible{
 		v.set(((float)r.nextInt(200))/100-0.5f,((float)r.nextInt(200))/100-0.5f);
 		elasticity = 0.5f;
 		xMaxSpeed = 10f;
-		hp = 1;
 		invulnerable = true;
+		age = 10000;
 		this.type = type;
 		switch (type) {
 			case HP : 
@@ -123,7 +124,8 @@ public class Item extends Collider implements Active,Visible{
 	 */
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
-		if ( hp < 0) {
+		age -= delta;
+		if(age < 0) {
 			o.remove(this);
 		}
 	}
