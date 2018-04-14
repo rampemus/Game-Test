@@ -35,6 +35,7 @@ public class Main extends StateBasedGame {
 		addState(new EnemyGame()); //id = 1
 		addState(new MapGame()); //id = 2
 		addState(new MapGame2()); //id = 3
+		addState(new BossMap());//id = 4
 		
 		this.getState(0).init(gc, this);
 		//this.getState(Play.id).init(gc, this);
