@@ -115,6 +115,7 @@ public class MapGame extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		if(initialized) {
 			backgroundMusic.loop(1.0f,0.1f);
+			initialized = false;
 		}
 		player.updateInput(gc, m,delta, oList);
 		player.update(oList,m,delta);
