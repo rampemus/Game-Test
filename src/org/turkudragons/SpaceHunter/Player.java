@@ -327,6 +327,10 @@ public class Player extends Character {
 		return mouse;
 	}
 	
+	public int getHP() {
+		return hp;
+	}
+	
 	public Shape getLineOfFire() {
 		return r.transform(Transform.createRotateTransform((float)aim.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY()));
 	}
