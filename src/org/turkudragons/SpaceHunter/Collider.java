@@ -196,14 +196,16 @@ public class Collider {
 			if ( v.getX() > 0) {
 				p.add(xstep);
 				//detect ground next to leg
-				if ( groundCollision(m) && !headCollision(m) && !rightCollision(m)) { //if ground is only one pixel try the upper one
+				if ( groundCollision(m) && !headCollision(m) && !leftCollision(m)) { //if ground is only one pixel try the upper one
+					p.sub(ystep);
 					p.sub(ystep);
 					if ( groundCollision(m) ) {
+						p.add(ystep);
 						p.add(ystep);
 						break;
 					}
 				} 
-				if ( groundCollision(m) || headCollision(m) || rightCollision(m)) {
+				if ( groundCollision(m) || headCollision(m) || leftCollision(m)) {
 					p.sub(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
 				} 
@@ -211,12 +213,14 @@ public class Collider {
 				p.sub(xstep);
 				if ( groundCollision(m) && !headCollision(m) && !rightCollision(m)) { //if ground is only one pixel try the upper one
 					p.sub(ystep);
+					p.sub(ystep);
 					if ( groundCollision(m) ) {
+						p.add(ystep);
 						p.add(ystep);
 						break;
 					}
 				} 
-				if ( groundCollision(m) || headCollision(m) || leftCollision(m) ) {
+				if ( groundCollision(m) || headCollision(m) || rightCollision(m) ) {
 					p.add(xstep);
 					v.set(v.getY()*-elasticity,v.getY());
 				}

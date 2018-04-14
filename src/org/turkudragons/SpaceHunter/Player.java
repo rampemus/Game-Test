@@ -224,10 +224,10 @@ public class Player extends Character {
 		shootingDirection.sub(p);
 		if ( lookingRight ) {
 			hand.setRotation((float)shootingDirection.getTheta());
-			hand.draw(this.getX()-width/2-16,this.getY()-height/2-8);
+			hand.draw(this.getX()-width/2-16+hotSpot.getX(),this.getY()-height/2+ hotSpot.getY());
 		} else {
 			handFlipped.setRotation((float)shootingDirection.getTheta());
-			handFlipped.draw(this.getX()-width/2-16,this.getY()-height/2-8);
+			handFlipped.draw(this.getX()-width/2-16+hotSpot.getX(),this.getY()-height/2+hotSpot.getY());
 		}
 		
 		//getFlippedCopy(!lookingRight, false)
