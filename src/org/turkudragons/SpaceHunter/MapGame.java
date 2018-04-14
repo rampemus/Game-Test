@@ -27,6 +27,7 @@ public class MapGame extends BasicGameState {
 		if(!initialized) {
 			oList = new ArrayList<Object>();
 			m = new Map();
+			//player and enemies
 			player = new Player(350,300);
 			oList.add(player);
 			oList.add(new Flame_Tank(640,576));
@@ -50,6 +51,7 @@ public class MapGame extends BasicGameState {
 		    oList.add(new Dragonling_Drone(1100,500));
 		    oList.add(new Dragonling_Drone(1300,500));
 		    input = gc.getInput();
+		  //map for the state
 			m.add(4,1,5,6);
 			m.add(4,1,5,11);
 			m.add(4,1,5,16);

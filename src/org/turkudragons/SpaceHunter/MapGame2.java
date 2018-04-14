@@ -25,6 +25,7 @@ public class MapGame2 extends BasicGameState {
 		if(!initialized) {
 			oList = new ArrayList<Object>();
 			m = new Map();
+			//player and enemies
 			player = new Player(350,3700);
 			oList.add(player);
 			oList.add(new Blockade_Barrel(3456,3712));
@@ -55,6 +56,7 @@ public class MapGame2 extends BasicGameState {
 			
 			input = gc.getInput();
 			
+			//map for the state
 			m.add(1,4,2,59);
 			m.add(2,4,10,58);
 			m.add(2,4,12,57);

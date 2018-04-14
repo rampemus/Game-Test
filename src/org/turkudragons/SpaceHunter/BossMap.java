@@ -27,12 +27,13 @@ public class BossMap extends BasicGameState {
 		if(!initialized) {
 			m = new Map();
 			oList = new ArrayList<Object>();
+			//player and the dragon
 			player = new Player(700,3700);
 			oList.add(player);
 			oList.add(new Mecha_Dragon(1500,3740));
 			
 			input = gc.getInput();
-			
+			//map for the state
 			m.add(1,1,10,59);
 			m.add(1,1,20,59);
 			m.add(1,1,10,50);
