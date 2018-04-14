@@ -131,12 +131,18 @@ public class MapGame2 extends BasicGameState {
 			}
 		}
 		if(oList.size()<2) {
+			((MapGame)sbg.getState(MapGame.id)).backgroundMusic.stop();
 			sbg.enterState(BossMap.id);
 		}
 		if (player.getHP() <= 0) {
+			((MapGame)sbg.getState(MapGame.id)).backgroundMusic.stop();
 			sbg.enterState(GameOver.id);
 		}
-		
+		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
+			((MapGame)sbg.getState(MapGame.id)).backgroundMusic.stop();
+			sbg.getState(Menu.id).init(gc, sbg);
+			sbg.enterState(Menu.id);
+		}
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());
 		
 		//deltaNumber = "Delta: " + delta;

@@ -25,7 +25,10 @@ public class GameOver extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		// TODO Auto-generated method stub
 		timeout -= delta;
-		if (timeout < 0) sbg.enterState(Menu.id);
+		if (timeout < 0) {
+			sbg.getState(Menu.id).init(gc, sbg);
+			sbg.enterState(Menu.id);
+		}
 	}
 
 	@Override
