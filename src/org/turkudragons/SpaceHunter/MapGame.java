@@ -33,15 +33,17 @@ public class MapGame extends BasicGameState {
 			oList.add(new Flame_Tank(2800,1600));
 			oList.add(new Flame_Tank(576,700));
 			
+			oList.add(new Flame_Tank(3200,1400));
+			oList.add(new Flame_Tank(3500,1000));
+			
 			oList.add(new Dragonling_Drone(1900,1600));
 			oList.add(new Dragonling_Drone(1700,1600));
 			oList.add(new Dragonling_Drone(1200,1600));
 			oList.add(new Dragonling_Drone(1500,1600));
 			oList.add(new Dragonling_Drone(2000,1600));
 			
-			
-			
-		    oList.add(new Blockade_Barrel(960,500));
+			oList.add(new Alien(3000,600));
+			oList.add(new Alien(960,500));
 		    oList.add(new Dragonling_Drone(1200,500));
 		    oList.add(new Dragonling_Drone(1100,500));
 		    oList.add(new Dragonling_Drone(1300,500));
