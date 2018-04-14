@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Vector2f;
 
@@ -17,6 +19,7 @@ public class Character extends Collider{
 	protected Vector2f hotSpot;
 	protected int ascendCooldown;
 	protected int descendCooldown;
+	protected Sound jump;
 	
 	public Character(int x, int y) {
 		super(x,y);
@@ -26,6 +29,11 @@ public class Character extends Collider{
 		hitBox = new Rectangle(0, 0, width, height);
 		weapons = new ArrayList<>(Arrays.asList(new Weapon(Weapon.getWeapons().get(0))));
 		currentWeapon = weapons.get(0);
+		try {
+			jump = new Sound("res/Jump.ogg");
+		} catch(SlickException e) {
+			
+		}
 	}
 	
 	public void display(Graphics g) {
@@ -138,6 +146,7 @@ public class Character extends Collider{
 	public void jump(Map m) {
 		if ( onGround(m) && !underCeiling(m) && !headCollision(m) ) {
 			jumpCooldown = jumpStrength;
+			jump.play(1, 0.03f);
 		}
 		
 		if (jumpCooldown > jumpStrength/400 && !headCollision(m)) {
