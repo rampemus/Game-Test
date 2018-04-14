@@ -201,7 +201,7 @@ public class Alien extends Character implements Active, Visible {
 		if (!lookingRight) {
 			hotSpot.set(hotSpot.getX()*-1,hotSpot.getY());
 		}
-		
+		/*
 		aim = new Vector2f(mouse);
 		aim.sub(p);
 		if ( lookingRight ) {
@@ -211,7 +211,7 @@ public class Alien extends Character implements Active, Visible {
 			handFlipped.setRotation((float)aim.getTheta());
 			handFlipped.draw(this.getX()+hotSpot.getX()-32,this.getY()+hotSpot.getY()-32);
 		}
-		
+		*/
 		//getFlippedCopy(!lookingRight, false)
 		
 	}

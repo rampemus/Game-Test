@@ -11,6 +11,13 @@ import org.newdawn.slick.geom.Rectangle;
 public class Mecha_Dragon extends Character implements Visible, Active {
 	
 	boolean alive = true;
+	Image blank;
+	Image ds1;
+	Image dr1;
+	Image dr2;
+	Image dr3;
+	Image[] Dragon = new Image[3];
+	Animation Dragon_Boss;
 	
 	public Mecha_Dragon (int defx, int defy) {
 		super(defx, defy);
@@ -23,7 +30,19 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		elasticity = 0.2f;
 		hp = 50000;
 		airborne = true;
+		try {
+		dr1 = new Image("res/Mecha_Dragon_w.png");
+		dr2 = new Image("res/Mecha_Dragon_w2.png");
+		dr3 = new Image("res/Mecha_Dragon_w3.png");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Dragon[0] = dr1;
+		Dragon[1] = dr2;
+		Dragon[2] = dr3;
 		
+		Dragon_Boss = new Animation(Dragon,100,true);
 		//lacks animations stuff
 		
 		for(Weapon w : weapons) {
@@ -35,6 +54,6 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	}
 	public void display(Graphics g) {
 		super.display(g);
-		//is missing draw
+		Dragon_Boss.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2,this.getY()-height/2 );
 	}
 }
