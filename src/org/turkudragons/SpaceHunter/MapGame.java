@@ -130,7 +130,7 @@ public class MapGame extends BasicGameState {
 		//deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {
-			oList.add(new Item(100,400));
+			oList.add(new Item(100,400,Collect.randomItem()));
 		}
 		if(input.isKeyPressed(Input.KEY_M)) {
 			backgroundMusic.loop(1.0f,0.1f);

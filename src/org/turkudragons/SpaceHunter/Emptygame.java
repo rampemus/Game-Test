@@ -58,7 +58,7 @@ public class Emptygame extends BasicGameState {
 		deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {
-			oList.add(new Item(input.getMouseX()+(int)player.getX()-400,input.getMouseY()+(int)player.getY() - 300));
+			oList.add(new Item(input.getMouseX()+(int)player.getX()-400,input.getMouseY()+(int)player.getY() - 300, Collect.randomItem()));
 		}
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
 			oList.remove(1);

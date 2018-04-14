@@ -60,7 +60,7 @@ public class EnemyGame extends BasicGameState {
 		deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {
-			oList.add(new Item(100,400));
+			oList.add(new Item(100,400,Collect.randomItem()));
 		}
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
 			oList.remove(1);
