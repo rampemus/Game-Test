@@ -27,6 +27,7 @@ public class Item extends Collider implements Active,Visible{
 		hp = 1;
 		type = Collect.randomItem();
 		amount = 100;
+		invulnerable = true;
 	}
 	
 	public Item(int x, int y, Collect type) {
@@ -36,6 +37,7 @@ public class Item extends Collider implements Active,Visible{
 		elasticity = 0.5f;
 		xMaxSpeed = 10f;
 		hp = 1;
+		invulnerable = true;
 		this.type = type;
 		switch (type) {
 			case HP : 

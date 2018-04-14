@@ -83,7 +83,7 @@ public class MapGame extends BasicGameState {
 	    	m.add(2,1,35,8);
 	    	m.add(2,1,30,6);
 			try {
-				backgroundMusic = new Music("/res/Music.ogg");
+				backgroundMusic = new Music("res/Music.ogg");
 			}catch(SlickException e) {
 				
 			}
