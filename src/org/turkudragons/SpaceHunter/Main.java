@@ -31,7 +31,6 @@ public class Main extends StateBasedGame {
 	public void initStatesList(GameContainer gc) throws SlickException {
 		addState(new Menu()); //id = 0
 		//addState(new Play()); //id = 
-		//addState(new Story()); //id = 
 		addState(new EnemyGame()); //id = 1
 		addState(new MapGame()); //id = 2
 		addState(new MapGame2()); //id = 3
@@ -41,7 +40,6 @@ public class Main extends StateBasedGame {
 		
 		this.getState(0).init(gc, this);
 		//this.getState(Play.id).init(gc, this);
-		//this.getState(Story.id).init(gc, this);
 		this.getState(EnemyGame.id).init(gc, this);
 		this.getState(MapGame.id).init(gc, this);
 		this.getState(MapGame2.id).init(gc, this);

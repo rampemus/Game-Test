@@ -19,12 +19,14 @@ public class BossMap extends BasicGameState {
 	private boolean isTile;
 	private boolean initialized = false;
 	private Music bossTheme;
-	private ArrayList<Object> oList = new ArrayList<Object>();
-	private Map m = new Map();
+	private ArrayList<Object> oList;
+	private Map m;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if(!initialized) {
+			m = new Map();
+			oList = new ArrayList<Object>();
 			player = new Player(700,3700);
 			oList.add(player);
 			oList.add(new Mecha_Dragon(1500,3740));

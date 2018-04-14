@@ -75,16 +75,17 @@ public class Menu extends BasicGameState {
 		//Story button
 		if((mouseX>100 && mouseX<280) && (mouseY>330 && mouseY<390)){
 			if(Mouse.isButtonDown(0)){
-				sbg.enterState(6);
 				titleScreen.stop();
+				sbg.getState(Story.id).init(gc, sbg);
+				sbg.enterState(Story.id);
 			}
 		}
 		
 		//EnemyGame button
 		if((mouseX>100 && mouseX<280) && (mouseY>260 && mouseY<320)){
 			if(Mouse.isButtonDown(0)){
-				//sbg.enterState(EnemyGame.id);
 				titleScreen.stop();
+				sbg.getState(EnemyGame.id).init(gc, sbg);
 				sbg.enterState(EnemyGame.id);
 			}
 		}
@@ -93,6 +94,7 @@ public class Menu extends BasicGameState {
 		if((mouseX>100 && mouseX<280) && (mouseY>190 && mouseY<250)){
 			if(Mouse.isButtonDown(0)){
 				titleScreen.stop();
+				sbg.getState(MapGame.id).init(gc, sbg);
 				sbg.enterState(MapGame.id);
 			}
 		}

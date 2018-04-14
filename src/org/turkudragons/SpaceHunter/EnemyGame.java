@@ -15,13 +15,15 @@ public class EnemyGame extends BasicGameState {
 	private Player player;
 	private String deltaNumber = "0";
 	private Input input;
-	private ArrayList<Object> oList = new ArrayList<Object>();
-	private Map m = new Map();
-	private boolean initialized = false;
+	private ArrayList<Object> oList;
+	private Map m;
+	private boolean initialized;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if(!initialized) {
+			oList = new ArrayList<Object>();
+			m = new Map();
 			player = new Player(350,300);
 			oList.add(player);
 			/*oList.add(new Blockade_Barrel(100,100));
@@ -49,6 +51,9 @@ public class EnemyGame extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		if(initialized) {
+			initialized = false;
+		}
 		player.updateInput(gc, m, delta, oList);
 		
 		player.update(oList,m,delta);

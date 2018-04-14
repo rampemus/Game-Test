@@ -19,12 +19,14 @@ public class MapGame extends BasicGameState {
 	private boolean isTile;
 	public Music backgroundMusic;
 	private boolean initialized = false;
-	private ArrayList<Object> oList = new ArrayList<Object>();
-	private Map m = new Map();
+	private ArrayList<Object> oList;
+	private Map m;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if(!initialized) {
+			oList = new ArrayList<Object>();
+			m = new Map();
 			player = new Player(350,300);
 			oList.add(player);
 			oList.add(new Flame_Tank(640,576));
@@ -129,6 +131,7 @@ public class MapGame extends BasicGameState {
 			}
 		}
 		if(oList.size()<2) {
+			sbg.getState(MapGame2.id).init(gc, sbg);
 			sbg.enterState(MapGame2.id);
 		}
 		if (player.getHP() <= 0) {

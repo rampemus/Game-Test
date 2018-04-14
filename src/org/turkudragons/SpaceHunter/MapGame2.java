@@ -17,12 +17,14 @@ public class MapGame2 extends BasicGameState {
 	private Input input;
 	private boolean isTile;
 	private boolean initialized = false;
-	private ArrayList<Object> oList = new ArrayList<Object>();
-	private Map m = new Map();
+	private ArrayList<Object> oList;
+	private Map m;
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if(!initialized) {
+			oList = new ArrayList<Object>();
+			m = new Map();
 			player = new Player(350,3700);
 			oList.add(player);
 			oList.add(new Blockade_Barrel(3456,3712));
@@ -122,6 +124,9 @@ public class MapGame2 extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		if(initialized) {
+			initialized = false;
+		}
 		player.updateInput(gc, m,delta, oList);
 		player.update(oList,m,delta);
 		for (int i = oList.size()-1; i >= 0; i--) {
@@ -132,6 +137,7 @@ public class MapGame2 extends BasicGameState {
 		}
 		if(oList.size()<2) {
 			((MapGame)sbg.getState(MapGame.id)).backgroundMusic.stop();
+			sbg.getState(BossMap.id).init(gc, sbg);
 			sbg.enterState(BossMap.id);
 		}
 		if (player.getHP() <= 0) {

@@ -10,6 +10,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Story extends BasicGameState{
 
 	public static final int id = 6;
+	private boolean initialized;
 	Input input;
 	String[] story = {	"Date: 20XX, March 6th",
 						"Location: Orbiting TLX-278 (Sigmar System)",
@@ -39,7 +40,12 @@ public class Story extends BasicGameState{
 						};
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		input = gc.getInput();
+		if(!initialized) {
+			input = gc.getInput();
+			initialized = true;
+		}
+		
+		
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -51,8 +57,12 @@ public class Story extends BasicGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		if(initialized) {
+			initialized = false;
+		}
 		// TODO Auto-generated method stub
 		if (input.isKeyDown(Input.KEY_ESCAPE)) {
+			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
 		}
 	}
