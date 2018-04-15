@@ -1,7 +1,5 @@
 package org.turkudragons.SpaceHunter;
 
-import java.util.ArrayList;
-
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;

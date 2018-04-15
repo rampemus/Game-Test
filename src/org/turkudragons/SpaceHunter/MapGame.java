@@ -53,9 +53,11 @@ public class MapGame extends BasicGameState {
 		    input = gc.getInput();
 		  //map for the state
 			m.add(4,1,5,6);
+			
 			m.add(2,1,6,2);
 			m.add(2,1,10,2);
 			m.add(2,1,8,2);
+			
 			m.add(4,1,5,11);
 			m.add(4,1,5,16);
 			m.add(4,1,5,21);
@@ -99,7 +101,7 @@ public class MapGame extends BasicGameState {
 	    	m.add(2,1,35,8);
 	    	m.add(2,1,30,6);
 	    	
-			//For The Win 16 by Håkan Eriksson, downloaded from player.epidemicsound.com
+			//For The Win 16 by Håkan Eriksson, downloaded from epidemicsound.com
 			backgroundMusic = new Music("res/Music.ogg");
 			
 			initialized = true;

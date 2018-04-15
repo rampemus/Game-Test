@@ -106,10 +106,11 @@ public class Player extends Character {
 		r = new Rectangle(x,y,1,1000);
 		viewArea = new Polygon();
 		
+		shootCooldown = currentWeapon.getFiringRate();
 	}
 	
 	/**
-	 * Takes care of updating the input of player such as jumpin, moving shooting.
+	 * Takes care of updating the input of player such as jumping, moving and shooting.
 	 * @param gc
 	 * @param m
 	 * @param delta
@@ -320,9 +321,15 @@ public class Player extends Character {
 		switch (type) {
 			case HP : 
 				hp += amount;
+				if(hp > 10000) {
+					hp = 10000;
+				}
 				break;
 			case HP_LARGE : 
 				hp += amount;
+				if(hp > 10000) {
+					hp = 10000;
+				}
 				break;
 			case ASSAULT_AMMO :
 				weapons.get(1).setCount(weapons.get(1).getCount() + amount);
