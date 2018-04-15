@@ -3,8 +3,14 @@ package org.turkudragons.SpaceHunter;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
+/**
+ * A class that holds all the sound effects.
+ * @author Santeri Loitomaa
+ *
+ */
 public class Sounds {
 	
+	//Sounds, names make them self explanitory.
 	static Sound DragonRoar;
 	static Sound Warning;
 	static Sound Death;
@@ -37,6 +43,10 @@ public class Sounds {
 		bite = new Sound("res/Bite.ogg");
 	}
 	
+	/**
+	 * Checks if there is a sound playing.
+	 * @return
+	 */
 	public static boolean soundIsPlaying() {
 		if(DragonRoar.playing() || Warning.playing() || Death.playing() || Crash.playing() || bullet.playing() || fire.playing() ||
 				grenade.playing() || missile.playing() || plop.playing() || rifle.playing() || shotgun.playing() || bite.playing())
