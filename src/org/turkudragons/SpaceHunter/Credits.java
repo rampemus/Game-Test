@@ -30,6 +30,7 @@ public class Credits extends BasicGameState {
 			"Music:" , 
 			"Extreme Action - bensound.com (Menu music)" , 
 			"For The Win 16 - Håkan Erikson (Level music)" , 
+			"Game Over Yeah - orangefreesounds.com (Game over theme)" , 
 			"Drone Hunting - Niklas Johansson (Boss level music)" , 
 			"Sci Fi - bensound.com (Story and Credits music)" , 
 			"",

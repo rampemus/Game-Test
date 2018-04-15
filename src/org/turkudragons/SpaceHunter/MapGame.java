@@ -137,6 +137,7 @@ public class MapGame extends BasicGameState {
 			}
 		}
 		if(oList.size()<2) {
+			((Main)sbg).setOldPlayer(player);
 			sbg.getState(MapGame2.id).init(gc, sbg);
 			sbg.enterState(MapGame2.id);
 		}
