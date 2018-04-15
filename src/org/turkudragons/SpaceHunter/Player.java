@@ -313,7 +313,10 @@ public class Player extends Character {
 		int amount = i.getAmount();
 		switch (type) {
 			case HP : 
-				hp += 100;
+				hp += amount;
+				break;
+			case HP_LARGE : 
+				hp += amount;
 				break;
 			case ASSAULT_AMMO :
 				weapons.get(1).setCount(weapons.get(1).getCount() + amount);

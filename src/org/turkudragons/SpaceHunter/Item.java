@@ -33,7 +33,15 @@ public class Item extends Collider implements Active,Visible{
 		this.type = type;
 		switch (type) {
 			case HP : 
-				amount = 100;
+				amount = 500;
+				try {
+					texture = new Image("res/HP.png");
+				}catch(SlickException e) {
+					
+				}
+				break;
+			case HP_LARGE : 
+				amount = 5000;
 				try {
 					texture = new Image("res/HP.png");
 				}catch(SlickException e) {
@@ -145,7 +153,7 @@ public class Item extends Collider implements Active,Visible{
 }
 
 enum Collect {
-	HP, ASSAULT_AMMO, SNIPER_AMMO, ROCKET, GRENADE, PUMP_SHOTGUN_AMMO, FLAMETHROWER_AMMO, DOUBLE_DAMAGE, INFINITE_AMMO, INVULNERABILITY;
+	HP, ASSAULT_AMMO, SNIPER_AMMO, ROCKET, GRENADE, PUMP_SHOTGUN_AMMO, FLAMETHROWER_AMMO, DOUBLE_DAMAGE, INFINITE_AMMO, INVULNERABILITY, HP_LARGE;
 	
 	//method for getting a random item
 	private static Random r = new Random();
