@@ -264,7 +264,10 @@ public class Player extends Character {
 		aim = new Vector2f(0,0);
 		r.setLocation(this.getX(), this.getY());
 		g.drawString("Invulnerability Timer: " + invulnerabilityTimer,getX()-90,getY()-height-30);
-		g.drawString("Reload Timer: " + shootCooldown,getX()-90,getY()-height-45);
+		g.drawString("Double Damage Timer: " + doubleDamageTimer,getX()-90,getY()-height-45);
+		g.drawString("Infinite Ammo Timer: " + infiniteAmmoTimer,getX()-90,getY()-height-60);
+		g.drawString("Reload Timer: " + shootCooldown,getX()-90,getY()-height-75);
+		g.drawString("Ammo count: " + currentWeapon.getCount(),getX()-90,getY()-height-90);
 		//g.draw(r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
 		if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;
 		player_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);
