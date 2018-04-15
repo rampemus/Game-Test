@@ -14,12 +14,10 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	boolean alive = true;
 	boolean active = false;
 	boolean activate = false;
-	boolean doortime = true;
 	int startup = 3;
 	int timer = 0;
 	private Sound DragonRoar;
 	private Sound Warning;
-	private Sound Door;
 	Image blank;
 	Image ds1;
 	Image dr1;
@@ -52,7 +50,6 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		drm3 = new Image("res/Mecha_Dragon_wm3.png");
 		DragonRoar = new Sound("res/DragonRoar.ogg");
 		Warning = new Sound("res/Warning.ogg");
-		Door = new Sound("res/Door.ogg");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -126,6 +123,8 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		for(Weapon w : weapons) {
 			w.setEnemy(true);
 		}
+		weapons.get(1).setDamage(7);
+		weapons.get(1).setRange(350);
 		currentWeapon = weapons.get(1);
 	}
 	public void update(ArrayList<Object> o, Map m, int delta) {
@@ -196,9 +195,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		}
 		//shoots fire and comes closer
 		if (Dragon_Boss.getFrame() <27 && Dragon_Boss.getFrame() >=21 && activate && alive) {
-			doortime = true;
 			currentWeapon = weapons.get(1);
-			Door.play(1, 0.35f);
 			if (((Player)o.get(0)).getX()<this.getX()) {
 				walkLeft(delta);
 				shoot(o, (int)this.getX()-30,(int)this.getY()-5,(int)this.getX()-60,(int)this.getY()+35);
@@ -255,7 +252,6 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		}
 		//loop over
 		if (Dragon_Boss.getFrame() == 60 && activate && alive) {
-			doortime = true;
 			currentWeapon = weapons.get(1);
 		}
 		
