@@ -85,8 +85,8 @@ public class Menu extends BasicGameState {
 		if((mouseX>100 && mouseX<280) && (mouseY>260 && mouseY<320)){
 			if(Mouse.isButtonDown(0)){
 				titleScreen.stop();
-				sbg.getState(EnemyGame.id).init(gc, sbg);
-				sbg.enterState(EnemyGame.id);
+				sbg.getState(BossMap.id).init(gc, sbg);
+				sbg.enterState(BossMap.id);
 			}
 		}
 		

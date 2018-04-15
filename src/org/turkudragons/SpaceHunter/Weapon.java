@@ -591,7 +591,7 @@ class Bullet implements Active,Visible{
 		else if(currentWeapon.getName().equals("Guided RPG")) {
 			for(int i = 0; i < currentWeapon.getProjectileSpeed()*delta; i++) {
 				if(currentWeapon.isEnemy()) {
-					pm = new Vector2f(((Player)oList.get(0)).getX() + ((Player)oList.get(0)).getY());
+					pm = new Vector2f(((Player)oList.get(0)).getP());
 					v = new Vector2f(0,0);
 					v.sub(p);
 					v.add(pm);
