@@ -243,4 +243,26 @@ public class Character extends Collider{
 		}
 		return true;
 	}
+	
+	public boolean canSeeCharacter(Character c, Map m, int maxDistance) {
+		int steplength = 10; //change this one to 1 if you see any walls that the enemies can see through
+		
+		//vector magic, stepping every single coordinate between character this to character c
+		Vector2f start = new Vector2f(p);
+		Vector2f end = new Vector2f(c.getP());
+		Vector2f step = new Vector2f(end);
+		step.sub(start);
+		int distance = (int)step.length();
+		if (distance > maxDistance) {
+			return false;
+		}
+		int numberOfSteps = distance/steplength;
+		step.normalise();
+		step.scale(steplength);
+		for ( int i = 0; i < numberOfSteps; i++) {
+			start.add(step);
+			if ( m.ground(start.getX(), start.getY()) ) return false;
+		}
+		return true;
+	}
 }
