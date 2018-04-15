@@ -140,6 +140,7 @@ public class MapGame extends BasicGameState {
 		}
 		if (player.getHP() <= 0) {
 			backgroundMusic.stop();
+			sbg.getState(GameOver.id).init(gc, sbg);
 			sbg.enterState(GameOver.id);
 		}
 		if(input.isKeyPressed(Input.KEY_ESCAPE)) {

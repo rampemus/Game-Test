@@ -1,8 +1,6 @@
 package org.turkudragons.SpaceHunter;
 
 import java.util.ArrayList;
-
-
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -23,7 +21,6 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Player extends Character {
 	private int maxItemSwallowDistance;
-	private boolean godMode = false;
 	
 	//all the images for animation
 	private Image player_s;
@@ -214,9 +211,8 @@ public class Player extends Character {
 		
 		// enable godMode
 		if ( input.isKeyDown(Input.KEY_K) ){
-			godMode = true;
+			invulnerable = true;
 		}
-		if (godMode) hp = 10000;
 	}
 	
 	

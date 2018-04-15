@@ -15,6 +15,11 @@ public class MapTest extends StateBasedGame {
 
 		AppGameContainer appgc;
 		Weapon.createWeapons();
+		try {
+			Sounds.initiateSounds();
+		} catch (SlickException e1) {
+			e1.printStackTrace();
+		}
 		
 		try {
 			appgc = new AppGameContainer(new MapTest("Testataan miten mäppi toimii"));
@@ -29,8 +34,8 @@ public class MapTest extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
-		addState(new MapGame());
 		addState(new MapGame2());
+		addState(new MapGame());
 		addState(new BossMap());
 		//MapGame.id = 1;
 		//MapGame2.id = 2;

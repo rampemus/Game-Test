@@ -58,6 +58,18 @@ public class MapGame2 extends BasicGameState {
 			
 			//map for the state
 			m.add(1,4,2,59);
+			
+			m.add(4,4,2,58);
+			m.add(4,4,2,54);
+			m.add(4,4,2,50);
+			m.add(4,4,2,46);
+			m.add(4,4,2,42);
+			m.add(4,4,2,38);
+			m.add(4,4,2,34);
+			m.add(4,4,2,30);
+			m.add(4,4,2,26);
+			m.add(4,4,2,22);
+			
 			m.add(2,4,10,58);
 			m.add(2,4,12,57);
 			m.add(2,4,14,56);
@@ -84,6 +96,13 @@ public class MapGame2 extends BasicGameState {
 			m.add(2,4,51,53);
 			m.add(4,4,56,59);
 			m.add(4,4,56,54);
+			
+			m.add(4,4,56,50);
+			m.add(4,4,56,45);
+			m.add(4,4,56,40);
+			m.add(4,4,56,35);
+			m.add(4,4,56,30);
+			
 			m.add(2,4,54,49);
 			
 			m.add(2,5,34,43);
@@ -144,6 +163,7 @@ public class MapGame2 extends BasicGameState {
 		}
 		if (player.getHP() <= 0) {
 			((MapGame)sbg.getState(MapGame.id)).backgroundMusic.stop();
+			sbg.getState(GameOver.id).init(gc, sbg);
 			sbg.enterState(GameOver.id);
 		}
 		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
