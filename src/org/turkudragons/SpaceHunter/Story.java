@@ -13,6 +13,7 @@ public class Story extends BasicGameState{
 	public static final int id = 6;
 	private boolean initialized;
 	Input input;
+	private int animationTimer = 0;
 	private Music storyM;
 	String[] story = {	"Date: 20XX, March 6th",
 						"Location: Orbiting TLX-278 (Sigmar System)",
@@ -46,6 +47,7 @@ public class Story extends BasicGameState{
 			storyM = new Music("res/Story.ogg");
 			input = gc.getInput();
 			initialized = true;
+			animationTimer = 0;
 		}
 		
 		
@@ -54,7 +56,12 @@ public class Story extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		g.drawString("(PRESS ESC TO RETURN)", 140, 10);
 		for ( int i = 0; i < story.length; i++) {
-			g.drawString(story[i], 10, 60 + 20*i);
+			if ( i*1000 < animationTimer - 1000) {
+				g.drawString(story[i], 10, 60 + 20*i);
+			}
+			if ( i*1000 < animationTimer && animationTimer < i*1000+1000) {
+				g.drawString(story[i].substring(0,(int)((float)(animationTimer%1000)/1000*story[i].length())), 10, 60 + 20*i);
+			}
 		}
 	}
 
@@ -70,6 +77,7 @@ public class Story extends BasicGameState{
 			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
 		}
+		animationTimer += delta;
 	}
 
 	@Override
