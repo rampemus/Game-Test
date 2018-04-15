@@ -18,6 +18,10 @@ public class Sounds {
 	static Sound shotgun;
 	static Sound bite;
 	
+	/**
+	 * These sounds have been downloaded from soundbible.com and are only used personally. 
+	 * @throws SlickException
+	 */
 	public static void initiateSounds() throws SlickException {
 		DragonRoar = new Sound("res/DragonRoar.ogg");
 		Warning = new Sound("res/Warning.ogg");

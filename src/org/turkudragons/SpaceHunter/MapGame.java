@@ -28,7 +28,7 @@ public class MapGame extends BasicGameState {
 			oList = new ArrayList<Object>();
 			m = new Map();
 			//player and enemies
-			player = new Player(350,300);
+			player = new Player(414,400);
 			oList.add(player);
 			oList.add(new Flame_Tank(640,576));
 			oList.add(new Flame_Tank(3200,1600));
@@ -53,6 +53,9 @@ public class MapGame extends BasicGameState {
 		    input = gc.getInput();
 		  //map for the state
 			m.add(4,1,5,6);
+			m.add(2,1,6,2);
+			m.add(2,1,10,2);
+			m.add(2,1,8,2);
 			m.add(4,1,5,11);
 			m.add(4,1,5,16);
 			m.add(4,1,5,21);
@@ -88,7 +91,8 @@ public class MapGame extends BasicGameState {
 	    	m.add(3,1,47,16);
 	    	m.add(1,1,49,16);
 	    	m.add(1,1,49,17);
-	    	m.add(4,1,59,16);	
+	    	m.add(4,1,59,16);
+	    	m.add(4,1,59,12);
 	    	m.add(2,1,51,13);
 	    	m.add(2,1,45,10);
 	    	m.add(2,1,42,10);
