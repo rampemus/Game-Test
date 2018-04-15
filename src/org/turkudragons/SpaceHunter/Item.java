@@ -43,7 +43,7 @@ public class Item extends Collider implements Active,Visible{
 			case HP_LARGE : 
 				amount = 5000;
 				try {
-					texture = new Image("res/HP.png");
+					texture = new Image("res/HPL.png");
 				}catch(SlickException e) {
 					
 				}
