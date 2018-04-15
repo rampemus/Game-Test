@@ -29,8 +29,6 @@ public class Menu extends BasicGameState {
 	Image exit;
 	Music titleScreen;
 	private boolean initialized;
-	
-	private ArrayList<Object> oList = new ArrayList<Object>();
 
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if(!initialized) {
@@ -56,11 +54,6 @@ public class Menu extends BasicGameState {
 		MapTest.draw(100, 350, 180, 60);
 		exit.draw(100, 420, 180, 60);
 		
-		for (Object o : oList) {
-			if ( o instanceof Visible) {
-				((Visible)o).display(g);
-			}
-		}
 		g.drawString(deltaNumber,100,100);
 	}
 	/**
