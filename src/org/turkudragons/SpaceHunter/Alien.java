@@ -124,7 +124,7 @@ public class Alien extends Character implements Active, Visible {
 			alien_m.setCurrentFrame(7);
 				Random r = new Random();
 				int i = r.nextInt(10);
-				if (i < 7) {
+				if (i > 6) {
 					o.add(new Item((int)this.getX(),(int)this.getY(),Collect.HP_LARGE));
 				}
 			o.remove(this);

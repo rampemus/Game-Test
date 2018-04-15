@@ -21,6 +21,11 @@ public class Flame_Tank extends Character implements Visible, Active {
 	Animation Flame_tank;
 	boolean alive = true;
 
+	/**
+	 * Creates the character to certain coordinates and creates all necessary animations etc.
+	 * @param x x-coordinate of player
+	 * @param y y-coordinate of player
+	 */
 	public Flame_Tank(int defx, int defy) {
 		super(defx,defy);
 		width = 58;
@@ -60,8 +65,16 @@ public class Flame_Tank extends Character implements Visible, Active {
 		}
 		currentWeapon = weapons.get(1);
 	}
+	/**
+	 * updates the character on the playground. Super.update-has all the kinematics and common stuff with character
+	 * Can come at the player slowly when they are straight ahead, doesn't walk of ledges.
+	 * @param o oList of the gamestate
+	 * @param m Map of the gamestate
+	 * @param delta How many steps of millisecs to be taken
+	 */
 		public void update(ArrayList<Object> o, Map m, int delta) {
 			super.update(o, m, delta);
+			//Animation
 			if (Flame_tank.getFrame()==2 && alive) {
 				Flame_tank.setCurrentFrame(0);
 			}
@@ -96,6 +109,7 @@ public class Flame_Tank extends Character implements Visible, Active {
 					shoot(o, (int)this.getX()-30,(int)this.getY()-5,(int)((Character) o.get(0)).getX(), (int)this.getY());
 				}
 			}
+			// Walks right
 			if ((((Character) o.get(0)).getX() < this.getX() +500) && ((Character) o.get(0)).getX() > this.getX() && alive&&canSeeCharacter((Character)o.get(0),m)){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
 					if (checkMap(m,36,36)){
@@ -113,7 +127,10 @@ public class Flame_Tank extends Character implements Visible, Active {
 			Flame_tank.update(delta);
 		}
 	
-	
+		/**
+		 * Draws the tank
+		 * @param g Ghraphics object of the gamestate
+		 */
 	public void display(Graphics g) {
 		super.display(g);
 		Flame_tank.getCurrentFrame().getFlippedCopy(lookingRight, false).draw(this.getX()-width/2-3,this.getY()-height/2-34 );

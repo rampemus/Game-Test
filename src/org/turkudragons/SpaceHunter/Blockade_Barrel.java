@@ -23,6 +23,11 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 	boolean alive = true;
 	private int drops;
 	
+	/**
+	 * Creates the character to certain coordinates and creates all necessary animations etc.
+	 * @param x x-coordinate of player
+	 * @param y y-coordinate of player
+	 */
 	public Blockade_Barrel(int defx, int defy) {
 		super(defx,defy);
 		width = 31;
@@ -34,7 +39,7 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 		elasticity = 0.2f;
 		hp = 1000;
 		Random r = new Random();
-		drops = r.nextInt(5);
+		drops = r.nextInt(3)+2;
 		
 		try {
 			b = new Image ("res/blank.png");
@@ -63,10 +68,17 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 			w.setEnemy(true);
 		}
 	}
-	
+	/**
+	 * updates the character on the playground. Super.update-has all the kinematics and common stuff with character
+	 * sits still and drops stuff
+	 * @param o oList of the gamestate
+	 * @param m Map of the gamestate
+	 * @param delta How many steps of millisecs to be taken
+	 */
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		
+		//Animation & drops
 		if(hp <=600 && alive)  {
 			barrel_phases.setCurrentFrame(1);
 		}
@@ -85,7 +97,10 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 			o.remove(this);
 		}
 	}
-
+	/**
+	 * Draws the barrel
+	 * @param g Ghraphics object of the gamestate
+	 */
 	public void display(Graphics g) {
 		super.display(g);
 		barrel_phases.draw(this.getX()-width/2-16,this.getY()-height/2-5 );
