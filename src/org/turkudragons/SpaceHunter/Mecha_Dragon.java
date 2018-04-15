@@ -14,9 +14,12 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	boolean alive = true;
 	boolean active = false;
 	boolean activate = false;
+	boolean doortime = true;
 	int startup = 3;
 	int timer = 0;
 	private Sound DragonRoar;
+	private Sound Warning;
+	private Sound Door;
 	Image blank;
 	Image ds1;
 	Image dr1;
@@ -48,6 +51,8 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		drm2 = new Image("res/Mecha_Dragon_wm2.png");
 		drm3 = new Image("res/Mecha_Dragon_wm3.png");
 		DragonRoar = new Sound("res/DragonRoar.ogg");
+		Warning = new Sound("res/Warning.ogg");
+		Door = new Sound("res/Door.ogg");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,13 +134,13 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 			if (((Player)o.get(0)).getX() < this.getX() && ((Player)o.get(0)).getX() > this.getX()-500 && alive) {
 				Dragon_Boss.start();
 				active =true;
+				Warning.play(1, 0.35f);
 			}else {
 				Dragon_Boss.stop();
 			}
 		}
 		//the intro for the boss
 		if (Dragon_Boss.getFrame() == 4 && startup >1 && active && alive) {
-			//play warning sound
 			Dragon_Boss.setCurrentFrame(0);
 			startup = startup -1;
 		}else if (Dragon_Boss.getFrame() == 4 && startup >0) {
@@ -188,12 +193,12 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		if (Dragon_Boss.getFrame() <21 && Dragon_Boss.getFrame() >=15 && activate && alive) {
 			currentWeapon = weapons.get(2);
 			shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
-			shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
-			shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
 		}
 		//shoots fire and comes closer
 		if (Dragon_Boss.getFrame() <27 && Dragon_Boss.getFrame() >=21 && activate && alive) {
+			doortime = true;
 			currentWeapon = weapons.get(1);
+			Door.play(1, 0.35f);
 			if (((Player)o.get(0)).getX()<this.getX()) {
 				walkLeft(delta);
 				shoot(o, (int)this.getX()-30,(int)this.getY()-5,(int)this.getX()-60,(int)this.getY()+35);
@@ -250,6 +255,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		}
 		//loop over
 		if (Dragon_Boss.getFrame() == 60 && activate && alive) {
+			doortime = true;
 			currentWeapon = weapons.get(1);
 		}
 		
