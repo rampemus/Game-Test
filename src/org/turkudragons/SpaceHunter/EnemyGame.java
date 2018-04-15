@@ -43,7 +43,7 @@ public class EnemyGame extends BasicGameState {
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
-		player.display(g);
+		//player.display(g);
 		for (Object o : oList) {
 			if ( o instanceof Visible) {
 				((Visible)o).display(g);
@@ -60,7 +60,7 @@ public class EnemyGame extends BasicGameState {
 		}
 		player.updateInput(gc, m, delta, oList);
 		
-		player.update(oList,m,delta);
+		//player.update(oList,m,delta);
 		for (int i = oList.size()-1; i >= 0; i--) {
 			Object o = oList.get(i);
 			if ( o instanceof Active) {
