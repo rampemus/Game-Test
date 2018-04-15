@@ -143,11 +143,13 @@ public class MapGame extends BasicGameState {
 		}
 		if (player.getHP() <= 0) {
 			backgroundMusic.stop();
+			((Main) sbg).setOldPlayer(null);
 			sbg.getState(GameOver.id).init(gc, sbg);
 			sbg.enterState(GameOver.id);
 		}
 		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
 			backgroundMusic.stop();
+			((Main) sbg).setOldPlayer(null);
 			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
 		}

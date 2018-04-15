@@ -102,14 +102,14 @@ public class Weapon{
 	 */
 	public static void createWeapons() {
 		ammoTypes = new ArrayList<Weapon>();
-		ammoTypes.add(new Weapon("Pistol", 999, 250, 250, 1, 2.0f, false, false, 9999, false, false));
-		ammoTypes.add(new Weapon("Assault Rifle", 250, 100, 100, 1, 2.0f, false, false, 9999, false, false));
-		ammoTypes.add(new Weapon("Sniper Rifle", 33, 1000, 1000, 1, 3.0f, false, false, 9999, false, false));
+		ammoTypes.add(new Weapon("Pistol", 999, 250, 250, 1, 2.0f, false, false, 9999, false, true));
+		ammoTypes.add(new Weapon("Assault Rifle", 500, 100, 100, 1, 2.0f, false, false, 9999, false, false));
+		ammoTypes.add(new Weapon("Sniper Rifle", 30, 1000, 1000, 1, 3.0f, false, false, 9999, false, false));
 		ammoTypes.add(new Weapon("RPG-Launcher", 25, 1750, 1750, 1, 1.0f, true, false, 9999, false, false));
 		ammoTypes.add(new Weapon("Grenade-Launcher", 13, 1750, 1750, 1, 1.0f, true, false, 9999, false, false));
 		ammoTypes.add(new Weapon("Guided RPG", 25, 1750, 1750, 1, 1.0f, true, true, 9999, false, false));
-		ammoTypes.add(new Weapon("Pump Shotgun", 50, 250, 1250, 5, 2.0f, false, false, 500, false, false));
-		ammoTypes.add(new Weapon("Flamethrower", 500, 5, 50, 15, 1.0f, false, false, 250, false, false));
+		ammoTypes.add(new Weapon("Pump Shotgun", 100, 250, 1250, 5, 2.0f, false, false, 500, false, false));
+		ammoTypes.add(new Weapon("Flamethrower", 600, 5, 50, 15, 1.0f, false, false, 250, false, false));
 	}
 	
 	/**

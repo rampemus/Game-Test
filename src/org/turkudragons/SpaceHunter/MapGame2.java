@@ -61,72 +61,73 @@ public class MapGame2 extends BasicGameState {
 		input = gc.getInput();
 
 		// map for the state
-		m.add(1, 4, 2, 59);
+		m.add(1, 4, 2, 58);
 
-		m.add(4, 4, 2, 58);
-		m.add(4, 4, 2, 54);
-		m.add(4, 4, 2, 50);
-		m.add(4, 4, 2, 46);
-		m.add(4, 4, 2, 42);
-		m.add(4, 4, 2, 38);
-		m.add(4, 4, 2, 34);
-		m.add(4, 4, 2, 30);
-		m.add(4, 4, 2, 26);
-		m.add(4, 4, 2, 22);
+		m.add(4, 4, 2, 57);
+		m.add(4, 4, 2, 53);
+		m.add(4, 4, 2, 49);
+		m.add(4, 4, 2, 45);
+		m.add(4, 4, 2, 41);
+		m.add(4, 4, 2, 37);
+		m.add(4, 4, 2, 33);
+		m.add(4, 4, 2, 29);
+		m.add(4, 4, 2, 25);
+		m.add(4, 4, 2, 21);
 
-		m.add(2, 4, 10, 58);
-		m.add(2, 4, 12, 57);
-		m.add(2, 4, 14, 56);
-		m.add(2, 4, 16, 55);
+		m.add(2, 4, 10, 57);
+		m.add(2, 4, 12, 56);
+		m.add(2, 4, 14, 55);
+		m.add(2, 4, 16, 54);
 
-		m.add(1, 4, 19, 55);
-		m.add(2, 5, 17, 52);
-		m.add(2, 5, 23, 50);
+		m.add(1, 4, 19, 54);
+		m.add(2, 5, 17, 51);
+		m.add(2, 5, 23, 49);
 
-		m.add(4, 4, 29, 59);
-		m.add(1, 4, 30, 59);
-		m.add(1, 4, 40, 59);
-		m.add(2, 4, 47, 58);
+		m.add(4, 4, 29, 58);
+		m.add(1, 4, 30, 58);
+		m.add(1, 4, 40, 58);
 		m.add(2, 4, 47, 57);
+		m.add(2, 4, 47, 56);
 
-		m.add(1, 5, 30, 46);
-		m.add(1, 5, 40, 46);
-		m.add(1, 5, 30, 50);
-		m.add(1, 5, 40, 50);
+		m.add(1, 5, 30, 45);
+		m.add(1, 5, 40, 45);
+		m.add(1, 5, 30, 49);
+		m.add(1, 5, 40, 49);
 
-		m.add(2, 4, 50, 59);
-		m.add(2, 4, 53, 59);
-		m.add(2, 4, 54, 56);
-		m.add(2, 4, 51, 53);
-		m.add(4, 4, 56, 59);
-		m.add(4, 4, 56, 54);
+		m.add(2, 4, 50, 58);
+		m.add(2, 4, 53, 58);
+		m.add(2, 4, 54, 55);
+		m.add(2, 4, 51, 52);
+		m.add(4, 4, 56, 58);
+		m.add(4, 4, 56, 53);
 
-		m.add(4, 4, 56, 50);
-		m.add(4, 4, 56, 45);
-		m.add(4, 4, 56, 40);
-		m.add(4, 4, 56, 35);
-		m.add(4, 4, 56, 30);
+		m.add(4, 4, 56, 49);
+		m.add(4, 4, 56, 44);
+		m.add(4, 4, 56, 39);
+		m.add(4, 4, 56, 34);
+		m.add(4, 4, 56, 29);
 
-		m.add(2, 4, 54, 49);
+		m.add(2, 4, 54, 48);
 
-		m.add(2, 5, 34, 43);
-		m.add(2, 5, 37, 40);
-		m.add(2, 5, 40, 37);
-		m.add(2, 5, 44, 35);
-		m.add(2, 5, 47, 35);
+		m.add(2, 5, 34, 42);
+		m.add(2, 5, 37, 39);
+		m.add(2, 5, 40, 36);
+		m.add(2, 5, 44, 34);
+		m.add(2, 5, 47, 34);
 
-		m.add(2, 5, 32, 35);
-		m.add(2, 5, 24, 35);
-		m.add(2, 5, 15, 35);
-		m.add(1, 5, 15, 36);
-		m.add(1, 5, 25, 36);
+		m.add(2, 5, 32, 34);
+		m.add(2, 5, 24, 34);
+		m.add(2, 5, 15, 34);
+		m.add(1, 5, 15, 35);
+		m.add(1, 5, 25, 35);
 
-		m.add(2, 5, 21, 32);
-		m.add(2, 5, 24, 29);
-		m.add(1, 4, 14, 26);
-		m.add(1, 4, 4, 26);
-		m.add(5, 4, 19, 25);
-		m.add(5, 4, 7, 25);
+		m.add(2, 5, 21, 31);
+		m.add(2, 5, 24, 28);
+		m.add(1, 4, 14, 25);
+		m.add(1, 4, 4, 25);
+		m.add(5, 4, 19, 24);
+		m.add(5, 4, 7, 24);
+		
 		initialized = true;
 
 	}
@@ -166,11 +167,13 @@ public class MapGame2 extends BasicGameState {
 		}
 		if (player.getHP() <= 0) {
 			((MapGame) sbg.getState(MapGame.id)).backgroundMusic.stop();
+			((Main) sbg).setOldPlayer(null);
 			sbg.getState(GameOver.id).init(gc, sbg);
 			sbg.enterState(GameOver.id);
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			((MapGame) sbg.getState(MapGame.id)).backgroundMusic.stop();
+			((Main) sbg).setOldPlayer(null);
 			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
 		}

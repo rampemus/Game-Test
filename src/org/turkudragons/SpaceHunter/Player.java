@@ -56,6 +56,7 @@ public class Player extends Character implements Active, Visible{
 	public Player(int x, int y) {
 		super(x,y);
 		//load weapons
+		Weapon.createWeapons();
 		weapons = new ArrayList<Weapon>(Weapon.getWeapons());
 		
 		//set
@@ -345,10 +346,10 @@ public class Player extends Character implements Active, Visible{
 				weapons.get(4).setCount(weapons.get(4).getCount() + amount);
 				break;
 			case PUMP_SHOTGUN_AMMO :
-				weapons.get(5).setCount(weapons.get(6).getCount() + amount);
+				weapons.get(6).setCount(weapons.get(6).getCount() + amount);
 				break;
 			case FLAMETHROWER_AMMO :
-				weapons.get(6).setCount(weapons.get(7).getCount() + amount);
+				weapons.get(7).setCount(weapons.get(7).getCount() + amount);
 				break;
 			case DOUBLE_DAMAGE :
 				if (doubleDamageTimer == 0) {

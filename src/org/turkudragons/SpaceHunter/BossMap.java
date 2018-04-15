@@ -39,20 +39,20 @@ public class BossMap extends BasicGameState {
 
 		input = gc.getInput();
 		// map for the state
-		m.add(1, 1, 10, 59);
-		m.add(1, 1, 20, 59);
-		m.add(1, 1, 10, 50);
-		m.add(1, 1, 20, 50);
+		m.add(1, 1, 10, 58);
+		m.add(1, 1, 20, 58);
+		m.add(1, 1, 10, 49);
+		m.add(1, 1, 20, 49);
 
-		m.add(4, 1, 9, 59);
-		m.add(4, 1, 9, 54);
-		m.add(4, 1, 30, 59);
-		m.add(4, 1, 30, 54);
+		m.add(4, 1, 9, 58);
+		m.add(4, 1, 9, 53);
+		m.add(4, 1, 30, 58);
+		m.add(4, 1, 30, 53);
 
-		m.add(5, 1, 13, 57);
-		m.add(5, 1, 25, 57);
-		m.add(2, 1, 9, 54);
-		m.add(2, 1, 28, 54);
+		m.add(5, 1, 13, 56);
+		m.add(5, 1, 25, 56);
+		m.add(2, 1, 9, 53);
+		m.add(2, 1, 28, 53);
 
 		try {
 			// Drone Hunting by Niklas Johansson, downloaded from player.epidemicsound.com
@@ -95,16 +95,19 @@ public class BossMap extends BasicGameState {
 		}
 		if (oList.size() < 2) {
 			bossTheme.stop();
+			((Main) sbg).setOldPlayer(null);
 			sbg.getState(Credits.id).init(gc, sbg);
 			sbg.enterState(Credits.id);
 		}
 		if (player.getHP() <= 0) {
 			bossTheme.stop();
+			((Main) sbg).setOldPlayer(null);
 			sbg.getState(GameOver.id).init(gc, sbg);
 			sbg.enterState(GameOver.id);
 		}
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			bossTheme.stop();
+			((Main) sbg).setOldPlayer(null);
 			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
 		}

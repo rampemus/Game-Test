@@ -10,13 +10,14 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameOver extends BasicGameState{
 
 	public static final int id = 5;
-	public int timeout = 10000;
+	public int timeout;
 	private boolean initialized;
 	private Music gameOver;
 	
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		if(!initialized) {
 			gameOver = new Music("res/GameOver.ogg");
+			timeout = 10000;
 			initialized = true;
 		}
 	}

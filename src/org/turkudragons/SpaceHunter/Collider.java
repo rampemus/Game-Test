@@ -60,7 +60,7 @@ public class Collider {
 	public void display(Graphics g) {
 		hitBox.setCenterX(p.getX());
 		hitBox.setCenterY(p.getY());
-		g.draw(hitBox);
+		//g.draw(hitBox);
 		g.drawString("HP: " + hp,getX()-25,getY()-height);
 	}
 	

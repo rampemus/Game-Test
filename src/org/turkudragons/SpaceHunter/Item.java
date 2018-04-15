@@ -88,7 +88,7 @@ public class Item extends Collider implements Active,Visible{
 				}
 				break;
 			case PUMP_SHOTGUN_AMMO :
-				amount = 40;
+				amount = 50;
 				try {
 					texture = new Image("res/p_ammo.png");
 				}catch(SlickException e) {
