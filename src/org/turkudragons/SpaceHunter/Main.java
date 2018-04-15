@@ -44,6 +44,7 @@ public class Main extends StateBasedGame {
 		addState(new BossMap()); //id = 4
 		addState(new GameOver()); //id = 5
 		addState(new Story());	//id = 6
+		addState(new Credits());//id = 7
 		
 		this.getState(0).init(gc, this);
 		//this.getState(Play.id).init(gc, this);

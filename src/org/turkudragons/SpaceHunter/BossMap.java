@@ -92,6 +92,8 @@ public class BossMap extends BasicGameState {
 		}
 		if(oList.size()<2) {
 			bossTheme.stop();
+			sbg.getState(Credits.id).init(gc, sbg);
+			sbg.enterState(Credits.id);
 		}
 		if (player.getHP() <= 0) {
 			bossTheme.stop();
