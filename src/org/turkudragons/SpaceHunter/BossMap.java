@@ -84,15 +84,10 @@ public class BossMap extends BasicGameState {
 			bossTheme.loop(1.0f, 0.1f);
 			initialized = false;
 		}
-<<<<<<< HEAD
+		
 		player.updateInput(gc, m,delta, oList);
 		//player.update(oList,m,delta);
 		for (int i = oList.size()-1; i >= 0; i--) {
-=======
-		player.updateInput(gc, m, delta, oList);
-		player.update(oList, m, delta);
-		for (int i = oList.size() - 1; i >= 0; i--) {
->>>>>>> 4f03a9b13f4e239071b4d45db04dff91f537c2fa
 			Object o = oList.get(i);
 			if (o instanceof Active) {
 				((Active) o).update(oList, m, delta);

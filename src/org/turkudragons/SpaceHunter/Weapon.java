@@ -307,7 +307,7 @@ class Bullet implements Active,Visible{
 	private int range; // The range of the bullet.
 	private boolean destroyed; // The bullet is destroyed.
 	private Image texture; // The texture of the bullet.
-	private boolean removeKebab; // Is there a reason to remove a rocket from the weapons count.
+	private boolean removeRocketBullet; // Is there a reason to remove a rocket from the weapons count.
 	private float oldTheta; // The old direction of the bullet.
 	
 	/**
@@ -443,7 +443,7 @@ class Bullet implements Active,Visible{
 		
 		if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy()) {
 			if(currentWeapon.getName().equals("RPG-Launcher") || currentWeapon.getName().equals("Guided RPG")) {
-				removeKebab = true;
+				removeRocketBullet = true;
 			}
 			else {
 				currentWeapon.setCount(currentWeapon.getCount()-1);
@@ -600,10 +600,10 @@ class Bullet implements Active,Visible{
 				else bulletSpeedSlowerCycle--;
 			}
 		}
-		if(removeKebab) {
+		if(removeRocketBullet) {
 			((Player)(oList.get(0))).getWeapons().get(3).setCount(((Player)(oList.get(0))).getWeapons().get(3).getCount() - 1);
 			((Player)(oList.get(0))).getWeapons().get(5).setCount(((Player)(oList.get(0))).getWeapons().get(5).getCount() - 1);
-			removeKebab = false;
+			removeRocketBullet = false;
 		}
 	}
 
