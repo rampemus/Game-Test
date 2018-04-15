@@ -15,6 +15,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	boolean active = false;
 	boolean activate = false;
 	int startup = 3;
+	int timer = 0;
 	private Sound DragonRoar;
 	Image blank;
 	Image ds1;
@@ -24,7 +25,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	Image drm1;
 	Image drm2;
 	Image drm3;
-	Image[] Dragon = new Image[60];
+	Image[] Dragon = new Image[61];
 	Animation Dragon_Boss;
 	
 	public Mecha_Dragon (int defx, int defy) { //(1500,3740) default lokaatio
@@ -38,6 +39,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		elasticity = 0.2f;
 		hp = 50000;
 		airborne = true;
+		invulnerable = true;
 		try {
 		dr1 = new Image("res/Mecha_Dragon_w.png");
 		dr2 = new Image("res/Mecha_Dragon_w2.png");
@@ -110,6 +112,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		Dragon[57] = drm1;
 		Dragon[58] = drm2;
 		Dragon[59] = drm3;
+		Dragon[60] = drm3;
 		
 		Dragon_Boss = new Animation(Dragon,250,true);
 		
@@ -140,7 +143,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 			Dragon_Boss.setCurrentFrame(0);
 			startup = startup -1;
 		}else if (Dragon_Boss.getFrame() == 4 && startup ==0) {
-			//Mecha_Dragon Invulnerable in the start off?
+			invulnerable = false;
 			activate = true;
 		}
 		//the action sequence of the boss starts
@@ -204,10 +207,51 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 				descend(delta);
 			}
 		}
+		//ram
 		if (Dragon_Boss.getFrame() <33 && Dragon_Boss.getFrame() >=27 && activate && alive) {
-			
+			if (((Player)o.get(0)).getX()<this.getX()) {
+				walkLeft(delta*2);
+			} else {
+				walkRight(delta*2);
+			}
+			if (((Player)o.get(0)).getY()<this.getY()) {
+				ascend(delta*2);
+			} else {
+				descend(delta*2);
+			}
+			if(hitBox.intersects(((Collider)o.get(0)).getHitbox())) {
+			    ((Collider)o.get(0)).takeDamage(3);
+			}
 		}
-		
+		//ram
+		if (Dragon_Boss.getFrame() <42 && Dragon_Boss.getFrame() >=33 && activate && alive) {
+			ascend(delta*2);
+			if (((Player)o.get(0)).getX()<this.getX()) {
+				walkRight(delta);
+			} else {
+				walkLeft(delta);
+			}	
+		}
+		timer = timer - delta;
+		//The dragon spawns little friends
+		if (Dragon_Boss.getFrame() <54 && Dragon_Boss.getFrame() >=42 && activate && alive) {
+			DragonRoar.play(1, 0.35f);
+			if (timer <0) {
+				o.add(new Dragonling_Drone((int)this.getX(),(int)this.getY()));
+				timer = 1000;
+			}
+		}
+		//fires missiles
+		if (Dragon_Boss.getFrame() <60 && Dragon_Boss.getFrame() >=54 && activate && alive) {
+			if (Dragon_Boss.getFrame() <21 && Dragon_Boss.getFrame() >=15 && activate && alive) {
+				currentWeapon = weapons.get(2);
+				shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
+			}
+		}
+		//loop over
+		if (Dragon_Boss.getFrame() == 60 && activate && alive) {
+			currentWeapon = weapons.get(1);
+		}
 		
 		Dragon_Boss.update(delta);
 	}
