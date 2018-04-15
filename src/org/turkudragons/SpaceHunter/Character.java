@@ -86,7 +86,7 @@ public class Character extends Collider{
 	 */
 	public void shoot(ArrayList<Object> oList, int x, int y) {
 		if (shootCooldown <= 0) {
-			if((!(currentWeapon.getCount() == 0)) || currentWeapon.isEnemy()) {
+			if((!(currentWeapon.getCount() <= 0)) || currentWeapon.isEnemy()) {
 				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
 					oList.add(new Bullet((int)this.getX()+(int)hotSpot.getX(), (int)this.getY()+(int)hotSpot.getY(), x, y, currentWeapon)); //shoot from character position plus hotSpot coordinates
 				if(currentWeapon.getName().equals("Flamethrower"))

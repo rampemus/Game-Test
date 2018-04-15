@@ -285,6 +285,9 @@ public class Collider {
 		while ( rightCollision(m) && !leftCollision(m)) {
 			p.sub(new Vector2f(1,0));
 		}
+		if(m.size() < getY() + 96) {
+			hp = -1;
+		}
 	}
 	
 	/**

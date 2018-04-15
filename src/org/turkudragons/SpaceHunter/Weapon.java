@@ -441,7 +441,7 @@ class Bullet implements Active,Visible{
 			this.oldTheta = (float)v.getTheta();
 		}
 		
-		if(!currentWeapon.isInfinite() || !currentWeapon.isEnemy()) {
+		if(!currentWeapon.isInfinite() && !currentWeapon.isEnemy()) {
 			if(currentWeapon.getName().equals("RPG-Launcher") || currentWeapon.getName().equals("Guided RPG")) {
 				removeRocketBullet = true;
 			}
