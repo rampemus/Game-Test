@@ -7,10 +7,15 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
 public class Mecha_Dragon extends Character implements Visible, Active {
 	
 	boolean alive = true;
+	boolean active = false;
+	boolean activate = false;
+	int startup = 3;
+	private Sound DragonRoar;
 	Image blank;
 	Image ds1;
 	Image dr1;
@@ -40,6 +45,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		drm1 = new Image("res/Mecha_Dragon_wm.png");
 		drm2 = new Image("res/Mecha_Dragon_wm2.png");
 		drm3 = new Image("res/Mecha_Dragon_wm3.png");
+		DragonRoar = new Sound("res/DragonRoar.ogg");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -106,19 +112,107 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		Dragon[59] = drm3;
 		
 		Dragon_Boss = new Animation(Dragon,250,true);
-		//lacks animations stuff
 		
+		weapons.add(new Weapon(Weapon.getWeapons().get(7)));
+		weapons.add(new Weapon(Weapon.getWeapons().get(5)));
 		for(Weapon w : weapons) {
 			w.setEnemy(true);
 		}
+		currentWeapon = weapons.get(1);
 	}
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
+		if (!active) {
+			if (((Player)o.get(0)).getX() < this.getX() && ((Player)o.get(0)).getX() > this.getX()-500 && alive) {
+				Dragon_Boss.start();
+				active =true;
+			}else {
+				Dragon_Boss.stop();
+			}
+		}
+		//the intro for the boss
+		if (Dragon_Boss.getFrame() == 4 && startup >1 && active && alive) {
+			//play warning sound
+			Dragon_Boss.setCurrentFrame(0);
+			startup = startup -1;
+		}else if (Dragon_Boss.getFrame() == 4 && startup >0) {
+			DragonRoar.play(1, 0.35f);
+			Dragon_Boss.setCurrentFrame(0);
+			startup = startup -1;
+		}else if (Dragon_Boss.getFrame() == 4 && startup ==0) {
+			//Mecha_Dragon Invulnerable in the start off?
+			activate = true;
+		}
+		//the action sequence of the boss starts
+		// Breath fire and chase
+		if (Dragon_Boss.getFrame() <12  && activate && alive) {
+			// fire breathe
+			if (((Player)o.get(0)).getX()<this.getX()+30) {
+				shoot(o, (int)this.getX()-30,(int)this.getY()-5,(int)this.getX()-60,(int)this.getY()+35);
+			}else {
+				shoot(o, (int)this.getX()+30,(int)this.getY()-5,(int)this.getX()+60,(int)this.getY()+35);
+			}
+			// adjusting height
+			if (((Player)o.get(0)).getY()<this.getY()+100) {
+				ascend(delta*2);
+			}else if (((Player)o.get(0)).getY()>this.getY()+150) {
+				descend(delta*2);
+			}
+			// Adjusting horizontal position when player is on the left
+			//turning needs to be fixed
+			if (((Player)o.get(0)).getX()<this.getX()-200) {
+				walkLeft(delta);
+			}else if (((Player)o.get(0)).getX()>this.getX()-100) {
+				walkRight(delta);
+			}
+			// Adjusting horizontal position when player is on the Right
+			if (((Player)o.get(0)).getX()>this.getX()+200) {
+				walkRight(delta);
+			}else if (((Player)o.get(0)).getX()<this.getX()+100) {
+				walkLeft(delta);
+			}
+		}
+		// Flies back
+		if (Dragon_Boss.getFrame() <15 && Dragon_Boss.getFrame() >=12 && activate && alive) {
+			ascend(delta*2);
+			if (((Player)o.get(0)).getX()<this.getX()) {
+				walkRight(delta);
+			} else {
+				walkLeft(delta);
+			}
+		}
+		//Shoots missile
+		if (Dragon_Boss.getFrame() <21 && Dragon_Boss.getFrame() >=15 && activate && alive) {
+			currentWeapon = weapons.get(2);
+			shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
+			shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
+			shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
+		}
+		//shoots fire and comes closer
+		if (Dragon_Boss.getFrame() <27 && Dragon_Boss.getFrame() >=21 && activate && alive) {
+			currentWeapon = weapons.get(1);
+			if (((Player)o.get(0)).getX()<this.getX()) {
+				walkLeft(delta);
+				shoot(o, (int)this.getX()-30,(int)this.getY()-5,(int)this.getX()-60,(int)this.getY()+35);
+			} else {
+				walkRight(delta);
+				shoot(o, (int)this.getX()+30,(int)this.getY()-5,(int)this.getX()+60,(int)this.getY()+35);
+			}
+			if (((Player)o.get(0)).getY()<this.getY()) {
+				ascend(delta);
+			} else {
+				descend(delta);
+			}
+		}
+		if (Dragon_Boss.getFrame() <33 && Dragon_Boss.getFrame() >=27 && activate && alive) {
+			
+		}
+		
 		
 		Dragon_Boss.update(delta);
 	}
 	public void display(Graphics g) {
 		super.display(g);
-		Dragon_Boss.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2,this.getY()-height/2 );
+		Dragon_Boss.getCurrentFrame().getFlippedCopy(lookingRight, false).draw(this.getX()-width/2,this.getY()-height/2 );
 	}
 }
