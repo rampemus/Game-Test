@@ -23,6 +23,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class Player extends Character {
 	private int maxItemSwallowDistance;
+	private boolean godMode = false;
 	
 	//all the images for animation
 	private Image player_s;
@@ -210,6 +211,12 @@ public class Player extends Character {
 		if(input.isKeyPressed(Input.KEY_8)) {
 			currentWeapon = weapons.get(7);
 		}
+		
+		// enable godMode
+		if ( input.isKeyDown(Input.KEY_K) ){
+			godMode = true;
+		}
+		if (godMode) hp = 10000;
 	}
 	
 	
