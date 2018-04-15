@@ -2,6 +2,7 @@ package org.turkudragons.SpaceHunter;
 
 import java.util.ArrayList;
 
+
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -14,8 +15,16 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.geom.Vector2f;
 
+/**
+ * Controllable player on the screen that will be saved oList index 0.
+ * @author Pasi(main functionality, documentation), Tommi(animations), Santeri (collect, mouse, input)
+ *
+ */
+
 public class Player extends Character {
 	private int maxItemSwallowDistance;
+	
+	//all the images for animation
 	private Image player_s;
 	private Image hand;
 	private Image handFlipped;
@@ -30,6 +39,7 @@ public class Player extends Character {
 	private Image [] player_a = new Image[10];
 	private Animation player_m;
 	
+	//controlling weapon-class
 	private Vector2f mouse = new Vector2f(0,0);
 	private Vector2f aim;
 	private Shape r;
@@ -37,12 +47,20 @@ public class Player extends Character {
 	private int infiniteAmmoTimer;
 	private int invulnerabilityTimer;
 	@SuppressWarnings("unused")
-	private Polygon viewArea;
+	private Polygon viewArea; //for later use
+	
+	/**
+	 * Creates player to certain coordinates
+	 * @param x x-coordinate of player
+	 * @param y y-coordinate of player
+	 */
 	
 	public Player(int x, int y) {
 		super(x,y);
+		//load weapons
 		weapons = new ArrayList<Weapon>(Weapon.getWeapons());
 		
+		//set
 		maxItemSwallowDistance = height;
 		try {
 			player_s = new Image ("res/main_char_stand1.png"); 	//0
@@ -55,6 +73,7 @@ public class Player extends Character {
 			player_w7 = new Image ("res/main_char_walk7.png");	//7
 			blank = new Image ("res/blank.png");					//8
 			
+			//insert images into animation-array
 			player_a[0] = player_s;
 			player_a[1] = player_w1;
 			player_a[2] = player_w2;
@@ -66,8 +85,10 @@ public class Player extends Character {
 			player_a[8] = player_w7;
 			player_a[9] = blank;
 			
+			//insert array of images to the animation and set the duration
 			player_m = new Animation(player_a,100,true);
 			
+			//create also a picture of hand and a mirror image of hand
 			hand = new Image("res/player_hand.png");
 			handFlipped = hand.getFlippedCopy(false, true);
 			hotSpot = new Vector2f(0,0);
@@ -75,14 +96,28 @@ public class Player extends Character {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		hp = 10000;
-		aim = new Vector2f(0, 0);
+		aim = new Vector2f(0, 0); //vector that points to direction of mouse on the screen
+		
+		//agility things
 		jumpStrength = 0.8f;
+		xMaxSpeed = 0.6f;
+		
+		//for AI
 		r = new Rectangle(x,y,1,1000);
 		viewArea = new Polygon();
-		xMaxSpeed = 0.6f;
+		
 	}
 	
+	/**
+	 * Takes care of updating the input of player such as jumpin, moving shooting.
+	 * @param gc
+	 * @param m
+	 * @param delta
+	 * @param oList
+	 * @author Santeri, Pasi
+	 */
 	public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
 		
 		Input input = gc.getInput();
@@ -177,6 +212,15 @@ public class Player extends Character {
 		}
 	}
 	
+	
+	/**
+	 * updates the player on the playground. Super.update-has all the kinematics and common stuff with character and
+	 * then we add also pull item and powerups here.
+	 * @param o oList of the gamestate
+	 * @param m Map of the gamestate
+	 * @param delta How many steps of millisecs to be taken
+	 * 
+	 */
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		pullItems(o,delta);
@@ -210,6 +254,10 @@ public class Player extends Character {
 		}
 	}
 	
+	/**
+	 * Draw player and set the hand into proper position to the player
+	 * @param g Ghraphics object of the gamestate
+	 */
 	public void display(Graphics g) {
 		super.display(g);
 		//updateViewArea();
@@ -254,7 +302,12 @@ public class Player extends Character {
 			Vector2f point = new Vector2f(p.getX(),p.getY());
 		}
 	}*/
-
+	
+	/**
+	 * Collecting different types of ammo and powerups creates interactions into player attributes
+	 * @param i Item that has been collected
+	 * @author Santeri
+	 */
 	public void collectItem(Item i) {
 		Collect type = i.getType();
 		int amount = i.getAmount();
@@ -302,35 +355,43 @@ public class Player extends Character {
 		}
 	}
 	
+	/**
+	 * Pulling far away items so that it looks like player is picking up things
+	 * @param items
+	 * @param delta
+	 * @author Pasi
+	 */
 	public void pullItems(ArrayList<Object> items, int delta) {
-		for (int i = items.size()-1; i >= 0; i--) {
+		for (int i = items.size()-1; i >= 0; i--) { //check every item from top to bottom (in case of deleting in the middle)
 			if ( items.get(i) instanceof Item) {
 				Item item = (Item)items.get(i);
-				Vector2f a = new Vector2f(p);
-				a.sub(item.getP());
-				float distance = a.length();
-				if (distance < 30) {
+				Vector2f a = new Vector2f(p); 	//lets calculate the direction vector
+				a.sub(item.getP());				//to direction of player
+				float distance = a.length();		//make a note of distance of player and item
+				if (distance < 30) {				//collect if distance is less than 30
 					collectItem(item);
 					items.remove(i);
 					continue;
 				}
-				if ( distance < maxItemSwallowDistance) {
+				if ( distance < maxItemSwallowDistance) { // pull if distance is less than maxItemSwallowDistance
 					a.normalise();
-					a.scale(delta/distance/20);
+					a.scale(delta/distance/20);			 // create some kind of acceleration. 
 					item.vAdd(a, delta);
 				}
 			}
 		}
 	}
 	
+	/**
+	 * getters and setters for player only
+	 * @author Santeri
+	 */
 	public Vector2f getMouse() {
 		return mouse;
 	}
-	
 	public int getHP() {
 		return hp;
 	}
-	
 	public Shape getLineOfFire() {
 		return r.transform(Transform.createRotateTransform((float)aim.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY()));
 	}
