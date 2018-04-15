@@ -81,8 +81,8 @@ public class Blockade_Barrel extends Character implements Visible, Active{
 			barrel_phases.stop();
 			for(int i = 0; i < drops; i++) {
 				o.add(new Item((int)this.getX(), (int)this.getY(), Collect.randomItem()));
-				o.remove(this);
 			}
+			o.remove(this);
 		}
 	}
 
