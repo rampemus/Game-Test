@@ -11,9 +11,16 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Music;
 
+/**
+ * gamestate to jump between other gamestates and give user a preview of different gamestates
+ * You can enter any gamestate here except gameover, which one will follow after you
+ * lose in the game (die in the game)
+ * @author Pasi
+ */
+
 public class Menu extends BasicGameState {
 	
-	public static int id = 0;
+	public static int id = 0; //this will be the default gamestate
 	private String deltaNumber = "0";
 	Image play;
 	Image story;
@@ -37,7 +44,10 @@ public class Menu extends BasicGameState {
 		}
 	}
 
-	@Override
+	/**
+	 * Draw all the buttons to the screen
+	 * @author Olli
+	 */
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
 
 		play.draw(100, 140, 180, 60);
@@ -53,7 +63,10 @@ public class Menu extends BasicGameState {
 		}
 		g.drawString(deltaNumber,100,100);
 	}
-
+	/**
+	 * Checks which buttons have been pressed and plays music
+	 * @author Olli
+	 */
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		if(initialized) {
@@ -63,6 +76,7 @@ public class Menu extends BasicGameState {
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
 		
+		//for the finished game this button will work
 		/*play button
 		if((mouseX>100 && mouseX<280) && (mouseY>400 && mouseY<460)){
 			if(Mouse.isButtonDown(0)){

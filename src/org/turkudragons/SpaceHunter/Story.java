@@ -8,6 +8,11 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * Displays the background story of the game slowly. The story is written by Tommi
+ * @author Pasi
+ */
+
 public class Story extends BasicGameState{
 
 	public static final int id = 6;
@@ -52,13 +57,22 @@ public class Story extends BasicGameState{
 		
 		
 	}
-
+	
+	/**
+	 * render all the text to the screen
+	 */
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		g.drawString("(PRESS ESC TO RETURN)", 140, 10);
+		
+		//looppi joka piirtää osan tekstistä kerrallaan
 		for ( int i = 0; i < story.length; i++) {
+			
+			//tulosta ylemmät rivit kun ne ovat valmistuneet
 			if ( i*1000 < animationTimer - 1000) {
 				g.drawString(story[i], 10, 60 + 20*i);
 			}
+			
+			//viimeinen rivi kirjoitetaan vaiheittain niin, että aina yhdessä sekunnissa (1000 millisekunnissa) syntyy uusi rivi
 			if ( i*1000 < animationTimer && animationTimer < i*1000+1000) {
 				g.drawString(story[i].substring(0,(int)((float)(animationTimer%1000)/1000*story[i].length())), 10, 60 + 20*i);
 			}
@@ -67,16 +81,19 @@ public class Story extends BasicGameState{
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		//init if it hasn't done yet
 		if(initialized) {
 			storyM.loop(1,0.1f);
 			initialized = false;
 		}
-		// TODO Auto-generated method stub
+		//escape from the gamestate
 		if (input.isKeyDown(Input.KEY_ESCAPE)) {
 			storyM.stop();
 			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
 		}
+		
+		//increment
 		animationTimer += delta;
 	}
 
