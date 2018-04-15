@@ -16,7 +16,6 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	boolean activate = false;
 	int startup = 3;
 	int timer = 0;
-	int missilet = 0;
 	private Sound DragonRoar;
 	private Sound Warning;
 	private Sound Crash;
@@ -130,6 +129,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		}
 		weapons.get(1).setDamage(7);
 		weapons.get(1).setRange(350);
+		weapons.get(2).setFiringRate(400);
 		currentWeapon = weapons.get(1);
 	}
 	public void update(ArrayList<Object> o, Map m, int delta) {
@@ -199,16 +199,10 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 				walkLeft(delta);
 			}
 		}
-		if (missilet>0) {
-			missilet = missilet - delta;
-		}
 		//Shoots missile
 		if (Dragon_Boss.getFrame() <21 && Dragon_Boss.getFrame() >=15 && activate && alive) {
 			currentWeapon = weapons.get(2);
-			if (missilet<=0) {
 				shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
-				missilet = 400;
-			}	
 		}
 		//shoots fire and comes closer
 		if (Dragon_Boss.getFrame() <27 && Dragon_Boss.getFrame() >=21 && activate && alive) {
@@ -241,7 +235,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 			}
 			if(hitBox.intersects(((Collider)o.get(0)).getHitbox())) {
 			    ((Collider)o.get(0)).takeDamage(2);
-			    Crash.play(1, 0.35f);
+			    Crash.play(1, 0.03f);
 			}
 		}
 		//ram
@@ -267,10 +261,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		if (Dragon_Boss.getFrame() <60 && Dragon_Boss.getFrame() >=54 && activate && alive) {
 			if (Dragon_Boss.getFrame() <21 && Dragon_Boss.getFrame() >=15 && activate && alive) {
 				currentWeapon = weapons.get(2);
-				if (missilet<=0) {
 				shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
-				missilet = 400;
-				}
 			}
 		}
 		//loop over
