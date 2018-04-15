@@ -26,6 +26,7 @@ public class Alien extends Character implements Active, Visible {
 	Image blank;
 	Image [] alien_a = new Image[8];
 	Animation alien_m;
+
 	
 	private Vector2f aim;
 	private Vector2f mouse;
@@ -33,11 +34,12 @@ public class Alien extends Character implements Active, Visible {
 	
 	public Alien(int defx, int defy) {
 		super(defx,defy);
-		width = 37;
-		height = 22;
+		width = 33;
+		height = 64;
 		hitBox = new Rectangle(defx, defy, width, height);
 		hp = 1000;
 		aim = new Vector2f(100, 0);
+		mouse = new Vector2f(1000,1000);
 		jumpStrength = 0.8f;
 		xMaxSpeed = 0.6f;
 		
@@ -179,6 +181,9 @@ public class Alien extends Character implements Active, Visible {
 			o.remove(this);
 		}
 		alien_m.update(delta);
+		if (canSeeCharacter((Character)o.get(0),m)) {
+			mouse = new Vector2f(((Player)o.get(0)).getP());
+		}
 	}
 	
 	public void display(Graphics g) {
@@ -186,26 +191,26 @@ public class Alien extends Character implements Active, Visible {
 		//updateViewArea();
 		
 		
-		aim = new Vector2f(0,0);
+		//aim = new Vector2f(0,0);
 
 		//g.draw(r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
-		/*if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;
-		alien_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);		 
-		 */
-		alien_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-7,this.getY()-height/2-20 );
+		if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;
+		//alien_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);		 
+		
+		alien_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-10,this.getY()-height/2);
 		//draw hand
-		if ( alien_m.getFrame() == 0 ) hotSpot.set(-8,-10);
-		if ( alien_m.getFrame() == 1 ) hotSpot.set(-6,-11);
-		if ( alien_m.getFrame() == 2 ) hotSpot.set(-2,-12);
-		if ( alien_m.getFrame() == 3 ) hotSpot.set(-2,-12);
-		if ( alien_m.getFrame() == 4 ) hotSpot.set(-1,-12);
-		if ( alien_m.getFrame() == 5 ) hotSpot.set(-2,-12);
-		if ( alien_m.getFrame() == 6 ) hotSpot.set(-2,-12);
+		if ( alien_m.getFrame() == 0 ) hotSpot.set(-6,-10);
+		if ( alien_m.getFrame() == 1 ) hotSpot.set(-6,-9);
+		if ( alien_m.getFrame() == 2 ) hotSpot.set(0,-9);
+		if ( alien_m.getFrame() == 3 ) hotSpot.set(6,-8);
+		if ( alien_m.getFrame() == 4 ) hotSpot.set(13,-9);
+		if ( alien_m.getFrame() == 5 ) hotSpot.set(6,-9);
+		if ( alien_m.getFrame() == 6 ) hotSpot.set(4,-9);
 		
 		if (!lookingRight) {
-			hotSpot.set(hotSpot.getX()*-1,hotSpot.getY());
+			hotSpot.set(hotSpot.getX()*-1+8,hotSpot.getY());
 		}
-		/*
+		
 		aim = new Vector2f(mouse);
 		aim.sub(p);
 		if ( lookingRight ) {
@@ -215,7 +220,7 @@ public class Alien extends Character implements Active, Visible {
 			handFlipped.setRotation((float)aim.getTheta());
 			handFlipped.draw(this.getX()+hotSpot.getX()-32,this.getY()+hotSpot.getY()-32);
 		}
-		*/
+		
 		//getFlippedCopy(!lookingRight, false)
 		
 	}
