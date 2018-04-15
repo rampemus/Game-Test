@@ -19,7 +19,7 @@ import org.newdawn.slick.geom.Vector2f;
  *
  */
 
-public class Player extends Character {
+public class Player extends Character implements Active, Visible{
 	private int maxItemSwallowDistance;
 	
 	//all the images for animation

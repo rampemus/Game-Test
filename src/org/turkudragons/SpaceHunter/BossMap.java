@@ -67,7 +67,7 @@ public class BossMap extends BasicGameState {
 		g.translate(-(player.getX()-400),-(player.getY()-300));
 		
 		m.display();
-		player.display(g);
+		//player.display(g);
 		for (Object o : oList) {
 			if ( o instanceof Visible) {
 				((Visible)o).display(g);
@@ -83,7 +83,7 @@ public class BossMap extends BasicGameState {
 			initialized = false;
 		}
 		player.updateInput(gc, m,delta, oList);
-		player.update(oList,m,delta);
+		//player.update(oList,m,delta);
 		for (int i = oList.size()-1; i >= 0; i--) {
 			Object o = oList.get(i);
 			if ( o instanceof Active) {
