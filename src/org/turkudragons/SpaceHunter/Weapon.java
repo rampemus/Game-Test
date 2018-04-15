@@ -271,7 +271,7 @@ public class Weapon{
 	 * Setter for the range of the bullets of the weapon.
 	 * @param arcs
 	 */
-	public void setArcs(int range) {
+	public void setRange(int range) {
 		this.range = range;
 	}
 	
