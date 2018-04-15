@@ -90,9 +90,9 @@ public class Character extends Collider{
 				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
 					oList.add(new Bullet((int)this.getX()+(int)hotSpot.getX(), (int)this.getY()+(int)hotSpot.getY(), x, y, currentWeapon)); //shoot from character position plus hotSpot coordinates
 				if(currentWeapon.getName().equals("Flamethrower"))
-					Weapon.fire.play(1, 0.1f);
+					Sounds.fire.play(1, 0.1f);
 				if(currentWeapon.getName().equals("Pump Shotgun"))
-					Weapon.shotgun.play(1, 0.1f);
+					Sounds.shotgun.play(1, 0.1f);
 			}
 			//change the animation to shooting and so on
 			shootCooldown = currentWeapon.getFiringRate();
@@ -114,9 +114,9 @@ public class Character extends Collider{
 				for(int i = 0; i < currentWeapon.getAmountOfBullets(); i++)
 					oList.add(new Bullet(x+(int)hotSpot.getX(), y+(int)hotSpot.getY(), destX, destY, currentWeapon));
 				if(currentWeapon.getName().equals("Flamethrower"))
-					Weapon.fire.play(1, 0.1f);
+					Sounds.fire.play(1, 0.1f);
 				if(currentWeapon.getName().equals("Pump Shotgun"))
-					Weapon.shotgun.play(1, 0.1f);
+					Sounds.shotgun.play(1, 0.1f);
 				
 			}
 			//animaation vaihtaminen ampumiseen jne.
@@ -230,7 +230,7 @@ public class Character extends Collider{
 		
 		//vector magic, stepping every single coordinate between character this to character c
 		Vector2f start = new Vector2f(p);
-		Vector2f end	   = new Vector2f(c.getP());
+		Vector2f end = new Vector2f(c.getP());
 		Vector2f step = new Vector2f(end);
 		step.sub(start);
 		int distance = (int)step.length();

@@ -1,13 +1,11 @@
 package org.turkudragons.SpaceHunter;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
 public class Mecha_Dragon extends Character implements Visible, Active {
 	
@@ -16,10 +14,6 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	boolean activate = false;
 	int startup = 3;
 	int timer = 0;
-	private Sound DragonRoar;
-	private Sound Warning;
-	private Sound Crash;
-	private Sound Death;
 	Image blank;
 	Image ds1;
 	Image dr1;
@@ -50,10 +44,6 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		drm1 = new Image("res/Mecha_Dragon_wm.png");
 		drm2 = new Image("res/Mecha_Dragon_wm2.png");
 		drm3 = new Image("res/Mecha_Dragon_wm3.png");
-		DragonRoar = new Sound("res/DragonRoar.ogg");
-		Warning = new Sound("res/Warning.ogg");
-		Death = new Sound ("res/RobotDeath.ogg");
-		Crash = new Sound ("res/Slam.ogg");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -136,7 +126,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		super.update(o, m, delta);
 		if (hp<=0) {
 			alive = false;
-			Death.play(1, 0.35f);
+			Sounds.Death.play(1, 0.35f);
 			o.remove(this);
 		}
 		
@@ -144,7 +134,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 			if (((Player)o.get(0)).getX() < this.getX() && ((Player)o.get(0)).getX() > this.getX()-500 && alive) {
 				Dragon_Boss.start();
 				active =true;
-				Warning.play(1, 0.35f);
+				Sounds.Warning.play(1, 0.35f);
 			}else {
 				Dragon_Boss.stop();
 			}
@@ -154,7 +144,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 			Dragon_Boss.setCurrentFrame(0);
 			startup = startup -1;
 		}else if (Dragon_Boss.getFrame() == 4 && startup >0) {
-			DragonRoar.play(1, 0.35f);
+			Sounds.DragonRoar.play(1, 0.35f);
 			Dragon_Boss.setCurrentFrame(0);
 			startup = startup -1;
 		}else if (Dragon_Boss.getFrame() == 4 && startup ==0) {
@@ -235,7 +225,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 			}
 			if(hitBox.intersects(((Collider)o.get(0)).getHitbox())) {
 			    ((Collider)o.get(0)).takeDamage(2);
-			    Crash.play(1, 0.03f);
+			    Sounds.Crash.play(1, 0.03f);
 			}
 		}
 		//ram
@@ -251,7 +241,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		timer = timer - delta;
 		//The dragon spawns little friends
 		if (Dragon_Boss.getFrame() <54 && Dragon_Boss.getFrame() >=42 && activate && alive) {
-			DragonRoar.play(1, 0.35f);
+			Sounds.DragonRoar.play(1, 0.35f);
 			if (timer <0) {
 				o.add(new Dragonling_Drone((int)this.getX(),(int)this.getY()));
 				timer = 1000;

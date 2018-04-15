@@ -7,7 +7,6 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
 
 public class Dragonling_Drone extends Character implements Visible, Active {
@@ -31,7 +30,6 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 	int cooldown = 0;
 	boolean evade = false;
 	int evasionT = 0;
-	private Sound bite;
 
 	public Dragonling_Drone (int defx, int defy) {
 		super(defx, defy);
@@ -60,7 +58,6 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 			dd2 = new Image ("res/Dragoling_Drone_d2.png");
 			dd3 = new Image ("res/Dragoling_Drone_d3.png");
 			dd4 = new Image ("res/Dragoling_Drone_d4.png");
-			bite = new Sound("res/Bite.ogg");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,7 +126,7 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 			shootCooldown-= delta;
 		}
 		if(hitBox.intersects(((Collider)o.get(0)).getHitbox()) && shootCooldown<= 0 && alive) {
-			bite.play(1, 0.15f);
+			Sounds.bite.play(1, 0.15f);
 		    ((Collider)o.get(0)).takeDamage(100);
 		    shootCooldown = 300;
 		}

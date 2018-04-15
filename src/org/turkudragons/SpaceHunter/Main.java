@@ -7,6 +7,8 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class Main extends StateBasedGame {
 
+	public boolean soundPlaying;
+	
 	public Main(String name) {
 		super(name);
 	}
@@ -15,6 +17,11 @@ public class Main extends StateBasedGame {
 
 		AppGameContainer appgc;
 		Weapon.createWeapons();
+		try {
+			Sounds.initiateSounds();
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
 		
 		try {
 			appgc = new AppGameContainer(new Main("Space Hunter"));
