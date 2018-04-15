@@ -101,9 +101,9 @@ public class Character extends Collider{
 	
 	/**
 	 * A shooting method that allows a defined hotspot.
-	 * @param oList
-	 * @param x
-	 * @param y
+	 * @param oList Object List
+	 * @param x X-Coordinate
+	 * @param y Y-Coordinate
 	 * @param destX xoffset of hotspot
 	 * @param destY yoffset of hotspot
 	 * @author Santeri
@@ -126,10 +126,10 @@ public class Character extends Collider{
 	
 	/**
 	 * A shooting method that can be given an additional boolean for more constant firing. Used by aiming.
-	 * @param oList
-	 * @param x
-	 * @param y
-	 * @param kk
+	 * @param oList Object List
+	 * @param x X-Coordinate
+	 * @param y Y-Coordinate
+	 * @param kk Is a dummy bullet
 	 * @author Santeri
 	 */
 	public void shoot(ArrayList<Object> oList, int xTarget, int yTarget, boolean kk) {

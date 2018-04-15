@@ -33,17 +33,17 @@ public class Weapon{
 	
 	/**
 	 * Constructor for a weapon object created from the given values.
-	 * @param name
-	 * @param count
-	 * @param damage
-	 * @param firingRate
-	 * @param amountOfBullets
-	 * @param projectileSpeed
-	 * @param destroyable
-	 * @param guided
-	 * @param range
-	 * @param enemy
-	 * @param infinite
+	 * @param name The name of the weapon.
+	 * @param count The ammo count of the weapon.
+	 * @param damage The damege one bullet does.
+	 * @param firingRate The time you need to wait in between shots.
+	 * @param amountOfBullets The amount of bullets per shot.
+	 * @param projectileSpeed The speed of a bullet.
+	 * @param destroyable The bullet can be destroyed.
+	 * @param guided The bullet is homing.
+	 * @param range The maximum of tics the bullet is allowed to live.
+	 * @param enemy The weapon belongs to an enemy.
+	 * @param infinite The ammo is infinite.
 	 */
 	public Weapon(String name, int count, int damage, int firingRate, int amountOfBullets, float projectileSpeed, boolean destroyable, boolean guided,
 			int range, boolean enemy, boolean infinite) {
@@ -62,7 +62,7 @@ public class Weapon{
 	
 	/**
 	 * Creates a copy of a weapon.
-	 * @param weapon
+	 * @param weapon The Weapon to be copied
 	 */
 	public Weapon(Weapon weapon) {
 		this.name = weapon.getName();
@@ -80,8 +80,8 @@ public class Weapon{
 
 	/**
 	 * Creates a copy of a weapon with a defined enemy value.
-	 * @param weapon
-	 * @param enemy
+	 * @param weapon The Weapon to be copied
+	 * @param enemy Enemy value
 	 */
 	public Weapon(Weapon weapon, boolean enemy) {
 		this.name = weapon.getName();
@@ -122,14 +122,14 @@ public class Weapon{
 	
 	/**
 	 * Getter for the name of the weapon.
-	 * @return
+	 * @return The name of the weapon.
 	 */
 	public String getName() {
 		return name;
 	}
 	/**
 	 * Setter for the name of the weapon.
-	 * @param name
+	 * @param name The name of the weapon.
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -137,7 +137,7 @@ public class Weapon{
 	
 	/**
 	 * Getter for the ammo count of the weapon.
-	 * @return
+	 * @return The ammo count of the weapon.
 	 */
 	public int getCount() {
 		if(!infinite) return count;
@@ -145,7 +145,7 @@ public class Weapon{
 	}
 	/**
 	 * Setter for the ammo count of the weapon.
-	 * @param count
+	 * @param count The ammo count of the weapon.
 	 */
 	public void setCount(int count) {
 		if(!infinite) this.count = count;
@@ -153,14 +153,14 @@ public class Weapon{
 	
 	/**
 	 * Getter for the damage of the weapon.
-	 * @return
+	 * @return The damage of the weapon.
 	 */
 	public int getDamage() {
 		return damage;
 	}
 	/**
 	 * Setter for the damage of the weapon.
-	 * @param damage
+	 * @param damage The damage of the weapon.
 	 */
 	public void setDamage(int damage) {
 		this.damage = damage;
@@ -168,14 +168,14 @@ public class Weapon{
 	
 	/**
 	 * Getter for the firing rate of the weapon.
-	 * @return
+	 * @return The firing rate of the weapon.
 	 */
 	public int getFiringRate() {
 		return firingRate;
 	}
 	/**
 	 * Setter for the firing rate of the weapon.
-	 * @param firingRate
+	 * @param firingRate The firing rate of the weapon.
 	 */
 	public void setFiringRate(int firingRate) {
 		this.firingRate = firingRate;
@@ -183,14 +183,14 @@ public class Weapon{
 	
 	/**
 	 * Getter for the amount of bullets per shot of the weapon.
-	 * @return
+	 * @return The amount of bullets per shot of the weapon.
 	 */
 	public int getAmountOfBullets() {
 		return amountOfBullets;
 	}
 	/**
 	 * Setter for the amount of bullets per shot of the weapon.
-	 * @param amountOfBullets
+	 * @param amountOfBullets The amount of bullets per shot of the weapon.
 	 */
 	public void setAmountOfBullets(int amountOfBullets) {
 		this.amountOfBullets = amountOfBullets;
@@ -198,14 +198,14 @@ public class Weapon{
 	
 	/**
 	 * Getter for the projectile speed of the bullets of the weapon.
-	 * @return
+	 * @return The projectile speed of the bullets of the weapon.
 	 */
 	public float getProjectileSpeed() {
 		return projectileSpeed;
 	}
 	/**
 	 * Setter for the projectile speed of the bullets of the weapon.
-	 * @param projectileSpeed
+	 * @param projectileSpeed The projectile speed of the bullets of the weapon.
 	 */
 	public void setProjectileSpeed(float projectileSpeed) {
 		this.projectileSpeed = projectileSpeed;
@@ -213,14 +213,14 @@ public class Weapon{
 	
 	/**
 	 * Getter for the destroyability of the bullets of the weapon.
-	 * @return
+	 * @return The destroyability of the bullets of the weapon.
 	 */
 	public boolean isDestroyable() {
 		return destroyable;
 	}
 	/**
 	 * Setter for the destroyability of the bullets of the weapon.
-	 * @param destroyable
+	 * @param destroyable The destroyability of the bullets of the weapon.
 	 */
 	public void setDestroyable(boolean destroyable) {
 		this.destroyable = destroyable;
@@ -228,14 +228,14 @@ public class Weapon{
 	
 	/**
 	 * Getter for the guidability of the bullets of the weapon.
-	 * @return
+	 * @return The guidability of the bullets of the weapon.
 	 */
 	public boolean isGuided() {
 		return guided;
 	}
 	/**
 	 * Setter for the guidability of the bullets of the weapon.
-	 * @param guided
+	 * @param guided The guidability of the bullets of the weapon.
 	 */
 	public void setGuided(boolean guided) {
 		this.guided = guided;
@@ -243,14 +243,14 @@ public class Weapon{
 	
 	/**
 	 * Getter for the range of the bullets of the weapon.
-	 * @return
+	 * @return The range of the bullets of the weapon.
 	 */
 	public int getRange() {
 		return range;
 	}
 	/**
 	 * Setter for the range of the bullets of the weapon.
-	 * @param arcs
+	 * @param range The range of the bullets of the weapon.
 	 */
 	public void setRange(int range) {
 		this.range = range;
@@ -258,14 +258,14 @@ public class Weapon{
 	
 	/**
 	 * Getter for the infinity of the bullets of the weapon.
-	 * @return
+	 * @return The infinity of the bullets of the weapon.
 	 */
 	public boolean isInfinite() {
 		return infinite;
 	}
 	/**
 	 * Setter for the infinity of the bullets of the weapon.
-	 * @param infinite
+	 * @param infinite The infinity of the bullets of the weapon.
 	 */
 	public void setInfinite(boolean infinite) {
 		this.infinite = infinite;
@@ -273,14 +273,14 @@ public class Weapon{
 	
 	/**
 	 * Getter for the owner of the weapon (Is it an enemy or not?).
-	 * @return
+	 * @return The owner of the weapon (Is it an enemy or not?).
 	 */
 	public boolean isEnemy() {
 		return enemy;
 	}
 	/**
 	 * Setter for the owner of the weapon (Is it an enemy or not?).
-	 * @param enemy
+	 * @param enemy The owner of the weapon (Is it an enemy or not?).
 	 */
 	public void setEnemy(boolean enemy) {
 		this.enemy = enemy;
@@ -312,11 +312,11 @@ class Bullet implements Active,Visible{
 	
 	/**
 	 * A constructor for a bullet. It needs the current weapon and coordinates of the shooter and the destination to work.
-	 * @param x
-	 * @param y
-	 * @param destX
-	 * @param destY
-	 * @param currentWeapon
+	 * @param x X-Coordinate of the shooter.
+	 * @param y Y-Coordinate of the shooter.
+	 * @param destX X-Coordinate of the target.
+	 * @param destY Y-Coordinate of the target.
+	 * @param currentWeapon Weapon of use.
 	 */
 	public Bullet(int x, int y, int destX, int destY, Weapon currentWeapon) {
 		
@@ -454,11 +454,11 @@ class Bullet implements Active,Visible{
 	
 	/**
 	 * Constructor for a dummy bullet used in grenade aiming.
-	 * @param x
-	 * @param y
-	 * @param destX
-	 * @param destY
-	 * @param test
+	 * @param x X-Coordinate of the shooter.
+	 * @param y Y-Coordinate of the shooter.
+	 * @param destX X-Coordinate of the target.
+	 * @param destY Y-Coordinate of the target.
+	 * @param test A shape used to differentiate the two constructors.
 	 */
 	public Bullet(int x, int y, int destX, int destY, Shape test) {
 		if(x == destX && y == destY) {
@@ -609,8 +609,8 @@ class Bullet implements Active,Visible{
 
 	/**
 	 * Checks for changes in the cursor's position.
-	 * @param oList
-	 * @return
+	 * @param oList Object list
+	 * @return true if line of fire has changed.
 	 */
 	private boolean thingsMoved(ArrayList<Object> oList) {
 		if((int)(oldLineOfFire.getCenterX()) != (int)(((Player)oList.get(0)).getLineOfFire().getCenterX())) {
@@ -621,8 +621,8 @@ class Bullet implements Active,Visible{
 
 	/**
 	 * Checks if the bullet is hitting anything and acts accordingily.
-	 * @param oList
-	 * @return
+	 * @param oList Object list
+	 * @return true if hit an enemy.
 	 */
 	private boolean enemyCollision(ArrayList<Object> oList) {
 		for(Object o : oList) {
@@ -662,17 +662,24 @@ class Bullet implements Active,Visible{
 		return false;
 	}
 	
+	/**
+	 * Getter for the destroyed value.
+	 * @return true if bullet should be deleted.
+	 */
 	public boolean getDestroyed() {
 		return destroyed;
 	}
+	/**
+	 * Set a bullet to be destroyed next time it updates.
+	 */
 	public void setDestroyed() {
 		destroyed = true;
 	}
 
 	/**
 	 * Checks if the bullets are hitting the ground or fly off the map.
-	 * @param m
-	 * @return
+	 * @param m The current Map in use.
+	 * @return true if should be deleted.
 	 */
 	private boolean groundCollision(Map m) {
 		if (p.getY() > 3840) {

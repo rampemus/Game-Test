@@ -45,7 +45,7 @@ public class Sounds {
 	
 	/**
 	 * Checks if there is a sound playing.
-	 * @return
+	 * @return true if a sound is playing.
 	 */
 	public static boolean soundIsPlaying() {
 		if(DragonRoar.playing() || Warning.playing() || Death.playing() || Crash.playing() || bullet.playing() || fire.playing() ||

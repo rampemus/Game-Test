@@ -24,9 +24,9 @@ public class Item extends Collider implements Active,Visible{
 	
 	/**
 	 * Creates an item of a specific type to a specific location.
-	 * @param x
-	 * @param y
-	 * @param type
+	 * @param x X-Coordinate of the new item.
+	 * @param y Y-Coordinate of the new item.
+	 * @param type The type of the new item.
 	 * @author Santeri Loitomaa
 	 */
 	public Item(int x, int y, Collect type) {
