@@ -71,102 +71,17 @@ public class Alien extends Character implements Active, Visible {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	/*public void updateInput(GameContainer gc, Map m, int delta, ArrayList<Object> oList) {
-		
-		Input input = gc.getInput();
-		
-		mouse.set(input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300);
-		
-		// animation
-		if(player_m.getFrame() == 0) {
-			player_m.stop();
-		}
-		if (player_m.getFrame()==8) {
-			player_m.setCurrentFrame(1);
-		}
-		//if (!input.isKeyDown(Input.KEY_D)&&!input.isKeyDown(Input.KEY_A)) {
-			
-		//}
-		if (input.isKeyDown(Input.KEY_D)||input.isKeyDown(Input.KEY_A)) {
-			player_m.start();
-		} else {
-			player_m.setCurrentFrame(0);
-		}
-		player_m.update(delta);
-		//horizontal movement
-		if ( input.isKeyDown(Input.KEY_D)) {
-			walkRight(delta);
-		} else if ( input.isKeyDown(Input.KEY_A)) {
-			walkLeft(delta);
-		} 
-		
-		//vertical movement, when airborne
-		if ( input.isKeyDown(Input.KEY_W)) {
-			ascend(delta);
-		} else if ( input.isKeyDown(Input.KEY_S)) {
-			descend(delta);
-		} 
-		
-		//jetpack by pressing J (for testing flying)
-		if ( input.isKeyDown(Input.KEY_J)) {
-			airborne = true;
-		} else {
-			airborne = false;
-		}
-		
-		//jump mecanic
-		if ( input.isKeyDown(Input.KEY_SPACE) ){
-			jump(m);
-		}
-		
-		//shoot!!!
-		if ( input.isMouseButtonDown(0)) {
-			shoot(oList, input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300);
-		}
-		
-		if(currentWeapon.getName().equals("Grenade-Launcher")) {
-			shoot(oList, input.getMouseX()+(int)getX()-400,input.getMouseY()+(int)getY() - 300, true);
-		}
-		
-		//Change weapon
-		if(org.lwjgl.input.Mouse.hasWheel()) {
-			int x = org.lwjgl.input.Mouse.getDWheel();
-			int y = weapons.indexOf(currentWeapon);
-			if(x < 0 && y > 0) {
-				currentWeapon = weapons.get(y-1);
-			}
-			if(x > 0 && y < 7) {
-				currentWeapon = weapons.get(y+1);
-			}
-		}
-		if(input.isKeyPressed(Input.KEY_1)) {
-			currentWeapon = weapons.get(0);
-		}
-		if(input.isKeyPressed(Input.KEY_2)) {
+		Random r = new Random();
+		int x = r.nextInt(8);
+		if (x<0 && x!=4) {
+			weapons.add(new Weapon(Weapon.getWeapons().get(x)));
 			currentWeapon = weapons.get(1);
 		}
-		if(input.isKeyPressed(Input.KEY_3)) {
-			currentWeapon = weapons.get(2);
+		for(Weapon w : weapons) {
+			w.setEnemy(true);
 		}
-		if(input.isKeyPressed(Input.KEY_4)) {
-			currentWeapon = weapons.get(3);
-		}
-		if(input.isKeyPressed(Input.KEY_5)) {
-			currentWeapon = weapons.get(4);
-		}
-		if(input.isKeyPressed(Input.KEY_6)) {
-			currentWeapon = weapons.get(5);
-		}
-		if(input.isKeyPressed(Input.KEY_7)) {
-			currentWeapon = weapons.get(6);
-		}
-		if(input.isKeyPressed(Input.KEY_8)) {
-			currentWeapon = weapons.get(7);
-		}
-	}*/
-	
+	}
+
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		// animation
@@ -188,14 +103,8 @@ public class Alien extends Character implements Active, Visible {
 	
 	public void display(Graphics g) {
 		super.display(g);
-		//updateViewArea();
-		
-		
-		//aim = new Vector2f(0,0);
 
-		//g.draw(r.transform(Transform.createRotateTransform((float)v.getTheta() * 0.01745329252f - 1.57079632679f, this.getX(), this.getY())));
-		if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;
-		//alien_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-16,this.getY()-height/2);		 
+		if ( mouse.getX() < p.getX() ) lookingRight = false; else lookingRight = true;	 
 		
 		alien_m.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-10,this.getY()-height/2);
 		//draw hand
@@ -221,11 +130,9 @@ public class Alien extends Character implements Active, Visible {
 			handFlipped.draw(this.getX()+hotSpot.getX()-32,this.getY()+hotSpot.getY()-32);
 		}
 		
-		//getFlippedCopy(!lookingRight, false)
-		
 	}
 	
-	public Vector2f getMouse() {
-		return mouse;
+		public Vector2f getMouse() {
+			return mouse;
 	}
 }

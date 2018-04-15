@@ -83,7 +83,7 @@ public class Flame_Tank extends Character implements Visible, Active {
 				o.remove(this);
 			}
 			// Walks left
-			if ((((Character) o.get(0)).getX() > this.getX() -500) && ((Character) o.get(0)).getX() < this.getX() && alive){
+			if ((((Character) o.get(0)).getX() > this.getX() -500) && ((Character) o.get(0)).getX() < this.getX() && alive&&canSeeCharacter((Character)o.get(0),m)){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
 					if (checkMap(m,-36,36)){
 						walkLeft(delta);
@@ -91,12 +91,12 @@ public class Flame_Tank extends Character implements Visible, Active {
 				}
 			}
 			// Shoots left
-			if ((((Character) o.get(0)).getX() > this.getX() -300) && ((Character) o.get(0)).getX() < this.getX() && alive){
+			if ((((Character) o.get(0)).getX() > this.getX() -300) && ((Character) o.get(0)).getX() < this.getX() && alive&&canSeeCharacter((Character)o.get(0),m)){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
 					shoot(o, (int)this.getX()-30,(int)this.getY()-5,(int)((Character) o.get(0)).getX(), (int)this.getY());
 				}
 			}
-			if ((((Character) o.get(0)).getX() < this.getX() +500) && ((Character) o.get(0)).getX() > this.getX() && alive){
+			if ((((Character) o.get(0)).getX() < this.getX() +500) && ((Character) o.get(0)).getX() > this.getX() && alive&&canSeeCharacter((Character)o.get(0),m)){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
 					if (checkMap(m,36,36)){
 						walkRight(delta);
@@ -104,7 +104,7 @@ public class Flame_Tank extends Character implements Visible, Active {
 				}
 			}
 			//Shoots right
-			if ((((Character) o.get(0)).getX() < this.getX() +300) && ((Character) o.get(0)).getX() > this.getX() && alive){
+			if ((((Character) o.get(0)).getX() < this.getX() +300) && ((Character) o.get(0)).getX() > this.getX() && alive&&canSeeCharacter((Character)o.get(0),m)){
 				if ((((Character) o.get(0)).getY() > this.getY() -50) && ((Character) o.get(0)).getY() < this.getY() +50){
 					shoot(o,(int)this.getX()+30,(int)this.getY()-5,(int)((Character) o.get(0)).getX(), (int)this.getY());
 					
