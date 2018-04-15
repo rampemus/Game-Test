@@ -182,4 +182,8 @@ public class Map{
 		
 		return false;
 	}
+	
+	public int size() {
+		return tiles[0].length*tileSize;
+	}
 }
