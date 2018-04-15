@@ -12,7 +12,7 @@ import org.newdawn.slick.geom.Rectangle;
 /**
  * The only boss in the game as of now, unlike most other enemies it has a long loop of actions it performs
  * in a set order, thus making it have a routine instead of an "Intelligence".
- * @author tommi
+ * @author Tommi Heikkinen
  *
  */
 public class Mecha_Dragon extends Character implements Visible, Active {
@@ -135,11 +135,13 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		weapons.get(2).setFiringRate(400);
 		currentWeapon = weapons.get(1);
 	}
-	
 	/**
-	 * 
+	 * updates the character on the playground. Super.update-has all the kinematics and common stuff with character
+	 * Has the pattern of the boss written down to phases divided by the current frame of the animation
+	 * @param o oList of the gamestate
+	 * @param m Map of the gamestate
+	 * @param delta How many steps of millisecs to be taken
 	 */
-	
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		if (hp<=0) {
@@ -147,7 +149,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 			Sounds.Death.play(1, 0.35f);
 			o.remove(this);
 		}
-		
+		//Activates the boss when nearby
 		if (!active) {
 			if (((Player)o.get(0)).getX() < this.getX() && ((Player)o.get(0)).getX() > this.getX()-500 && alive) {
 				Dragon_Boss.start();
@@ -198,7 +200,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 				walkLeft(delta);
 			}
 		}
-		// Flies back
+		// Flies away from palyer
 		if (Dragon_Boss.getFrame() <15 && Dragon_Boss.getFrame() >=12 && activate && alive) {
 			ascend(delta*2);
 			if (((Player)o.get(0)).getX()<this.getX()) {
@@ -207,7 +209,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 				walkLeft(delta);
 			}
 		}
-		//Shoots missile
+		//Shoots missiles
 		if (Dragon_Boss.getFrame() <21 && Dragon_Boss.getFrame() >=15 && activate && alive) {
 			currentWeapon = weapons.get(2);
 				shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
@@ -228,7 +230,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 				descend(delta);
 			}
 		}
-		//ram
+		//tries to ram the player for massive damage
 		if (Dragon_Boss.getFrame() <33 && Dragon_Boss.getFrame() >=27 && activate && alive) {
 			xAcceleration = 0.0055f;
 			if (((Player)o.get(0)).getX()<this.getX()) {
@@ -246,7 +248,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 			    Sounds.Crash.play(1, 0.03f);
 			}
 		}
-		//ram
+		//rams the player
 		if (Dragon_Boss.getFrame() <42 && Dragon_Boss.getFrame() >=33 && activate && alive) {
 			xAcceleration = 0.005f;
 			ascend(delta*2);
@@ -256,6 +258,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 				walkLeft(delta);
 			}	
 		}
+		//timer for dragonling drone goes down
 		timer = timer - delta;
 		//The dragon spawns little friends
 		if (Dragon_Boss.getFrame() <54 && Dragon_Boss.getFrame() >=42 && activate && alive) {
@@ -272,13 +275,17 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 				shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
 			}
 		}
-		//loop over
+		//loop over, return to beginning
 		if (Dragon_Boss.getFrame() == 60 && activate && alive) {
 			currentWeapon = weapons.get(1);
 		}
 		
 		Dragon_Boss.update(delta);
 	}
+	/**
+	 * Draws the boss
+	 * @param g Ghraphics object of the gamestate
+	 */
 	public void display(Graphics g) {
 		super.display(g);
 		Dragon_Boss.getCurrentFrame().getFlippedCopy(lookingRight, false).draw(this.getX()-width/2-10,this.getY()-height/2-50 );

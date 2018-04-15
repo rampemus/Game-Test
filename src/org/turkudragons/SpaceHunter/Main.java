@@ -7,7 +7,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class Main extends StateBasedGame {
 
-	public boolean soundPlaying;
+	private Player oldPlayer;
 	
 	public Main(String name) {
 		super(name);
@@ -54,6 +54,13 @@ public class Main extends StateBasedGame {
 		//this.getState(BossMap.id).init(gc, this);
 		//this.getState(GameOver.id).init(gc, this);
 		//this.getState(Story.id).init(gc, this);
+	}
+	
+	public Player getOldPlayer() {
+		return oldPlayer;
+	}
+	public void setOldPlayer(Player oldPlayer) {
+		this.oldPlayer = oldPlayer;
 	}
 
 }

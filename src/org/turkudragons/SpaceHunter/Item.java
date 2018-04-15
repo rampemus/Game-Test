@@ -17,11 +17,18 @@ import org.newdawn.slick.SlickException;
  *
  */
 public class Item extends Collider implements Active,Visible{
-	private Collect type;
-	private int amount;
-	private int age;
-	private Image texture;
+	private Collect type; // Type of the item.
+	private int amount; // The time a power up lasts, or the amount of bullets/health you get.
+	private int age; // How long the item is allowed to live.
+	private Image texture; // The texture of the item.
 	
+	/**
+	 * Creates an item of a specific type to a specific location.
+	 * @param x
+	 * @param y
+	 * @param type
+	 * @author Santeri Loitomaa
+	 */
 	public Item(int x, int y, Collect type) {
 		super(x, y);
 		Random r = new Random();
@@ -152,6 +159,11 @@ public class Item extends Collider implements Active,Visible{
 	public Collect getType() { return type; }
 }
 
+/**
+ * An enum for the different types of items available in the game.
+ * @author Pasi Toivanen
+ *
+ */
 enum Collect {
 	HP, ASSAULT_AMMO, SNIPER_AMMO, ROCKET, GRENADE, PUMP_SHOTGUN_AMMO, FLAMETHROWER_AMMO, DOUBLE_DAMAGE, INFINITE_AMMO, INVULNERABILITY, HP_LARGE;
 	

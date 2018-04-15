@@ -135,7 +135,10 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		}
 
 		//attacks to the left
-		if((((Character)o.get(0)).getX()<this.getX())&&(((Character)o.get(0)).getX()>this.getX()-600) && alive) {
+		if((((Character)o.get(0)).getX()<this.getX())&&(((Character)o.get(0)).getX()>this.getX()-600) && alive&&canSeeCharacter((Character)o.get(0),m,700)) {
+			if (m.isTile(this.getX(), this.getY()+20)) {
+				ascend(delta*3);
+			}
 			if (((Character)o.get(0)).getY()<this.getY()){
 				ascend(delta*5);
 			}else {
@@ -159,7 +162,10 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		}
 		
 		//attacking to the right
-		if((((Character)o.get(0)).getX()>this.getX())&&(((Character)o.get(0)).getX()<this.getX()+600) && alive) {
+		if((((Character)o.get(0)).getX()>this.getX())&&(((Character)o.get(0)).getX()<this.getX()+600) && alive&&canSeeCharacter((Character)o.get(0),m,700)) {
+			if (m.isTile(this.getX(), this.getY()+20)) {
+				ascend(delta*3);
+			}
 			if (((Character)o.get(0)).getY()<this.getY()){
 				ascend(delta*5);
 			}else {

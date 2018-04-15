@@ -7,14 +7,15 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 public class BossMap extends BasicGameState {
-	
+
 	public static int id = 4;
 	private Player player;
-	//private String deltaNumber = "0";
+	// private String deltaNumber = "0";
 	private Input input;
 	private boolean isTile;
 	private boolean initialized = false;
@@ -24,73 +25,80 @@ public class BossMap extends BasicGameState {
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		if(!initialized) {
-			m = new Map();
-			oList = new ArrayList<Object>();
-			//player and the dragon
-			player = new Player(700,3700);
-			oList.add(player);
-			oList.add(new Mecha_Dragon(1500,3740));
-			
-			input = gc.getInput();
-			//map for the state
-			m.add(1,1,10,59);
-			m.add(1,1,20,59);
-			m.add(1,1,10,50);
-			m.add(1,1,20,50);
-			
-			m.add(4,1,9,59);
-			m.add(4,1,9,54);
-		    m.add(4,1,30,59);
-			m.add(4,1,30,54);
-			
-
-			m.add(5,1,13,57);
-			m.add(5,1,25,57);
-			m.add(2,1,9,54);
-			m.add(2,1,28,54);
-			
-			try {
-				//Drone Hunting by Niklas Johansson, downloaded from player.epidemicsound.com
-				bossTheme = new Music("res/BossTheme.ogg");
-			}catch(SlickException e) {
-				
-			}
-			
-			initialized = true;
+		m = new Map();
+		oList = new ArrayList<Object>();
+		// player and the dragon
+		try {
+			player = ((Main) sbg).getOldPlayer();
+			player.p = new Vector2f(700, 3700);
+		} catch (NullPointerException e) {
+			player = new Player(700, 3700);
 		}
-	}
+		oList.add(player);
+		oList.add(new Mecha_Dragon(1500, 3740));
 
+		input = gc.getInput();
+		// map for the state
+		m.add(1, 1, 10, 59);
+		m.add(1, 1, 20, 59);
+		m.add(1, 1, 10, 50);
+		m.add(1, 1, 20, 50);
+
+		m.add(4, 1, 9, 59);
+		m.add(4, 1, 9, 54);
+		m.add(4, 1, 30, 59);
+		m.add(4, 1, 30, 54);
+
+		m.add(5, 1, 13, 57);
+		m.add(5, 1, 25, 57);
+		m.add(2, 1, 9, 54);
+		m.add(2, 1, 28, 54);
+
+		try {
+			// Drone Hunting by Niklas Johansson, downloaded from player.epidemicsound.com
+			bossTheme = new Music("res/BossTheme.ogg");
+		} catch (SlickException e) {
+
+		}
+
+		initialized = true;
+	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
-		g.translate(-(player.getX()-400),-(player.getY()-300));
-		
+		g.translate(-(player.getX() - 400), -(player.getY() - 300));
+
 		m.display();
 		//player.display(g);
 		for (Object o : oList) {
-			if ( o instanceof Visible) {
-				((Visible)o).display(g);
+			if (o instanceof Visible) {
+				((Visible) o).display(g);
 			}
 		}
-		g.drawString("isTile:" + isTile,100,100);
+		g.drawString("isTile:" + isTile, 100, 100);
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		if(initialized) {
-			bossTheme.loop(1.0f,0.1f);
+		if (initialized) {
+			bossTheme.loop(1.0f, 0.1f);
 			initialized = false;
 		}
+<<<<<<< HEAD
 		player.updateInput(gc, m,delta, oList);
 		//player.update(oList,m,delta);
 		for (int i = oList.size()-1; i >= 0; i--) {
+=======
+		player.updateInput(gc, m, delta, oList);
+		player.update(oList, m, delta);
+		for (int i = oList.size() - 1; i >= 0; i--) {
+>>>>>>> 4f03a9b13f4e239071b4d45db04dff91f537c2fa
 			Object o = oList.get(i);
-			if ( o instanceof Active) {
-				((Active)o).update(oList, m, delta);
+			if (o instanceof Active) {
+				((Active) o).update(oList, m, delta);
 			}
 		}
-		if(oList.size()<2) {
+		if (oList.size() < 2) {
 			bossTheme.stop();
 			sbg.getState(Credits.id).init(gc, sbg);
 			sbg.enterState(Credits.id);
@@ -100,20 +108,20 @@ public class BossMap extends BasicGameState {
 			sbg.getState(GameOver.id).init(gc, sbg);
 			sbg.enterState(GameOver.id);
 		}
-		if(input.isKeyPressed(Input.KEY_ESCAPE)) {
+		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			bossTheme.stop();
 			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
 		}
-		
+
 		isTile = m.isTile(input.getMouseX(), input.getMouseY());
-		
-		//deltaNumber = "Delta: " + delta;
+
+		// deltaNumber = "Delta: " + delta;
 		// god-mode
 		if (input.isKeyDown(Input.KEY_F)) {
-			oList.add(new Item(100,400,Collect.randomItem()));
+			oList.add(new Item(100, 400, Collect.randomItem()));
 		}
-		
+
 		if (input.isKeyDown(Input.KEY_G) && oList.size() > 1) {
 			oList.remove(1);
 		}
@@ -124,5 +132,5 @@ public class BossMap extends BasicGameState {
 		// TODO Auto-generated method stub
 		return BossMap.id;
 	}
-	
+
 }
