@@ -8,7 +8,11 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
-
+/**
+ * These flyign enemis follow the player around while avoiding shooting.
+ * @author Tommi Heikkinen
+ *
+ */
 public class Dragonling_Drone extends Character implements Visible, Active {
 	Image blank;
 	Image d1;
@@ -30,7 +34,11 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 	int cooldown = 0;
 	boolean evade = false;
 	int evasionT = 0;
-
+	/**
+	 * Creates the character to certain coordinates and creates all necessary animations etc.
+	 * @param x x-coordinate of player
+	 * @param y y-coordinate of player
+	 */
 	public Dragonling_Drone (int defx, int defy) {
 		super(defx, defy);
 		width = 37;
@@ -83,6 +91,13 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 			w.setEnemy(true);
 		}
 	}
+	/**
+	 * updates the character on the playground. Super.update-has all the kinematics and common stuff with character
+	 * Knows how to avoid shooting and chaces player while he is in his sight
+	 * @param o oList of the gamestate
+	 * @param m Map of the gamestate
+	 * @param delta How many steps of millisecs to be taken
+	 */
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		//basic animation
@@ -189,7 +204,10 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		}
 		Dragonling_drone.update(delta);
 	}
-
+	/**
+	 * Draws the drone
+	 * @param g Ghraphics object of the gamestate
+	 */
 	public void display(Graphics g) {
 		super.display(g);
 		Dragonling_drone.getCurrentFrame().getFlippedCopy(!lookingRight, false).draw(this.getX()-width/2-7,this.getY()-height/2-20 );
