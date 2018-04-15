@@ -7,8 +7,15 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
+
+
+/**
+ * The only boss in the game as of now, unlike most other enemies it has a long loop of actions it performs
+ * in a set order, thus making it have a routine instead of an "Intelligence".
+ * @author tommi
+ *
+ */
 public class Mecha_Dragon extends Character implements Visible, Active {
-	
 	boolean alive = true;
 	boolean active = false;
 	boolean activate = false;
@@ -24,6 +31,12 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	Image drm3;
 	Image[] Dragon = new Image[61];
 	Animation Dragon_Boss;
+	
+	/**
+	 * Creates the character to certain coordinates and creates all necessary animations etc.
+	 * @param x x-coordinate of player
+	 * @param y y-coordinate of player
+	 */
 	
 	public Mecha_Dragon (int defx, int defy) { //(1500,3740) default lokaatio
 		super(defx, defy);
@@ -122,6 +135,11 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		weapons.get(2).setFiringRate(400);
 		currentWeapon = weapons.get(1);
 	}
+	
+	/**
+	 * 
+	 */
+	
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		if (hp<=0) {

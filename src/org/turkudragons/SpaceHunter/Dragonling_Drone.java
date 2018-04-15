@@ -97,6 +97,9 @@ public class Dragonling_Drone extends Character implements Visible, Active {
 		if (Dragonling_drone.getFrame()==14) {
 			Random r = new Random();
 			int i = r.nextInt(10);
+			if (i == 8) {
+				o.add(new Item((int)this.getX(),(int)this.getY(),Collect.HP_LARGE));
+			}
 			if (i == 9) {
 				o.add(new Item((int)this.getX(),(int)this.getY(),Collect.HP));
 			}

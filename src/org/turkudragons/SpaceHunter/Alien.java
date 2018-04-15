@@ -76,12 +76,15 @@ public class Alien extends Character implements Active, Visible {
 			e.printStackTrace();
 		}
 		Random r = new Random();
-		int x = r.nextInt(8);
-		if (x>0 && !(x==4)) {
+		int x = r.nextInt(9);
+		if (x>0 && !(x==4)&& x<8) {
 			weapons.add(new Weapon(Weapon.getWeapons().get(x)));
 			currentWeapon = weapons.get(1);
 		}
-		
+		if (x == 8) {
+			weapons.add(new Weapon(Weapon.getWeapons().get(1)));
+			currentWeapon = weapons.get(1);
+		}
 		for(Weapon w : weapons) {
 			w.setEnemy(true);
 		}
@@ -108,7 +111,13 @@ public class Alien extends Character implements Active, Visible {
 		}
 		if(hp <= 0) {
 			alien_m.setCurrentFrame(7);
+				Random r = new Random();
+				int i = r.nextInt(10);
+				if (i < 7) {
+					o.add(new Item((int)this.getX(),(int)this.getY(),Collect.HP_LARGE));
+				}
 			o.remove(this);
+			
 		}
 		//evasion
 		if (canSeeCharacter((Character)o.get(0),m,500) && ((Character) o.get(0)).isShooting() && alive){
