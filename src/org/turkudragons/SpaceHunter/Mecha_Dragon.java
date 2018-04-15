@@ -16,8 +16,11 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	boolean activate = false;
 	int startup = 3;
 	int timer = 0;
+	int missilet = 0;
 	private Sound DragonRoar;
 	private Sound Warning;
+	private Sound Crash;
+	private Sound Death;
 	Image blank;
 	Image ds1;
 	Image dr1;
@@ -50,6 +53,8 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		drm3 = new Image("res/Mecha_Dragon_wm3.png");
 		DragonRoar = new Sound("res/DragonRoar.ogg");
 		Warning = new Sound("res/Warning.ogg");
+		Death = new Sound ("res/RobotDeath.ogg");
+		Crash = new Sound ("res/Slam.ogg");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -131,6 +136,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		super.update(o, m, delta);
 		if (hp<=0) {
 			alive = false;
+			Death.play(1, 0.35f);
 			o.remove(this);
 		}
 		
@@ -193,10 +199,16 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 				walkLeft(delta);
 			}
 		}
+		if (missilet>0) {
+			missilet = missilet - delta;
+		}
 		//Shoots missile
 		if (Dragon_Boss.getFrame() <21 && Dragon_Boss.getFrame() >=15 && activate && alive) {
 			currentWeapon = weapons.get(2);
-			shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
+			if (missilet<=0) {
+				shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
+				missilet = 400;
+			}	
 		}
 		//shoots fire and comes closer
 		if (Dragon_Boss.getFrame() <27 && Dragon_Boss.getFrame() >=21 && activate && alive) {
@@ -229,6 +241,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 			}
 			if(hitBox.intersects(((Collider)o.get(0)).getHitbox())) {
 			    ((Collider)o.get(0)).takeDamage(2);
+			    Crash.play(1, 0.35f);
 			}
 		}
 		//ram
@@ -254,7 +267,10 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		if (Dragon_Boss.getFrame() <60 && Dragon_Boss.getFrame() >=54 && activate && alive) {
 			if (Dragon_Boss.getFrame() <21 && Dragon_Boss.getFrame() >=15 && activate && alive) {
 				currentWeapon = weapons.get(2);
+				if (missilet<=0) {
 				shoot(o, (int)this.getX(),(int)this.getY(),(int)((Player)o.get(0)).getX(),(int)((Player)o.get(0)).getY());
+				missilet = 400;
+				}
 			}
 		}
 		//loop over
