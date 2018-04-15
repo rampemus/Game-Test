@@ -31,8 +31,8 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	
 	public Mecha_Dragon (int defx, int defy) { //(1500,3740) default lokaatio
 		super(defx, defy);
-		width = 120;
-		height = 120;
+		width = 72;
+		height = 30;
 		hitBox = new Rectangle(defx, defy, width, height);
 		xMaxSpeed = 1.01f;
 		friction = 0.01f;
@@ -129,6 +129,11 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	}
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
+		if (hp<=0) {
+			alive = false;
+			o.remove(this);
+		}
+		
 		if (!active) {
 			if (((Player)o.get(0)).getX() < this.getX() && ((Player)o.get(0)).getX() > this.getX()-500 && alive) {
 				Dragon_Boss.start();
@@ -155,9 +160,9 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		if (Dragon_Boss.getFrame() <12  && activate && alive) {
 			// fire breathe
 			if (((Player)o.get(0)).getX()<this.getX()+30) {
-				shoot(o, (int)this.getX()-30,(int)this.getY()-5,(int)this.getX()-60,(int)this.getY()+35);
+				shoot(o, (int)this.getX()-34,(int)this.getY(),(int)this.getX()-60,(int)this.getY()+35);
 			}else {
-				shoot(o, (int)this.getX()+30,(int)this.getY()-5,(int)this.getX()+60,(int)this.getY()+35);
+				shoot(o, (int)this.getX()+59,(int)this.getY(),(int)this.getX()+84,(int)this.getY()+25);
 			}
 			// adjusting height
 			if (((Player)o.get(0)).getY()<this.getY()+100) {
@@ -198,10 +203,10 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 			currentWeapon = weapons.get(1);
 			if (((Player)o.get(0)).getX()<this.getX()) {
 				walkLeft(delta);
-				shoot(o, (int)this.getX()-30,(int)this.getY()-5,(int)this.getX()-60,(int)this.getY()+35);
+				shoot(o, (int)this.getX()-34,(int)this.getY(),(int)this.getX()-60,(int)this.getY()+25);
 			} else {
 				walkRight(delta);
-				shoot(o, (int)this.getX()+30,(int)this.getY()-5,(int)this.getX()+60,(int)this.getY()+35);
+				shoot(o, (int)this.getX()+59,(int)this.getY(),(int)this.getX()+84,(int)this.getY()+25);
 			}
 			if (((Player)o.get(0)).getY()<this.getY()) {
 				ascend(delta);
@@ -211,6 +216,7 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 		}
 		//ram
 		if (Dragon_Boss.getFrame() <33 && Dragon_Boss.getFrame() >=27 && activate && alive) {
+			xAcceleration = 0.0055f;
 			if (((Player)o.get(0)).getX()<this.getX()) {
 				walkLeft(delta*2);
 			} else {
@@ -222,11 +228,12 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 				descend(delta*2);
 			}
 			if(hitBox.intersects(((Collider)o.get(0)).getHitbox())) {
-			    ((Collider)o.get(0)).takeDamage(3);
+			    ((Collider)o.get(0)).takeDamage(2);
 			}
 		}
 		//ram
 		if (Dragon_Boss.getFrame() <42 && Dragon_Boss.getFrame() >=33 && activate && alive) {
+			xAcceleration = 0.005f;
 			ascend(delta*2);
 			if (((Player)o.get(0)).getX()<this.getX()) {
 				walkRight(delta);
@@ -259,6 +266,6 @@ public class Mecha_Dragon extends Character implements Visible, Active {
 	}
 	public void display(Graphics g) {
 		super.display(g);
-		Dragon_Boss.getCurrentFrame().getFlippedCopy(lookingRight, false).draw(this.getX()-width/2,this.getY()-height/2 );
+		Dragon_Boss.getCurrentFrame().getFlippedCopy(lookingRight, false).draw(this.getX()-width/2-10,this.getY()-height/2-50 );
 	}
 }
