@@ -8,12 +8,15 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
-import java.util.ArrayList;
 import java.util.Random;
 import org.newdawn.slick.geom.Rectangle;
-
+/**
+ * The alien chaces the player, aims at it, jumps over ledges and jumps to avoid fire, making it one of the
+ * hardest enemies to giht.
+ * @author Tommi Heikkinen (almost everything) Pasi Toivanen (Hand rotation)
+ *
+ */
 public class Alien extends Character implements Active, Visible {
-	
 	Image alien_s;
 	Image hand;
 	Image handFlipped;
@@ -30,12 +33,14 @@ public class Alien extends Character implements Active, Visible {
 	boolean evade = false;
 	boolean chase = false;
 	int evasionT;
-
-	
 	private Vector2f aim;
 	private Vector2f mouse;
 
-	
+	/**
+	 * Creates the character to certain coordinates and creates all necessary animations etc.
+	 * @param x x-coordinate of player
+	 * @param y y-coordinate of player
+	 */
 	public Alien(int defx, int defy) {
 		super(defx,defy);
 		width = 33;
@@ -89,7 +94,13 @@ public class Alien extends Character implements Active, Visible {
 			w.setEnemy(true);
 		}
 	}
-
+	/**
+	 * updates the character on the playground. Super.update-has all the kinematics and common stuff with character
+	 * Has the necessary functions to make the alien dodge bullets, shoot, jump over pits etc.
+	 * @param o oList of the gamestate
+	 * @param m Map of the gamestate
+	 * @param delta How many steps of millisecs to be taken
+	 */
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		// animation
@@ -162,7 +173,11 @@ public class Alien extends Character implements Active, Visible {
 			mouse = new Vector2f(((Player)o.get(0)).getP());
 		}
 	}
-	
+	/**
+	 * Draws the Alien
+	 * @author Pasi Toivanen (hand) Tommi Heikkinen (the rest)
+	 * @param g Ghraphics object of the gamestate
+	 */
 	public void display(Graphics g) {
 		super.display(g);
 
@@ -193,7 +208,6 @@ public class Alien extends Character implements Active, Visible {
 		}
 		
 	}
-	
 		public Vector2f getMouse() {
 			return mouse;
 	}
