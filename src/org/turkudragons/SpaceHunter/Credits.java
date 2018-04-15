@@ -53,7 +53,7 @@ public class Credits extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		for ( int i = 0; i < credits.length; i++) {
 			//tulosta ylemmät rivit kun ne ovat valmistuneet
-				g.drawString(credits[i], 400-credits[i].length()*10/2, 600 - (int)y + 20*i);
+				g.drawString(credits[i], 400-credits[i].length()*10/2, 600 - (int)y + 30*i);
 		}
 	}
 
@@ -66,14 +66,14 @@ public class Credits extends BasicGameState {
 		step += delta;
 		if ( step > 30 ) {
 			y++;
-			step = 0;
+			step -= 30;
 		}
 		if (input.isKeyDown(Input.KEY_ESCAPE)||input.isKeyDown(Input.KEY_ENTER)|input.isKeyDown(Input.KEY_SPACE)) {
 			storyM.stop();
 			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
 		}
-		if ( y > 1090) {
+		if ( y > 1390) {
 			storyM.stop();
 			sbg.getState(Menu.id).init(gc, sbg);
 			sbg.enterState(Menu.id);
