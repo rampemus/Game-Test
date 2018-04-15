@@ -26,6 +26,10 @@ public class Alien extends Character implements Active, Visible {
 	Image blank;
 	Image [] alien_a = new Image[8];
 	Animation alien_m;
+	boolean alive = true;
+	boolean evade = false;
+	boolean chase = false;
+	int evasionT;
 
 	
 	private Vector2f aim;
@@ -40,8 +44,8 @@ public class Alien extends Character implements Active, Visible {
 		hp = 1000;
 		aim = new Vector2f(100, 0);
 		mouse = new Vector2f(1000,1000);
-		jumpStrength = 0.8f;
-		xMaxSpeed = 0.6f;
+		jumpStrength = 0.7f;
+		xMaxSpeed = 0.4f;
 		
 		try {
 			alien_s = new Image ("res/humanoid_char_stand1.png");//0
@@ -62,7 +66,7 @@ public class Alien extends Character implements Active, Visible {
 			alien_a[6] = alien_w6;
 			alien_a[7] = blank;
 			
-			alien_m = new Animation(alien_a,100,true);
+			alien_m = new Animation(alien_a,200,true);
 			
 			hand = new Image("res/humanoid_hand.png");
 			handFlipped = hand.getFlippedCopy(false, true);
@@ -73,10 +77,11 @@ public class Alien extends Character implements Active, Visible {
 		}
 		Random r = new Random();
 		int x = r.nextInt(8);
-		if (x<0 && x!=4) {
+		if (x>0 && !(x==4)) {
 			weapons.add(new Weapon(Weapon.getWeapons().get(x)));
 			currentWeapon = weapons.get(1);
 		}
+		
 		for(Weapon w : weapons) {
 			w.setEnemy(true);
 		}
@@ -85,8 +90,18 @@ public class Alien extends Character implements Active, Visible {
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		super.update(o, m, delta);
 		// animation
-		if(alien_m.getFrame() == 0) {
+		if(alien_m.getFrame() == 0 && !chase) {
 			alien_m.stop();
+		}
+		
+		if ((canSeeCharacter((Character)o.get(0),m,500)) && !chase){
+			alien_m.start();
+			chase = true;
+		}
+		if (!(canSeeCharacter((Character)o.get(0),m,500)) && chase){
+			alien_m.setCurrentFrame(0);
+			alien_m.stop();
+			chase = false;
 		}
 		if (alien_m.getFrame()==6) {
 			alien_m.setCurrentFrame(1);
@@ -95,6 +110,44 @@ public class Alien extends Character implements Active, Visible {
 			alien_m.setCurrentFrame(7);
 			o.remove(this);
 		}
+		//evasion
+		if (canSeeCharacter((Character)o.get(0),m,500) && ((Character) o.get(0)).isShooting() && alive){
+			if (((Player)o.get(0)).getLineOfFire().intersects(hitBox)) {
+				evade = true;
+				evasionT = 150;
+			}
+		}
+		if (evade == true) {
+			if (((Player)o.get(0)).getX()<this.getX()) {
+				walkRight(delta);
+				jump(m);
+			}else {
+				walkLeft(delta);
+				jump(m);
+			}
+			evasionT = evasionT-delta;
+			if (evasionT <= 0) {
+				evade = false;
+			}
+		}
+		//Attacking
+		if ((canSeeCharacter((Character)o.get(0),m,500) && alive)){
+			shoot(o, (int)((Player)o.get(0)).getX(), (int)((Player)o.get(0)).getY());
+			if (((Player)o.get(0)).getX()<this.getX()) {
+				walkLeft(delta);
+			}else {
+				walkRight(delta);
+			}
+		}
+		// Jumping
+		if (!checkMap(m,-36,64)&&(canSeeCharacter((Character)o.get(0),m,500))){
+			jump(m);
+		}
+		if (!checkMap(m,36,64)&&(canSeeCharacter((Character)o.get(0),m,500))){
+			jump(m);
+		}
+		
+		//updates the hand
 		alien_m.update(delta);
 		if (canSeeCharacter((Character)o.get(0),m)) {
 			mouse = new Vector2f(((Player)o.get(0)).getP());
