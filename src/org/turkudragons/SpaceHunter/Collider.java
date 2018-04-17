@@ -11,7 +11,6 @@ import org.newdawn.slick.geom.Vector2f;
  * Collider-class is anything that interacts with gravity and doesn't go through map obstacles.
  * Most of objects will be destroyable, so they will automaticly implement health points and taking damage
  * @author Pasi Toivanen
- *
  */
 
 public class Collider {
@@ -222,14 +221,13 @@ public class Collider {
 	}
 	
 	/**
-	 * updates collider so that it will obey the mechanics with map and other objects in the gameState
+	 * Updates collider so that it will obey the mechanics with map and other objects in the gameState.
 	 * 
 	 * @param o Other objects in the gameState
 	 * @param m Map object of the gameState
 	 * @param delta Number of updates to do in single run
 	 * @author Pasi Toivanen
 	 */
-	
 	public void update(ArrayList<Object> o, Map m, int delta) {
 		g.scale(delta);
 		if (airborne) {
@@ -360,13 +358,18 @@ public class Collider {
 	}
 	
 	/**
-	 * If walking(or flying) speeds of players must be changed, you can change it through here
+	 * If walking speed of players must be changed, you can change it through here
 	 * @param maxSpeed
 	 * @author Pasi Toivanen
 	 */
 	public void setMaxXSpeed(float maxSpeed) {
 		xMaxSpeed = maxSpeed;
 	}
+	/**
+	 * If flying speed of players must be changed, you can change it through here
+	 * @param maxSpeed
+	 * @author Pasi Toivanen
+	 */
 	public void setMaxYSpeed(float maxSpeed) {
 		yMaxSpeed = maxSpeed;
 	}
