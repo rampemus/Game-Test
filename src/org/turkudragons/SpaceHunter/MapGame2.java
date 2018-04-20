@@ -134,7 +134,7 @@ public class MapGame2 extends BasicGameState {
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame stg, Graphics g) throws SlickException {
-		g.translate(-(player.getX() - 400), -(player.getY() - 300));
+		g.translate(-(int)(player.getX()-400),-(int)(player.getY()-300));
 
 		m.display();
 		//player.display(g);
